@@ -10,6 +10,7 @@ import Foundation
 enum HTTPError: Error, CustomStringConvertible {
     case invalidURL
     case invalidRequset
+    case invalidResponse
     case statusCode(Int)
     case emptyData
     case failureDecode
@@ -20,6 +21,8 @@ enum HTTPError: Error, CustomStringConvertible {
             return "잘못된 URL 입니다."
         case .invalidRequset:
             return "요청에 실패하였습니다."
+        case .invalidResponse:
+            return "응답에 실패하였습니다."
         case .statusCode(let code):
             switch code {
             case 404:
