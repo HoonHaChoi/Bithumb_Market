@@ -17,7 +17,25 @@ struct APIService {
         self.endpoint = endpoint
     }
     
-    func requestResource(url: URL?, completion: @escaping (Result<Data, HTTPError>) -> Void) {
+    func request<T: Decodable>(url: URL?, completion: @escaping (Result<T, HTTPError>) -> Void) {
+        requestResource(url: url) { result in
+            switch result {
+            case .success(let data):
+                let decodeData: Result<T, HTTPError> = decode(data: data)
+                
+                switch decodeData {
+                case .success(let model):
+                    completion(.success(model))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private func requestResource(url: URL?, completion: @escaping (Result<Data, HTTPError>) -> Void) {
         guard let url = url else {
             completion(.failure(.invalidURL))
             return
@@ -45,7 +63,17 @@ struct APIService {
             }
             
             completion(.success(data))
+        }.resume()
+    }
+    
+    private func decode<T: Decodable>(data: Data) -> Result<T, HTTPError> {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        guard let decoding = try? decoder.decode(T.self, from: data) else {
+            return .failure(.failureDecode)
         }
+        return .success(decoding)
     }
     
 }
