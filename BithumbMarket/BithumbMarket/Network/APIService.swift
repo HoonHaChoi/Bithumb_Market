@@ -10,11 +10,9 @@ import Foundation
 struct APIService {
     
     private let session: URLSession
-    private let endpoint: EndPoint
     
-    init(session: URLSession = URLSession.shared, endpoint: EndPoint = EndPoint()) {
+    init(session: URLSession = URLSession.shared) {
         self.session = session
-        self.endpoint = endpoint
     }
     
     func request<T: Decodable>(url: URL?, completion: @escaping (Result<T, HTTPError>) -> Void) {
