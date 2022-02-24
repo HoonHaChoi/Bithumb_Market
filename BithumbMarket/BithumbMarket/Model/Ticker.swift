@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Ticker: Decodable {
-    let status: String
-    let data: [String: Market]
+struct Ticker {
+    let symbol: String
+    let market: Market
 }
