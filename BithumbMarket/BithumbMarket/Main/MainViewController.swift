@@ -17,18 +17,30 @@ class MainViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var coinSortView: CoinSortControlView = {
+        let sortView = CoinSortControlView()
+        sortView.translatesAutoresizingMaskIntoConstraints = false
+        return sortView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureTableView()
+        view.backgroundColor = .systemBackground
+        configureUI()
     }
 
-    private func configureTableView() {
+    private func configureUI() {
+        view.addSubview(coinSortView)
         view.addSubview(mainTableView)
         let safeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            mainTableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            coinSortView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+            coinSortView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
+            coinSortView.widthAnchor.constraint(equalToConstant: 130),
+            coinSortView.heightAnchor.constraint(equalToConstant: 40),
+            
+            mainTableView.topAnchor.constraint(equalTo: coinSortView.bottomAnchor, constant: 20),
             mainTableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             mainTableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             mainTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)

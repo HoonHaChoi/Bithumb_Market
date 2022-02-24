@@ -20,12 +20,12 @@ final class CoinSortControlView: UIView {
     }
     
     private let coinsortSegmentControl: CoinSortSegmentControl = {
-        let segmentControl = CoinSortSegmentControl(items: [])
+        let segmentControl = CoinSortSegmentControl(items: ["목록", "관심"])
         segmentControl.translatesAutoresizingMaskIntoConstraints = false
         return segmentControl
     }()
     
-    private let underLineView: UIView = {
+    private lazy var underLineView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 3
         view.backgroundColor = .orange
