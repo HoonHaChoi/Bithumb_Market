@@ -15,6 +15,8 @@ class TransactionViewController: ViewController {
         let view = UITableView()
         view.delegate = self
         view.dataSource = self
+        view.rowHeight = 45
+        view.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         view.register(TransactionTableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
         return view
     }()
@@ -47,13 +49,34 @@ extension TransactionViewController {
     
     func setupView() {
         view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        [
+            timeTitleLabel,
+            priceTitleLabel,
+            quntityTitleLabel
+        ].forEach{stackView.addArrangedSubview($0)}
+        
+        [
+            stackView,
+            tableView
+        ].forEach{view.addSubview($0)}
+        
+        [
+            stackView,
+            tableView,
+        ].forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+        ])
+
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
     }
     

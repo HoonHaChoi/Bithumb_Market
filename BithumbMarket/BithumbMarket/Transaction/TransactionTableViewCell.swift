@@ -66,7 +66,7 @@ extension TransactionTableViewCell {
         NSLayoutConstraint.activate([
             titmeLabel.topAnchor.constraint(equalTo: self.topAnchor),
             titmeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            titmeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
+            titmeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -79,7 +79,7 @@ extension TransactionTableViewCell {
         NSLayoutConstraint.activate([
             quntityLabel.topAnchor.constraint(equalTo: self.topAnchor),
             quntityLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             quntityLabel.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
