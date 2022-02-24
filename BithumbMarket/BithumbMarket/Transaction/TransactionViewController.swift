@@ -11,18 +11,21 @@ class TransactionViewController: ViewController {
     
     private lazy var timeTitleLabel: UILabel = {
         let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
         label.text = "시간"
         return label
     }()
     
     private lazy var priceTitleLabel: UILabel = {
         let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
         label.text = "가격"
         return label
     }()
     
     private lazy var quntityTitleLabel: UILabel = {
         let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
         label.text = "수량"
         return label
     }()

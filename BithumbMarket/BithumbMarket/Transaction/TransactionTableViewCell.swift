@@ -12,20 +12,20 @@ final class TransactionTableViewCell: UITableViewCell {
     
     private lazy var timeLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18)
+        label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
         return label
     }()
     
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18)
+        label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
         label.textAlignment = .right
         return label
     }()
     
     private lazy var quntityLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18)
+        label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
         label.textAlignment = .right
         label.adjustsFontSizeToFitWidth = true
         return label
