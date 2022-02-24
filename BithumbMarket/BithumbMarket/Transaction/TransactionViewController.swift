@@ -8,8 +8,31 @@
 import UIKit
 
 class TransactionViewController: ViewController {
-
-    let row = 20
+    
+    private lazy var timeTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "시간"
+        return label
+    }()
+    
+    private lazy var priceTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "가격"
+        return label
+    }()
+    
+    private lazy var quntityTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "수량"
+        return label
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .equalSpacing
+        return view
+    }()
     
     private lazy var tableView: UITableView = {
         let view = UITableView()
@@ -31,7 +54,7 @@ class TransactionViewController: ViewController {
 
 extension TransactionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return row
+        return transaction.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
