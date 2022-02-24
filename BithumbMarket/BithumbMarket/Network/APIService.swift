@@ -33,6 +33,24 @@ struct APIService {
         }
     }
     
+    func requestTickers(url: URL?, completion: @escaping (Result<[Ticker], HTTPError>) -> Void) {
+        requestResource(url: url) { result in
+            switch result {
+            case .success(let data):
+                let serializeData = serialize(data: data)
+                
+                switch serializeData {
+                case .success(let tickers):
+                    completion(.success(tickers))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
     private func requestResource(url: URL?, completion: @escaping (Result<Data, HTTPError>) -> Void) {
         guard let url = url else {
             completion(.failure(.invalidURL))
