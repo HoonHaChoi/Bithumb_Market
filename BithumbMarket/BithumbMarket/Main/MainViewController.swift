@@ -33,6 +33,7 @@ class MainViewController: UIViewController {
             mainTableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             mainTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
+        mainTableView.register(TickerCell.self, forCellReuseIdentifier: TickerCell.reuseidentifier)
     }
 
 }

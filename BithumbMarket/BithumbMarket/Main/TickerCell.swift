@@ -18,7 +18,7 @@ final class TickerCell: UITableViewCell {
     let currentPriceLabel = UILabel()
     let changeRateLabel = UILabel()
     let changePriceLabel = UILabel()
-    let favoriteButton = UIButton()
+    let favoriteButton = UIButton(type: .system)
     
     let symbolStackView = UIStackView()
     let currentStackView = UIStackView()
