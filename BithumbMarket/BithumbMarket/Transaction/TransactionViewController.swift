@@ -15,7 +15,7 @@ class TransactionViewController: ViewController {
         let view = UITableView()
         view.delegate = self
         view.dataSource = self
-        view.register(UITableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
+        view.register(TransactionTableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
         return view
     }()
     
@@ -31,10 +31,9 @@ extension TransactionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath) as UITableViewCell
-        cell.textLabel?.text = "title"
-        
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath) as? TransactionTableViewCell
+        cell?.configure(transaction: transaction[indexPath.row])
+        return cell ?? UITableViewCell()
     }
 }
 
