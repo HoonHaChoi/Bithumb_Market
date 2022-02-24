@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7FB23E7527C76D2A005ACAD4 /* OrderbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB23E7427C76D2A005ACAD4 /* OrderbookViewController.swift */; };
 		BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430C827C5C1D500A77A38 /* AppDelegate.swift */; };
 		BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */; };
 		BF0430CD27C5C1D500A77A38 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430CC27C5C1D500A77A38 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7FB23E7427C76D2A005ACAD4 /* OrderbookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderbookViewController.swift; sourceTree = "<group>"; };
 		BF0430C527C5C1D500A77A38 /* BithumbMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BithumbMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF0430C827C5C1D500A77A38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7FB23E7327C76CF7005ACAD4 /* OrderbookView */ = {
+			isa = PBXGroup;
+			children = (
+				7FB23E7427C76D2A005ACAD4 /* OrderbookViewController.swift */,
+			);
+			path = OrderbookView;
+			sourceTree = "<group>";
+		};
 		BF0430BC27C5C1D500A77A38 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +72,7 @@
 		BF0430C727C5C1D500A77A38 /* BithumbMarket */ = {
 			isa = PBXGroup;
 			children = (
+				7FB23E7327C76CF7005ACAD4 /* OrderbookView */,
 				BF0430C827C5C1D500A77A38 /* AppDelegate.swift */,
 				BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */,
 				BF0430CC27C5C1D500A77A38 /* ViewController.swift */,
@@ -168,6 +179,7 @@
 				BF86B5F327C60653005A2170 /* APIService.swift in Sources */,
 				BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */,
 				BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */,
+				7FB23E7527C76D2A005ACAD4 /* OrderbookViewController.swift in Sources */,
 				BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
