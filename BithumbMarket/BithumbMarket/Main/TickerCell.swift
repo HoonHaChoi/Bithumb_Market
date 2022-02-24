@@ -39,6 +39,12 @@ final class TickerCell: UITableViewCell {
         setConstraintLayout()
     }
     
+    func configure(ticker: Ticker) {
+        symbolLabel.text = ticker.symbol
+        currentPriceLabel.text = ticker.market.closingPrice
+        changeRateLabel.text = String(format: "%.2f", ticker.changeOfRate()) + "%"
+        changePriceLabel.text = "\(ticker.changeOfPrice())"
+    }
 }
 
 extension TickerCell {

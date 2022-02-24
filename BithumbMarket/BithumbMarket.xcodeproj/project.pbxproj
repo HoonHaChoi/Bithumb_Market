@@ -18,6 +18,7 @@
 		BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F627C60B65005A2170 /* HTTPError.swift */; };
 		BF99E9E527C7D55C00DA497B /* CoinSortSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9E427C7D55C00DA497B /* CoinSortSegmentControl.swift */; };
 		BF99E9E727C7D69B00DA497B /* CoinSortControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9E627C7D69B00DA497B /* CoinSortControlView.swift */; };
+		BF99E9EA27C7EB1300DA497B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9E927C7EB1300DA497B /* String+Extension.swift */; };
 		BFF712B727C733C100B38ACE /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF712B627C733C100B38ACE /* Market.swift */; };
 		BFF712BA27C753DB00B38ACE /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF712B927C753DB00B38ACE /* TickerCell.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		BF86B5F627C60B65005A2170 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		BF99E9E427C7D55C00DA497B /* CoinSortSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSortSegmentControl.swift; sourceTree = "<group>"; };
 		BF99E9E627C7D69B00DA497B /* CoinSortControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSortControlView.swift; sourceTree = "<group>"; };
+		BF99E9E927C7EB1300DA497B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		BFF712B627C733C100B38ACE /* Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
 		BFF712B927C753DB00B38ACE /* TickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +77,7 @@
 				BFF712B827C74FCC00B38ACE /* Main */,
 				BF86B5F127C60638005A2170 /* Network */,
 				BF86B5EE27C602D4005A2170 /* Model */,
+				BF99E9E827C7EB0300DA497B /* Extension */,
 				BF0430D127C5C1D700A77A38 /* Assets.xcassets */,
 				BF0430D327C5C1D700A77A38 /* LaunchScreen.storyboard */,
 				BF0430D627C5C1D700A77A38 /* Info.plist */,
@@ -108,6 +111,14 @@
 				BF99E9E627C7D69B00DA497B /* CoinSortControlView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		BF99E9E827C7EB0300DA497B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BF99E9E927C7EB1300DA497B /* String+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		BFF712B827C74FCC00B38ACE /* Main */ = {
@@ -194,6 +205,7 @@
 				BF99E9E527C7D55C00DA497B /* CoinSortSegmentControl.swift in Sources */,
 				BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */,
 				BF0430CD27C5C1D500A77A38 /* MainViewController.swift in Sources */,
+				BF99E9EA27C7EB1300DA497B /* String+Extension.swift in Sources */,
 				BFF712BA27C753DB00B38ACE /* TickerCell.swift in Sources */,
 				BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */,
 				BFF712B727C733C100B38ACE /* Market.swift in Sources */,
