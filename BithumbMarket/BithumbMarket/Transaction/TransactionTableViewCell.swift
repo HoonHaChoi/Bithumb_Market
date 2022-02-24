@@ -10,7 +10,7 @@ import UIKit
 
 final class TransactionTableViewCell: UITableViewCell {
     
-    private lazy var titmeLabel: UILabel = {
+    private lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18)
         return label
@@ -32,7 +32,7 @@ final class TransactionTableViewCell: UITableViewCell {
     }()
     
     func configure(transaction: Transaction) {
-        titmeLabel.text = transaction.time
+        timeLabel.text = transaction.time
         priceLabel.text = transaction.price
         quntityLabel.text = transaction.quntity
     }
@@ -52,27 +52,27 @@ extension TransactionTableViewCell {
     
     func setupView() {
         [
-            titmeLabel,
+            timeLabel,
             priceLabel,
             quntityLabel
         ].forEach{addSubview($0)}
         
         [
-            titmeLabel,
+            timeLabel,
             priceLabel,
             quntityLabel
         ].forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
 
         NSLayoutConstraint.activate([
-            titmeLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            titmeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            titmeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+            timeLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor)
         ])
         
         NSLayoutConstraint.activate([
             priceLabel.topAnchor.constraint(equalTo: self.topAnchor),
             priceLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            priceLabel.leadingAnchor.constraint(equalTo: titmeLabel.trailingAnchor, constant: 20),
+            priceLabel.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 20),
             priceLabel.trailingAnchor.constraint(equalTo: quntityLabel.leadingAnchor, constant: -20),
         ])
         
