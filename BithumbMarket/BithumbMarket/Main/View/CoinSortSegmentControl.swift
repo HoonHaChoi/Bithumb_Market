@@ -11,12 +11,12 @@ final class CoinSortSegmentControl: UISegmentedControl {
     
     override init(items: [Any]?) {
         super.init(items: items)
-        
+        configure()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        
+        configure()
     }
     
     private func configure() {
@@ -26,11 +26,11 @@ final class CoinSortSegmentControl: UISegmentedControl {
         self.selectedSegmentIndex = 0
         self.setTitleTextAttributes([
             NSAttributedString.Key.foregroundColor: UIColor.darkGray,
-            NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline)
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 26)
         ], for: .normal)
         self.setTitleTextAttributes([
             NSAttributedString.Key.foregroundColor: UIColor.black,
-            NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline)
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 26)
         ], for: .selected)
     }
     
