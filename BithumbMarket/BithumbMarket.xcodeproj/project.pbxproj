@@ -17,6 +17,7 @@
 		BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F427C606D8005A2170 /* EndPoint.swift */; };
 		BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F627C60B65005A2170 /* HTTPError.swift */; };
 		BF99E9E527C7D55C00DA497B /* CoinSortSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9E427C7D55C00DA497B /* CoinSortSegmentControl.swift */; };
+		BF99E9E727C7D69B00DA497B /* CoinSortControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9E627C7D69B00DA497B /* CoinSortControlView.swift */; };
 		BFF712B727C733C100B38ACE /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF712B627C733C100B38ACE /* Market.swift */; };
 		BFF712BA27C753DB00B38ACE /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF712B927C753DB00B38ACE /* TickerCell.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		BF86B5F427C606D8005A2170 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		BF86B5F627C60B65005A2170 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		BF99E9E427C7D55C00DA497B /* CoinSortSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSortSegmentControl.swift; sourceTree = "<group>"; };
+		BF99E9E627C7D69B00DA497B /* CoinSortControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSortControlView.swift; sourceTree = "<group>"; };
 		BFF712B627C733C100B38ACE /* Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
 		BFF712B927C753DB00B38ACE /* TickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				BF99E9E427C7D55C00DA497B /* CoinSortSegmentControl.swift */,
+				BF99E9E627C7D69B00DA497B /* CoinSortControlView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF99E9E727C7D69B00DA497B /* CoinSortControlView.swift in Sources */,
 				BF99E9E527C7D55C00DA497B /* CoinSortSegmentControl.swift in Sources */,
 				BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */,
 				BF0430CD27C5C1D500A77A38 /* MainViewController.swift in Sources */,

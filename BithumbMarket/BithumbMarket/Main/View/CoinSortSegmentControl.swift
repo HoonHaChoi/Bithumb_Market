@@ -29,7 +29,7 @@ final class CoinSortSegmentControl: UISegmentedControl {
             NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline)
         ], for: .normal)
         self.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.orange,
+            NSAttributedString.Key.foregroundColor: UIColor.black,
             NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline)
         ], for: .selected)
     }
