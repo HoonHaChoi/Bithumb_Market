@@ -9,6 +9,10 @@ import UIKit
 
 final class TickerCell: UITableViewCell {
     
+    static var reuseidentifier: String {
+        return String(describing: self)
+    }
+    
     let symbolLabel = UILabel()
     let paymentLabel = UILabel()
     let currentPriceLabel = UILabel()
@@ -23,12 +27,14 @@ final class TickerCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureLabel()
+        configureStackView()
+        setConstraintLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
 }
 
@@ -52,6 +58,10 @@ extension TickerCell {
         
         paymentLabel.text = "KRW"
         paymentLabel.textColor = .darkGray
+        
+        currentPriceLabel.textAlignment = .right
+        changeRateLabel.textAlignment = .right
+        changePriceLabel.textAlignment = .right
     }
     
     func configureStackView() {
@@ -65,15 +75,17 @@ extension TickerCell {
         changeStackView.axis = .vertical
         bundleStackView.axis = .horizontal
         
-        symbolStackView.distribution = .fill
+        symbolStackView.distribution = .equalSpacing
         currentStackView.distribution = .fill
-        changeStackView.distribution = .fill
+        changeStackView.distribution = .equalSpacing
         bundleStackView.distribution = .fill
         
         symbolStackView.alignment = .fill
         currentStackView.alignment = .top
         changeStackView.alignment = .fill
         bundleStackView.alignment = .fill
+        
+        bundleStackView.spacing = 20
     }
     
     func setConstraintLayout() {
@@ -87,15 +99,18 @@ extension TickerCell {
         bundleStackView.addArrangedSubview(currentStackView)
         bundleStackView.addArrangedSubview(changeStackView)
         
+        addSubview(bundleStackView)
+        addSubview(favoriteButton)
+        
         NSLayoutConstraint.activate([
-            bundleStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            bundleStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             bundleStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             bundleStackView.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -20),
             
-            favoriteButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            favoriteButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 30)
         ])
-        addSubview(bundleStackView)
     }
     
 }
