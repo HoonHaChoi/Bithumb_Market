@@ -14,10 +14,10 @@ struct EndPoint {
     private let path = "/public/"
     
     enum RequestType: String {
-        case ticker = "ticker"
-        case orderBook = "orderbook"
-        case transactionHistory = "transaction_history"
-        case assetsStatus = "assetsstatus"
+        case ticker = "ticker/"
+        case orderBook = "orderbook/"
+        case transactionHistory = "transaction_history/"
+        case assetsStatus = "assetsstatus/"
         
         var name: String {
             return self.rawValue
