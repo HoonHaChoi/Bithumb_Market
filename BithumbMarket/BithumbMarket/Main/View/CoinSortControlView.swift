@@ -21,6 +21,7 @@ final class CoinSortControlView: UIView {
     
     private let coinsortSegmentControl: CoinSortSegmentControl = {
         let segmentControl = CoinSortSegmentControl(items: ["목록", "관심"])
+        segmentControl.addTarget(self, action: #selector(changeSegmentedControlLinePosition), for: .valueChanged)
         segmentControl.translatesAutoresizingMaskIntoConstraints = false
         return segmentControl
     }()
@@ -55,5 +56,23 @@ final class CoinSortControlView: UIView {
         ])
     }
     
+    @objc private func changeSegmentedControlLinePosition() {
+        changeSegmentControlLine()
+    }
+    
+    func updateSelectIndex(to index: Int) {
+        coinsortSegmentControl.selectedSegmentIndex = index
+        changeSegmentControlLine()
+    }
+    
+    private func changeSegmentControlLine(){
+        let segmentIndex = CGFloat(coinsortSegmentControl.selectedSegmentIndex)
+        let segmentWidth = coinsortSegmentControl.frame.width / CGFloat(coinsortSegmentControl.numberOfSegments)
+        let leadingDistance = segmentWidth * segmentIndex
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            self?.leadingDistance.constant = leadingDistance
+            self?.layoutIfNeeded()
+        })
+    }
     
 }
