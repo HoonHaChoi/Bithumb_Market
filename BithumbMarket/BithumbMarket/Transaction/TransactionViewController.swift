@@ -21,6 +21,8 @@ class TransactionViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "체결 내역"
+        
         setupView()
     }
 }
