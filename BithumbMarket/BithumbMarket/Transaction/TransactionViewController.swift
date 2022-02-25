@@ -51,6 +51,10 @@ class TransactionViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "체결 내역"
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.barTintColor = .systemBackground
+        navigationController?.navigationBar.shadowImage = UIImage()
+        drawTitle()
         fetchData()
         setupView()
     }
