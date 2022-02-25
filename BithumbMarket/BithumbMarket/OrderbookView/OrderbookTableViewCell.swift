@@ -9,8 +9,6 @@ import UIKit
 
 final class OrderbookTableViewCell: UITableViewCell {
     
-    static let reuseIdentifier = "OrderTableViewCell"
-    
     let priceLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center

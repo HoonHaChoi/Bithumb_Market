@@ -13,7 +13,7 @@ class OrderbookViewController: UIViewController {
         let tableView = UITableView(frame: CGRect.zero)
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(OrderbookTableViewCell.self, forCellReuseIdentifier: OrderbookTableViewCell.reuseIdentifier)
+        tableView.register(OrderbookTableViewCell.self, forCellReuseIdentifier: OrderbookNameSpace.cellReuseIdentifier)
         return tableView
     }()
     
@@ -37,6 +37,7 @@ class OrderbookViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = OrderbookNameSpace.navigationTitle
         configureTableView()
     }
 }
