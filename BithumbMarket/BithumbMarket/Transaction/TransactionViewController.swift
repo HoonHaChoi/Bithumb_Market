@@ -50,10 +50,18 @@ class TransactionViewController: ViewController {
         return view
     }()
     
+    func fetchData() {
+        model.fetchTransaction(symbol: symbol) {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "체결 내역"
-        
+        fetchData()
         setupView()
     }
 }
