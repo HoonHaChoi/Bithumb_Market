@@ -29,6 +29,17 @@ class TransactionViewController: ViewController {
         return view
     }()
     
+    private func drawTitle() {
+        let titleText = TransactionNameSpace.tableTitle
+        
+        for text in titleText {
+            let view = UILabel()
+            view.textColor = .label
+            view.text = text
+            stackView.addArrangedSubview(view)
+        }
+    }
+    
     func fetchData() {
         model.fetchTransaction(symbol: symbol) {
             DispatchQueue.main.async {
@@ -68,21 +79,9 @@ extension TransactionViewController {
     func setupView() {
         view.addSubview(tableView)
         
-        [
-            timeTitleLabel,
-            priceTitleLabel,
-            quntityTitleLabel
-        ].forEach{stackView.addArrangedSubview($0)}
+        [stackView, tableView].forEach{view.addSubview($0)}
         
-        [
-            stackView,
-            tableView
-        ].forEach{view.addSubview($0)}
-        
-        [
-            stackView,
-            tableView,
-        ].forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
+        [stackView, tableView].forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -92,9 +91,9 @@ extension TransactionViewController {
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
     
