@@ -9,6 +9,9 @@ import UIKit
 
 class TransactionViewController: ViewController {
     
+    let symbol = "BTC"
+    let model = TransactionViewModel.init(service: APIService.init(session: URLSession.shared))
+    
     private lazy var timeTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
@@ -57,12 +60,14 @@ class TransactionViewController: ViewController {
 
 extension TransactionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return transaction.count
+        return model.transaction.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath) as? TransactionTableViewCell
-        cell?.configure(transaction: transaction[indexPath.row])
+        cell?.configure(transaction: model.transaction[indexPath.row])
+        cell?.selectionStyle = .none
+        
         return cell ?? UITableViewCell()
     }
 }
@@ -97,7 +102,7 @@ extension TransactionViewController {
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ])
-
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
