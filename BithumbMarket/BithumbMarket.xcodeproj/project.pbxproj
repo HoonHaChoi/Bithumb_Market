@@ -18,6 +18,8 @@
 		BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F627C60B65005A2170 /* HTTPError.swift */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
+		E8AC90AF27C7743700C50FA3 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AE27C7743700C50FA3 /* TransactionViewModel.swift */; };
+		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		BF86B5F627C60B65005A2170 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
+		E8AC90AE27C7743700C50FA3 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
+		E8AC90B027C8700500C50FA3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				BF86B5EF27C604B0005A2170 /* Ticker.swift */,
+				E8AC90B027C8700500C50FA3 /* Transaction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -102,6 +107,7 @@
 			children = (
 				E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */,
 				E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */,
+				E8AC90AE27C7743700C50FA3 /* TransactionViewModel.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -176,6 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */,
 				BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */,
 				BF0430CD27C5C1D500A77A38 /* ViewController.swift in Sources */,
 				BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */,
@@ -185,6 +192,7 @@
 				BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */,
 				E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */,
 				E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */,
+				E8AC90AF27C7743700C50FA3 /* TransactionViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
