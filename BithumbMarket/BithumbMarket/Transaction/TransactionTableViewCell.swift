@@ -40,7 +40,7 @@ final class TransactionTableViewCell: UITableViewCell {
     }
     
     func configure(transaction: TransactionData) {
-        timeLabel.text = transaction.transactionDate
+        timeLabel.text = transaction.transactionDate[5..<16]
         priceLabel.text = transaction.price
         quntityLabel.text = transaction.total
         
