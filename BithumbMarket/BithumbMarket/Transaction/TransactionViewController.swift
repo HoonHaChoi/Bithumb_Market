@@ -12,27 +12,6 @@ class TransactionViewController: ViewController {
     let symbol = "BTC"
     let model = TransactionViewModel.init(service: APIService.init(session: URLSession.shared))
     
-    private lazy var timeTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
-        label.text = "시간"
-        return label
-    }()
-    
-    private lazy var priceTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
-        label.text = "가격"
-        return label
-    }()
-    
-    private lazy var quntityTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
-        label.text = "수량"
-        return label
-    }()
-    
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -45,8 +24,8 @@ class TransactionViewController: ViewController {
         view.delegate = self
         view.dataSource = self
         view.rowHeight = 45
-        view.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        view.register(TransactionTableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
+        view.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        view.register(TransactionTableViewCell.self, forCellReuseIdentifier: TransactionNameSpace.cellReuseIdentifier)
         return view
     }()
     
@@ -72,7 +51,7 @@ extension TransactionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath) as? TransactionTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TransactionNameSpace.cellReuseIdentifier, for: indexPath) as? TransactionTableViewCell
         cell?.configure(transaction: model.transaction[indexPath.row])
         cell?.selectionStyle = .none
         

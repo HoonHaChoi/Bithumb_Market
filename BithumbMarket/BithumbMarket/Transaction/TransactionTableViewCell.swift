@@ -32,7 +32,7 @@ final class TransactionTableViewCell: UITableViewCell {
     }()
     
     private func check(type: String) {
-        if type == "ask" {
+        if type == TransactionNameSpace.ask {
             [timeLabel, priceLabel, quntityLabel].forEach{$0.textColor = .blue}
         } else {
             [timeLabel, priceLabel, quntityLabel].forEach{$0.textColor = .red}
@@ -53,7 +53,8 @@ final class TransactionTableViewCell: UITableViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setupView()
     }
     
 }
