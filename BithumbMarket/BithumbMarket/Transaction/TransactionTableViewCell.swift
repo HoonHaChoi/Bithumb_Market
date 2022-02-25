@@ -31,10 +31,20 @@ final class TransactionTableViewCell: UITableViewCell {
         return label
     }()
     
-    func configure(transaction: Transaction) {
-        timeLabel.text = transaction.time
+    private func check(type: String) {
+        if type == "ask" {
+            [timeLabel, priceLabel, quntityLabel].forEach{$0.textColor = .blue}
+        } else {
+            [timeLabel, priceLabel, quntityLabel].forEach{$0.textColor = .red}
+        }
+    }
+    
+    func configure(transaction: TransactionData) {
+        timeLabel.text = transaction.transactionDate
         priceLabel.text = transaction.price
-        quntityLabel.text = transaction.quntity
+        quntityLabel.text = transaction.total
+        
+        check(type: transaction.type)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
