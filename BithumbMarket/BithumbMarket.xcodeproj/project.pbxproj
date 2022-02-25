@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F54FF4527C8C60F00EBFBD8 /* Orderbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F54FF4427C8C60F00EBFBD8 /* Orderbook.swift */; };
+		7F54FF4827C8C65900EBFBD8 /* OrderbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F54FF4727C8C65900EBFBD8 /* OrderbookViewModel.swift */; };
 		BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430C827C5C1D500A77A38 /* AppDelegate.swift */; };
 		BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */; };
 		BF0430CD27C5C1D500A77A38 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430CC27C5C1D500A77A38 /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		7F54FF4427C8C60F00EBFBD8 /* Orderbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orderbook.swift; sourceTree = "<group>"; };
+		7F54FF4727C8C65900EBFBD8 /* OrderbookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderbookViewModel.swift; sourceTree = "<group>"; };
 		BF0430C527C5C1D500A77A38 /* BithumbMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BithumbMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF0430C827C5C1D500A77A38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +50,7 @@
 		7F54FF4127C8C4F500EBFBD8 /* OrderbookViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				7F54FF4727C8C65900EBFBD8 /* OrderbookViewModel.swift */,
 			);
 			path = OrderbookViewModel;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */,
 				BF86B5F327C60653005A2170 /* APIService.swift in Sources */,
 				BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */,
+				7F54FF4827C8C65900EBFBD8 /* OrderbookViewModel.swift in Sources */,
 				BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */,
 				BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */,
 			);
