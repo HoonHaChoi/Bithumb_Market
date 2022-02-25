@@ -9,20 +9,23 @@ import UIKit
 
 class OrderbookViewController: UIViewController {
     //MARK: UI property
-    let orderbookTableView: UITableView = {
+    private let orderbookTableView: UITableView = {
         let tableView = UITableView(frame: CGRect.zero)
+        tableView.separatorStyle = .none
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(OrderbookTableViewCell.self, forCellReuseIdentifier: OrderbookTableViewCell.reuseIdentifier)
         return tableView
     }()
     
-    lazy var orderbookTableViewConstraints = [
+    private lazy var orderbookTableViewConstraints = [
         orderbookTableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
         orderbookTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         orderbookTableView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
         orderbookTableView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
     ]
     
-    private func setLayout() {
-        orderbookTableView.translatesAutoresizingMaskIntoConstraints = false
+    private func configureTableView() {
+        view.addSubview(orderbookTableView)
         NSLayoutConstraint.activate(orderbookTableViewConstraints)
     }
     
@@ -30,11 +33,10 @@ class OrderbookViewController: UIViewController {
     override func loadView() {
         super.loadView()
         view.backgroundColor = .systemBackground
-        view.addSubview(orderbookTableView)
-        setLayout()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTableView()
     }
 }
