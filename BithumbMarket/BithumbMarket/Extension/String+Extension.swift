@@ -15,6 +15,10 @@ extension String {
         return String(self[start..<end])
     }
     
+    func withComma() -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+
+        return numberFormatter.string(from: NSNumber(value: Int(self) ?? 0))!
+    }
 }
-
-
