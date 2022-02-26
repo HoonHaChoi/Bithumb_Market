@@ -43,3 +43,26 @@ enum APIEndpoint: Endpoint {
     }
     
 }
+
+enum ChartIntervals: CaseIterable {
+    case oneminute
+    case tenminute
+    case halfhour
+    case anhour
+    case day
+    
+    var type: String {
+        switch self {
+        case .oneminute:
+            return "1m"
+        case .tenminute:
+            return "10m"
+        case .halfhour:
+            return "30m"
+        case .anhour:
+            return "1h"
+        case .day:
+            return "24h"
+        }
+    }
+}
