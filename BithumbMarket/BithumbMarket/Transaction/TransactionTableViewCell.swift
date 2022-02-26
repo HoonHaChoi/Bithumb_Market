@@ -40,9 +40,9 @@ final class TransactionTableViewCell: UITableViewCell {
     }
     
     func configure(transaction: TransactionData) {
-        timeLabel.text = transaction.transactionDate[5..<16]
+        timeLabel.text = transaction.transactionDate[11..<20]
         priceLabel.text = transaction.price
-        quntityLabel.text = transaction.total
+        quntityLabel.text = transaction.unitsTraded
         
         check(type: transaction.type)
     }
