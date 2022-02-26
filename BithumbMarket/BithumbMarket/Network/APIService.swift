@@ -15,8 +15,8 @@ struct APIService {
         self.session = session
     }
     
-    func request<T: Decodable>(url: URL?, completion: @escaping (Result<T, HTTPError>) -> Void) {
-        requestResource(url: url) { result in
+    func request<T: Decodable>(endpoint: APIEndpoint, completion: @escaping (Result<T, HTTPError>) -> Void) {
+        requestResource(url: endpoint.url) { result in
             switch result {
             case .success(let data):
                 let decodeData: Result<T, HTTPError> = decode(data: data)
@@ -33,8 +33,8 @@ struct APIService {
         }
     }
     
-    func requestTickers(url: URL?, completion: @escaping (Result<[Ticker], HTTPError>) -> Void) {
-        requestResource(url: url) { result in
+    func requestTickers(endpoint: APIEndpoint, completion: @escaping (Result<[Ticker], HTTPError>) -> Void) {
+        requestResource(url: endpoint.url) { result in
             switch result {
             case .success(let data):
                 let serializeData = serialize(data: data)
