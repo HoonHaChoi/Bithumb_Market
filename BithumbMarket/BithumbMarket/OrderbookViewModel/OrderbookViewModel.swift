@@ -7,7 +7,17 @@
 
 import Foundation
 
-class OrderbookViewModel {
+//TODO: ViewModel 타입 불필요시 제거
+protocol OrderbookViewModelType {
+    var binding: () -> Void { get set}
+    
+    var asksPrice: [String]? { get }
+    var asksQuanity: [String]? { get }
+    var bidsPrice: [String]? { get }
+    var bidsQuanity: [String]? { get }
+}
+
+class OrderbookViewModel: OrderbookViewModelType {
 
     //TODO: 뷰와 의존 관계에 따라 변경 및 추가
     var binding: () -> Void = { }
