@@ -11,10 +11,10 @@ import Foundation
 protocol OrderbookViewModelType {
     var binding: () -> Void { get set}
     
-    var asksPrice: [String]? { get }
-    var asksQuanity: [String]? { get }
-    var bidsPrice: [String]? { get }
-    var bidsQuanity: [String]? { get }
+    var priceOfAsks: [String]? { get }
+    var quantityOfAsks: [String]? { get }
+    var priceOfBids: [String]? { get }
+    var quantityOfBids: [String]? { get }
 }
 
 class OrderbookViewModel: OrderbookViewModelType {
@@ -29,10 +29,10 @@ class OrderbookViewModel: OrderbookViewModelType {
     }
     
     //TODO: TableViewDataSource에 따라 필요없는 프로퍼티 제거 및 추가
-    var asksPrice: [String]?
-    var asksQuanity: [String]?
-    var bidsPrice: [String]?
-    var bidsQuanity: [String]?
+    var priceOfAsks: [String]?
+    var quantityOfAsks: [String]?
+    var priceOfBids: [String]?
+    var quantityOfBids: [String]?
     
     //TODO: Quanity 연산 작업
     
@@ -43,9 +43,10 @@ class OrderbookViewModel: OrderbookViewModelType {
             switch result {
             case .success(let success):
                 self?.orderbookData = success.data
-                self?.asksPrice = self?.orderbookData?.asks.map{ $0.quantity }
-                self?.bidsPrice = self?.orderbookData?.asks.map{ $0.quantity }
-                self?.bidsQuanity = self?.orderbookData?.bids.map{ $0.price }
+                self?.priceOfAsks = self?.orderbookData?.asks.map{ $0.price }
+                self?.quantityOfAsks = self?.orderbookData?.asks.map{ $0.quantity }
+                self?.priceOfBids = self?.orderbookData?.bids.map{ $0.price }
+                self?.quantityOfBids = self?.orderbookData?.asks.map{ $0.quantity }
             case .failure(let failure):
                 //TODO: fail 처리
                 print(failure)
