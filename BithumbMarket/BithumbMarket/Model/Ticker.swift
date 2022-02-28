@@ -11,6 +11,10 @@ struct Ticker {
     let symbol: String
     var market: Market
     
+    var paymentCurrency: String {
+        symbol + "_KRW"
+    }
+    
     func changeOfRate() -> Double {
         return (Double(changeOfPrice()) - 1) * 100
     }
