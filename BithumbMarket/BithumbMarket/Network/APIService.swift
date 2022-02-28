@@ -122,4 +122,25 @@ struct APIService {
         return .success(decoding)
     }
     
+    func sendSocketMessage(to message: Message) {
+        guard let encoder = try? JSONEncoder().encode(message) else {
+             return
+        }
+        socket.sendMessage(data: encoder)
+    }
+    
+    func perform<T: Decodable>(completion: @escaping (Result<T, HTTPError>) -> Void) {
+        socket.reciveText { tickerString in
+            guard let data = tickerString.data(using: .utf8) else {
+                completion(.failure(.failureDecode))
+                return
+            }
+            completion(self.decode(data: data))
+        }
+    }
+    
+    func disconnectSocket() {
+        socket.disconnect()
+    }
+    
 }

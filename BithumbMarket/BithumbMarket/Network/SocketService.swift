@@ -26,11 +26,11 @@ struct SocketService {
         webSocket.disconnect()
     }
     
-    func performString(completion: @escaping (String) -> Void) {
+    func reciveText(completion: @escaping (String) -> Void) {
         webSocket.onEvent = { result in
             switch result {
             case .text(let string):
-                perform(message: string, completion: completion)
+                shouldConfirm(message: string, completion: completion)
             default:
                 break
             }
@@ -42,11 +42,9 @@ struct SocketService {
         return message.hasPrefix(prefix)
     }
     
-    private func perform(message: String, completion: @escaping (String) -> Void) {
+    private func shouldConfirm(message: String, completion: @escaping (String) -> Void) {
         if !isSuccessMessage(to: message) {
             completion(message)
-        } else {
-            print(message)
         }
     }
     
