@@ -12,7 +12,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let screen = (scene as? UIWindowScene) else { return }
+        
+        let navigationController = UINavigationController()
+        navigationController.isNavigationBarHidden = true
+        
+        navigationController.setViewControllers([MainViewController(viewmodel: .init(), datasource: .init())], animated: true)
+        navigationController.isNavigationBarHidden = true
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.windowScene = screen
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
 
 }

@@ -26,7 +26,7 @@ final class MainViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let tickers):
-                self.tickers.value = tickers
+                self.tickers.value = tickers.sorted(by: >)
                 self.updateTableHandler?()
                 self.sendMessage()
             case .failure(let error):
