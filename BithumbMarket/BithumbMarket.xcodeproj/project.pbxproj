@@ -23,6 +23,7 @@
 		BFD5863B27CBF3F200720BDC /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5863A27CBF3F200720BDC /* UIColor+Extension.swift */; };
 		BFD5863E27CC5EA600720BDC /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = BFD5863D27CC5EA600720BDC /* Starscream */; };
 		BFD5864027CC5EC200720BDC /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5863F27CC5EC200720BDC /* SocketService.swift */; };
+		BFD5864227CC66F400720BDC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5864127CC66F400720BDC /* Message.swift */; };
 		BFF712B727C733C100B38ACE /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF712B627C733C100B38ACE /* Market.swift */; };
 		BFF712BA27C753DB00B38ACE /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF712B927C753DB00B38ACE /* TickerCell.swift */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		BF99E9F827CAA61600DA497B /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		BFD5863A27CBF3F200720BDC /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		BFD5863F27CC5EC200720BDC /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
+		BFD5864127CC66F400720BDC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		BFF712B627C733C100B38ACE /* Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
 		BFF712B927C753DB00B38ACE /* TickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +100,7 @@
 			children = (
 				BF86B5EF27C604B0005A2170 /* Ticker.swift */,
 				BFF712B627C733C100B38ACE /* Market.swift */,
+				BFD5864127CC66F400720BDC /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				BFF712B727C733C100B38ACE /* Market.swift in Sources */,
 				BF86B5F327C60653005A2170 /* APIService.swift in Sources */,
 				BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */,
+				BFD5864227CC66F400720BDC /* Message.swift in Sources */,
 				BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */,
 				BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */,
 			);
