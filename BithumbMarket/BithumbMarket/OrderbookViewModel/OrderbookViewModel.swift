@@ -34,7 +34,12 @@ class OrderbookViewModel: OrderbookViewModelType {
     var priceOfBids: [String]?
     var quantityOfBids: [String]?
     
-    //TODO: Quanity 연산 작업
+    //TODO: 수정
+    private func calculateRateOfQuintity(quantities: [String], quantity: String) -> Float {
+        let quantities = quantities.map { Float($0) ?? 0 }
+        let sumOfQuantities = quantities.reduce(0){ $0 + $1}
+        return Float(quantity) ?? 0 / sumOfQuantities * 5
+    }
     
     private let url = EndPoint().makeURL(of: .orderBook, param: "BTC_KRW")
     
