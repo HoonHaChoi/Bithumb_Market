@@ -28,6 +28,13 @@
 		BFB9562D27CCB0F8001627C6 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004D27CC9B4B00752ABA /* Observable.swift */; };
 		BFB9562F27CCB35D001627C6 /* MainDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB9562E27CCB35D001627C6 /* MainDataSource.swift */; };
 		BFB9563027CCB3CC001627C6 /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004F27CC9B4B00752ABA /* TickerCell.swift */; };
+		BFB9563127CCB5A6001627C6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005027CC9B4B00752ABA /* MainViewController.swift */; };
+		BFB9563227CCB647001627C6 /* CoinSortControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005227CC9B4B00752ABA /* CoinSortControlView.swift */; };
+		BFB9563327CCB647001627C6 /* CoinSortSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005327CC9B4B00752ABA /* CoinSortSegmentControl.swift */; };
+		BFB9563427CCB6C5001627C6 /* OrderbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005927CC9B4B00752ABA /* OrderbookViewModel.swift */; };
+		BFB9563527CCB6C5001627C6 /* OrderbookNameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005627CC9B4B00752ABA /* OrderbookNameSpace.swift */; };
+		BFB9563627CCB6C5001627C6 /* OrderbookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005727CC9B4B00752ABA /* OrderbookTableViewCell.swift */; };
+		BFB9563727CCB6C5001627C6 /* OrderbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005527CC9B4B00752ABA /* OrderbookViewController.swift */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
@@ -299,6 +306,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFB9563227CCB647001627C6 /* CoinSortControlView.swift in Sources */,
+				BFB9563727CCB6C5001627C6 /* OrderbookViewController.swift in Sources */,
+				BFB9563327CCB647001627C6 /* CoinSortSegmentControl.swift in Sources */,
+				BFB9563127CCB5A6001627C6 /* MainViewController.swift in Sources */,
 				BFB9563027CCB3CC001627C6 /* TickerCell.swift in Sources */,
 				BFB9562D27CCB0F8001627C6 /* Observable.swift in Sources */,
 				7F2E005C27CC9F3300752ABA /* SocketService.swift in Sources */,
@@ -309,9 +320,12 @@
 				BFB9562F27CCB35D001627C6 /* MainDataSource.swift in Sources */,
 				7F2E004527CC9AE000752ABA /* Orderbook.swift in Sources */,
 				7F2E004627CC9AE000752ABA /* Message.swift in Sources */,
+				BFB9563627CCB6C5001627C6 /* OrderbookTableViewCell.swift in Sources */,
 				7F2E004727CC9AE000752ABA /* OrderbookEntity.swift in Sources */,
+				BFB9563427CCB6C5001627C6 /* OrderbookViewModel.swift in Sources */,
 				E8AC90BC27C8D12100C50FA3 /* TransactionNameSpace.swift in Sources */,
 				E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */,
+				BFB9563527CCB6C5001627C6 /* OrderbookNameSpace.swift in Sources */,
 				BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */,
 				BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */,
 				E8AC90BA27C8BB5600C50FA3 /* String+Extension.swift in Sources */,
