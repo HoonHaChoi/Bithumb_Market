@@ -18,6 +18,7 @@ final class MainViewModel {
     }
     
     var updateTableHandler: (() -> Void)?
+    var changeIndexHandler: ((Int) -> Void)?
     var errorHandler: ((HTTPError) -> Void)?
     
     func fetchTickers() {
@@ -43,6 +44,34 @@ final class MainViewModel {
         }
     }
     
+    func updateTickers() {
+        service.perform { [weak self] (respone: Result<ReceiveTicker, HTTPError>) in
+            guard let self = self else { return }
+            switch respone {
+            case .success(let ticker):
+                guard let index = self.findIndex(to: ticker) else {
+                    return
+                }
+                if self.compareTicker(index: index, to: ticker) {
+                    self.updateTicker(index: index, to: ticker)
+                    self.changeIndexHandler?(index)
+                }
+            case .failure(let error):
+                self.errorHandler?(error)
+            }
+        }
+    }
     
+    private func findIndex(to ticker: ReceiveTicker) -> Int? {
+        return tickers.value.firstIndex(where: { $0.equalSymbol(to: ticker) })
+    }
+    
+    private func compareTicker(index: Int, to ticker: ReceiveTicker) -> Bool {
+        return tickers.value[index].compare(to: ticker)
+    }
+    
+    private func updateTicker(index: Int, to ticker: ReceiveTicker) {
+        tickers.value[index].updatePrice(to: ticker)
+    }
     
 }
