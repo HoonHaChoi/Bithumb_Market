@@ -12,13 +12,12 @@ struct SocketService {
     
     private var webSocket: WebSocket
     
-    init(url: URL) {
-        var urlRequest = URLRequest(url: url)
-        urlRequest.timeoutInterval = 5
+    init(url: URL?) {
+        let urlRequest = URLRequest(url: url!)
         self.webSocket = .init(request: urlRequest)
         self.webSocket.connect()
     }
-    
+        
     func sendMessage(data: Data) {
         webSocket.write(data: data)
     }

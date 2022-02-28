@@ -10,9 +10,12 @@ import Foundation
 struct APIService {
     
     private let session: URLSession
+    private let socket: SocketService
     
-    init(session: URLSession = URLSession.shared) {
+    init(session: URLSession = URLSession(configuration: .ephemeral),
+         socket: SocketService = SocketService(url: APIEndpoint.socket.url)) {
         self.session = session
+        self.socket = socket
     }
     
     func request<T: Decodable>(endpoint: APIEndpoint, completion: @escaping (Result<T, HTTPError>) -> Void) {
