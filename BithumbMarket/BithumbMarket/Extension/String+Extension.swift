@@ -25,5 +25,5 @@ extension String {
         let numberString = NumberFormatter().computeDecimal(str: self, maximumDigit: maximumDigit)
         return String(format: "%.\(maximumDigit)f", numberString)
     }
-    
+
 }

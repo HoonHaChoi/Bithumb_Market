@@ -27,4 +27,17 @@ struct Market: Decodable {
     func changeOfRate() -> String {
         return String(((closingPrice.convertDouble() / openingPrice.convertDouble()) - 1) * 100).withDecimal(maximumDigit: 2) + "%"
     }
+    
+    func showChangeState() -> ChangeState {
+        if closingPrice.convertDouble().isEqual(to: openingPrice.convertDouble()) {
+            return .even
+        }
+        
+        if closingPrice.convertDouble().isLess(than: openingPrice.convertDouble()) {
+            return .fall
+        } else {
+            return .rise
+        }
+    }
+
 }

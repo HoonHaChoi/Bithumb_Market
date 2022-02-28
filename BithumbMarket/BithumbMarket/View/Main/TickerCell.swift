@@ -44,6 +44,14 @@ final class TickerCell: UITableViewCell {
         currentPriceLabel.text = ticker.market.closingPrice
         changeRateLabel.text = ticker.market.changeOfRate()
         changePriceLabel.text = ticker.market.changeOfPrice()
+        updateLabelColor(to: ticker)
+    }
+    
+    private func updateLabelColor(to ticker: Ticker) {
+        let color = ticker.market.showChangeState().color
+        currentPriceLabel.textColor = color
+        changeRateLabel.textColor = color
+        changePriceLabel.textColor = color
     }
 }
 
