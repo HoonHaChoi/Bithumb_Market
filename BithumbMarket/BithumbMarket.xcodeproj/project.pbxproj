@@ -189,13 +189,13 @@
 		BF86B5EE27C602D4005A2170 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7F2E004027CC9AE000752ABA /* Market.swift */,
 				7F2E004227CC9AE000752ABA /* Message.swift */,
 				7F2E004127CC9AE000752ABA /* Orderbook.swift */,
 				7F2E004327CC9AE000752ABA /* OrderbookEntity.swift */,
 				BF86B5EF27C604B0005A2170 /* Ticker.swift */,
-				E8AC90B027C8700500C50FA3 /* Transaction.swift */,
+				7F2E004027CC9AE000752ABA /* Market.swift */,
 				BFB9563827CCBD37001627C6 /* ReceiveTicker.swift */,
+				E8AC90B027C8700500C50FA3 /* Transaction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

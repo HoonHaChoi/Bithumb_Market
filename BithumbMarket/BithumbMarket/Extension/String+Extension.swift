@@ -13,6 +13,10 @@ extension String {
         return Int(self) ?? 0
     }
     
+    func convertDouble() -> Double {
+        return Double(self) ?? 0
+    }
+    
     func withComma() -> String {
         return NumberFormatter().computeDecimal(str: self)
     }

@@ -13,7 +13,7 @@ final class MainViewModel {
     private var service: APIService
     
     init(service: APIService = APIService()) {
-        tickers = .init([])
+        self.tickers = .init([])
         self.service = service
     }
     

@@ -15,11 +15,33 @@ struct Ticker {
         symbol + "_KRW"
     }
     
-    func changeOfRate() -> Double {
-        return (Double(changeOfPrice()) - 1) * 100
+    func equalSymbol(to ticker: ReceiveTicker) -> Bool {
+        return paymentCurrency == ticker.content.symbol
     }
     
-    func changeOfPrice() -> Int {
-        return market.closingPrice.convertInt() - market.openingPrice.convertInt()
+    func compare(to ticker: ReceiveTicker) -> Bool {
+        market.closingPrice != ticker.content.closePrice
     }
+    
+    mutating func updatePrice(to ticker: ReceiveTicker) {
+        market.closingPrice = ticker.content.closePrice
+        market.openingPrice = ticker.content.openPrice
+    }
+    
+}
+
+extension Ticker: Comparable {
+    
+    static func > (lhs: Self, rhs: Self) -> Bool {
+        lhs.market.accTradeValue24H.convertDouble() > rhs.market.accTradeValue24H.convertDouble()
+    }
+    
+    static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs.market.accTradeValue24H.convertDouble() < rhs.market.accTradeValue24H.convertDouble()
+    }
+    
+    static func == (lhs: Ticker, rhs: Ticker) -> Bool {
+        lhs.market.accTradeValue24H.convertDouble() == rhs.market.accTradeValue24H.convertDouble()
+    }
+    
 }

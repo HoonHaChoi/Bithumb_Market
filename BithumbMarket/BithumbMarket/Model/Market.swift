@@ -8,8 +8,8 @@
 import Foundation
 
 struct Market: Decodable {
-    let openingPrice: String
-    let closingPrice: String
+    var openingPrice: String
+    var closingPrice: String
     let minPrice: String
     let maxPrice: String
     let unitsTraded: String
@@ -19,4 +19,12 @@ struct Market: Decodable {
     let accTradeValue24H: String
     let fluctate24H: String
     let fluctateRate24H: String
+    
+    func changeOfPrice() -> Int {
+        return closingPrice.convertInt() - openingPrice.convertInt()
+    }
+    
+    func changeOfRate() -> Double {
+        return (Double(changeOfPrice()) - 1) * 100
+    }
 }
