@@ -21,9 +21,7 @@ final class TransactionViewModel {
     }
     
     func fetchTransaction(symbol: String, completion: @escaping () -> Void ) {
-        let endPoint = EndPoint()
-        let url = endPoint.makeURL(of: .transactionHistory, param: symbol)
-        service.request(url: url) { (result: Result<Transaction, HTTPError>) in
+        service.request(endpoint: .transactionHistory(symbol: symbol)) { (result: Result<Transaction, HTTPError>) in
             switch result {
             case .success(let model):
                 self.transactionData = model.data

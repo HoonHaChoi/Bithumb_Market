@@ -40,7 +40,7 @@ final class TransactionTableViewCell: UITableViewCell {
     }
     
     func configure(transaction: TransactionData) {
-        timeLabel.text = transaction.transactionDate[11..<20]
+//        timeLabel.text = transaction.transactionDate[11..<20]
         priceLabel.text = transaction.price.withComma()
         quntityLabel.text = transaction.unitsTraded
         
