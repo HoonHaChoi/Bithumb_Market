@@ -27,6 +27,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureUI()
+
     }
 
     private func configureUI() {
