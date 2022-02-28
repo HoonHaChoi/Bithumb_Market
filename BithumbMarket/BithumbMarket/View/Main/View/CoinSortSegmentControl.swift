@@ -25,12 +25,12 @@ final class CoinSortSegmentControl: UISegmentedControl {
         
         self.selectedSegmentIndex = 0
         self.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.darkGray,
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 26)
+            NSAttributedString.Key.foregroundColor: UIColor.textSecondary,
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 23)
         ], for: .normal)
         self.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.black,
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 26)
+            NSAttributedString.Key.foregroundColor: UIColor.typoColor,
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 23)
         ], for: .selected)
     }
     

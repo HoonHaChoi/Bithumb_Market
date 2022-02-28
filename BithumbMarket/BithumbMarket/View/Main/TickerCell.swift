@@ -41,7 +41,7 @@ final class TickerCell: UITableViewCell {
     
     func configure(ticker: Ticker) {
         symbolLabel.text = ticker.symbol
-        currentPriceLabel.text = ticker.market.closingPrice
+        currentPriceLabel.text = ticker.market.closingPrice.withComma()
         changeRateLabel.text = ticker.market.changeOfRate()
         changePriceLabel.text = ticker.market.changeOfPrice()
         updateLabelColor(to: ticker)
@@ -72,9 +72,9 @@ extension TickerCell {
         changePriceLabel.font = .preferredFont(forTextStyle: .footnote)
         
         favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        
+        favoriteButton.tintColor = .textSecondary
         paymentLabel.text = "KRW"
-        paymentLabel.textColor = .darkGray
+        paymentLabel.textColor = .textSecondary
         
         currentPriceLabel.textAlignment = .right
         changeRateLabel.textAlignment = .right
@@ -117,7 +117,7 @@ extension TickerCell {
         bundleStackView.addArrangedSubview(changeStackView)
         
         addSubview(bundleStackView)
-        addSubview(favoriteButton)
+        contentView.addSubview(favoriteButton)
         
         NSLayoutConstraint.activate([
             bundleStackView.centerYAnchor.constraint(equalTo: centerYAnchor),

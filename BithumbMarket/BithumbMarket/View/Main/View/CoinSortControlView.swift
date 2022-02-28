@@ -29,7 +29,7 @@ final class CoinSortControlView: UIView {
     private lazy var underLineView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 3
-        view.backgroundColor = .orange
+        view.backgroundColor = .mainColor
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

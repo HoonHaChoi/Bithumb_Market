@@ -29,6 +29,7 @@ class MainViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = 60
         tableView.estimatedRowHeight = 60
+        tableView.delaysContentTouches = false
         return tableView
     }()
     
