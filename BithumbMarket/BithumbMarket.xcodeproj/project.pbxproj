@@ -24,6 +24,7 @@
 		BFD5863E27CC5EA600720BDC /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = BFD5863D27CC5EA600720BDC /* Starscream */; };
 		BFD5864027CC5EC200720BDC /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5863F27CC5EC200720BDC /* SocketService.swift */; };
 		BFD5864227CC66F400720BDC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5864127CC66F400720BDC /* Message.swift */; };
+		BFD5864527CC68C000720BDC /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5864427CC68C000720BDC /* Observable.swift */; };
 		BFF712B727C733C100B38ACE /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF712B627C733C100B38ACE /* Market.swift */; };
 		BFF712BA27C753DB00B38ACE /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF712B927C753DB00B38ACE /* TickerCell.swift */; };
 /* End PBXBuildFile section */
@@ -47,6 +48,7 @@
 		BFD5863A27CBF3F200720BDC /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		BFD5863F27CC5EC200720BDC /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		BFD5864127CC66F400720BDC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		BFD5864427CC68C000720BDC /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		BFF712B627C733C100B38ACE /* Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
 		BFF712B927C753DB00B38ACE /* TickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +90,7 @@
 				BF86B5F127C60638005A2170 /* Network */,
 				BF86B5EE27C602D4005A2170 /* Model */,
 				BF99E9E827C7EB0300DA497B /* Extension */,
+				BFD5864327CC68AC00720BDC /* Util */,
 				BF0430D127C5C1D700A77A38 /* Assets.xcassets */,
 				BF0430D327C5C1D700A77A38 /* LaunchScreen.storyboard */,
 				BF0430D627C5C1D700A77A38 /* Info.plist */,
@@ -133,6 +136,14 @@
 				BFD5863A27CBF3F200720BDC /* UIColor+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		BFD5864327CC68AC00720BDC /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				BFD5864427CC68C000720BDC /* Observable.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		BFF712B827C74FCC00B38ACE /* Main */ = {
@@ -233,6 +244,7 @@
 				BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */,
 				BFF712B727C733C100B38ACE /* Market.swift in Sources */,
 				BF86B5F327C60653005A2170 /* APIService.swift in Sources */,
+				BFD5864527CC68C000720BDC /* Observable.swift in Sources */,
 				BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */,
 				BFD5864227CC66F400720BDC /* Message.swift in Sources */,
 				BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */,
