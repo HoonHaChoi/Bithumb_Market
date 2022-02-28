@@ -9,32 +9,22 @@
 /* Begin PBXBuildFile section */
 		BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430C827C5C1D500A77A38 /* AppDelegate.swift */; };
 		BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */; };
-		BF0430CD27C5C1D500A77A38 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430CC27C5C1D500A77A38 /* MainViewController.swift */; };
+		BF0430CD27C5C1D500A77A38 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430CC27C5C1D500A77A38 /* ViewController.swift */; };
 		BF0430D227C5C1D700A77A38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF0430D127C5C1D700A77A38 /* Assets.xcassets */; };
 		BF0430D527C5C1D700A77A38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0430D327C5C1D700A77A38 /* LaunchScreen.storyboard */; };
 		BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5EF27C604B0005A2170 /* Ticker.swift */; };
 		BF86B5F327C60653005A2170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F227C60653005A2170 /* APIService.swift */; };
 		BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F427C606D8005A2170 /* EndPoint.swift */; };
 		BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F627C60B65005A2170 /* HTTPError.swift */; };
-		BF99E9E527C7D55C00DA497B /* CoinSortSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9E427C7D55C00DA497B /* CoinSortSegmentControl.swift */; };
-		BF99E9E727C7D69B00DA497B /* CoinSortControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9E627C7D69B00DA497B /* CoinSortControlView.swift */; };
-		BF99E9EA27C7EB1300DA497B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9E927C7EB1300DA497B /* String+Extension.swift */; };
-		BF99E9F927CAA61600DA497B /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9F827CAA61600DA497B /* APIEndpoint.swift */; };
-		BFD5863B27CBF3F200720BDC /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5863A27CBF3F200720BDC /* UIColor+Extension.swift */; };
-		BFD5863E27CC5EA600720BDC /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = BFD5863D27CC5EA600720BDC /* Starscream */; };
-		BFD5864027CC5EC200720BDC /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5863F27CC5EC200720BDC /* SocketService.swift */; };
-		BFD5864227CC66F400720BDC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5864127CC66F400720BDC /* Message.swift */; };
-		BFD5864527CC68C000720BDC /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5864427CC68C000720BDC /* Observable.swift */; };
-		BFE1606027CC762500A12DF2 /* NumberFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE1605F27CC762500A12DF2 /* NumberFormatter+Extension.swift */; };
-		BFF712B727C733C100B38ACE /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF712B627C733C100B38ACE /* Market.swift */; };
-		BFF712BA27C753DB00B38ACE /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF712B927C753DB00B38ACE /* TickerCell.swift */; };
+		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
+		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BF0430C527C5C1D500A77A38 /* BithumbMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BithumbMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF0430C827C5C1D500A77A38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BF0430CC27C5C1D500A77A38 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		BF0430CC27C5C1D500A77A38 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BF0430D127C5C1D700A77A38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF0430D427C5C1D700A77A38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF0430D627C5C1D700A77A38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,17 +32,8 @@
 		BF86B5F227C60653005A2170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		BF86B5F427C606D8005A2170 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		BF86B5F627C60B65005A2170 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
-		BF99E9E427C7D55C00DA497B /* CoinSortSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSortSegmentControl.swift; sourceTree = "<group>"; };
-		BF99E9E627C7D69B00DA497B /* CoinSortControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSortControlView.swift; sourceTree = "<group>"; };
-		BF99E9E927C7EB1300DA497B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		BF99E9F827CAA61600DA497B /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
-		BFD5863A27CBF3F200720BDC /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		BFD5863F27CC5EC200720BDC /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
-		BFD5864127CC66F400720BDC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		BFD5864427CC68C000720BDC /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		BFE1605F27CC762500A12DF2 /* NumberFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Extension.swift"; sourceTree = "<group>"; };
-		BFF712B627C733C100B38ACE /* Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
-		BFF712B927C753DB00B38ACE /* TickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerCell.swift; sourceTree = "<group>"; };
+		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +41,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFD5863E27CC5EA600720BDC /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,11 +68,10 @@
 			children = (
 				BF0430C827C5C1D500A77A38 /* AppDelegate.swift */,
 				BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */,
-				BFF712B827C74FCC00B38ACE /* Main */,
+				BF0430CC27C5C1D500A77A38 /* ViewController.swift */,
 				BF86B5F127C60638005A2170 /* Network */,
 				BF86B5EE27C602D4005A2170 /* Model */,
-				BF99E9E827C7EB0300DA497B /* Extension */,
-				BFD5864327CC68AC00720BDC /* Util */,
+				E8AC90A927C71DFC00C50FA3 /* Transaction */,
 				BF0430D127C5C1D700A77A38 /* Assets.xcassets */,
 				BF0430D327C5C1D700A77A38 /* LaunchScreen.storyboard */,
 				BF0430D627C5C1D700A77A38 /* Info.plist */,
@@ -104,8 +83,6 @@
 			isa = PBXGroup;
 			children = (
 				BF86B5EF27C604B0005A2170 /* Ticker.swift */,
-				BFF712B627C733C100B38ACE /* Market.swift */,
-				BFD5864127CC66F400720BDC /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -114,49 +91,19 @@
 			isa = PBXGroup;
 			children = (
 				BF86B5F227C60653005A2170 /* APIService.swift */,
-				BF99E9F827CAA61600DA497B /* APIEndpoint.swift */,
 				BF86B5F627C60B65005A2170 /* HTTPError.swift */,
 				BF86B5F427C606D8005A2170 /* EndPoint.swift */,
-				BFD5863F27CC5EC200720BDC /* SocketService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		BF99E9E327C7D25C00DA497B /* View */ = {
+		E8AC90A927C71DFC00C50FA3 /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
-				BF99E9E427C7D55C00DA497B /* CoinSortSegmentControl.swift */,
-				BF99E9E627C7D69B00DA497B /* CoinSortControlView.swift */,
+				E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */,
+				E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		BF99E9E827C7EB0300DA497B /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				BF99E9E927C7EB1300DA497B /* String+Extension.swift */,
-				BFE1605F27CC762500A12DF2 /* NumberFormatter+Extension.swift */,
-				BFD5863A27CBF3F200720BDC /* UIColor+Extension.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
-		BFD5864327CC68AC00720BDC /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				BFD5864427CC68C000720BDC /* Observable.swift */,
-			);
-			path = Util;
-			sourceTree = "<group>";
-		};
-		BFF712B827C74FCC00B38ACE /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				BF99E9E327C7D25C00DA497B /* View */,
-				BF0430CC27C5C1D500A77A38 /* MainViewController.swift */,
-				BFF712B927C753DB00B38ACE /* TickerCell.swift */,
-			);
-			path = Main;
+			path = Transaction;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,9 +122,6 @@
 			dependencies = (
 			);
 			name = BithumbMarket;
-			packageProductDependencies = (
-				BFD5863D27CC5EA600720BDC /* Starscream */,
-			);
 			productName = BithumbMarket;
 			productReference = BF0430C527C5C1D500A77A38 /* BithumbMarket.app */;
 			productType = "com.apple.product-type.application";
@@ -206,9 +150,6 @@
 				Base,
 			);
 			mainGroup = BF0430BC27C5C1D500A77A38;
-			packageReferences = (
-				BFD5863C27CC5EA600720BDC /* XCRemoteSwiftPackageReference "Starscream" */,
-			);
 			productRefGroup = BF0430C627C5C1D500A77A38 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -235,24 +176,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF99E9E727C7D69B00DA497B /* CoinSortControlView.swift in Sources */,
-				BF99E9E527C7D55C00DA497B /* CoinSortSegmentControl.swift in Sources */,
 				BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */,
-				BF0430CD27C5C1D500A77A38 /* MainViewController.swift in Sources */,
-				BF99E9EA27C7EB1300DA497B /* String+Extension.swift in Sources */,
-				BFD5864027CC5EC200720BDC /* SocketService.swift in Sources */,
-				BF99E9F927CAA61600DA497B /* APIEndpoint.swift in Sources */,
-				BFF712BA27C753DB00B38ACE /* TickerCell.swift in Sources */,
-				BFD5863B27CBF3F200720BDC /* UIColor+Extension.swift in Sources */,
+				BF0430CD27C5C1D500A77A38 /* ViewController.swift in Sources */,
 				BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */,
-				BFF712B727C733C100B38ACE /* Market.swift in Sources */,
 				BF86B5F327C60653005A2170 /* APIService.swift in Sources */,
-				BFD5864527CC68C000720BDC /* Observable.swift in Sources */,
 				BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */,
-				BFD5864227CC66F400720BDC /* Message.swift in Sources */,
 				BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */,
 				BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */,
-				BFE1606027CC762500A12DF2 /* NumberFormatter+Extension.swift in Sources */,
+				E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */,
+				E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,7 +325,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 27BW92Z482;
+				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BithumbMarket/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -420,7 +352,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 27BW92Z482;
+				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BithumbMarket/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -462,25 +394,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		BFD5863C27CC5EA600720BDC /* XCRemoteSwiftPackageReference "Starscream" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/daltoniam/Starscream.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		BFD5863D27CC5EA600720BDC /* Starscream */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BFD5863C27CC5EA600720BDC /* XCRemoteSwiftPackageReference "Starscream" */;
-			productName = Starscream;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BF0430BD27C5C1D500A77A38 /* Project object */;
 }
