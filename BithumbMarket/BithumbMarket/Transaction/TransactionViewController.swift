@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransactionViewController: ViewController {
+class TransactionViewController: UIViewController {
     
     let symbol = "BTC"
     let model = TransactionViewModel.init(service: APIService.init(session: URLSession.shared))
