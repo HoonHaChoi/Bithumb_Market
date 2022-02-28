@@ -15,11 +15,11 @@ extension NumberFormatter {
         return self.string(from: number ?? 0) ?? ""
     }
     
-    func computeDecimal(str: String, maximumDigit: Int) -> String {
+    func computeDecimal(str: String, maximumDigit: Int) -> Double {
         self.numberStyle = .decimal
         self.maximumFractionDigits = maximumDigit
         let number = self.number(from: str)
-        return self.string(from: number ?? 0) ?? ""
+        return Double(truncating: number ?? 0)
     }
 
 }

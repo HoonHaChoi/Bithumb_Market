@@ -20,11 +20,11 @@ struct Market: Decodable {
     let fluctate24H: String
     let fluctateRate24H: String
     
-    func changeOfPrice() -> Int {
-        return closingPrice.convertInt() - openingPrice.convertInt()
+    func changeOfPrice() -> String {
+        return String(closingPrice.convertDouble() - openingPrice.convertDouble()).withComma()
     }
     
-    func changeOfRate() -> Double {
-        return (Double(changeOfPrice()) - 1) * 100
+    func changeOfRate() -> String {
+        return String(((closingPrice.convertDouble() / openingPrice.convertDouble()) - 1) * 100).withDecimal(maximumDigit: 2) + "%"
     }
 }

@@ -42,8 +42,8 @@ final class TickerCell: UITableViewCell {
     func configure(ticker: Ticker) {
         symbolLabel.text = ticker.symbol
         currentPriceLabel.text = ticker.market.closingPrice
-        changeRateLabel.text = String(format: "%.2f", ticker.market.changeOfRate()) + "%"
-        changePriceLabel.text = "\(ticker.market.changeOfPrice())"
+        changeRateLabel.text = ticker.market.changeOfRate()
+        changePriceLabel.text = ticker.market.changeOfPrice()
     }
 }
 
@@ -57,11 +57,11 @@ extension TickerCell {
         changePriceLabel.translatesAutoresizingMaskIntoConstraints = false
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         
-        symbolLabel.font = .preferredFont(forTextStyle: .title3)
+        symbolLabel.font = .preferredFont(forTextStyle: .body)
         paymentLabel.font = .preferredFont(forTextStyle: .footnote)
         currentPriceLabel.font = .preferredFont(forTextStyle: .body)
         changeRateLabel.font = .preferredFont(forTextStyle: .body)
-        changePriceLabel.font = .preferredFont(forTextStyle: .body)
+        changePriceLabel.font = .preferredFont(forTextStyle: .footnote)
         
         favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
         
@@ -118,7 +118,9 @@ extension TickerCell {
             
             favoriteButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 30)
+            favoriteButton.widthAnchor.constraint(equalToConstant: 30),
+            
+            changeStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 80)
         ])
     }
     

@@ -226,9 +226,9 @@
 		E8AC90B627C8BB2300C50FA3 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				7F2E004927CC9B1400752ABA /* NumberFormatter+Extension.swift */,
 				7F2E004827CC9B1400752ABA /* UIColor+Extension.swift */,
 				E8AC90B927C8BB5600C50FA3 /* String+Extension.swift */,
+				7F2E004927CC9B1400752ABA /* NumberFormatter+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
