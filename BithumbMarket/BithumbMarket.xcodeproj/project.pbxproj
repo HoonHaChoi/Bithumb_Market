@@ -26,6 +26,8 @@
 		BFB9562927CCAD49001627C6 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB9562827CCAD49001627C6 /* MainViewModel.swift */; };
 		BFB9562C27CCADDC001627C6 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = BFB9562B27CCADDC001627C6 /* Starscream */; };
 		BFB9562D27CCB0F8001627C6 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004D27CC9B4B00752ABA /* Observable.swift */; };
+		BFB9562F27CCB35D001627C6 /* MainDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB9562E27CCB35D001627C6 /* MainDataSource.swift */; };
+		BFB9563027CCB3CC001627C6 /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004F27CC9B4B00752ABA /* TickerCell.swift */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
@@ -63,6 +65,7 @@
 		BF86B5F427C606D8005A2170 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		BF86B5F627C60B65005A2170 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		BFB9562827CCAD49001627C6 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		BFB9562E27CCB35D001627C6 /* MainDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataSource.swift; sourceTree = "<group>"; };
 		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E8AC90B027C8700500C50FA3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -96,6 +99,7 @@
 			children = (
 				7F2E004F27CC9B4B00752ABA /* TickerCell.swift */,
 				7F2E005027CC9B4B00752ABA /* MainViewController.swift */,
+				BFB9562E27CCB35D001627C6 /* MainDataSource.swift */,
 				BFB9562827CCAD49001627C6 /* MainViewModel.swift */,
 				7F2E005127CC9B4B00752ABA /* View */,
 			);
@@ -295,12 +299,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFB9563027CCB3CC001627C6 /* TickerCell.swift in Sources */,
 				BFB9562D27CCB0F8001627C6 /* Observable.swift in Sources */,
 				7F2E005C27CC9F3300752ABA /* SocketService.swift in Sources */,
 				7F2E005D27CC9F3300752ABA /* APIEndpoint.swift in Sources */,
 				7F2E004A27CC9B1400752ABA /* UIColor+Extension.swift in Sources */,
 				7F2E004B27CC9B1400752ABA /* NumberFormatter+Extension.swift in Sources */,
 				7F2E004427CC9AE000752ABA /* Market.swift in Sources */,
+				BFB9562F27CCB35D001627C6 /* MainDataSource.swift in Sources */,
 				7F2E004527CC9AE000752ABA /* Orderbook.swift in Sources */,
 				7F2E004627CC9AE000752ABA /* Message.swift in Sources */,
 				7F2E004727CC9AE000752ABA /* OrderbookEntity.swift in Sources */,
