@@ -39,7 +39,7 @@ class OrderbookViewModel: OrderbookViewModelType {
     private let url = EndPoint().makeURL(of: .orderBook, param: "BTC_KRW")
     
     init(service: APIService) {
-        service.request(url: url) { [weak self] (result: Result<Orderbook, HTTPError>) in
+        service.request(url: url) { [weak self] (result: Result<OrderbookEntity, HTTPError>) in
             switch result {
             case .success(let success):
                 self?.orderbookData = success.data

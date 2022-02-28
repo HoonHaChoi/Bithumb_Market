@@ -2,24 +2,19 @@
 //  Orderbook.swift
 //  BithumbMarket
 //
-//  Created by Doyoung on 2022/02/25.
+//  Created by Doyoung on 2022/02/28.
 //
 
 import Foundation
 
-struct Orderbook: Decodable {
-    let data: OrderbookData
+struct Quantity {
+    let text: String
+    let rate: Float
 }
 
-struct OrderbookData: Decodable {
-    let timestamp: String
-    let orderCurrency: String
-    let paymentCurrency: String
-    let bids: [Order]
-    let asks: [Order]
-}
-
-struct Order: Decodable {
-    let quantity: String
-    let price: String
+struct Orderbook {
+    let asksPrice: [String]
+    let bidsPrice: [String]
+    let asksQuanity: [Quantity]
+    let bidsQuanity: [Quantity]
 }
