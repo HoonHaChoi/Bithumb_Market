@@ -2,25 +2,23 @@
 //  String+Extension.swift
 //  BithumbMarket
 //
-//  Created by HOONHA CHOI on 2022/02/25.
+//  Created by jiinheo on 2022/02/25.
 //
 
 import Foundation
 
 extension String {
     
-    func convertInt() -> Int {
-        return Int(self) ?? 0
+    subscript(_ range: CountableRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: max(0, range.lowerBound))
+        let end = index(startIndex, offsetBy: min(self.count, range.upperBound))
+        return String(self[start..<end])
     }
     
     func withComma() -> String {
-        return NumberFormatter().computeDecimal(str: self)
-    }
-    
-    func withDecimal(maximumDigit: Int) -> String {
-        let numberString = NumberFormatter().computeDecimal(str: self, maximumDigit: maximumDigit)
-        return String(format: "%.\(maximumDigit)f", numberString)
-    }
-    
-}
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
 
+        return numberFormatter.string(from: NSNumber(value: Int(self) ?? 0))!
+    }
+}

@@ -31,10 +31,20 @@ final class TransactionTableViewCell: UITableViewCell {
         return label
     }()
     
-    func configure(transaction: Transaction) {
-        timeLabel.text = transaction.time
-        priceLabel.text = transaction.price
-        quntityLabel.text = transaction.quntity
+    private func check(type: String) {
+        if type == TransactionNameSpace.ask {
+            [timeLabel, priceLabel, quntityLabel].forEach{$0.textColor = .blue}
+        } else {
+            [timeLabel, priceLabel, quntityLabel].forEach{$0.textColor = .red}
+        }
+    }
+    
+    func configure(transaction: TransactionData) {
+        timeLabel.text = transaction.transactionDate[11..<20]
+        priceLabel.text = transaction.price.withComma()
+        quntityLabel.text = transaction.unitsTraded
+        
+        check(type: transaction.type)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,7 +53,8 @@ final class TransactionTableViewCell: UITableViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setupView()
     }
     
 }
@@ -66,7 +77,7 @@ extension TransactionTableViewCell {
         NSLayoutConstraint.activate([
             timeLabel.topAnchor.constraint(equalTo: self.topAnchor),
             timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
         ])
         
         NSLayoutConstraint.activate([
@@ -79,7 +90,7 @@ extension TransactionTableViewCell {
         NSLayoutConstraint.activate([
             quntityLabel.topAnchor.constraint(equalTo: self.topAnchor),
             quntityLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             quntityLabel.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
