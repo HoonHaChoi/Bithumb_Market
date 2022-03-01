@@ -18,7 +18,7 @@ final class MainViewModel {
     }
     
     var updateTableHandler: (() -> Void)?
-    var changeIndexHandler: ((Int) -> Void)?
+    var changeIndexHandler: ((Int, ChangeState?) -> Void)?
     var errorHandler: ((HTTPError) -> Void)?
     
     func fetchTickers() {
@@ -54,7 +54,7 @@ final class MainViewModel {
                 }
                 if self.compareTicker(index: index, to: ticker) {
                     self.updateTicker(index: index, to: ticker)
-                    self.changeIndexHandler?(index)
+                    self.changeIndexHandlerAction(index: index)
                 }
             case .failure(let error):
                 self.errorHandler?(error)
@@ -72,6 +72,11 @@ final class MainViewModel {
     
     private func updateTicker(index: Int, to ticker: ReceiveTicker) {
         tickers.value[index].updatePrice(to: ticker)
+    }
+    
+    private func changeIndexHandlerAction(index: Int) {
+        let changeState = tickers.value[index].change
+        changeIndexHandler?(index, changeState)
     }
     
 }

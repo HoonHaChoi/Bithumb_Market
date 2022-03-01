@@ -10,6 +10,7 @@ import Foundation
 struct Ticker {
     let symbol: String
     var market: Market
+    var change: ChangeState?
     
     var paymentCurrency: String {
         symbol + "_KRW"
@@ -24,8 +25,13 @@ struct Ticker {
     }
     
     mutating func updatePrice(to ticker: ReceiveTicker) {
+        updateTickerChangeState(to: ticker.content.closePrice)
         market.closingPrice = ticker.content.closePrice
         market.openingPrice = ticker.content.openPrice
+    }
+    
+    private mutating func updateTickerChangeState(to closePrice: String) {
+        change = market.compareCloseprice(to: closePrice)
     }
     
 }

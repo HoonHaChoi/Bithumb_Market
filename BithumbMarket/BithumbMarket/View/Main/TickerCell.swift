@@ -48,11 +48,17 @@ final class TickerCell: UITableViewCell {
     }
     
     private func updateLabelColor(to ticker: Ticker) {
-        let color = ticker.market.showChangeState().color
+        let color = ticker.market.showNetChangeState().color
         currentPriceLabel.textColor = color
         changeRateLabel.textColor = color
         changePriceLabel.textColor = color
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.backgroundColor = .systemBackground
+    }
+    
 }
 
 extension TickerCell {

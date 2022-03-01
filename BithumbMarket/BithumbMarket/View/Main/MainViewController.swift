@@ -46,6 +46,7 @@ class MainViewController: UIViewController {
         configureTableView()
         bind()
         viewmodel.fetchTickers()
+        viewmodel.updateTickers()
     }
 
     private func configureUI() {
@@ -76,6 +77,7 @@ class MainViewController: UIViewController {
             self?.datasource.items = tickers
         }
         viewmodel.updateTableHandler = updateTableView
+        viewmodel.changeIndexHandler = updateTableViewRows(index:state:)
     }
     
     private func updateTableView() {
@@ -84,4 +86,15 @@ class MainViewController: UIViewController {
         }
     }
     
+    private func updateTableViewRows(index: Int, state: ChangeState?) {
+        DispatchQueue.main.async { [weak self] in
+            self?.mainTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
+            let cell = self?.mainTableView.cellForRow(at: IndexPath(row: index, section: 0))
+            UIView.animate(withDuration: 0.3) {
+                cell?.backgroundColor = state?.color.withAlphaComponent(0.2)
+            } completion: { _ in
+                cell?.backgroundColor = .systemBackground
+            }
+        }
+    }
 }
