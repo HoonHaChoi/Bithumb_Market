@@ -9,8 +9,20 @@ import UIKit
 
 class TransactionViewController: UIViewController {
     
-    let symbol = "BTC"
-    let model = TransactionViewModel.init(service: APIService.init(session: URLSession.shared))
+    private let viewmodel: TransactionViewModel
+    private let datasource: TransactionDataSource
+    
+    init(viewmodel: TransactionViewModel, datasource: TransactionDataSource) {
+        self.viewmodel = viewmodel
+        self.datasource = datasource
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.viewmodel = .init()
+        self.datasource = .init()
+        super.init(coder: coder)
+    }
     
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
@@ -21,11 +33,10 @@ class TransactionViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let view = UITableView()
-        view.delegate = self
-        view.dataSource = self
         view.rowHeight = 45
         view.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         view.register(TransactionTableViewCell.self, forCellReuseIdentifier: TransactionNameSpace.cellReuseIdentifier)
+        view.dataSource = datasource
         return view
     }()
     
@@ -40,11 +51,16 @@ class TransactionViewController: UIViewController {
         }
     }
     
-    func fetchData() {
-        model.fetchTransaction(symbol: symbol) {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+    private func bind() {
+        viewmodel.transactionData.subscribe { [weak self] transactions in
+            self?.datasource.items = transactions
+        }
+        viewmodel.updateTableHandler = updateTableView
+    }
+    
+    private func updateTableView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
         }
     }
     
@@ -55,27 +71,10 @@ class TransactionViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.shadowImage = UIImage()
         drawTitle()
-        fetchData()
         setupView()
+        bind()
+        viewmodel.fetchTransaction()
     }
-}
-
-extension TransactionViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.transaction.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TransactionNameSpace.cellReuseIdentifier, for: indexPath) as? TransactionTableViewCell
-        cell?.configure(transaction: model.transaction[indexPath.row])
-        cell?.selectionStyle = .none
-        
-        return cell ?? UITableViewCell()
-    }
-}
-
-extension TransactionViewController: UITableViewDelegate {
-    
 }
 
 extension TransactionViewController {
