@@ -20,6 +20,7 @@
 		BF0430D227C5C1D700A77A38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF0430D127C5C1D700A77A38 /* Assets.xcassets */; };
 		BF0430D527C5C1D700A77A38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0430D327C5C1D700A77A38 /* LaunchScreen.storyboard */; };
 		BF5573C327CD43C30065B054 /* ChangeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5573C227CD43C30065B054 /* ChangeState.swift */; };
+		BF7D214227CE919C007F0DCE /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214127CE919C007F0DCE /* Double+Extension.swift */; };
 		BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5EF27C604B0005A2170 /* Ticker.swift */; };
 		BF86B5F327C60653005A2170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F227C60653005A2170 /* APIService.swift */; };
 		BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F427C606D8005A2170 /* EndPoint.swift */; };
@@ -70,6 +71,7 @@
 		BF0430D427C5C1D700A77A38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF0430D627C5C1D700A77A38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF5573C227CD43C30065B054 /* ChangeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeState.swift; sourceTree = "<group>"; };
+		BF7D214127CE919C007F0DCE /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		BF86B5EF27C604B0005A2170 /* Ticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticker.swift; sourceTree = "<group>"; };
 		BF86B5F227C60653005A2170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		BF86B5F427C606D8005A2170 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				7F2E004827CC9B1400752ABA /* UIColor+Extension.swift */,
 				E8AC90B927C8BB5600C50FA3 /* String+Extension.swift */,
 				7F2E004927CC9B1400752ABA /* NumberFormatter+Extension.swift */,
+				BF7D214127CE919C007F0DCE /* Double+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				BFB9563727CCB6C5001627C6 /* OrderbookViewController.swift in Sources */,
 				BFB9563327CCB647001627C6 /* CoinSortSegmentControl.swift in Sources */,
 				BFB9563127CCB5A6001627C6 /* MainViewController.swift in Sources */,
+				BF7D214227CE919C007F0DCE /* Double+Extension.swift in Sources */,
 				BFB9563027CCB3CC001627C6 /* TickerCell.swift in Sources */,
 				BFB9562D27CCB0F8001627C6 /* Observable.swift in Sources */,
 				7F2E005C27CC9F3300752ABA /* SocketService.swift in Sources */,
