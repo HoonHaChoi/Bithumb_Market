@@ -46,7 +46,7 @@ final class TickerCell: UITableViewCell {
         currentPriceLabel.text = ticker.market.closingPrice.withComma()
         changeRateLabel.text = ticker.market.fluctateRate24H + "%"
         changePriceLabel.text = ticker.market.fluctate24H.withComma()
-        accTradeValueLabel.text = "\(ticker.market.accTradeValue24H.convertDouble() / 1000000)" + "백만"
+        accTradeValueLabel.text = String(format: "%.0f", (ticker.market.accTradeValue24H.convertDouble() / 1000000)).withComma() + "백만"
         updateLabelColor(to: ticker)
     }
     
@@ -106,7 +106,7 @@ extension TickerCell {
         currentPriceLabel.font = .preferredFont(forTextStyle: .body)
         changeRateLabel.font = .preferredFont(forTextStyle: .body)
         changePriceLabel.font = .preferredFont(forTextStyle: .footnote)
-        accTradeValueLabel.font = .preferredFont(forTextStyle: .body)
+        accTradeValueLabel.font = .preferredFont(forTextStyle: .callout)
         
         favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
         favoriteButton.tintColor = .textSecondary
@@ -124,22 +124,26 @@ extension TickerCell {
         symbolStackView.translatesAutoresizingMaskIntoConstraints = false
         currentStackView.translatesAutoresizingMaskIntoConstraints = false
         changeStackView.translatesAutoresizingMaskIntoConstraints = false
+        accTradeValueStackView.translatesAutoresizingMaskIntoConstraints = false
         bundleStackView.translatesAutoresizingMaskIntoConstraints = false
         
         symbolStackView.axis = .vertical
         currentStackView.axis = .horizontal
         changeStackView.axis = .vertical
+        accTradeValueStackView.axis = .horizontal
         bundleStackView.axis = .horizontal
         
         symbolStackView.distribution = .equalSpacing
         currentStackView.distribution = .equalSpacing
         changeStackView.distribution = .equalSpacing
+        accTradeValueStackView.distribution = .equalCentering
         bundleStackView.distribution = .equalCentering
         
         symbolStackView.alignment = .fill
         currentStackView.alignment = .top
         changeStackView.alignment = .fill
         bundleStackView.alignment = .fill
+        accTradeValueStackView.alignment = .top
         
         bundleStackView.spacing = 20
     }
@@ -150,26 +154,29 @@ extension TickerCell {
         currentStackView.addArrangedSubview(currentPriceLabel)
         changeStackView.addArrangedSubview(changeRateLabel)
         changeStackView.addArrangedSubview(changePriceLabel)
+        accTradeValueStackView.addArrangedSubview(accTradeValueLabel)
         
         bundleStackView.addArrangedSubview(symbolStackView)
         bundleStackView.addArrangedSubview(currentStackView)
         bundleStackView.addArrangedSubview(changeStackView)
+        bundleStackView.addArrangedSubview(accTradeValueStackView)
         
         addSubview(bundleStackView)
-        contentView.addSubview(favoriteButton)
+//        contentView.addSubview(favoriteButton)
         
         NSLayoutConstraint.activate([
             bundleStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             bundleStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            bundleStackView.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -20),
+            bundleStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
             currentStackView.trailingAnchor.constraint(equalTo: changeStackView.leadingAnchor, constant: -20),
             
-            favoriteButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 30),
+//            favoriteButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+//            favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+//            favoriteButton.widthAnchor.constraint(equalToConstant: 30),
             
-            changeStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 80)
+            changeStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 80),
+            changeStackView.trailingAnchor.constraint(equalTo: accTradeValueStackView.leadingAnchor, constant: -20)
         ])
     }
     
