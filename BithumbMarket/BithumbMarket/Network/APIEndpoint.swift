@@ -45,6 +45,7 @@ enum APIEndpoint: Endpoint {
 }
 
 enum ChartIntervals: CaseIterable {
+    
     case oneminute
     case tenminute
     case halfhour

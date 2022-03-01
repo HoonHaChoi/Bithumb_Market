@@ -8,6 +8,7 @@
 import Foundation
 
 enum HTTPError: Error, CustomStringConvertible {
+    
     case invalidURL
     case invalidRequset
     case invalidResponse

@@ -43,9 +43,9 @@ final class TickerCell: UITableViewCell {
     func configure(ticker: Ticker) {
         symbolLabel.text = ticker.symbol
         currentPriceLabel.text = ticker.market.closingPrice.withComma()
-        changeRateLabel.text = ticker.market.fluctateRate24H + "%"
+        changeRateLabel.text = ticker.market.fluctateRate24H.withDecimal(maximumDigit: 2) + "%"
         changePriceLabel.text = ticker.market.fluctate24H.withComma()
-        accTradeValueLabel.text = String(format: "%.0f", (ticker.market.accTradeValue24H.convertDouble() / 1000000)).withComma() + "백만"
+        accTradeValueLabel.text = ticker.market.accTradeValue24H.convertDouble().formatPrice
         updateLabelColor(to: ticker)
     }
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     
     private let datasource: MainDataSource
     private let viewmodel: MainViewModel

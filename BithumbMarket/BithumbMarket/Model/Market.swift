@@ -8,6 +8,7 @@
 import Foundation
 
 struct Market: Decodable {
+    
     var openingPrice: String
     var closingPrice: String
     let minPrice: String

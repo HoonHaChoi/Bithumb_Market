@@ -8,6 +8,7 @@
 import UIKit
 
 enum ChangeState {
+    
     case rise
     case fall
     case even
@@ -33,4 +34,5 @@ enum ChangeState {
             return .systemBackground
         }
     }
+    
 }

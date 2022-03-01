@@ -8,6 +8,7 @@
 import Foundation
 
 struct Ticker {
+    
     let symbol: String
     var market: Market
     var change: ChangeState
