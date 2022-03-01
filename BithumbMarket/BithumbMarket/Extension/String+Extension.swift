@@ -22,4 +22,10 @@ extension String {
         return String(format: "%.\(maximumDigit)f", numberString)
     }
     
+    subscript(_ range: CountableRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: max(0, range.lowerBound))
+        let end = index(startIndex, offsetBy: min(self.count, range.upperBound))
+        return String(self[start..<end])
+    }
+    
 }
