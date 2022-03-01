@@ -12,7 +12,7 @@ enum ChangeState {
     case fall
     case even
     
-    var color: UIColor {
+    var textColor: UIColor {
         switch self {
         case .rise:
             return .riseColor
@@ -20,6 +20,17 @@ enum ChangeState {
             return .fallColor
         case .even:
             return .typoColor
+        }
+    }
+    
+    var backgroundColor: UIColor {
+        switch self {
+        case .rise:
+            return .riseColor
+        case .fall:
+            return .fallColor
+        case .even:
+            return .systemBackground
         }
     }
 }
