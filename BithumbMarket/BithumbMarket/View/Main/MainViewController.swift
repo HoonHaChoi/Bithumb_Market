@@ -63,16 +63,16 @@ final class MainViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             coinSortView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
-            coinSortView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
+            coinSortView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5),
             coinSortView.widthAnchor.constraint(equalToConstant: 150),
             coinSortView.heightAnchor.constraint(equalToConstant: 40),
             
-            mainTableView.topAnchor.constraint(equalTo: coinSortView.bottomAnchor, constant: 20),
+            mainTableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             mainTableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             mainTableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             mainTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
             
-            headerView.topAnchor.constraint(equalTo: coinSortView.bottomAnchor),
+            headerView.topAnchor.constraint(equalTo: coinSortView.bottomAnchor, constant: 10),
             headerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
         ])
