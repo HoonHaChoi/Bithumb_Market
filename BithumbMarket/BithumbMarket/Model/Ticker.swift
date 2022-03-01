@@ -10,7 +10,13 @@ import Foundation
 struct Ticker {
     let symbol: String
     var market: Market
-    var change: ChangeState?
+    var change: ChangeState
+    
+    init(symbol: String, market: Market) {
+        self.symbol = symbol
+        self.market = market
+        self.change = .even
+    }
     
     var paymentCurrency: String {
         symbol + "_KRW"

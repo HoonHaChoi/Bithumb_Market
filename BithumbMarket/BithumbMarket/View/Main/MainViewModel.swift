@@ -18,7 +18,7 @@ final class MainViewModel {
     }
     
     var updateTableHandler: (() -> Void)?
-    var changeIndexHandler: ((Int, ChangeState?) -> Void)?
+    var changeIndexHandler: ((Int, ChangeState) -> Void)?
     var errorHandler: ((HTTPError) -> Void)?
     
     func fetchTickers() {

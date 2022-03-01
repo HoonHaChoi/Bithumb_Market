@@ -45,6 +45,17 @@ final class TickerCell: UITableViewCell {
         changeRateLabel.text = ticker.market.changeOfRate()
         changePriceLabel.text = ticker.market.changeOfPrice()
         updateLabelColor(to: ticker)
+        
+    }
+    
+    func updateAnimation(state: ChangeState) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.backgroundColor = state.color.withAlphaComponent(0.2)
+            self?.createCurrentUnderLineLayer(color: state.color)
+        } completion: { _ in
+            self.currentPriceLabel.layer.sublayers?.removeLast()
+            self.backgroundColor = .systemBackground
+        }
     }
     
     private func updateLabelColor(to ticker: Ticker) {
@@ -54,9 +65,25 @@ final class TickerCell: UITableViewCell {
         changePriceLabel.textColor = color
     }
 
+    private func createCurrentUnderLineLayer(color: UIColor) {
+        let underLineLayer = CAShapeLayer()
+        currentPriceLabel.layer.addSublayer(underLineLayer)
+        
+        let path = UIBezierPath()
+        path.move(to: .init(x: currentStackView.frame.width,
+                            y: currentPriceLabel.frame.height + 3))
+        path.addLine(to: .init(x: currentStackView.frame.width - currentPriceLabel.frame.width,
+                               y: currentPriceLabel.frame.height + 3))
+        underLineLayer.strokeColor = color.cgColor
+        underLineLayer.fillColor = color.cgColor
+        underLineLayer.lineWidth = 4
+        underLineLayer.path = path.cgPath
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         self.backgroundColor = .systemBackground
+        self.currentPriceLabel.text = ""
     }
     
 }
@@ -99,9 +126,9 @@ extension TickerCell {
         bundleStackView.axis = .horizontal
         
         symbolStackView.distribution = .equalSpacing
-        currentStackView.distribution = .fill
+        currentStackView.distribution = .equalSpacing
         changeStackView.distribution = .equalSpacing
-        bundleStackView.distribution = .fill
+        bundleStackView.distribution = .equalCentering
         
         symbolStackView.alignment = .fill
         currentStackView.alignment = .top
@@ -129,6 +156,8 @@ extension TickerCell {
             bundleStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             bundleStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             bundleStackView.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -20),
+            
+            currentStackView.trailingAnchor.constraint(equalTo: changeStackView.leadingAnchor, constant: -20),
             
             favoriteButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
