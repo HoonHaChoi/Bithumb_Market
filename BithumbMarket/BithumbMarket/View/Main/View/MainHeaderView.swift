@@ -74,7 +74,7 @@ final class MainHeaderView: UIView {
         NSLayoutConstraint.activate([
             titleStackView.topAnchor.constraint(equalTo: topAnchor),
             titleStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            titleStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            titleStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             titleStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             
             separatorView.leadingAnchor.constraint(equalTo: leadingAnchor),
