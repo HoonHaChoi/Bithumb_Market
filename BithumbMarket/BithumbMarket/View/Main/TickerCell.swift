@@ -18,11 +18,13 @@ final class TickerCell: UITableViewCell {
     let currentPriceLabel = UILabel()
     let changeRateLabel = UILabel()
     let changePriceLabel = UILabel()
+    let accTradeValueLabel = UILabel()
     let favoriteButton = UIButton(type: .system)
     
     let symbolStackView = UIStackView()
     let currentStackView = UIStackView()
     let changeStackView = UIStackView()
+    let accTradeValueStackView = UIStackView()
     let bundleStackView = UIStackView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -44,6 +46,7 @@ final class TickerCell: UITableViewCell {
         currentPriceLabel.text = ticker.market.closingPrice.withComma()
         changeRateLabel.text = ticker.market.fluctateRate24H + "%"
         changePriceLabel.text = ticker.market.fluctate24H.withComma()
+        accTradeValueLabel.text = "\(ticker.market.accTradeValue24H.convertDouble() / 1000000)" + "백만"
         updateLabelColor(to: ticker)
     }
     
@@ -95,6 +98,7 @@ extension TickerCell {
         currentPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         changeRateLabel.translatesAutoresizingMaskIntoConstraints = false
         changePriceLabel.translatesAutoresizingMaskIntoConstraints = false
+        accTradeValueLabel.translatesAutoresizingMaskIntoConstraints = false
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         
         symbolLabel.font = .preferredFont(forTextStyle: .body)
@@ -102,15 +106,18 @@ extension TickerCell {
         currentPriceLabel.font = .preferredFont(forTextStyle: .body)
         changeRateLabel.font = .preferredFont(forTextStyle: .body)
         changePriceLabel.font = .preferredFont(forTextStyle: .footnote)
+        accTradeValueLabel.font = .preferredFont(forTextStyle: .body)
         
         favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
         favoriteButton.tintColor = .textSecondary
         paymentLabel.text = "KRW"
         paymentLabel.textColor = .textSecondary
+        accTradeValueLabel.textColor = .typoColor
         
         currentPriceLabel.textAlignment = .right
         changeRateLabel.textAlignment = .right
         changePriceLabel.textAlignment = .right
+        accTradeValueLabel.textAlignment = .right
     }
     
     func configureStackView() {
