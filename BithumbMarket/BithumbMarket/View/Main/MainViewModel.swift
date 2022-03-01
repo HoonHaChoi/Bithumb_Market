@@ -39,7 +39,7 @@ final class MainViewModel {
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self = self else { return }
             let symbols = self.tickers.value.map { $0.paymentCurrency }
-            let message = Message(type: .ticker, symbols: .names(symbols), tickTypes: .mid)
+            let message = Message(type: .ticker, symbols: .names(symbols), tickTypes: .twentyfourHour)
             self.service.sendSocketMessage(to: message)
         }
     }

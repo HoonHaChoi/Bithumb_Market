@@ -25,5 +25,12 @@ extension String {
         let numberString = NumberFormatter().computeDecimal(str: self, maximumDigit: maximumDigit)
         return String(format: "%.\(maximumDigit)f", numberString)
     }
-
+    
+    func equalStringDouble(_ str: String) -> Bool {
+        self.convertDouble().isEqual(to: str.convertDouble())
+    }
+    
+    func isLessStringDouble(_ str: String) -> Bool {
+        self.convertDouble().isLess(than: str.convertDouble())
+    }
 }

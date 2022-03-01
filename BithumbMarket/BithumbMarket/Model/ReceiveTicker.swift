@@ -16,6 +16,7 @@ struct Content: Codable {
     let openPrice: String
     let closePrice: String
     let symbol: String
+    let value: String
     let volume: String
     let sellVolume: String
     let buyVolume: String

@@ -9,73 +9,37 @@ import Foundation
 
 struct Market: Decodable {
     var openingPrice: String
-    var closingPrice: ClosePrice
+    var closingPrice: String
     let minPrice: String
     let maxPrice: String
     let unitsTraded: String
     let accTradeValue: String
-    let prevClosingPrice: String
-    let unitsTraded24H: String
-    let accTradeValue24H: String
-    let fluctate24H: String
-    let fluctateRate24H: String
+    var prevClosingPrice: String
+    var unitsTraded24H: String
+    var accTradeValue24H: String
+    var fluctate24H: String
+    var fluctateRate24H: String
     
-    func changeOfPrice() -> String {
-        return String(closingPrice.computeChangePrice(openingPrice)).withComma()
+    func computePriceChangeState() -> ChangeState {
+        return setChangeState(openingPrice, closingPrice)
     }
     
-    func changeOfRate() -> String {
-        return String(closingPrice.computeChangeOfRate(openingPrice)).withDecimal(maximumDigit: 2) + "%"
+    func computeClosepriceState(to newClosePrice: String) -> ChangeState {
+        return setChangeState(closingPrice, newClosePrice)
     }
     
-    func showNetChangeState() -> ChangeState {
-        return closingPrice.computeNetChangeState(openingPrice)
-    }
-    
-    func compareCloseprice(to closePrice: String) -> ChangeState {
-        return closingPrice.compare(than: closePrice)
+    func isNotEqual(_ newClosePrice: String) -> Bool {
+        closingPrice != newClosePrice
     }
 
-}
-
-struct ClosePrice {
-    
-    private(set) var price: String
-    
-    func computeChangePrice(_ openingPrice: String) -> Double {
-        return price.convertDouble() - openingPrice.convertDouble()
-    }
-    
-    func computeChangeOfRate(_ openingPrice: String) -> Double {
-        return ((price.convertDouble() / openingPrice.convertDouble()) - 1) * 100
-    }
-    
-    func computeNetChangeState(_ openingPrice: String) -> ChangeState {
-        if price.convertDouble().isEqual(to: openingPrice.convertDouble()) {
+    private func setChangeState(_ priceA: String,_ priceB : String) -> ChangeState {
+        if priceA.equalStringDouble(priceB) {
             return .even
         }
-        if price.convertDouble().isLess(than: openingPrice.convertDouble()) {
-            return .fall
-        }
-        return .rise
-    }
-    
-    func compare(than closePrice: String) -> ChangeState {
-        if price.convertDouble().isEqual(to: closePrice.convertDouble()) {
-            return .even
-        }
-        if price.convertDouble().isLess(than: closePrice.convertDouble()) {
+        
+        if priceA.isLessStringDouble(priceB) {
             return .rise
         }
         return .fall
     }
-    
-    mutating func updatePrice(_ price: String) {
-        self.price = price
-    }
-    
-    func isNotEqual(_ price: String) -> Bool{
-        self.price != price
-    }
-    
 }

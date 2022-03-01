@@ -41,11 +41,10 @@ final class TickerCell: UITableViewCell {
     
     func configure(ticker: Ticker) {
         symbolLabel.text = ticker.symbol
-        currentPriceLabel.text = ticker.market.closingPrice.closingPrice.withComma()
-        changeRateLabel.text = ticker.market.changeOfRate()
-        changePriceLabel.text = ticker.market.changeOfPrice()
+        currentPriceLabel.text = ticker.market.closingPrice.withComma()
+        changeRateLabel.text = ticker.market.fluctateRate24H + "%"
+        changePriceLabel.text = ticker.market.fluctate24H.withComma()
         updateLabelColor(to: ticker)
-        
     }
     
     func updateAnimation(state: ChangeState) {
@@ -59,7 +58,7 @@ final class TickerCell: UITableViewCell {
     }
     
     private func updateLabelColor(to ticker: Ticker) {
-        let color = ticker.market.showNetChangeState().color
+        let color = ticker.market.computePriceChangeState().color
         currentPriceLabel.textColor = color
         changeRateLabel.textColor = color
         changePriceLabel.textColor = color
