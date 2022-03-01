@@ -33,16 +33,16 @@ final class TransactionTableViewCell: UITableViewCell {
     
     private func check(type: String) {
         if type == TransactionNameSpace.ask {
-            [timeLabel, priceLabel, quntityLabel].forEach{$0.textColor = .blue}
+            [priceLabel, quntityLabel].forEach{$0.textColor = .fallColor}
         } else {
-            [timeLabel, priceLabel, quntityLabel].forEach{$0.textColor = .red}
+            [priceLabel, quntityLabel].forEach{$0.textColor = .riseColor}
         }
     }
     
     func configure(transaction: TransactionData) {
         timeLabel.text = transaction.transactionDate[11..<20]
         priceLabel.text = transaction.price.withComma()
-        quntityLabel.text = transaction.unitsTraded
+        quntityLabel.text = transaction.unitsTraded.withDecimal(maximumDigit: 4)
         
         check(type: transaction.type)
     }
@@ -83,8 +83,8 @@ extension TransactionTableViewCell {
         NSLayoutConstraint.activate([
             priceLabel.topAnchor.constraint(equalTo: self.topAnchor),
             priceLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            priceLabel.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 20),
-            priceLabel.trailingAnchor.constraint(equalTo: quntityLabel.leadingAnchor, constant: -20),
+            priceLabel.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 10),
+            priceLabel.trailingAnchor.constraint(equalTo: quntityLabel.leadingAnchor, constant: -10),
         ])
         
         NSLayoutConstraint.activate([

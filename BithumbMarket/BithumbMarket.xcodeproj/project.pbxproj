@@ -23,6 +23,17 @@
 		BF86B5F327C60653005A2170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F227C60653005A2170 /* APIService.swift */; };
 		BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F427C606D8005A2170 /* EndPoint.swift */; };
 		BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F627C60B65005A2170 /* HTTPError.swift */; };
+		E80248F727CCAD45004A4016 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = E80248F627CCAD45004A4016 /* Starscream */; };
+		E80248F827CCB548004A4016 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004D27CC9B4B00752ABA /* Observable.swift */; };
+		E80248F927CCB66D004A4016 /* OrderbookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005727CC9B4B00752ABA /* OrderbookTableViewCell.swift */; };
+		E80248FA27CCB66F004A4016 /* OrderbookNameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005627CC9B4B00752ABA /* OrderbookNameSpace.swift */; };
+		E80248FB27CCB673004A4016 /* OrderbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005527CC9B4B00752ABA /* OrderbookViewController.swift */; };
+		E80248FC27CCB677004A4016 /* OrderbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005927CC9B4B00752ABA /* OrderbookViewModel.swift */; };
+		E80248FD27CCB680004A4016 /* CoinSortSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005327CC9B4B00752ABA /* CoinSortSegmentControl.swift */; };
+		E80248FE27CCB683004A4016 /* CoinSortControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005227CC9B4B00752ABA /* CoinSortControlView.swift */; };
+		E80248FF27CCB686004A4016 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005027CC9B4B00752ABA /* MainViewController.swift */; };
+		E802490027CCB68A004A4016 /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004F27CC9B4B00752ABA /* TickerCell.swift */; };
+		E802492427CDB3CC004A4016 /* TransactionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E802492327CDB3CC004A4016 /* TransactionDataSource.swift */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
@@ -59,6 +70,7 @@
 		BF86B5F227C60653005A2170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		BF86B5F427C606D8005A2170 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		BF86B5F627C60B65005A2170 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
+		E802492327CDB3CC004A4016 /* TransactionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDataSource.swift; sourceTree = "<group>"; };
 		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E8AC90B027C8700500C50FA3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -72,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E80248F727CCAD45004A4016 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,10 +208,11 @@
 		E8AC90A927C71DFC00C50FA3 /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
-				E8AC90BB27C8D12100C50FA3 /* TransactionNameSpace.swift */,
 				E8AC90B427C8745100C50FA3 /* TransactionViewModel.swift */,
 				E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */,
+				E802492327CDB3CC004A4016 /* TransactionDataSource.swift */,
 				E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */,
+				E8AC90BB27C8D12100C50FA3 /* TransactionNameSpace.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -229,6 +243,9 @@
 			dependencies = (
 			);
 			name = BithumbMarket;
+			packageProductDependencies = (
+				E80248F627CCAD45004A4016 /* Starscream */,
+			);
 			productName = BithumbMarket;
 			productReference = BF0430C527C5C1D500A77A38 /* BithumbMarket.app */;
 			productType = "com.apple.product-type.application";
@@ -257,6 +274,9 @@
 				Base,
 			);
 			mainGroup = BF0430BC27C5C1D500A77A38;
+			packageReferences = (
+				E80248F527CCAD45004A4016 /* XCRemoteSwiftPackageReference "Starscream" */,
+			);
 			productRefGroup = BF0430C627C5C1D500A77A38 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -283,25 +303,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E80248FD27CCB680004A4016 /* CoinSortSegmentControl.swift in Sources */,
 				7F2E005C27CC9F3300752ABA /* SocketService.swift in Sources */,
+				E80248F927CCB66D004A4016 /* OrderbookTableViewCell.swift in Sources */,
 				7F2E005D27CC9F3300752ABA /* APIEndpoint.swift in Sources */,
 				7F2E004A27CC9B1400752ABA /* UIColor+Extension.swift in Sources */,
 				7F2E004B27CC9B1400752ABA /* NumberFormatter+Extension.swift in Sources */,
 				7F2E004427CC9AE000752ABA /* Market.swift in Sources */,
+				E80248FF27CCB686004A4016 /* MainViewController.swift in Sources */,
 				7F2E004527CC9AE000752ABA /* Orderbook.swift in Sources */,
 				7F2E004627CC9AE000752ABA /* Message.swift in Sources */,
 				7F2E004727CC9AE000752ABA /* OrderbookEntity.swift in Sources */,
 				E8AC90BC27C8D12100C50FA3 /* TransactionNameSpace.swift in Sources */,
 				E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */,
+				E802492427CDB3CC004A4016 /* TransactionDataSource.swift in Sources */,
+				E80248F827CCB548004A4016 /* Observable.swift in Sources */,
 				BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */,
+				E80248FC27CCB677004A4016 /* OrderbookViewModel.swift in Sources */,
+				E80248FA27CCB66F004A4016 /* OrderbookNameSpace.swift in Sources */,
 				BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */,
+				E802490027CCB68A004A4016 /* TickerCell.swift in Sources */,
 				E8AC90BA27C8BB5600C50FA3 /* String+Extension.swift in Sources */,
 				E8AC90B527C8745100C50FA3 /* TransactionViewModel.swift in Sources */,
 				BF86B5F327C60653005A2170 /* APIService.swift in Sources */,
+				E80248FE27CCB683004A4016 /* CoinSortControlView.swift in Sources */,
 				BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */,
 				BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */,
 				BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */,
 				E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */,
+				E80248FB27CCB673004A4016 /* OrderbookViewController.swift in Sources */,
 				E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,6 +542,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E80248F527CCAD45004A4016 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E80248F627CCAD45004A4016 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E80248F527CCAD45004A4016 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BF0430BD27C5C1D500A77A38 /* Project object */;
 }
