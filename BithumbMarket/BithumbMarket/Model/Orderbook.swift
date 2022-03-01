@@ -7,14 +7,13 @@
 
 import Foundation
 
-struct Quantity {
-    let text: String
-    let rate: Float
+struct Orderbook {
+    var asks: [Order]
+    var bids: [Order]
 }
 
-struct Orderbook {
-    let asksPrice: [String]
-    let bidsPrice: [String]
-    let asksQuanity: [Quantity]
-    let bidsQuanity: [Quantity]
+struct Order {
+    let price: String
+    let quantity: String
+    let rateOfQuantity: Float
 }
