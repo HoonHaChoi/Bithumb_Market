@@ -9,30 +9,33 @@ import Foundation
 
 protocol OrderbookViewModelType {
     
-    var binding: () -> Void { get set}
-    var orderbook: Orderbook { get }
+    var orderbook: Observable<Orderbook> { get }
     func request(completion: @escaping () -> Void)
     
 }
 
-class OrderbookViewModel: OrderbookViewModelType {
+final class OrderbookViewModel: OrderbookViewModelType {
 
-    //TODO: 뷰와 의존 관계에 따라 변경 및 추가
-    var binding: () -> Void = { }
-    var orderbook: Orderbook {
-        didSet {
-            binding()
-        }
-    }
+    var orderbook: Observable<Orderbook>
     private var service: APIService
     
     init(service: APIService) {
         self.service = service
-        self.orderbook = Orderbook(
-            asksPrice: Array(repeating: "", count: 30),
-            bidsPrice: Array(repeating: "", count: 30),
-            asksQuanity: Array(repeating: Quantity(text: "", rate: 0), count: 30),
-            bidsQuanity: Array(repeating: Quantity(text: "", rate: 0), count: 30)
+        self.orderbook =  Observable(
+            Orderbook(
+                asks: Array(
+                    repeating: Order(
+                        price: "",
+                        quantity: "",
+                        rateOfQuantity: 0),
+                    count: 30),
+                bids:  Array(
+                    repeating: Order(
+                        price: "",
+                        quantity: "",
+                        rateOfQuantity: 0),
+                    count: 30)
+            )
         )
     }
     
