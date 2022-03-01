@@ -42,11 +42,9 @@ class OrderbookViewModel: OrderbookViewModelType {
         return Float(quantity) ?? 0 / sumOfQuantities * 5
     }
     
-    private let url = EndPoint().makeURL(of: .orderBook, param: "BTC_KRW")
-    
     //TODO: 메소드 분리
     func request(completion: @escaping () -> Void) {
-        service.request(url: url) { [weak self] (result: Result<OrderbookEntity, HTTPError>) in
+        service.request(endpoint: .orderBook(symbol: "BTC")) { [weak self] (result: Result<OrderbookEntity, HTTPError>) in
             switch result {
             case .success(let success):
                 let orderbookData = success.data
