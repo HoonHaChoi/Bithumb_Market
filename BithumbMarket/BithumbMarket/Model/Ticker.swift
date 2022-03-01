@@ -27,12 +27,12 @@ struct Ticker {
     }
     
     func compare(to ticker: ReceiveTicker) -> Bool {
-        market.closingPrice != ticker.content.closePrice
+        market.closingPrice.isNotEqual(ticker.content.closePrice)
     }
     
     mutating func updatePrice(to ticker: ReceiveTicker) {
         updateTickerChangeState(to: ticker.content.closePrice)
-        market.closingPrice = ticker.content.closePrice
+        market.closingPrice.updatePrice(ticker.content.closePrice)
         market.openingPrice = ticker.content.openPrice
     }
     
