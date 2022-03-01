@@ -15,17 +15,20 @@ final class MainHeaderView: UIView {
     private let accTradeValueTitleLabel = UILabel()
     
     private let titleStackView = UIStackView()
+    private let separatorView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureLabels()
         configureStackView()
+        configureSeparatorView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configureLabels()
         configureStackView()
+        configureSeparatorView()
     }
     
     func configureLabels() {
@@ -59,6 +62,20 @@ final class MainHeaderView: UIView {
             titleStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             titleStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             titleStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
+    
+    func configureSeparatorView() {
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        separatorView.backgroundColor = .textSecondary
+        
+        addSubview(separatorView)
+        
+        NSLayoutConstraint.activate([
+            separatorView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            separatorView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            separatorView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
     
