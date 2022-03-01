@@ -39,6 +39,12 @@ final class MainViewController: UIViewController {
         return sortView
     }()
     
+    private let headerView: MainHeaderView = {
+        let view = MainHeaderView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -52,6 +58,7 @@ final class MainViewController: UIViewController {
     private func configureUI() {
         view.addSubview(coinSortView)
         view.addSubview(mainTableView)
+        view.addSubview(headerView)
         let safeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
@@ -63,7 +70,11 @@ final class MainViewController: UIViewController {
             mainTableView.topAnchor.constraint(equalTo: coinSortView.bottomAnchor, constant: 20),
             mainTableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             mainTableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            mainTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+            mainTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+            
+            headerView.topAnchor.constraint(equalTo: coinSortView.bottomAnchor),
+            headerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
         ])
     }
     
