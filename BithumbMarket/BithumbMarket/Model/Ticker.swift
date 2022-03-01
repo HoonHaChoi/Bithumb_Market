@@ -12,6 +12,11 @@ struct Ticker {
     var market: Market
     var change: ChangeState
     
+    enum UpdateState {
+        case closePrice
+        case tradeValue
+    }
+    
     init(symbol: String, market: Market) {
         self.symbol = symbol
         self.market = market
@@ -26,8 +31,8 @@ struct Ticker {
         return paymentCurrency == ticker.content.symbol
     }
     
-    func compare(to ticker: ReceiveTicker) -> Bool {
-        return market.isNotEqual(ticker.content.closePrice)
+    func compare(to ticker: ReceiveTicker, state: (UpdateState) -> Void) {
+        market.isNotEqual(ticker.content.closePrice) ? state(.closePrice) : state(.tradeValue)
     }
     
     mutating func updatePrice(to ticker: ReceiveTicker) {

@@ -52,22 +52,31 @@ final class MainViewModel {
                 guard let index = self.findIndex(to: ticker) else {
                     return
                 }
-                if self.compareTicker(index: index, to: ticker) {
-                    self.updateTicker(index: index, to: ticker)
-                    self.changeIndexHandlerAction(index: index)
-                }
+                self.apply(index: index, to: ticker)
             case .failure(let error):
                 self.errorHandler?(error)
             }
         }
     }
     
-    private func findIndex(to ticker: ReceiveTicker) -> Int? {
-        return tickers.value.firstIndex(where: { $0.equalSymbol(to: ticker) })
+    private func apply(index: Int, to ticker: ReceiveTicker) {
+        tickers.value[index].compare(to: ticker) { [weak self] state in
+            guard let self = self else { return }
+            
+            self.updateTicker(index: index, to: ticker)
+            let changeState = self.tickers.value[index].change
+            
+            switch state {
+            case .closePrice:
+                self.changeIndexHandler?(index, changeState)
+            case .tradeValue:
+                self.changeIndexHandler?(index, .even)
+            }
+        }
     }
     
-    private func compareTicker(index: Int, to ticker: ReceiveTicker) -> Bool {
-        return tickers.value[index].compare(to: ticker)
+    private func findIndex(to ticker: ReceiveTicker) -> Int? {
+        return tickers.value.firstIndex(where: { $0.equalSymbol(to: ticker) })
     }
     
     private func updateTicker(index: Int, to ticker: ReceiveTicker) {
