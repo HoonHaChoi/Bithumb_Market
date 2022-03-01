@@ -19,7 +19,6 @@ final class TickerCell: UITableViewCell {
     let changeRateLabel = UILabel()
     let changePriceLabel = UILabel()
     let accTradeValueLabel = UILabel()
-    let favoriteButton = UIButton(type: .system)
     
     let symbolStackView = UIStackView()
     let currentStackView = UIStackView()
@@ -99,17 +98,14 @@ extension TickerCell {
         changeRateLabel.translatesAutoresizingMaskIntoConstraints = false
         changePriceLabel.translatesAutoresizingMaskIntoConstraints = false
         accTradeValueLabel.translatesAutoresizingMaskIntoConstraints = false
-        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         
-        symbolLabel.font = .preferredFont(forTextStyle: .body)
+        symbolLabel.font = .preferredFont(forTextStyle: .callout)
         paymentLabel.font = .preferredFont(forTextStyle: .footnote)
-        currentPriceLabel.font = .preferredFont(forTextStyle: .body)
-        changeRateLabel.font = .preferredFont(forTextStyle: .body)
+        currentPriceLabel.font = .preferredFont(forTextStyle: .callout)
+        changeRateLabel.font = .preferredFont(forTextStyle: .callout)
         changePriceLabel.font = .preferredFont(forTextStyle: .footnote)
         accTradeValueLabel.font = .preferredFont(forTextStyle: .callout)
-        
-        favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        favoriteButton.tintColor = .textSecondary
+
         paymentLabel.text = "KRW"
         paymentLabel.textColor = .textSecondary
         accTradeValueLabel.textColor = .typoColor
@@ -145,7 +141,7 @@ extension TickerCell {
         bundleStackView.alignment = .fill
         accTradeValueStackView.alignment = .top
         
-        bundleStackView.spacing = 20
+        bundleStackView.spacing = 0
     }
     
     func setConstraintLayout() {
@@ -162,21 +158,17 @@ extension TickerCell {
         bundleStackView.addArrangedSubview(accTradeValueStackView)
         
         addSubview(bundleStackView)
-//        contentView.addSubview(favoriteButton)
         
         NSLayoutConstraint.activate([
             bundleStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             bundleStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             bundleStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
-            currentStackView.trailingAnchor.constraint(equalTo: changeStackView.leadingAnchor, constant: -20),
+            currentStackView.trailingAnchor.constraint(equalTo: changeStackView.leadingAnchor, constant: -10),
             
-//            favoriteButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-//            favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-//            favoriteButton.widthAnchor.constraint(equalToConstant: 30),
-            
-            changeStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 80),
-            changeStackView.trailingAnchor.constraint(equalTo: accTradeValueStackView.leadingAnchor, constant: -20)
+            changeStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 75),
+            changeStackView.trailingAnchor.constraint(equalTo: accTradeValueStackView.leadingAnchor, constant: -10),
+            accTradeValueStackView.widthAnchor.constraint(equalToConstant: 90)
         ])
     }
     
