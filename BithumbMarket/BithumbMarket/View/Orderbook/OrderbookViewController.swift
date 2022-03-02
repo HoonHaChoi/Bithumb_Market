@@ -48,7 +48,10 @@ class OrderbookViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.featchOrderbook()
+        viewModel.featchOrderbook { [weak self] in
+            let indexPath = IndexPath(row: 0, section: 1)
+            self?.orderbookTableView.scrollToRow(at: indexPath, at: .middle, animated: false)
+        }
    }
     
     private lazy var orderbookTableViewConstraints = [

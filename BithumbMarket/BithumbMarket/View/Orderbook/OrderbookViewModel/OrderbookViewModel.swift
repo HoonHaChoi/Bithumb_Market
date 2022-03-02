@@ -11,7 +11,7 @@ protocol OrderbookViewModelType {
     var orderbook: Observable<Orderbook> { get }
     var updateTableHandler: (() -> Void)? { get set }
     var errorHandler: ((HTTPError) -> Void)? { get set }
-    func featchOrderbook()
+    func featchOrderbook(completion: @escaping () -> Void)
 }
 
 final class OrderbookViewModel: OrderbookViewModelType {
@@ -45,7 +45,8 @@ final class OrderbookViewModel: OrderbookViewModelType {
     var errorHandler: ((HTTPError) -> Void)?
     var updateTableHandler: (() -> Void)?
     
-    func featchOrderbook() {
+    func featchOrderbook(completion: @escaping () -> Void) {
+        completion()
         requestOrderbook { [weak self] in
             self?.updateOrderbook()
         }
