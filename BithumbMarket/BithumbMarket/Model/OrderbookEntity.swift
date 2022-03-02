@@ -15,11 +15,11 @@ struct OrderbookData: Decodable {
     let timestamp: String
     let orderCurrency: String
     let paymentCurrency: String
-    let bids: [Order]
-    let asks: [Order]
+    let bids: [OrderEntity]
+    let asks: [OrderEntity]
 }
 
-struct Order: Decodable {
+struct OrderEntity: Decodable {
     let quantity: String
     let price: String
 }
