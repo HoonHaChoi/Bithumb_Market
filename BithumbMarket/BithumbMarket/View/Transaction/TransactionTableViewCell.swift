@@ -12,6 +12,7 @@ final class TransactionTableViewCell: UITableViewCell {
     
     private lazy var timeLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .textPrimary
         label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
         return label
     }()
@@ -32,7 +33,7 @@ final class TransactionTableViewCell: UITableViewCell {
     }()
     
     private func check(type: String) {
-        if type == TransactionNameSpace.ask {
+        if type == TransactionNameSpace.ask[0] || type == TransactionNameSpace.ask[1] {
             [priceLabel, quntityLabel].forEach{$0.textColor = .fallColor}
         } else {
             [priceLabel, quntityLabel].forEach{$0.textColor = .riseColor}
@@ -40,7 +41,7 @@ final class TransactionTableViewCell: UITableViewCell {
     }
     
     func configure(transaction: TransactionData) {
-        timeLabel.text = transaction.transactionDate[11..<20]
+        timeLabel.text = transaction.transactionDate[11..<19]
         priceLabel.text = transaction.price.withComma()
         quntityLabel.text = transaction.unitsTraded.withDecimal(maximumDigit: 4)
         

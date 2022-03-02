@@ -34,6 +34,7 @@ class TransactionViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let view = UITableView()
         view.rowHeight = 45
+        view.estimatedRowHeight = 45
         view.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         view.register(TransactionTableViewCell.self, forCellReuseIdentifier: TransactionNameSpace.cellReuseIdentifier)
         view.dataSource = datasource
@@ -45,7 +46,8 @@ class TransactionViewController: UIViewController {
         
         for text in titleText {
             let view = UILabel()
-            view.textColor = .label
+            view.textColor = .textPrimary
+            view.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
             view.text = text
             stackView.addArrangedSubview(view)
         }
@@ -72,7 +74,7 @@ class TransactionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "체결 내역"
+        self.title = TransactionNameSpace.navigationTitle
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -81,6 +83,7 @@ class TransactionViewController: UIViewController {
         bind()
         viewmodel.fetchTransaction()
     }
+
 }
 
 extension TransactionViewController {

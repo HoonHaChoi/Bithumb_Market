@@ -9,6 +9,9 @@ import Foundation
 
 final class TransactionViewModel {
     
+    private let symbol = "BTC"
+    private let name = "BTC_KRW"
+    
     var transactionData: Observable<[TransactionData]>
     private var service: APIService
     
@@ -22,7 +25,8 @@ final class TransactionViewModel {
     var errorHandler: ((HTTPError) -> Void)?
     
     func fetchTransaction() {
-        service.request(endpoint: .transactionHistory(symbol: "BTC")) { (result:  Result<Transaction, HTTPError>)  in
+        service.request(endpoint: .transactionHistory(symbol: symbol)) { [weak self] (result:  Result<Transaction, HTTPError>)  in
+            guard let self = self else { return }
             switch result {
             case .success(let transaction):
                 self.transactionData.value = transaction.data.reversed()

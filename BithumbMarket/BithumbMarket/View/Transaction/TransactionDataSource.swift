@@ -22,6 +22,8 @@ final class TransactionDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TransactionNameSpace.cellReuseIdentifier, for: indexPath) as? TransactionTableViewCell else { return .init()}
         cell.configure(transaction: items[indexPath.row])
+        cell.selectionStyle = .none
         return cell
     }
+    
 }
