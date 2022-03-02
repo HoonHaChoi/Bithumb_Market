@@ -8,7 +8,22 @@
 import UIKit
 
 class OrderbookViewController: UIViewController {
-    //MARK: UI property
+    
+    private let dataSource: OrderbookDataSource
+    private let viewModel: OrderbookViewModelType
+    
+    init(viewModel: OrderbookViewModelType = OrderbookViewModel(symbol: "BTC_KRW"), dataSource: OrderbookDataSource) {
+        self.viewModel = viewModel
+        self.dataSource = dataSource
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.viewModel = OrderbookViewModel(symbol: "BTC_KRW")
+        self.dataSource = .init()
+        super.init(coder: coder)
+    }
+    
     private let orderbookTableView: UITableView = {
         let tableView = UITableView(frame: CGRect.zero)
         tableView.separatorStyle = .none
@@ -16,6 +31,17 @@ class OrderbookViewController: UIViewController {
         tableView.register(OrderbookTableViewCell.self, forCellReuseIdentifier: OrderbookNameSpace.cellReuseIdentifier)
         return tableView
     }()
+    
+    override func loadView() {
+        super.loadView()
+        view.backgroundColor = .systemBackground
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = OrderbookNameSpace.navigationTitle
+        configureTableView()
+    }
     
     private lazy var orderbookTableViewConstraints = [
         orderbookTableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
@@ -27,17 +53,7 @@ class OrderbookViewController: UIViewController {
     private func configureTableView() {
         view.addSubview(orderbookTableView)
         NSLayoutConstraint.activate(orderbookTableViewConstraints)
+        orderbookTableView.dataSource = dataSource
     }
     
-    //MARK: Life Cycle
-    override func loadView() {
-        super.loadView()
-        view.backgroundColor = .systemBackground
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = OrderbookNameSpace.navigationTitle
-        configureTableView()
-    }
 }

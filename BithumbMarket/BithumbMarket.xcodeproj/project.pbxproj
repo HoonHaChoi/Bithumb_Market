@@ -21,6 +21,8 @@
 		7F844CD027CEFA6600C06084 /* OrderbookNameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005627CC9B4B00752ABA /* OrderbookNameSpace.swift */; };
 		7F844CD127CEFA7B00C06084 /* OrderbookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005727CC9B4B00752ABA /* OrderbookTableViewCell.swift */; };
 		7F844CD227CEFFEB00C06084 /* OrderbookDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CCE27CEFA2300C06084 /* OrderbookDataSource.swift */; };
+		7F844CD527CF145F00C06084 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 7F844CD427CF145F00C06084 /* Starscream */; };
+		7F844CD627CF14F000C06084 /* OrderbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005527CC9B4B00752ABA /* OrderbookViewController.swift */; };
 		BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430C827C5C1D500A77A38 /* AppDelegate.swift */; };
 		BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */; };
 		BF0430D227C5C1D700A77A38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF0430D127C5C1D700A77A38 /* Assets.xcassets */; };
@@ -80,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F844CD527CF145F00C06084 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +242,9 @@
 			dependencies = (
 			);
 			name = BithumbMarket;
+			packageProductDependencies = (
+				7F844CD427CF145F00C06084 /* Starscream */,
+			);
 			productName = BithumbMarket;
 			productReference = BF0430C527C5C1D500A77A38 /* BithumbMarket.app */;
 			productType = "com.apple.product-type.application";
@@ -267,6 +273,9 @@
 				Base,
 			);
 			mainGroup = BF0430BC27C5C1D500A77A38;
+			packageReferences = (
+				7F844CD327CF145F00C06084 /* XCRemoteSwiftPackageReference "Starscream" */,
+			);
 			productRefGroup = BF0430C627C5C1D500A77A38 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -309,6 +318,7 @@
 				BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */,
 				E8AC90BA27C8BB5600C50FA3 /* String+Extension.swift in Sources */,
 				E8AC90B527C8745100C50FA3 /* TransactionViewModel.swift in Sources */,
+				7F844CD627CF14F000C06084 /* OrderbookViewController.swift in Sources */,
 				BF86B5F327C60653005A2170 /* APIService.swift in Sources */,
 				BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */,
 				BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */,
@@ -528,6 +538,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7F844CD327CF145F00C06084 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7F844CD427CF145F00C06084 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F844CD327CF145F00C06084 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BF0430BD27C5C1D500A77A38 /* Project object */;
 }
