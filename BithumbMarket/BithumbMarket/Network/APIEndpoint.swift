@@ -66,4 +66,20 @@ enum ChartIntervals: CaseIterable {
             return "24h"
         }
     }
+    
+    var name: String {
+        switch self {
+        case .oneminute:
+            return "1분"
+        case .tenminute:
+            return "10분"
+        case .halfhour:
+            return "30분"
+        case .anhour:
+            return "1시간"
+        case .day:
+            return "1일"
+        }
+    }
+    
 }
