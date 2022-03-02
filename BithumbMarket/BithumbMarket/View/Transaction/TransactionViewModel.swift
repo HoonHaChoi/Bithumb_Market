@@ -18,6 +18,7 @@ final class TransactionViewModel {
     }
     
     var updateTableHandler: (() -> Void)?
+    var insertTableHandler: (() -> Void)?
     var errorHandler: ((HTTPError) -> Void)?
     
     func fetchTransaction() {

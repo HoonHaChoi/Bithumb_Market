@@ -56,12 +56,18 @@ class TransactionViewController: UIViewController {
             self?.datasource.items = transactions
         }
         viewmodel.updateTableHandler = updateTableView
+        viewmodel.insertTableHandler = insertRowTableView
     }
     
     private func updateTableView() {
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
+            
         }
+    }
+    
+    private func insertRowTableView() {
+        tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
     }
     
     override func viewDidLoad() {
