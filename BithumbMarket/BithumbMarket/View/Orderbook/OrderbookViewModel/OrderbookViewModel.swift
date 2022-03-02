@@ -138,7 +138,7 @@ final class OrderbookViewModel: OrderbookViewModelType {
                 )
             }
         }
-        order.sort{ Double($0.price) ?? 0 < Double($1.price) ?? 0 }
+        order.sort{ Double($0.price) ?? 0 > Double($1.price) ?? 0 }
         
         return order
     }
