@@ -22,6 +22,8 @@
 		BF5573C327CD43C30065B054 /* ChangeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5573C227CD43C30065B054 /* ChangeState.swift */; };
 		BF7D214227CE919C007F0DCE /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214127CE919C007F0DCE /* Double+Extension.swift */; };
 		BF7D214427CEA95A007F0DCE /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214327CEA95A007F0DCE /* MainHeaderView.swift */; };
+		BF7D214927CF0C81007F0DCE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214827CF0C81007F0DCE /* DetailViewController.swift */; };
+		BF7D214C27CF3A1A007F0DCE /* CurrentMarketPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214B27CF3A1A007F0DCE /* CurrentMarketPriceView.swift */; };
 		BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5EF27C604B0005A2170 /* Ticker.swift */; };
 		BF86B5F327C60653005A2170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F227C60653005A2170 /* APIService.swift */; };
 		BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F427C606D8005A2170 /* EndPoint.swift */; };
@@ -74,6 +76,8 @@
 		BF5573C227CD43C30065B054 /* ChangeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeState.swift; sourceTree = "<group>"; };
 		BF7D214127CE919C007F0DCE /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		BF7D214327CEA95A007F0DCE /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
+		BF7D214827CF0C81007F0DCE /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		BF7D214B27CF3A1A007F0DCE /* CurrentMarketPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMarketPriceView.swift; sourceTree = "<group>"; };
 		BF86B5EF27C604B0005A2170 /* Ticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticker.swift; sourceTree = "<group>"; };
 		BF86B5F227C60653005A2170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		BF86B5F427C606D8005A2170 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				7F2E004E27CC9B4B00752ABA /* Main */,
+				BF7D214727CF0C6E007F0DCE /* Detail */,
 				E8AC90A927C71DFC00C50FA3 /* Transaction */,
 				7F2E005427CC9B4B00752ABA /* Orderbook */,
 			);
@@ -192,6 +197,23 @@
 				BF0430D627C5C1D700A77A38 /* Info.plist */,
 			);
 			path = BithumbMarket;
+			sourceTree = "<group>";
+		};
+		BF7D214727CF0C6E007F0DCE /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				BF7D214A27CF39AF007F0DCE /* View */,
+				BF7D214827CF0C81007F0DCE /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		BF7D214A27CF39AF007F0DCE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BF7D214B27CF3A1A007F0DCE /* CurrentMarketPriceView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		BF86B5EE27C602D4005A2170 /* Model */ = {
@@ -345,12 +367,14 @@
 				BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */,
 				E8AC90BA27C8BB5600C50FA3 /* String+Extension.swift in Sources */,
 				E8AC90B527C8745100C50FA3 /* TransactionViewModel.swift in Sources */,
+				BF7D214927CF0C81007F0DCE /* DetailViewController.swift in Sources */,
 				BFB9562927CCAD49001627C6 /* MainViewModel.swift in Sources */,
 				BF86B5F327C60653005A2170 /* APIService.swift in Sources */,
 				BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */,
 				BF7D214427CEA95A007F0DCE /* MainHeaderView.swift in Sources */,
 				BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */,
 				BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */,
+				BF7D214C27CF3A1A007F0DCE /* CurrentMarketPriceView.swift in Sources */,
 				E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */,
 				E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */,
 			);
