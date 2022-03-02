@@ -30,7 +30,7 @@ extension UIColor {
     }
     
     static var orderBookBuyBackground: UIColor {
-        .init(named: "orderBookBuyBackground") ?? .init()
+        .init(named: "OrderBookBuyBackground") ?? .init()
     }
     
     static var orderBookSellBackground: UIColor {

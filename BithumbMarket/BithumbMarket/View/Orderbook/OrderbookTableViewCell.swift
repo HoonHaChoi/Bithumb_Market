@@ -12,7 +12,8 @@ final class OrderbookTableViewCell: UITableViewCell {
     let priceLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .headline)
+        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 17, weight: .semibold)
+        label.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: monoFont)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -20,9 +21,10 @@ final class OrderbookTableViewCell: UITableViewCell {
     let askQuantityLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.textAlignment = .left
-        label.font = .preferredFont(forTextStyle: .subheadline)
-        label.textColor = .systemBlue
+        label.textAlignment = .right
+        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 15, weight: .regular)
+        label.font = UIFontMetrics(forTextStyle: .subheadline).scaledFont(for: monoFont)
+        label.textColor = .fallColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -30,9 +32,10 @@ final class OrderbookTableViewCell: UITableViewCell {
     let bidQuantityLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.textAlignment = .right
-        label.font = .preferredFont(forTextStyle: .subheadline)
-        label.textColor = .systemRed
+        label.textAlignment = .left
+        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 15, weight: .regular)
+        label.font = UIFontMetrics(forTextStyle: .subheadline).scaledFont(for: monoFont)
+        label.textColor = .riseColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -40,7 +43,7 @@ final class OrderbookTableViewCell: UITableViewCell {
     let askQuantityBarView: UIProgressView = {
         let progreesBar = UIProgressView()
         progreesBar.semanticContentAttribute = .forceRightToLeft
-        progreesBar.progressTintColor = .systemBlue.withAlphaComponent(0.2)
+        progreesBar.progressTintColor = .orderBookSellBackground
         progreesBar.trackTintColor = .clear
         progreesBar.translatesAutoresizingMaskIntoConstraints = false
         return progreesBar
@@ -48,7 +51,7 @@ final class OrderbookTableViewCell: UITableViewCell {
     
     let bidQuantityBarView: UIProgressView = {
         let progreesBar = UIProgressView()
-        progreesBar.progressTintColor = .systemRed.withAlphaComponent(0.2)
+        progreesBar.progressTintColor = .orderBookBuyBackground
         progreesBar.trackTintColor = .clear
         progreesBar.translatesAutoresizingMaskIntoConstraints = false
         return progreesBar
