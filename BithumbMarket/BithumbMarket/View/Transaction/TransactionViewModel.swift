@@ -29,7 +29,7 @@ final class TransactionViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let transaction):
-                self.transactionData.value = transaction.data.reversed()
+                self.transactionData.value = transaction.data
                 self.updateTableHandler?()
                 self.sendMessage()
                 self.updateTransaction()
@@ -47,7 +47,7 @@ final class TransactionViewModel {
         }
     }
     
-    func updateTransaction() {
+    private func updateTransaction() {
         service.perform { [weak self] (result: Result<ReceiveTransaction, HTTPError>) in
             guard let self = self else { return }
             switch result {
@@ -60,8 +60,7 @@ final class TransactionViewModel {
                         price: data.contPrice,
                         total: data.contAmt
                     )
-                    print(transactionData)
-                    self.transactionData.value.insert(transactionData, at: 0)
+                    self.transactionData.value.append(transactionData)
                     self.insertTableHandler?()
                 }
             case .failure(let error):

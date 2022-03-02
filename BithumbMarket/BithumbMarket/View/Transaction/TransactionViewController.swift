@@ -30,6 +30,7 @@ class TransactionViewController: UIViewController {
     }()
     
     private lazy var tableView: UITableView = {
+        
         let view = UITableView()
         view.rowHeight = 45
         view.estimatedRowHeight = 45
@@ -50,7 +51,6 @@ class TransactionViewController: UIViewController {
     private func updateTableView() {
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
-            
         }
     }
     
