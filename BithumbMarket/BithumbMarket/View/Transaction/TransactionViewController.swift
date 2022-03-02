@@ -55,7 +55,9 @@ class TransactionViewController: UIViewController {
     }
     
     private func insertRowTableView() {
-        tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        UIView.performWithoutAnimation {
+            tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        }
     }
     
     override func viewDidLoad() {
