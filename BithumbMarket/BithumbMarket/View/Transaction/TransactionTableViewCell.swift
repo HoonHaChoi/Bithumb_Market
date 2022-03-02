@@ -63,18 +63,17 @@ final class TransactionTableViewCell: UITableViewCell {
 extension TransactionTableViewCell {
     
     func setupView() {
-        [
-            timeLabel,
-            priceLabel,
-            quntityLabel
-        ].forEach{addSubview($0)}
         
         [
             timeLabel,
             priceLabel,
             quntityLabel
-        ].forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
 
+        ].forEach{
+            addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
         NSLayoutConstraint.activate([
             timeLabel.topAnchor.constraint(equalTo: self.topAnchor),
             timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
