@@ -45,8 +45,11 @@ final class TransactionHeaderView: UIView {
 extension TransactionHeaderView {
     
     private func setupView() {
-        self.addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        [stackView].forEach{
+            addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
