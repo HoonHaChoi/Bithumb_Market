@@ -25,14 +25,14 @@ final class OrderbookViewModel: OrderbookViewModelType {
             Orderbook(
                 asks: Array(
                     repeating: Order(
-                        price: "",
-                        quantity: "",
+                        price: OrderbookNameSpace.emptyPrice,
+                        quantity: OrderbookNameSpace.noQuantity,
                         rateOfQuantity: 0),
                     count: 30),
                 bids:  Array(
                     repeating: Order(
-                        price: "",
-                        quantity: "",
+                        price: OrderbookNameSpace.emptyPrice,
+                        quantity: OrderbookNameSpace.noQuantity,
                         rateOfQuantity: 0),
                     count: 30)
             )
@@ -89,8 +89,8 @@ final class OrderbookViewModel: OrderbookViewModelType {
                 guard let orderbookData = self?.orderbookData else {
                     return }
                 let receivedOrderbook = success.content.list
-                let receivedAsks = receivedOrderbook.filter { $0.orderType == "ask" }
-                let receivedBids = receivedOrderbook.filter { $0.orderType == "bid" }
+                let receivedAsks = receivedOrderbook.filter { $0.orderType == OrderbookNameSpace.ask }
+                let receivedBids = receivedOrderbook.filter { $0.orderType == OrderbookNameSpace.bid }
                 guard let asksEntity = self?.mergeOrders(orderbookData.asks, into: receivedAsks),
                       let bidsEntity = self?.mergeOrders(orderbookData.bids, into: receivedBids) else {
                           return
@@ -123,14 +123,14 @@ final class OrderbookViewModel: OrderbookViewModelType {
                     continue
                 }
                 order.remove(at: samePrice)
-                if new[index].quantity != "0" {
+                if new[index].quantity != OrderbookNameSpace.noQuantity {
                     order.append(
                         OrderEntity(
                             quantity: new[index].quantity,
                             price: new[index].price)
                     )
                 }
-            } else if new[index].quantity != "0" {
+            } else if new[index].quantity != OrderbookNameSpace.noQuantity {
                 order.append(
                     OrderEntity(
                         quantity: new[index].quantity,
