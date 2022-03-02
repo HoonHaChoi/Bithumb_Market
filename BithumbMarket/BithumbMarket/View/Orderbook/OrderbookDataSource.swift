@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OrderbookDataSource: NSObject, UITableViewDataSource {
+final class OrderbookDataSource: NSObject, UITableViewDataSource {
     
     var items: Orderbook
     
