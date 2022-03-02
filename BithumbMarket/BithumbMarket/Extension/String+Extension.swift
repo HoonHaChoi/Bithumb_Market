@@ -23,7 +23,7 @@ extension String {
     
     func withDecimal(maximumDigit: Int) -> String {
         let numberString = NumberFormatter().computeDecimal(str: self, maximumDigit: maximumDigit)
-        return String(format: "%.\(maximumDigit)f", numberString).withComma()
+        return String(format: "%.\(maximumDigit)f", numberString)
     }
     
     func equalStringDouble(_ str: String) -> Bool {

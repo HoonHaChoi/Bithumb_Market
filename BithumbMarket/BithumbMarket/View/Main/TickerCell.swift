@@ -100,10 +100,10 @@ extension TickerCell {
         accTradeValueLabel.translatesAutoresizingMaskIntoConstraints = false
         
         symbolLabel.font = .preferredFont(forTextStyle: .callout)
-        paymentLabel.font = .preferredFont(forTextStyle: .footnote)
+        paymentLabel.font = .preferredFont(forTextStyle: .caption1)
         currentPriceLabel.font = .preferredFont(forTextStyle: .callout)
         changeRateLabel.font = .preferredFont(forTextStyle: .callout)
-        changePriceLabel.font = .preferredFont(forTextStyle: .footnote)
+        changePriceLabel.font = .preferredFont(forTextStyle: .caption1)
         accTradeValueLabel.font = .preferredFont(forTextStyle: .callout)
 
         paymentLabel.text = "KRW"

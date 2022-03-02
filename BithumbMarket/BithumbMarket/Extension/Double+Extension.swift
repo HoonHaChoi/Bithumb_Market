@@ -15,7 +15,7 @@ extension Double {
         
         for i in 0..<unit.count {
             if self/standardValue > 1 {
-                return String(self/standardValue).withDecimal(maximumDigit: 0) + unit[i]
+                return String(self/standardValue).withDecimal(maximumDigit: 0).withComma() + unit[i]
             }
             standardValue /= 10
         }
