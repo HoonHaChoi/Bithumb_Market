@@ -158,7 +158,8 @@ final class OrderbookViewModel: OrderbookViewModelType {
     private func calculateRateOfQuintity(quantities: [String], quantity: String) -> Float {
         let quantities = quantities.map { Float($0) ?? 0 }
         let sumOfQuantities = quantities.reduce(0){ $0 + $1}
-        return Float(quantity) ?? 0 / sumOfQuantities * 5
+        let rate = Float(quantity) ?? 0 / sumOfQuantities * 5
+        return rate > 1 ? 1 : rate
     }
     
 }
