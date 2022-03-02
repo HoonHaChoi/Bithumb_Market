@@ -25,9 +25,10 @@ class OrderbookDataSource: NSObject, UITableViewDataSource {
         }
     }
     
-    init(items: Orderbook) {
-        self.items = items
-        super.init()
+    override init() {
+        items = .init(
+            asks: .init(),
+            bids: .init())
     }
     
     func updateCellData(by orderbook: Orderbook) {
