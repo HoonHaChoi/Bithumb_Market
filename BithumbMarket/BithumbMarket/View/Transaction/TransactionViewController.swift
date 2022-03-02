@@ -9,95 +9,92 @@ import UIKit
 
 class TransactionViewController: UIViewController {
     
-    let symbol = "BTC"
-    let model = TransactionViewModel.init(service: APIService.init(session: URLSession.shared))
+    private let viewmodel: TransactionViewModel
+    private let datasource: TransactionDataSource
     
-    private lazy var stackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.distribution = .equalSpacing
+    init(viewmodel: TransactionViewModel, datasource: TransactionDataSource) {
+        self.viewmodel = viewmodel
+        self.datasource = datasource
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.viewmodel = .init()
+        self.datasource = .init()
+        super.init(coder: coder)
+    }
+    
+    private lazy var headerView: TransactionHeaderView = {
+        let view = TransactionHeaderView()
         return view
     }()
     
     private lazy var tableView: UITableView = {
+        
         let view = UITableView()
-        view.delegate = self
-        view.dataSource = self
         view.rowHeight = 45
+        view.estimatedRowHeight = 45
         view.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         view.register(TransactionTableViewCell.self, forCellReuseIdentifier: TransactionNameSpace.cellReuseIdentifier)
+        view.dataSource = datasource
         return view
     }()
     
-    private func drawTitle() {
-        let titleText = TransactionNameSpace.tableTitle
-        
-        for text in titleText {
-            let view = UILabel()
-            view.textColor = .label
-            view.text = text
-            stackView.addArrangedSubview(view)
+    private func bind() {
+        viewmodel.transactionData.subscribe { [weak self] transactions in
+            self?.datasource.items = transactions
+        }
+        viewmodel.updateTableHandler = updateTableView
+        viewmodel.insertTableHandler = insertRowTableView
+    }
+    
+    private func updateTableView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
         }
     }
     
-    func fetchData() {
-        model.fetchTransaction(symbol: symbol) {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+    private func insertRowTableView() {
+        UIView.performWithoutAnimation {
+            tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "체결 내역"
+        self.title = TransactionNameSpace.navigationTitle
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.shadowImage = UIImage()
-        drawTitle()
-        fetchData()
         setupView()
+        bind()
+        viewmodel.fetchTransaction()
     }
-}
 
-extension TransactionViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.transaction.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TransactionNameSpace.cellReuseIdentifier, for: indexPath) as? TransactionTableViewCell
-        cell?.configure(transaction: model.transaction[indexPath.row])
-        cell?.selectionStyle = .none
-        
-        return cell ?? UITableViewCell()
-    }
-}
-
-extension TransactionViewController: UITableViewDelegate {
-    
 }
 
 extension TransactionViewController {
     
     func setupView() {
-        view.addSubview(tableView)
-        
-        [stackView, tableView].forEach{view.addSubview($0)}
-        
-        [stackView, tableView].forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
-        
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-        ])
+
+        [
+            headerView,
+            tableView
+            
+        ].forEach{
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10),
+            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
+            
+            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
     

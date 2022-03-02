@@ -12,6 +12,7 @@ final class TransactionTableViewCell: UITableViewCell {
     
     private lazy var timeLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .textPrimary
         label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
         return label
     }()
@@ -32,17 +33,17 @@ final class TransactionTableViewCell: UITableViewCell {
     }()
     
     private func check(type: String) {
-        if type == TransactionNameSpace.ask {
-            [timeLabel, priceLabel, quntityLabel].forEach{$0.textColor = .blue}
+        if type == TransactionNameSpace.ask[0] || type == TransactionNameSpace.ask[1] {
+            [priceLabel, quntityLabel].forEach{$0.textColor = .fallColor}
         } else {
-            [timeLabel, priceLabel, quntityLabel].forEach{$0.textColor = .red}
+            [priceLabel, quntityLabel].forEach{$0.textColor = .riseColor}
         }
     }
     
     func configure(transaction: TransactionData) {
-//        timeLabel.text = transaction.transactionDate[11..<20]
+        timeLabel.text = transaction.transactionDate[11..<19]
         priceLabel.text = transaction.price.withComma()
-        quntityLabel.text = transaction.unitsTraded
+        quntityLabel.text = transaction.unitsTraded.withDecimal(maximumDigit: 4)
         
         check(type: transaction.type)
     }
@@ -62,37 +63,33 @@ final class TransactionTableViewCell: UITableViewCell {
 extension TransactionTableViewCell {
     
     func setupView() {
-        [
-            timeLabel,
-            priceLabel,
-            quntityLabel
-        ].forEach{addSubview($0)}
         
         [
             timeLabel,
             priceLabel,
             quntityLabel
-        ].forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
 
+        ].forEach{
+            addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
         NSLayoutConstraint.activate([
             timeLabel.topAnchor.constraint(equalTo: self.topAnchor),
             timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
-        ])
-        
-        NSLayoutConstraint.activate([
+            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            
             priceLabel.topAnchor.constraint(equalTo: self.topAnchor),
             priceLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            priceLabel.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 20),
-            priceLabel.trailingAnchor.constraint(equalTo: quntityLabel.leadingAnchor, constant: -20),
-        ])
-        
-        NSLayoutConstraint.activate([
+            priceLabel.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 10),
+            priceLabel.trailingAnchor.constraint(equalTo: quntityLabel.leadingAnchor, constant: -10),
+            
             quntityLabel.topAnchor.constraint(equalTo: self.topAnchor),
             quntityLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            quntityLabel.widthAnchor.constraint(equalToConstant: 100)
+            quntityLabel.widthAnchor.constraint(equalToConstant: 100),
         ])
+
     }
     
 }

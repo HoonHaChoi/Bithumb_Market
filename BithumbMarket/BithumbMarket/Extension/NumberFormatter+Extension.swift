@@ -21,5 +21,5 @@ extension NumberFormatter {
         let number = self.number(from: str)
         return Double(truncating: number ?? 0)
     }
-
+    
 }
