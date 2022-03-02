@@ -34,6 +34,7 @@
 		E80248FF27CCB686004A4016 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005027CC9B4B00752ABA /* MainViewController.swift */; };
 		E802490027CCB68A004A4016 /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004F27CC9B4B00752ABA /* TickerCell.swift */; };
 		E802492427CDB3CC004A4016 /* TransactionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E802492327CDB3CC004A4016 /* TransactionDataSource.swift */; };
+		E813E60827CDFB4800776390 /* ReceiveTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E813E60727CDFB4800776390 /* ReceiveTransaction.swift */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
@@ -71,6 +72,7 @@
 		BF86B5F427C606D8005A2170 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		BF86B5F627C60B65005A2170 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		E802492327CDB3CC004A4016 /* TransactionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDataSource.swift; sourceTree = "<group>"; };
+		E813E60727CDFB4800776390 /* ReceiveTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveTransaction.swift; sourceTree = "<group>"; };
 		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E8AC90B027C8700500C50FA3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				7F2E004327CC9AE000752ABA /* OrderbookEntity.swift */,
 				BF86B5EF27C604B0005A2170 /* Ticker.swift */,
 				E8AC90B027C8700500C50FA3 /* Transaction.swift */,
+				E813E60727CDFB4800776390 /* ReceiveTransaction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */,
 				E802490027CCB68A004A4016 /* TickerCell.swift in Sources */,
 				E8AC90BA27C8BB5600C50FA3 /* String+Extension.swift in Sources */,
+				E813E60827CDFB4800776390 /* ReceiveTransaction.swift in Sources */,
 				E8AC90B527C8745100C50FA3 /* TransactionViewModel.swift in Sources */,
 				BF86B5F327C60653005A2170 /* APIService.swift in Sources */,
 				E80248FE27CCB683004A4016 /* CoinSortControlView.swift in Sources */,
