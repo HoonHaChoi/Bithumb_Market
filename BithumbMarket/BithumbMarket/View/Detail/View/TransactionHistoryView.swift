@@ -32,11 +32,12 @@ final class TransactionHistoryView: UIView {
 extension TransactionHistoryView {
     
     private func configureLabelButttonUI() {
-        transactionHistoryNameLabel.textColor = .textPrimary
+        transactionHistoryNameLabel.textColor = .typoColor
         transactionHistoryNameLabel.font = .preferredFont(forTextStyle: .headline)
         transactionHistoryNameLabel.text = "채결 내역 보기"
         
         transactionHistoryButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        transactionHistoryButton.tintColor = .actionTextSecondary
     }
     
     private func configureStackViewUI() {
