@@ -29,6 +29,8 @@ class OrderbookViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(OrderbookTableViewCell.self, forCellReuseIdentifier: OrderbookNameSpace.cellReuseIdentifier)
+        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = 44
         return tableView
     }()
     

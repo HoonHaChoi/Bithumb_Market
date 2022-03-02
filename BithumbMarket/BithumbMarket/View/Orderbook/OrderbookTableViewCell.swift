@@ -91,7 +91,6 @@ final class OrderbookTableViewCell: UITableViewCell {
     private lazy var cellConstraint = [
         ///Tag - Price Constraint
         priceLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 3),
-        priceLabel.heightAnchor.constraint(equalToConstant: 34),
         priceLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         priceLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         priceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),

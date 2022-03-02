@@ -146,8 +146,8 @@ final class OrderbookViewModel: OrderbookViewModelType {
         return entity
             .map {
                 Order(
-                    price: $0.price,
-                    quantity: $0.quantity,
+                    price: $0.price.withComma(),
+                    quantity: $0.quantity.withDecimal(maximumDigit: 4),
                     rateOfQuantity: self.calculateRateOfQuintity(
                         quantities: entity.map{ $0.quantity },
                         quantity: $0.quantity))
