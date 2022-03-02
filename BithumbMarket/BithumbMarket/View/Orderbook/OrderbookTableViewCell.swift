@@ -54,6 +54,39 @@ final class OrderbookTableViewCell: UITableViewCell {
         return progreesBar
     }()
  
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configureUI()
+    }
+    
+    func configure(items: Orderbook, section: Int, index: Int) {
+        switch section {
+        case 0:
+            priceLabel.text = items.asks[index].price
+            askQuantityLabel.text = items.asks[index].quantity
+            askQuantityBarView.setProgress(items.asks[index].rateOfQuantity, animated: true)
+        case 1:
+            priceLabel.text = items.bids[index].price
+            bidQuantityLabel.text = items.bids[index].quantity
+            bidQuantityBarView.setProgress(items.bids[index].rateOfQuantity, animated: true)
+        default:
+            break
+        }
+    }
+    
+    private func configureUI() {
+        contentView.addSubview(priceLabel)
+        contentView.addSubview(askQuantityBarView)
+        contentView.addSubview(bidQuantityBarView)
+        contentView.addSubview(askQuantityLabel)
+        contentView.addSubview(bidQuantityLabel)
+        NSLayoutConstraint.activate(cellConstraint)
+    }
     
     private lazy var cellConstraint = [
         ///Tag - Price Constraint
@@ -82,25 +115,6 @@ final class OrderbookTableViewCell: UITableViewCell {
         bidQuantityLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         bidQuantityLabel.leadingAnchor.constraint(equalTo: priceLabel.trailingAnchor, constant: 10)
     ]
-    
-    private func configureCell() {
-        contentView.addSubview(priceLabel)
-        contentView.addSubview(askQuantityBarView)
-        contentView.addSubview(bidQuantityBarView)
-        contentView.addSubview(askQuantityLabel)
-        contentView.addSubview(bidQuantityLabel)
-        NSLayoutConstraint.activate(cellConstraint)
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configureCell()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        configureCell()
-    }
     
     override func prepareForReuse(){
         super.prepareForReuse()

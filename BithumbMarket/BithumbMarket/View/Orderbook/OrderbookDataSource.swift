@@ -54,6 +54,7 @@ class OrderbookDataSource: NSObject, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: OrderbookNameSpace.cellReuseIdentifier, for: indexPath) as? OrderbookTableViewCell else {
             return UITableViewCell()
         }
+        cell.configure(items: items, section: indexPath.section, index: indexPath.row)
         return cell
     }
     
