@@ -13,6 +13,10 @@ extension String {
         return Int(self) ?? 0
     }
     
+    func convertDouble() -> Double {
+        return Double(self) ?? 0
+    }
+    
     func withComma() -> String {
         return NumberFormatter().computeDecimal(str: self)
     }
@@ -20,6 +24,14 @@ extension String {
     func withDecimal(maximumDigit: Int) -> String {
         let numberString = NumberFormatter().computeDecimal(str: self, maximumDigit: maximumDigit)
         return String(format: "%.\(maximumDigit)f", numberString)
+    }
+    
+    func equalStringDouble(_ str: String) -> Bool {
+        self.convertDouble().isEqual(to: str.convertDouble())
+    }
+    
+    func isLessStringDouble(_ str: String) -> Bool {
+        self.convertDouble().isLess(than: str.convertDouble())
     }
     
     subscript(_ range: CountableRange<Int>) -> String {

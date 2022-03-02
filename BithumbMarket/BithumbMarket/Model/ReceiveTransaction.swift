@@ -9,10 +9,10 @@ import Foundation
 
 struct ReceiveTransaction: Codable {
     let type: String
-    let content: Content
+    let content: TransactionContent
 }
 
-struct Content: Codable {
+struct TransactionContent: Codable {
     let list: [TransactionList]
 }
 
