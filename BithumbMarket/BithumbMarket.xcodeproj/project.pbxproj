@@ -16,6 +16,8 @@
 		7F2E005C27CC9F3300752ABA /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005A27CC9F3300752ABA /* SocketService.swift */; };
 		7F2E005D27CC9F3300752ABA /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005B27CC9F3300752ABA /* APIEndpoint.swift */; };
 		7F844CCB27CE6D3D00C06084 /* ReceiveOrderbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CCA27CE6D3D00C06084 /* ReceiveOrderbook.swift */; };
+		7F844CCC27CE6E3700C06084 /* OrderbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005927CC9B4B00752ABA /* OrderbookViewModel.swift */; };
+		7F844CCD27CE6E5300C06084 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004D27CC9B4B00752ABA /* Observable.swift */; };
 		BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430C827C5C1D500A77A38 /* AppDelegate.swift */; };
 		BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */; };
 		BF0430D227C5C1D700A77A38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF0430D127C5C1D700A77A38 /* Assets.xcassets */; };
@@ -304,9 +306,11 @@
 				BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */,
 				BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */,
 				BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */,
+				7F844CCC27CE6E3700C06084 /* OrderbookViewModel.swift in Sources */,
 				E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */,
 				E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */,
 				7F844CCB27CE6D3D00C06084 /* ReceiveOrderbook.swift in Sources */,
+				7F844CCD27CE6E5300C06084 /* Observable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

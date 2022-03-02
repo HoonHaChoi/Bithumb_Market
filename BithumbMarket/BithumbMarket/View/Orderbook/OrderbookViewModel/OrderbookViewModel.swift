@@ -40,6 +40,7 @@ final class OrderbookViewModel: OrderbookViewModelType {
         self.symbol = symbol
     }
     
+    private var orderbookData: OrderbookData?
     var errorHandler: ((HTTPError) -> Void)?
     
     func featchOrderbook() {
@@ -56,6 +57,73 @@ final class OrderbookViewModel: OrderbookViewModelType {
                 self?.errorHandler?(error)
             }
         }
+    }
+    
+    private func sendMessage() {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
+            guard let symbol = self?.symbol else { return }
+            let message = Message(type: .orderbookdepth, symbols: .name(symbol))
+            self?.service.sendSocketMessage(to: message)
+        }
+    }
+    
+    private func updateOrderbook() {
+        self.service.perform { [weak self] (result: Result<ReceiveOrderbook, HTTPError>) in
+            switch result {
+            case .success(let success):
+                guard let orderbookData = self?.orderbookData else { return }
+                let receivedOrderbook = success.content.list
+                let receivedAsks = receivedOrderbook.filter { $0.orderType == "ask" }
+                let receivedBids = receivedOrderbook.filter { $0.orderType == "bid" }
+                guard let asksEntity = self?.mergeOrders(orderbookData.asks, into: receivedAsks),
+                      let bidsEntity = self?.mergeOrders(orderbookData.bids, into: receivedBids) else {
+                          return
+                      }
+                guard let asks = self?.convert(from: asksEntity).suffix(30),
+                      let bids = self?.convert(from: bidsEntity).prefix(30) else {
+                          return
+                      }
+                self?.orderbook.value = Orderbook(
+                    asks: Array(asks),
+                    bids: Array(bids)
+                )
+            case .failure(let error):
+                self?.errorHandler?(error)
+            }
+        }
+    }
+    
+    private func mergeOrders(_ old: [OrderEntity], into new: [ReceiveOrder]) -> [OrderEntity] {
+        var order = old
+        let newOrderPrice = new.map { $0.price }
+        let previousOrderPrice = old.map { $0.price }
+        
+        for (index, price) in newOrderPrice.enumerated() {
+            if previousOrderPrice.contains(price) {
+                guard let samePrice = order.firstIndex(where: {
+                    $0.price == price
+                }) else {
+                    continue
+                }
+                order.remove(at: samePrice)
+                if new[index].quantity != "0" {
+                    order.append(
+                        OrderEntity(
+                            quantity: new[index].quantity,
+                            price: new[index].price)
+                    )
+                }
+            } else if new[index].quantity != "0" {
+                order.append(
+                    OrderEntity(
+                        quantity: new[index].quantity,
+                        price: new[index].price)
+                )
+            }
+        }
+        order.sort{ Double($0.price) ?? 0 < Double($1.price) ?? 0 }
+        
+        return order
     }
     
     private func convert(from entity: [OrderEntity]) -> [Order]{
