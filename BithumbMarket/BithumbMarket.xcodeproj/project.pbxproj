@@ -24,6 +24,8 @@
 		BF7D214427CEA95A007F0DCE /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214327CEA95A007F0DCE /* MainHeaderView.swift */; };
 		BF7D214927CF0C81007F0DCE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214827CF0C81007F0DCE /* DetailViewController.swift */; };
 		BF7D214C27CF3A1A007F0DCE /* CurrentMarketPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214B27CF3A1A007F0DCE /* CurrentMarketPriceView.swift */; };
+		BF7D214E27CF4B06007F0DCE /* TransactionPriceGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214D27CF4B06007F0DCE /* TransactionPriceGraphView.swift */; };
+		BF7D215027CF4B90007F0DCE /* TransactionPriceSelectTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214F27CF4B90007F0DCE /* TransactionPriceSelectTimeView.swift */; };
 		BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5EF27C604B0005A2170 /* Ticker.swift */; };
 		BF86B5F327C60653005A2170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F227C60653005A2170 /* APIService.swift */; };
 		BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F427C606D8005A2170 /* EndPoint.swift */; };
@@ -78,6 +80,8 @@
 		BF7D214327CEA95A007F0DCE /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
 		BF7D214827CF0C81007F0DCE /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BF7D214B27CF3A1A007F0DCE /* CurrentMarketPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMarketPriceView.swift; sourceTree = "<group>"; };
+		BF7D214D27CF4B06007F0DCE /* TransactionPriceGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionPriceGraphView.swift; sourceTree = "<group>"; };
+		BF7D214F27CF4B90007F0DCE /* TransactionPriceSelectTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionPriceSelectTimeView.swift; sourceTree = "<group>"; };
 		BF86B5EF27C604B0005A2170 /* Ticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticker.swift; sourceTree = "<group>"; };
 		BF86B5F227C60653005A2170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		BF86B5F427C606D8005A2170 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
@@ -212,6 +216,8 @@
 			isa = PBXGroup;
 			children = (
 				BF7D214B27CF3A1A007F0DCE /* CurrentMarketPriceView.swift */,
+				BF7D214D27CF4B06007F0DCE /* TransactionPriceGraphView.swift */,
+				BF7D214F27CF4B90007F0DCE /* TransactionPriceSelectTimeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -344,6 +350,7 @@
 				BFB9563727CCB6C5001627C6 /* OrderbookViewController.swift in Sources */,
 				BFB9563327CCB647001627C6 /* CoinSortSegmentControl.swift in Sources */,
 				BFB9563127CCB5A6001627C6 /* MainViewController.swift in Sources */,
+				BF7D214E27CF4B06007F0DCE /* TransactionPriceGraphView.swift in Sources */,
 				BF7D214227CE919C007F0DCE /* Double+Extension.swift in Sources */,
 				BFB9563027CCB3CC001627C6 /* TickerCell.swift in Sources */,
 				BFB9562D27CCB0F8001627C6 /* Observable.swift in Sources */,
@@ -361,6 +368,7 @@
 				E8AC90BC27C8D12100C50FA3 /* TransactionNameSpace.swift in Sources */,
 				E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */,
 				BF5573C327CD43C30065B054 /* ChangeState.swift in Sources */,
+				BF7D215027CF4B90007F0DCE /* TransactionPriceSelectTimeView.swift in Sources */,
 				BFB9563927CCBD37001627C6 /* ReceiveTicker.swift in Sources */,
 				BFB9563527CCB6C5001627C6 /* OrderbookNameSpace.swift in Sources */,
 				BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */,
