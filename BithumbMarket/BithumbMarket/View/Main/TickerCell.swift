@@ -92,13 +92,6 @@ final class TickerCell: UITableViewCell {
 extension TickerCell {
     
     func configureLabel() {
-        symbolLabel.translatesAutoresizingMaskIntoConstraints = false
-        paymentLabel.translatesAutoresizingMaskIntoConstraints = false
-        currentPriceLabel.translatesAutoresizingMaskIntoConstraints = false
-        changeRateLabel.translatesAutoresizingMaskIntoConstraints = false
-        changePriceLabel.translatesAutoresizingMaskIntoConstraints = false
-        accTradeValueLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         symbolLabel.font = .preferredFont(forTextStyle: .callout)
         paymentLabel.font = .preferredFont(forTextStyle: .caption1)
         currentPriceLabel.font = .preferredFont(forTextStyle: .callout)
@@ -117,10 +110,6 @@ extension TickerCell {
     }
     
     func configureStackView() {
-        symbolStackView.translatesAutoresizingMaskIntoConstraints = false
-        currentStackView.translatesAutoresizingMaskIntoConstraints = false
-        changeStackView.translatesAutoresizingMaskIntoConstraints = false
-        accTradeValueStackView.translatesAutoresizingMaskIntoConstraints = false
         bundleStackView.translatesAutoresizingMaskIntoConstraints = false
         
         symbolStackView.axis = .vertical

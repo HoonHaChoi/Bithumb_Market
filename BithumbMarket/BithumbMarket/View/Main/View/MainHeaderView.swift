@@ -35,7 +35,6 @@ final class MainHeaderView: UIView {
     
     private func configureLabels() {
         [symbolsTitleLabel, currentPriceTitleLabel, fluctuateTitleLabel, accTradeValueTitleLabel].forEach { label in
-            label.translatesAutoresizingMaskIntoConstraints = false
             label.font = .preferredFont(forTextStyle: .caption1)
             label.textColor = .typoColor.withAlphaComponent(0.7)
         }
