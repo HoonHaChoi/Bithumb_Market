@@ -9,6 +9,7 @@ import Foundation
 
 protocol OrderbookViewModelType {
     var orderbook: Observable<Orderbook> { get }
+    var updateTableHandler: (() -> Void)? { get set }
     var errorHandler: ((HTTPError) -> Void)? { get set }
     func featchOrderbook()
 }
@@ -42,17 +43,30 @@ final class OrderbookViewModel: OrderbookViewModelType {
     
     private var orderbookData: OrderbookData?
     var errorHandler: ((HTTPError) -> Void)?
+    var updateTableHandler: (() -> Void)?
     
     func featchOrderbook() {
+        requestOrderbook { [weak self] in
+            self?.updateOrderbook()
+        }
+    }
+    
+    private func requestOrderbook(completion: @escaping () -> Void) {
         service.request(endpoint: .orderBook(symbol: symbol)) { [weak self] (result: Result<OrderbookEntity, HTTPError>) in
             switch result {
             case .success(let success):
                 let orderbook = success.data
+                self?.orderbookData = orderbook
                 guard let asks = self?.convert(from: orderbook.asks),
                       let bids = self?.convert(from: orderbook.bids) else {
                           return
                       }
                 self?.orderbook.value = Orderbook(asks: asks, bids: bids)
+                self?.updateTableHandler?()
+                self?.sendMessage()
+                DispatchQueue.main.async {
+                    completion()
+                }
             case .failure(let error):
                 self?.errorHandler?(error)
             }
@@ -71,7 +85,8 @@ final class OrderbookViewModel: OrderbookViewModelType {
         self.service.perform { [weak self] (result: Result<ReceiveOrderbook, HTTPError>) in
             switch result {
             case .success(let success):
-                guard let orderbookData = self?.orderbookData else { return }
+                guard let orderbookData = self?.orderbookData else {
+                    return }
                 let receivedOrderbook = success.content.list
                 let receivedAsks = receivedOrderbook.filter { $0.orderType == "ask" }
                 let receivedBids = receivedOrderbook.filter { $0.orderType == "bid" }
@@ -87,6 +102,7 @@ final class OrderbookViewModel: OrderbookViewModelType {
                     asks: Array(asks),
                     bids: Array(bids)
                 )
+                self?.updateTableHandler?()
             case .failure(let error):
                 self?.errorHandler?(error)
             }

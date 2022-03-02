@@ -10,7 +10,7 @@ import UIKit
 class OrderbookViewController: UIViewController {
     
     private let dataSource: OrderbookDataSource
-    private let viewModel: OrderbookViewModelType
+    private var viewModel: OrderbookViewModelType
     
     init(viewModel: OrderbookViewModelType = OrderbookViewModel(symbol: "BTC_KRW"), dataSource: OrderbookDataSource) {
         self.viewModel = viewModel
@@ -41,7 +41,13 @@ class OrderbookViewController: UIViewController {
         super.viewDidLoad()
         title = OrderbookNameSpace.navigationTitle
         configureTableView()
+        bind()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.featchOrderbook()
+   }
     
     private lazy var orderbookTableViewConstraints = [
         orderbookTableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
@@ -55,5 +61,18 @@ class OrderbookViewController: UIViewController {
         NSLayoutConstraint.activate(orderbookTableViewConstraints)
         orderbookTableView.dataSource = dataSource
     }
-    
+
+    private func bind() {
+        viewModel.updateTableHandler = updateTableView
+        viewModel.orderbook.subscribe { [weak self] observer in
+            self?.dataSource.items = observer
+        }
+    }
+
+    private func updateTableView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.orderbookTableView.reloadData()
+        }
+    }
+
 }
