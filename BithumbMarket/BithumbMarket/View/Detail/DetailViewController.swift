@@ -27,12 +27,20 @@ class DetailViewController: UIViewController {
         return view
     }()
     
+    let assetsStatusView: AssetsStatusView = {
+        let view = AssetsStatusView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .systemBackground
         view.addSubview(currentMarketPriceView)
         view.addSubview(transactionPriceSelectTimeView)
         view.addSubview(transactionHistoryView)
+        view.addSubview(assetsStatusView)
         
         NSLayoutConstraint.activate([
             currentMarketPriceView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -45,7 +53,12 @@ class DetailViewController: UIViewController {
             
             transactionHistoryView.topAnchor.constraint(equalTo: transactionPriceSelectTimeView.bottomAnchor, constant: 20),
             transactionHistoryView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
-            transactionHistoryView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor)
+            transactionHistoryView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
+            
+            assetsStatusView.topAnchor.constraint(equalTo: transactionHistoryView.bottomAnchor, constant: 20),
+            assetsStatusView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
+            assetsStatusView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
         ])  
     }
+    
 }
