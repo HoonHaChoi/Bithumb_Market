@@ -24,10 +24,8 @@ class TransactionViewController: UIViewController {
         super.init(coder: coder)
     }
     
-    private lazy var stackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.distribution = .equalSpacing
+    private lazy var headerView: TransactionHeaderView = {
+        let view = TransactionHeaderView()
         return view
     }()
     
@@ -40,18 +38,6 @@ class TransactionViewController: UIViewController {
         view.dataSource = datasource
         return view
     }()
-    
-    private func drawTitle() {
-        let titleText = TransactionNameSpace.tableTitle
-        
-        for text in titleText {
-            let view = UILabel()
-            view.textColor = .textPrimary
-            view.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
-            view.text = text
-            stackView.addArrangedSubview(view)
-        }
-    }
     
     private func bind() {
         viewmodel.transactionData.subscribe { [weak self] transactions in
@@ -78,7 +64,6 @@ class TransactionViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.shadowImage = UIImage()
-        drawTitle()
         setupView()
         bind()
         viewmodel.fetchTransaction()
@@ -89,18 +74,22 @@ class TransactionViewController: UIViewController {
 extension TransactionViewController {
     
     func setupView() {
-        view.addSubview(tableView)
-        
-        [stackView, tableView].forEach{view.addSubview($0)}
-        
-        [stackView, tableView].forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
+
+        [
+            headerView,
+            tableView
+            
+        ].forEach{
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
+            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
             
-            tableView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10),
+            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
