@@ -78,22 +78,19 @@ extension TransactionTableViewCell {
         NSLayoutConstraint.activate([
             timeLabel.topAnchor.constraint(equalTo: self.topAnchor),
             timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
-        ])
-        
-        NSLayoutConstraint.activate([
+            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            
             priceLabel.topAnchor.constraint(equalTo: self.topAnchor),
             priceLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             priceLabel.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 10),
             priceLabel.trailingAnchor.constraint(equalTo: quntityLabel.leadingAnchor, constant: -10),
-        ])
-        
-        NSLayoutConstraint.activate([
+            
             quntityLabel.topAnchor.constraint(equalTo: self.topAnchor),
             quntityLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            quntityLabel.widthAnchor.constraint(equalToConstant: 100)
+            quntityLabel.widthAnchor.constraint(equalToConstant: 100),
         ])
+
     }
     
 }

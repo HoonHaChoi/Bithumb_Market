@@ -99,13 +99,11 @@ extension TransactionViewController {
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
-        ])
-        
-        NSLayoutConstraint.activate([
+            
             tableView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
     
