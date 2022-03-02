@@ -23,6 +23,10 @@ final class CurrentMarketPriceView: UIView {
         configureLabelButttonUI()
         configureStackViewUI()
         setConstraintLayout()
+        
+        currentPriceLabel.text = "512334213".withComma()
+        changePriceLabel.text = "531231234".withComma()
+        changeRateLabel.text = "-10.12%"
     }
     
     required init?(coder: NSCoder) {
@@ -37,12 +41,23 @@ final class CurrentMarketPriceView: UIView {
 extension CurrentMarketPriceView {
     
     private func configureLabelButttonUI() {
-        currentPriceLabel.font = .preferredFont(forTextStyle: .title1)
-        changePriceLabel.font = .preferredFont(forTextStyle: .headline)
-        changeRateLabel.font = .preferredFont(forTextStyle: .headline)
+        currentPriceLabel.font = .boldSystemFont(ofSize: 20)
+        changePriceLabel.font = .preferredFont(forTextStyle: .callout)
+        changeRateLabel.font = .preferredFont(forTextStyle: .callout)
         
         changePriceLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         changePriceLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        
+        orderBookButton.translatesAutoresizingMaskIntoConstraints = false
+        orderBookButton.setTitle("호가", for: .normal)
+        orderBookButton.setTitleColor(.textSecondary, for: .normal)
+        orderBookButton.titleLabel?.font = .boldSystemFont(ofSize: 17)
+        orderBookButton.backgroundColor = .actionBackgroundPrimary
+        orderBookButton.layer.cornerRadius = 10
+        
+        currentPriceLabel.textColor = .riseColor
+        changePriceLabel.textColor = .riseColor
+        changeRateLabel.textColor = .riseColor
     }
     
     private func configureStackViewUI() {
@@ -51,7 +66,7 @@ extension CurrentMarketPriceView {
         changeStackView.axis = .horizontal
         
         currentMarketPriceStackView.distribution = .fill
-        currnetPriceStackView.distribution = .fill
+        currnetPriceStackView.distribution = .equalSpacing
         changeStackView.distribution = .fill
         
         currentMarketPriceStackView.alignment = .fill
@@ -60,7 +75,7 @@ extension CurrentMarketPriceView {
         
         currentMarketPriceStackView.spacing = 0
         currnetPriceStackView.spacing = 5
-        changeStackView.spacing = 15
+        changeStackView.spacing = 10
         
         currentMarketPriceStackView.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -71,15 +86,20 @@ extension CurrentMarketPriceView {
         currnetPriceStackView.addArrangedSubview(currentPriceLabel)
         currnetPriceStackView.addArrangedSubview(changeStackView)
         currentMarketPriceStackView.addArrangedSubview(currnetPriceStackView)
-        currentMarketPriceStackView.addArrangedSubview(orderBookButton)
         
         addSubview(currentMarketPriceStackView)
+        addSubview(orderBookButton)
         
         NSLayoutConstraint.activate([
             currentMarketPriceStackView.topAnchor.constraint(equalTo: topAnchor),
             currentMarketPriceStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            currentMarketPriceStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            currentMarketPriceStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            currentMarketPriceStackView.trailingAnchor.constraint(equalTo: orderBookButton.leadingAnchor),
+            currentMarketPriceStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            orderBookButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            orderBookButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            orderBookButton.widthAnchor.constraint(equalToConstant: 60),
+            orderBookButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
