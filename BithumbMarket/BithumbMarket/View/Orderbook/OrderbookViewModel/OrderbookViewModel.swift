@@ -19,7 +19,7 @@ final class OrderbookViewModel: OrderbookViewModelType {
     var orderbook: Observable<Orderbook>
     private var service: APIService
     
-    init(service: APIService, symbol: String) {
+    init(service: APIService = APIService(), symbol: String) {
         self.orderbook =  Observable(
             Orderbook(
                 asks: Array(
