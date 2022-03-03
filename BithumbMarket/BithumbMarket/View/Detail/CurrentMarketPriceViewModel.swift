@@ -11,14 +11,14 @@ final class CurrentMarketPriceViewModel {
     
     private var service: APIService
     private var symbol: String
-    var price : Observable<CurrentPrice>
+    var price : Observable<CurrentMarketPrice>
     
     var errorHandler: ((HTTPError) -> Void)?
     
     init(service: APIService = APIService(), symbol: String) {
         self.service = service
         self.symbol = symbol
-        self.price = .init(CurrentPrice(
+        self.price = .init(CurrentMarketPrice(
             currentPrice: "",
             changePrice: "",
             changeRate: "")
@@ -26,7 +26,7 @@ final class CurrentMarketPriceViewModel {
     }
     
     func fetchPrice() {
-        service.request(endpoint: .ticker(symbol: symbol)) { [weak self] (result: Result<Price, HTTPError>) in
+        service.request(endpoint: .ticker(symbol: symbol)) { [weak self] (result: Result<CurrentPrice, HTTPError>) in
             switch result {
             case .success(let ticker):
                 guard let currentPrice = self?.convert(from: ticker.data) else { return }
@@ -60,16 +60,16 @@ final class CurrentMarketPriceViewModel {
         }
     }
     
-    private func convert(from market: Market) -> CurrentPrice {
-        return CurrentPrice(
+    private func convert(from market: Market) -> CurrentMarketPrice {
+        return CurrentMarketPrice(
             currentPrice: market.closingPrice,
             changePrice: market.fluctate24H,
             changeRate: market.fluctateRate24H
         )
     }
     
-    private func convert(from ticker: ReceiveTicker) -> CurrentPrice {
-        return CurrentPrice(
+    private func convert(from ticker: ReceiveTicker) -> CurrentMarketPrice {
+        return CurrentMarketPrice(
             currentPrice: ticker.content.closePrice,
             changePrice: ticker.content.chgAmt,
             changeRate: ticker.content.chgRate

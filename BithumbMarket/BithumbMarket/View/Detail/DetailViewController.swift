@@ -9,6 +9,18 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    private var currentMarketPriceViewModel: CurrentMarketPriceViewModel
+    
+    init(currentMarketPriceViewModel: CurrentMarketPriceViewModel = CurrentMarketPriceViewModel(symbol: "BTC_KRW"), assetsStatusViewModel: AssetsStatusViewModel = AssetsStatusViewModel(symbol: "BTC_KRW")) {
+        self.currentMarketPriceViewModel = currentMarketPriceViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.currentMarketPriceViewModel = CurrentMarketPriceViewModel(symbol: "BTC_KRW")
+        super.init(coder: coder)
+    }
+    
     let currentMarketPriceView: CurrentMarketPriceView = {
         let view = CurrentMarketPriceView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -59,6 +71,21 @@ class DetailViewController: UIViewController {
             assetsStatusView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             assetsStatusView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
         ])  
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        bindPriceView()
+        currentMarketPriceViewModel.fetchPrice()
+        currentMarketPriceViewModel.updatePrice()
+   }
+    
+    private func bindPriceView() {
+        currentMarketPriceViewModel.price.subscribe { [weak self] observer in
+            DispatchQueue.main.async {
+                self?.currentMarketPriceView.updateUI(observer)
+            }
+        }
     }
     
 }

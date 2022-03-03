@@ -23,10 +23,6 @@ final class CurrentMarketPriceView: UIView {
         configureLabelButttonUI()
         configureStackViewUI()
         setConstraintLayout()
-        
-        currentPriceLabel.text = "512334213".withComma()
-        changePriceLabel.text = "531231234".withComma()
-        changeRateLabel.text = "-10.12%"
     }
     
     required init?(coder: NSCoder) {
@@ -36,14 +32,25 @@ final class CurrentMarketPriceView: UIView {
         setConstraintLayout()
     }
     
+    func updateUI(_ currentPrice: CurrentMarketPrice) {
+        currentPriceLabel.text = currentPrice.currentPrice.withComma()
+        changePriceLabel.text = currentPrice.changePrice.withComma()
+        changeRateLabel.text = currentPrice.changeRate.withComma()  + "%"
+        currentPriceLabel.textColor = currentPrice.setChangeState().textColor
+        changePriceLabel.textColor = currentPrice.setChangeState().textColor
+        changeRateLabel.textColor = currentPrice.setChangeState().textColor
+    }
+    
 }
 
 extension CurrentMarketPriceView {
     
     private func configureLabelButttonUI() {
-        currentPriceLabel.font = .boldSystemFont(ofSize: 20)
-        changePriceLabel.font = .preferredFont(forTextStyle: .callout)
-        changeRateLabel.font = .preferredFont(forTextStyle: .callout)
+        let boldMonoFont: UIFont = .monospacedDigitSystemFont(ofSize: 20, weight: .bold)
+        currentPriceLabel.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: boldMonoFont)
+        let regularMonoFont: UIFont = .monospacedDigitSystemFont(ofSize: 16, weight: .regular)
+        changePriceLabel.font = UIFontMetrics(forTextStyle: .callout).scaledFont(for: regularMonoFont)
+        changeRateLabel.font = UIFontMetrics(forTextStyle: .callout).scaledFont(for: regularMonoFont)
         
         changePriceLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         changePriceLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
