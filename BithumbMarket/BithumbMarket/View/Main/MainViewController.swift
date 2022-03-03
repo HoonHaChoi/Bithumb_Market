@@ -53,6 +53,7 @@ final class MainViewController: UIViewController {
         bind()
         viewmodel.fetchTickers()
         viewmodel.updateTickers()
+        coinSortView.sortControlHandler = requestFilterActive
     }
 
     private func configureUI() {
@@ -84,8 +85,7 @@ final class MainViewController: UIViewController {
     }
 
     private func bind() {
-        viewmodel.tickers.subscribe { [weak self] tickers in
-            self?.datasource.items = tickers
+        viewmodel.tickers.subscribe { [weak self] tickers in self?.datasource.items = tickers
         }
         viewmodel.updateTableHandler = updateTableView
         viewmodel.changeIndexHandler = updateTableViewRows(index:state:)
@@ -105,4 +105,6 @@ final class MainViewController: UIViewController {
         }
     }
     
+    private func requestFilterActive() {
+    }
 }
