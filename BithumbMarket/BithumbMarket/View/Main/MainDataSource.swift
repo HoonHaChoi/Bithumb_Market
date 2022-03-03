@@ -10,13 +10,21 @@ import UIKit
 final class MainDataSource: NSObject, UITableViewDataSource {
     
     var items: [Ticker]
+    var filterItems: [Ticker]
+    var isFiltering: Bool
     
     override init() {
         items = .init()
+        filterItems = .init()
+        isFiltering = false
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        if isFiltering {
+            return filterItems.count
+        } else {
+            return items.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
