@@ -53,7 +53,6 @@ final class MainViewController: UIViewController {
         bind()
         viewmodel.fetchTickers()
         viewmodel.updateTickers()
-        coinSortView.sortControlHandler = requestFilterActive
     }
 
     private func configureUI() {
@@ -83,12 +82,27 @@ final class MainViewController: UIViewController {
         mainTableView.register(TickerCell.self, forCellReuseIdentifier: TickerCell.reuseidentifier)
         mainTableView.dataSource = datasource
     }
-
+    
     private func bind() {
-        viewmodel.tickers.subscribe { [weak self] tickers in self?.datasource.items = tickers
+        
+        viewmodel.tickers.subscribe { [weak self] tickers in
+            self?.datasource.items = tickers
         }
+        
+        viewmodel.filterTickers.subscribe { [weak self] tickers in
+            self?.datasource.filterItems = tickers
+        }
+        
+        viewmodel.isFilter.subscribe { [weak self] filter in
+            if filter != self?.datasource.isFiltering {
+                self?.updateTableView()
+            }
+            self?.datasource.isFiltering = filter
+        }
+        
         viewmodel.updateTableHandler = updateTableView
         viewmodel.changeIndexHandler = updateTableViewRows(index:state:)
+        coinSortView.sortControlHandler = viewmodel.executeFilterTickers
     }
     
     private func updateTableView() {
@@ -99,12 +113,34 @@ final class MainViewController: UIViewController {
     
     private func updateTableViewRows(index: Int, state: ChangeState) {
         DispatchQueue.main.async { [weak self] in
-            self?.mainTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
+            UIView.performWithoutAnimation {
+                self?.updateRows(index: index)
+            }
             let cell = self?.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
             cell?.updateAnimation(state: state)
         }
     }
     
-    private func requestFilterActive() {
+    private func updateRows(index: Int) {
+        if viewmodel.isFilter.value {
+            if datasource.filterItems.count > index {
+                updateVisibleRows(index: index)
+            }
+        } else {
+            updateVisibleRows(index: index)
+        }
     }
+    
+    private func updateVisibleRows(index: Int) {
+        mainTableView.indexPathsForVisibleRows?.forEach({ indexPath in
+            if indexPath.row == index {
+                reloadRow(indexPath: indexPath)
+            }
+        })
+    }
+    
+    private func reloadRow(indexPath: IndexPath) {
+        mainTableView.reloadRows(at: [indexPath], with: .none)
+    }
+    
 }
