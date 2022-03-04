@@ -34,6 +34,17 @@ class Graph: UIView {
         graph(width: frame.width, height: frame.height, color: color, values: values)
     }
     
+    private func show(touches: Set<UITouch>) {
+         if let touch = touches.first {
+             let position = touch.location(in: self)
+             let x = position.x
+             let index = Int(Float(x / offsetX))
+             
+             price(x: x, price: values[index])
+             stick(x: x)
+         }
+     }
+    
     private func price(x: CGFloat, price: CGFloat) {
         let text = "\(price)원"
         
