@@ -10,11 +10,15 @@ import Foundation
 final class MainViewModel {
     
     var tickers: Observable<[Ticker]>
+    var filterTickers: Observable<[Ticker]>
+    var isFilter: Observable<Bool>
     private var service: APIService
     
     init(service: APIService = APIService()) {
         self.tickers = .init([])
+        self.filterTickers = .init([])
         self.service = service
+        self.isFilter = .init(false)
     }
     
     var updateTableHandler: (() -> Void)?
@@ -49,43 +53,76 @@ final class MainViewModel {
             guard let self = self else { return }
             switch respone {
             case .success(let ticker):
-                guard let index = self.findIndex(to: ticker) else {
+                guard let index = self.findIndex(from: self.tickers, to: ticker) else {
                     return
                 }
-                self.apply(index: index, to: ticker)
+                self.updateTicker(index: index, to: ticker)
+                
+                if self.isFilter.value {
+                    self.startFilterTickers(to: ticker)
+                }
             case .failure(let error):
                 self.errorHandler?(error)
             }
         }
     }
     
-    private func apply(index: Int, to ticker: ReceiveTicker) {
+    private func updateTicker(index: Int, to ticker: ReceiveTicker) {
         tickers.value[index].compare(to: ticker) { [weak self] state in
             guard let self = self else { return }
+            tickers.value[index].updatePrice(to: ticker)
             
-            self.updateTicker(index: index, to: ticker)
-            let changeState = self.tickers.value[index].change
-            
-            switch state {
-            case .closePrice:
-                self.changeIndexHandler?(index, changeState)
-            case .tradeValue:
-                self.changeIndexHandler?(index, .even)
+            if !isFilter.value {
+                let colorState = self.tickers.value[index].change
+                changeIndexHandlerAction(index: index, color: colorState, updateState: state)
             }
         }
     }
     
-    private func findIndex(to ticker: ReceiveTicker) -> Int? {
-        return tickers.value.firstIndex(where: { $0.equalSymbol(to: ticker) })
+    private func startFilterTickers(to ticker: ReceiveTicker) {
+        guard let filterIndex = self.findIndex(from: self.filterTickers, to: ticker) else {
+            return
+        }
+        self.updateFilterTicker(index: filterIndex, to: ticker)
     }
     
-    private func updateTicker(index: Int, to ticker: ReceiveTicker) {
-        tickers.value[index].updatePrice(to: ticker)
+    private func updateFilterTicker(index: Int, to ticker: ReceiveTicker) {
+        filterTickers.value[index].compare(to: ticker) { [weak self] state in
+            guard let self = self else { return }
+            self.filterTickers.value[index].updatePrice(to: ticker)
+            let colorState = self.filterTickers.value[index].change
+            changeIndexHandlerAction(index: index, color: colorState, updateState: state)
+        }
     }
     
-    private func changeIndexHandlerAction(index: Int) {
-        let changeState = tickers.value[index].change
-        changeIndexHandler?(index, changeState)
+    private func findIndex(from ticker: Observable<[Ticker]>, to newTicker: ReceiveTicker) -> Int? {
+        return ticker.value.firstIndex(where: { $0.equalSymbol(to: newTicker) })
+    }
+    
+    private func changeIndexHandlerAction(index: Int, color: ChangeState,
+                                          updateState: Ticker.UpdateState) {
+        switch updateState {
+        case .closePrice:
+            self.changeIndexHandler?(index, color)
+        case .tradeValue:
+            self.changeIndexHandler?(index, .even)
+        }
+    }
+    
+    func executeFilterTickers() {
+        let symbols = ["EOS", "XRP", "BTC"]
+        let tickerFilter = tickers.value.filter({
+            symbols.contains($0.symbol) == true
+        })
+        
+        filterTickers.value = tickerFilter.sorted() { first, second in
+            if let first = symbols.firstIndex(of: first.symbol),
+               let second = symbols.firstIndex(of: second.symbol) {
+               return first < second
+            }
+            return false
+        }
+        isFilter.value = !isFilter.value
     }
     
 }

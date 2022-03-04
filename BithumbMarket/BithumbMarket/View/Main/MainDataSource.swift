@@ -10,21 +10,34 @@ import UIKit
 final class MainDataSource: NSObject, UITableViewDataSource {
     
     var items: [Ticker]
+    var filterItems: [Ticker]
+    var isFiltering: Bool
     
     override init() {
         items = .init()
+        filterItems = .init()
+        isFiltering = false
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        if isFiltering {
+            return filterItems.count
+        } else {
+            return items.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TickerCell.reuseidentifier, for: indexPath) as? TickerCell else {
             return .init()
         }
-        cell.configure(ticker: items[indexPath.row])
+        
+        if isFiltering {
+            cell.configure(ticker: filterItems[indexPath.row])
+        } else {
+            cell.configure(ticker: items[indexPath.row])
+        }
         return cell
     }
-    
+
 }

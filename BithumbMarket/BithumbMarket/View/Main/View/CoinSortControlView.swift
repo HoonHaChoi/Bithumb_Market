@@ -9,6 +9,8 @@ import UIKit
 
 final class CoinSortControlView: UIView {
     
+    var sortControlHandler: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -58,6 +60,7 @@ final class CoinSortControlView: UIView {
     
     @objc private func changeSegmentedControlLinePosition() {
         changeSegmentControlLine()
+        sortControlHandler?()
     }
     
     func updateSelectIndex(to index: Int) {
