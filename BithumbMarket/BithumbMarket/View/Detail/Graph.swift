@@ -45,6 +45,14 @@ class Graph: UIView {
          }
      }
     
+    private func remove() {
+          if let count = layer.sublayers?.count {
+              for _ in 1..<count {
+                  layer.sublayers?.remove(at: 1)
+              }
+          }
+      }
+    
     private func price(x: CGFloat, price: CGFloat) {
         let text = "\(price)원"
         
