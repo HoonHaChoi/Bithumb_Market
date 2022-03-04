@@ -48,6 +48,21 @@ class Graph: UIView {
         self.layer.addSublayer(textLayer)
     }
     
+    private func stick(x: CGFloat) {
+        let path = UIBezierPath()
+        let layers = CAShapeLayer()
+        
+        path.move(to: CGPoint(x: x, y: 40))
+        path.addLine(to: CGPoint(x: x, y: 270))
+        
+        layers.fillColor = nil
+        layers.strokeColor = UIColor.typoColor.cgColor
+        layers.lineWidth = 1
+        layers.lineCap = .round
+        layers.path = path.cgPath
+        self.layer.addSublayer(layers)
+    }
+    
     private func graph(width: CGFloat, height: CGFloat, color: CGColor, values: [CGFloat]) {
         
         var currentX: CGFloat = 0
