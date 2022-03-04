@@ -11,7 +11,8 @@ import AVFoundation
 
 class Graph: UIView {
     
-    let divideValue: CGFloat = 85000000
+    var offsetX: CGFloat = 0
+    
     var color = UIColor.mainColor.cgColor
     var values: [CGFloat] = []
     
@@ -30,22 +31,42 @@ class Graph: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        layer(width: frame.width, height: frame.height, color: color, values: values)
+        graph(width: frame.width, height: frame.height, color: color, values: values)
     }
     
-    private func layer(width: CGFloat, height: CGFloat, color: CGColor, values: [CGFloat]) {
+    private func price(x: CGFloat, price: CGFloat) {
+        let text = "\(price)원"
+        
+        let textLayer = CATextLayer()
+        textLayer.frame = CGRect(x: x - 50, y: 10, width: 100, height: 30)
+
+        let attributedString = NSAttributedString(
+            string: text,
+            attributes: [.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.textPrimary]
+        )
+        textLayer.string = attributedString
+        self.layer.addSublayer(textLayer)
+    }
+    
+    private func graph(width: CGFloat, height: CGFloat, color: CGColor, values: [CGFloat]) {
+        
+        var currentX: CGFloat = 0
+        var scale: CGFloat = 0
+        
+        if let first = values.first,
+           let last = values.last {
+            scale = ((first + last) / 2) / 0.5
+        }
         
         let path = UIBezierPath()
         let layers = CAShapeLayer()
+        offsetX = frame.width / CGFloat(values.count)
         
-        var currentX: CGFloat = 0
-        let offsetX: CGFloat = frame.width / CGFloat(values.count)
-        
-        path.move(to: CGPoint(x: 0, y: frame.height - (frame.height * (values[0] / divideValue))))
+        path.move(to: CGPoint(x: 0, y: frame.height - (frame.height * (values[0] / scale))))
         
         for i in 1..<values.count {
             currentX += offsetX
-            path.addLine(to: CGPoint(x: currentX, y: frame.height - (frame.height * (values[i] / divideValue))))
+            path.addLine(to: CGPoint(x: currentX, y: frame.height - (frame.height * (values[i] / scale))))
         }
         
         layers.fillColor = nil
@@ -55,4 +76,5 @@ class Graph: UIView {
         layers.path = path.cgPath
         self.layer.addSublayer(layers)
     }
+    
 }
