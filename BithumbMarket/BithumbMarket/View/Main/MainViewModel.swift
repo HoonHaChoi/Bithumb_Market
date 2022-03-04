@@ -110,6 +110,7 @@ final class MainViewModel {
     }
     
     func executeFilterTickers() {
+        isFilter.value = !isFilter.value
         let symbols = ["EOS", "XRP", "BTC"]
         let tickerFilter = tickers.value.filter({
             symbols.contains($0.symbol) == true
@@ -122,7 +123,6 @@ final class MainViewModel {
             }
             return false
         }
-        isFilter.value = !isFilter.value
     }
-    
+
 }

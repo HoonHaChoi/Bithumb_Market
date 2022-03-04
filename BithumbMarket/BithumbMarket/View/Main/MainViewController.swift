@@ -113,9 +113,7 @@ final class MainViewController: UIViewController {
     
     private func updateTableViewRows(index: Int, state: ChangeState) {
         DispatchQueue.main.async { [weak self] in
-            UIView.performWithoutAnimation {
-                self?.updateRows(index: index)
-            }
+            self?.updateRows(index: index)
             let cell = self?.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
             cell?.updateAnimation(state: state)
         }
