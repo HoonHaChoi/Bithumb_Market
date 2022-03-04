@@ -31,8 +31,13 @@ final class MainDataSource: NSObject, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TickerCell.reuseidentifier, for: indexPath) as? TickerCell else {
             return .init()
         }
-        cell.configure(ticker: items[indexPath.row])
+        
+        if isFiltering {
+            cell.configure(ticker: filterItems[indexPath.row])
+        } else {
+            cell.configure(ticker: items[indexPath.row])
+        }
         return cell
     }
-    
+
 }
