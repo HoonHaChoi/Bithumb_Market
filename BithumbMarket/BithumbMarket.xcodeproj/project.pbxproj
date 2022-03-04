@@ -45,6 +45,7 @@
 		BFAD088927D25BFC0055D691 /* Like+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD088727D25BFC0055D691 /* Like+CoreDataClass.swift */; };
 		BFAD088A27D25BFC0055D691 /* Like+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD088827D25BFC0055D691 /* Like+CoreDataProperties.swift */; };
 		BFAD088D27D25F250055D691 /* LikeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD088C27D25F250055D691 /* LikeStorage.swift */; };
+		BFAD089827D2727A0055D691 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD089727D2727A0055D691 /* CoreDataError.swift */; };
 		BFB8F15527CF66D300702FBB /* AssetsStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8F15427CF66D300702FBB /* AssetsStatusView.swift */; };
 		BFB9562927CCAD49001627C6 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB9562827CCAD49001627C6 /* MainViewModel.swift */; };
 		BFB9562C27CCADDC001627C6 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = BFB9562B27CCADDC001627C6 /* Starscream */; };
@@ -117,6 +118,7 @@
 		BFAD088727D25BFC0055D691 /* Like+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Like+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BFAD088827D25BFC0055D691 /* Like+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Like+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BFAD088C27D25F250055D691 /* LikeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeStorage.swift; sourceTree = "<group>"; };
+		BFAD089727D2727A0055D691 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		BFB8F15427CF66D300702FBB /* AssetsStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsStatusView.swift; sourceTree = "<group>"; };
 		BFB9562827CCAD49001627C6 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		BFB9562E27CCB35D001627C6 /* MainDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataSource.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				BFAD088C27D25F250055D691 /* LikeStorage.swift */,
+				BFAD089727D2727A0055D691 /* CoreDataError.swift */,
 				BFAD088327D25B930055D691 /* CoreDataStorage */,
 			);
 			path = Storage;
@@ -437,6 +440,7 @@
 				BFB9562F27CCB35D001627C6 /* MainDataSource.swift in Sources */,
 				7F2E004527CC9AE000752ABA /* Orderbook.swift in Sources */,
 				7F2E004627CC9AE000752ABA /* Message.swift in Sources */,
+				BFAD089827D2727A0055D691 /* CoreDataError.swift in Sources */,
 				7F5AFC1E27D1A943002BECC3 /* AssetsState.swift in Sources */,
 				BFB9563627CCB6C5001627C6 /* OrderbookTableViewCell.swift in Sources */,
 				7F2E004727CC9AE000752ABA /* OrderbookEntity.swift in Sources */,
