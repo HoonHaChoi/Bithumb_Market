@@ -97,8 +97,17 @@ extension Graph {
     
     private func graph(width: CGFloat, height: CGFloat, values: [Int]) {
         offsetX = frame.width / CGFloat(values.count)
-        path.move(to: CGPoint(x: 0, y: frame.height - (frame.height * (values[0] / scale))))
-        values.forEach {
+        
+        let path = UIBezierPath()
+        let layers = CAShapeLayer()
+        var currentX: CGFloat = 0
+        
+        guard let min = values.min(), let max = values.max() else { return }
+        let scale = CGFloat(Double((max - min) / 2) / 0.35)
+        let currentY = values.map{ max - $0 }
+
+        path.move(to: CGPoint(x: 0, y: frame.height - 30 - (frame.height * (CGFloat(currentY[0]) / scale))))
+        currentY.forEach {
             currentX += offsetX
             path.addLine(to: CGPoint(x: currentX, y: frame.height - 30 - (frame.height * (CGFloat($0) / scale))))
         }
