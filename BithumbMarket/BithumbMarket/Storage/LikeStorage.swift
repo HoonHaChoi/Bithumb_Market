@@ -32,6 +32,7 @@ final class LikeStorge {
         return .success(likes)
     }
     
+    @discardableResult
     func save(symbol: String) -> Result<Bool, CoreDataError> {
         let like = Like(context: context)
         like.symbol = symbol
@@ -45,6 +46,7 @@ final class LikeStorge {
         }
     }
     
+    @discardableResult
     func delete(symbol: String) -> Result<Bool, CoreDataError> {
         let request = Like.fetchRequest()
         request.predicate = NSPredicate(format: "symbol == %@", symbol)
@@ -64,6 +66,7 @@ final class LikeStorge {
         }
     }
     
+    @discardableResult
     func find(symbol: String) -> Result<Bool, CoreDataError> {
         let request = Like.fetchRequest()
         request.predicate = NSPredicate(format: "symbol == %@", symbol)

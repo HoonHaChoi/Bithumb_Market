@@ -17,7 +17,7 @@ extension Like {
     }
 
     @NSManaged public var symbol: String?
-
+    
 }
 
 extension Like : Identifiable {

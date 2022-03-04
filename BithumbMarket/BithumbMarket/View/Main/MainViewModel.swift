@@ -13,17 +13,20 @@ final class MainViewModel {
     var filterTickers: Observable<[Ticker]>
     var isFilter: Observable<Bool>
     private var service: APIService
+    private let storage: LikeStorge
     
-    init(service: APIService = APIService()) {
+    init(service: APIService = APIService(),
+         storage: LikeStorge = LikeStorge()) {
         self.tickers = .init([])
         self.filterTickers = .init([])
         self.service = service
         self.isFilter = .init(false)
+        self.storage = storage
     }
     
     var updateTableHandler: (() -> Void)?
     var changeIndexHandler: ((Int, ChangeState) -> Void)?
-    var errorHandler: ((HTTPError) -> Void)?
+    var errorHandler: ((Error) -> Void)?
     
     func fetchTickers() {
         service.requestTickers(endpoint: .ticker()) { [weak self] result in
@@ -111,7 +114,8 @@ final class MainViewModel {
     
     func executeFilterTickers() {
         isFilter.value = !isFilter.value
-        let symbols = ["EOS", "XRP", "BTC"]
+        let symbols: [String] = fetctLikeSymbols()
+        
         let tickerFilter = tickers.value.filter({
             symbols.contains($0.symbol) == true
         })
@@ -123,6 +127,16 @@ final class MainViewModel {
             }
             return false
         }
+    }
+    
+    private func fetctLikeSymbols() -> [String] {
+        switch storage.fetch() {
+        case .success(let likes):
+            return likes.compactMap { $0.symbol }
+        case .failure(let error):
+            errorHandler?(error)
+        }
+        return .init()
     }
 
 }
