@@ -41,6 +41,9 @@
 		BF86B5F327C60653005A2170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F227C60653005A2170 /* APIService.swift */; };
 		BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F427C606D8005A2170 /* EndPoint.swift */; };
 		BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F627C60B65005A2170 /* HTTPError.swift */; };
+		BFAD088627D25BCB0055D691 /* LikeEntity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFAD088427D25BCB0055D691 /* LikeEntity.xcdatamodeld */; };
+		BFAD088927D25BFC0055D691 /* Like+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD088727D25BFC0055D691 /* Like+CoreDataClass.swift */; };
+		BFAD088A27D25BFC0055D691 /* Like+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD088827D25BFC0055D691 /* Like+CoreDataProperties.swift */; };
 		BFB8F15527CF66D300702FBB /* AssetsStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8F15427CF66D300702FBB /* AssetsStatusView.swift */; };
 		BFB9562927CCAD49001627C6 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB9562827CCAD49001627C6 /* MainViewModel.swift */; };
 		BFB9562C27CCADDC001627C6 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = BFB9562B27CCADDC001627C6 /* Starscream */; };
@@ -109,6 +112,9 @@
 		BF86B5F227C60653005A2170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		BF86B5F427C606D8005A2170 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		BF86B5F627C60B65005A2170 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
+		BFAD088527D25BCB0055D691 /* LikeEntity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LikeEntity.xcdatamodel; sourceTree = "<group>"; };
+		BFAD088727D25BFC0055D691 /* Like+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Like+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BFAD088827D25BFC0055D691 /* Like+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Like+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BFB8F15427CF66D300702FBB /* AssetsStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsStatusView.swift; sourceTree = "<group>"; };
 		BFB9562827CCAD49001627C6 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		BFB9562E27CCB35D001627C6 /* MainDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataSource.swift; sourceTree = "<group>"; };
@@ -222,6 +228,7 @@
 				BF86B5EE27C602D4005A2170 /* Model */,
 				E8AC90B627C8BB2300C50FA3 /* Extension */,
 				7F2E004C27CC9B4B00752ABA /* Util */,
+				BFAD088327D25B930055D691 /* CoreDataStorage */,
 				BF0430D127C5C1D700A77A38 /* Assets.xcassets */,
 				BF0430D327C5C1D700A77A38 /* LaunchScreen.storyboard */,
 				BF0430D627C5C1D700A77A38 /* Info.plist */,
@@ -280,6 +287,16 @@
 				BF86B5F427C606D8005A2170 /* EndPoint.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		BFAD088327D25B930055D691 /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				BFAD088427D25BCB0055D691 /* LikeEntity.xcdatamodeld */,
+				BFAD088727D25BFC0055D691 /* Like+CoreDataClass.swift */,
+				BFAD088827D25BFC0055D691 /* Like+CoreDataProperties.swift */,
+			);
+			path = CoreDataStorage;
 			sourceTree = "<group>";
 		};
 		E8AC90A927C71DFC00C50FA3 /* Transaction */ = {
@@ -391,6 +408,7 @@
 				7F844CDF27CFB5F300C06084 /* ReceiveOrderbook.swift in Sources */,
 				7F844CDC27CFB58C00C06084 /* OrderbookDataSource.swift in Sources */,
 				BFB9563227CCB647001627C6 /* CoinSortControlView.swift in Sources */,
+				BFAD088627D25BCB0055D691 /* LikeEntity.xcdatamodeld in Sources */,
 				BFB9563727CCB6C5001627C6 /* OrderbookViewController.swift in Sources */,
 				BFB9563327CCB647001627C6 /* CoinSortSegmentControl.swift in Sources */,
 				7F844CF527D065A500C06084 /* AssetsStatus.swift in Sources */,
@@ -417,8 +435,10 @@
 				BF5573C327CD43C30065B054 /* ChangeState.swift in Sources */,
 				BF7D215027CF4B90007F0DCE /* TransactionPriceSelectTimeView.swift in Sources */,
 				BFB8F15527CF66D300702FBB /* AssetsStatusView.swift in Sources */,
+				BFAD088A27D25BFC0055D691 /* Like+CoreDataProperties.swift in Sources */,
 				BFB9563527CCB6C5001627C6 /* OrderbookNameSpace.swift in Sources */,
 				BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */,
+				BFAD088927D25BFC0055D691 /* Like+CoreDataClass.swift in Sources */,
 				BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */,
 				E8AC90BA27C8BB5600C50FA3 /* String+Extension.swift in Sources */,
 				E8AC90B527C8745100C50FA3 /* TransactionViewModel.swift in Sources */,
@@ -661,6 +681,19 @@
 			productName = Starscream;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		BFAD088427D25BCB0055D691 /* LikeEntity.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BFAD088527D25BCB0055D691 /* LikeEntity.xcdatamodel */,
+			);
+			currentVersion = BFAD088527D25BCB0055D691 /* LikeEntity.xcdatamodel */;
+			path = LikeEntity.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BF0430BD27C5C1D500A77A38 /* Project object */;
 }
