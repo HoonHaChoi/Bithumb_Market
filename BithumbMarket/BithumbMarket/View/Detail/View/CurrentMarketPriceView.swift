@@ -46,9 +46,9 @@ final class CurrentMarketPriceView: UIView {
 extension CurrentMarketPriceView {
     
     private func configureLabelButttonUI() {
-        let boldMonoFont: UIFont = .monospacedDigitSystemFont(ofSize: 20, weight: .bold)
+        let boldMonoFont: UIFont = .monospacedDigitSystemFont(ofSize: 28, weight: .bold)
         currentPriceLabel.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: boldMonoFont)
-        let regularMonoFont: UIFont = .monospacedDigitSystemFont(ofSize: 16, weight: .regular)
+        let regularMonoFont: UIFont = .monospacedDigitSystemFont(ofSize: 18, weight: .regular)
         changePriceLabel.font = UIFontMetrics(forTextStyle: .callout).scaledFont(for: regularMonoFont)
         changeRateLabel.font = UIFontMetrics(forTextStyle: .callout).scaledFont(for: regularMonoFont)
         

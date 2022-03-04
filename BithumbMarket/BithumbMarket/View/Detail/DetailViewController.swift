@@ -51,7 +51,6 @@ class DetailViewController: UIViewController {
     let transactionHistoryView: TransactionHistoryView = {
         let view = TransactionHistoryView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .mainColor
         return view
     }()
     
@@ -61,34 +60,46 @@ class DetailViewController: UIViewController {
         return view
     }()
     
+    let transactionPricegraphView: TransactionPriceGraphView = {
+        let view = TransactionPriceGraphView()
+        view.backgroundColor = .systemGreen
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        configureNavigationBar()
         view.backgroundColor = .systemBackground
         configureScrollView()
         scrollContentView.addSubview(currentMarketPriceView)
         scrollContentView.addSubview(transactionPriceSelectTimeView)
+        scrollContentView.addSubview(transactionPricegraphView)
         scrollContentView.addSubview(transactionHistoryView)
         scrollContentView.addSubview(assetsStatusView)
         
         NSLayoutConstraint.activate([
-            currentMarketPriceView.topAnchor.constraint(equalTo: scrollContentView.topAnchor),
+            currentMarketPriceView.topAnchor.constraint(equalTo: scrollContentView.topAnchor, constant: 20),
             currentMarketPriceView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 20),
             currentMarketPriceView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -20),
             
-            transactionPriceSelectTimeView.topAnchor.constraint(equalTo: currentMarketPriceView.bottomAnchor, constant: 20),
+            transactionPricegraphView.heightAnchor.constraint(equalToConstant: 800),
+            transactionPricegraphView.topAnchor.constraint(equalTo: currentMarketPriceView.bottomAnchor, constant: 20),
+            transactionPricegraphView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
+            transactionPricegraphView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
+            
+            transactionPriceSelectTimeView.topAnchor.constraint(equalTo: transactionPricegraphView.bottomAnchor, constant: 20),
             transactionPriceSelectTimeView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             transactionPriceSelectTimeView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
             
             transactionHistoryView.topAnchor.constraint(equalTo: transactionPriceSelectTimeView.bottomAnchor, constant: 20),
             transactionHistoryView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             transactionHistoryView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
-            transactionHistoryView.heightAnchor.constraint(equalToConstant: 700),
             
             assetsStatusView.topAnchor.constraint(equalTo: transactionHistoryView.bottomAnchor, constant: 20),
             assetsStatusView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             assetsStatusView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
-            assetsStatusView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor)
+            assetsStatusView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -20)
         ])
         bindPriceView()
         bindAssetsStatusView()
@@ -100,6 +111,11 @@ class DetailViewController: UIViewController {
         currentMarketPriceViewModel.updatePrice()
         assetsStatusViewModel.fetchAssetsStatus()
    }
+    
+    private func configureNavigationBar(symbol: String = "BTC") {
+        title = symbol
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: nil)
+    }
     
     private func configureScrollView() {
         view.addSubview(scrollView)
