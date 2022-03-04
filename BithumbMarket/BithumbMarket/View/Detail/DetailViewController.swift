@@ -24,6 +24,18 @@ class DetailViewController: UIViewController {
         super.init(coder: coder)
     }
     
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+ 
+    private let scrollContentView: UIView = {
+       let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let currentMarketPriceView: CurrentMarketPriceView = {
         let view = CurrentMarketPriceView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +51,7 @@ class DetailViewController: UIViewController {
     let transactionHistoryView: TransactionHistoryView = {
         let view = TransactionHistoryView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .mainColor
         return view
     }()
     
@@ -50,17 +63,18 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .systemBackground
-        view.addSubview(currentMarketPriceView)
-        view.addSubview(transactionPriceSelectTimeView)
-        view.addSubview(transactionHistoryView)
-        view.addSubview(assetsStatusView)
+        configureScrollView()
+        scrollContentView.addSubview(currentMarketPriceView)
+        scrollContentView.addSubview(transactionPriceSelectTimeView)
+        scrollContentView.addSubview(transactionHistoryView)
+        scrollContentView.addSubview(assetsStatusView)
         
         NSLayoutConstraint.activate([
-            currentMarketPriceView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            currentMarketPriceView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            currentMarketPriceView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            currentMarketPriceView.topAnchor.constraint(equalTo: scrollContentView.topAnchor),
+            currentMarketPriceView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 20),
+            currentMarketPriceView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -20),
             
             transactionPriceSelectTimeView.topAnchor.constraint(equalTo: currentMarketPriceView.bottomAnchor, constant: 20),
             transactionPriceSelectTimeView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
@@ -69,10 +83,12 @@ class DetailViewController: UIViewController {
             transactionHistoryView.topAnchor.constraint(equalTo: transactionPriceSelectTimeView.bottomAnchor, constant: 20),
             transactionHistoryView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             transactionHistoryView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
+            transactionHistoryView.heightAnchor.constraint(equalToConstant: 700),
             
             assetsStatusView.topAnchor.constraint(equalTo: transactionHistoryView.bottomAnchor, constant: 20),
             assetsStatusView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             assetsStatusView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
+            assetsStatusView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor)
         ])
         bindPriceView()
         bindAssetsStatusView()
@@ -84,6 +100,22 @@ class DetailViewController: UIViewController {
         currentMarketPriceViewModel.updatePrice()
         assetsStatusViewModel.fetchAssetsStatus()
    }
+    
+    private func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(scrollContentView)
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollContentView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
+            scrollContentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            scrollContentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            scrollContentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            scrollContentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor)
+        ])
+    }
     
     private func bindPriceView() {
         currentMarketPriceViewModel.price.subscribe { [weak self] observer in
