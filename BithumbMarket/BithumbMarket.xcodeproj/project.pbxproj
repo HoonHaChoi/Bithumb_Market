@@ -15,6 +15,7 @@
 		7F2E004B27CC9B1400752ABA /* NumberFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004927CC9B1400752ABA /* NumberFormatter+Extension.swift */; };
 		7F2E005C27CC9F3300752ABA /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005A27CC9F3300752ABA /* SocketService.swift */; };
 		7F2E005D27CC9F3300752ABA /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005B27CC9F3300752ABA /* APIEndpoint.swift */; };
+		7F5AFC1E27D1A943002BECC3 /* AssetsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5AFC1D27D1A943002BECC3 /* AssetsState.swift */; };
 		7F844CDC27CFB58C00C06084 /* OrderbookDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CDB27CFB58C00C06084 /* OrderbookDataSource.swift */; };
 		7F844CDF27CFB5F300C06084 /* ReceiveOrderbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CDE27CFB5F300C06084 /* ReceiveOrderbook.swift */; };
 		7F844CE227CFB63800C06084 /* ReceiveTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CE127CFB63800C06084 /* ReceiveTransaction.swift */; };
@@ -80,6 +81,7 @@
 		7F2E005927CC9B4B00752ABA /* OrderbookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderbookViewModel.swift; sourceTree = "<group>"; };
 		7F2E005A27CC9F3300752ABA /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		7F2E005B27CC9F3300752ABA /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
+		7F5AFC1D27D1A943002BECC3 /* AssetsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsState.swift; sourceTree = "<group>"; };
 		7F844CDB27CFB58C00C06084 /* OrderbookDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderbookDataSource.swift; sourceTree = "<group>"; };
 		7F844CDE27CFB5F300C06084 /* ReceiveOrderbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveOrderbook.swift; sourceTree = "<group>"; };
 		7F844CE127CFB63800C06084 /* ReceiveTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveTransaction.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				7F2E004D27CC9B4B00752ABA /* Observable.swift */,
 				BF5573C227CD43C30065B054 /* ChangeState.swift */,
+				7F5AFC1D27D1A943002BECC3 /* AssetsState.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				BFB9562F27CCB35D001627C6 /* MainDataSource.swift in Sources */,
 				7F2E004527CC9AE000752ABA /* Orderbook.swift in Sources */,
 				7F2E004627CC9AE000752ABA /* Message.swift in Sources */,
+				7F5AFC1E27D1A943002BECC3 /* AssetsState.swift in Sources */,
 				BFB9563627CCB6C5001627C6 /* OrderbookTableViewCell.swift in Sources */,
 				7F2E004727CC9AE000752ABA /* OrderbookEntity.swift in Sources */,
 				7F844CF727D0661000C06084 /* AssetsStatusViewModel.swift in Sources */,

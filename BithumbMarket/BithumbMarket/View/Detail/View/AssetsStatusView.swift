@@ -27,17 +27,20 @@ final class AssetsStatusView: UIView {
         setConstraintLayout()
     }
     
+    func updateUI(_ assetsStatus: AssetsStatusData) {
+        assetsStatusLabel.font = .preferredFont(forTextStyle: .headline)
+        assetsStatusLabel.textColor = .typoColor
+        assetsStatusLabel.attributedText = assetsStatus.setState().attributedText
+    }
+    
 }
 
 extension AssetsStatusView {
     
     private func configureLabelUI() {
         assetsStatusNameLabel.font = .preferredFont(forTextStyle: .headline)
-        assetsStatusLabel.font = .preferredFont(forTextStyle: .headline)
         assetsStatusNameLabel.textColor = .typoColor
-        assetsStatusLabel.textColor = .typoColor
         assetsStatusNameLabel.text = "입출금 현황"
-        assetsStatusLabel.text = "입출금 가능"
     }
     
     private func configureStackViewUI() {
