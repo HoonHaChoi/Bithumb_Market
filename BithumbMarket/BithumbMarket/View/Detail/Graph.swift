@@ -78,6 +78,7 @@ extension Graph {
             attributes: [.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.textPrimary]
         )
         textLayer.string = attributedString
+        textLayer.alignmentMode = .center
         self.layer.addSublayer(textLayer)
     }
     
