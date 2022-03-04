@@ -8,15 +8,17 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    
     private var currentMarketPriceViewModel: CurrentMarketPriceViewModel
     private var assetsStatusViewModel: AssetsStatusViewModel
+    private var detailViewModel: DetailViewModel
     private let ticker: Ticker
     
     init(ticker: Ticker) {
         self.ticker = ticker
         self.currentMarketPriceViewModel = CurrentMarketPriceViewModel(symbol: ticker.symbol)
         self.assetsStatusViewModel = AssetsStatusViewModel(symbol: ticker.symbol)
+        self.detailViewModel = DetailViewModel()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,9 +31,9 @@ class DetailViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
- 
+    
     private let scrollContentView: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -82,12 +84,22 @@ class DetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         currentMarketPriceViewModel.updatePrice()
-   }
+    }
+    
+    private lazy var barButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.setPreferredSymbolConfiguration(.init(scale: .large), forImageIn: .normal)
+        button.tintColor = .mainColor
+        return button
+    }()
     
     private func configureNavigationBar() {
         title = ticker.symbol
         navigationController?.isNavigationBarHidden = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: nil)
+        let exist = detailViewModel.hasTicker(symbol: ticker.symbol)
+        exist ? barButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : barButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: barButton)
     }
     
     
@@ -123,7 +135,7 @@ extension DetailViewController {
             currentMarketPriceView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 20),
             currentMarketPriceView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -20),
             
-            transactionPricegraphView.heightAnchor.constraint(equalToConstant: 300),
+            transactionPricegraphView.heightAnchor.constraint(equalToConstant: 350),
             transactionPricegraphView.topAnchor.constraint(equalTo: currentMarketPriceView.bottomAnchor, constant: 20),
             transactionPricegraphView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             transactionPricegraphView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),

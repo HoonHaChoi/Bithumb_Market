@@ -11,7 +11,7 @@ struct DetailViewModel {
     
     private let storage: LikeStorge
     
-    init(storage: LikeStorge) {
+    init(storage: LikeStorge = LikeStorge()) {
         self.storage = storage
     }
     
