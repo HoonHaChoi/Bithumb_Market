@@ -83,6 +83,7 @@ extension Graph {
     }
     
     private func stick(x: CGFloat) {
+        let x = checkStick(x: x)
         let path = UIBezierPath()
         let layers = CAShapeLayer()
         
@@ -136,6 +137,17 @@ extension Graph {
             return 50
         case UIScreen.main.bounds.width - 80..<UIScreen.main.bounds.width:
             return UIScreen.main.bounds.width - 80
+        default:
+            return x
+        }
+    }
+    
+    private func checkStick(x: CGFloat) -> CGFloat {
+        switch x {
+        case ..<0:
+            return 0
+        case (UIScreen.main.bounds.width - 40)...:
+            return UIScreen.main.bounds.width - 40
         default:
             return x
         }
