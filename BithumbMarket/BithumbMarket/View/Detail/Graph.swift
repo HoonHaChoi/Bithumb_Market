@@ -49,14 +49,14 @@ class Graph: UIView {
 extension Graph {
     
     private func show(touches: Set<UITouch>) {
-         if let touch = touches.first {
-             let position = touch.location(in: self)
-             let x = position.x
-             let index = Int(Float(x / offsetX))
-             price(x: x, price: values[index])
-             stick(x: x)
-         }
-     }
+        if let touch = touches.first {
+            let position = touch.location(in: self)
+            let x = position.x
+            let index = checkIndex(index: Int(x / offsetX))
+            price(x: x, price: values[index])
+            stick(x: x)
+        }
+    }
     
     private func remove() {
           if let count = layer.sublayers?.count {
@@ -67,8 +67,7 @@ extension Graph {
       }
     
     private func price(x: CGFloat, price: CGFloat) {
-        let text = "\(price)원"
-        
+        let x = checkX(x: x)
         let textLayer = CATextLayer()
         textLayer.frame = CGRect(x: x - 50, y: 10, width: 100, height: 30)
 
@@ -96,7 +95,6 @@ extension Graph {
     private func graph(width: CGFloat, height: CGFloat, values: [CGFloat]) {
         let path = UIBezierPath()
         let layers = CAShapeLayer()
-        
         var currentX: CGFloat = 0
         var scale: CGFloat = 0
         
@@ -106,7 +104,6 @@ extension Graph {
         }
         
         offsetX = frame.width / CGFloat(values.count)
-        
         path.move(to: CGPoint(x: 0, y: frame.height - (frame.height * (values[0] / scale))))
         for i in 1..<values.count {
             currentX += offsetX
@@ -119,6 +116,28 @@ extension Graph {
         layers.lineCap = .round
         layers.path = path.cgPath
         self.layer.addSublayer(layers)
+    }
+    
+    private func checkIndex(index: Int) -> Int {
+        switch index {
+        case ..<0:
+            return 0
+        case (values.count - 1)...:
+            return values.count - 1
+        default:
+            return index
+        }
+    }
+    
+    private func checkX(x: CGFloat) -> CGFloat {
+        switch x {
+        case ..<50:
+            return 50
+        case UIScreen.main.bounds.width - 80..<UIScreen.main.bounds.width:
+            return UIScreen.main.bounds.width - 80
+        default:
+            return x
+        }
     }
     
 }
