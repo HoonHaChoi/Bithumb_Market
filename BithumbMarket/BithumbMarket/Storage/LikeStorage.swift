@@ -40,6 +40,7 @@ final class LikeStorge {
             try context.save()
             return .success(true)
         } catch {
+            context.rollback()
             return .failure(.failureSave)
         }
     }
@@ -58,6 +59,7 @@ final class LikeStorge {
             }
             return .success(true)
         } catch {
+            context.rollback()
             return .failure(.failureDelete)
         }
     }
@@ -74,12 +76,5 @@ final class LikeStorge {
         }
     }
     
-}
-
-enum CoreDataError: Error {
-    case failureFetch
-    case failureSave
-    case failureDelete
-    case failiureFind
 }
 
