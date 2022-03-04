@@ -76,11 +76,11 @@ class DetailViewController: UIViewController {
         bindPriceView()
         bindAssetsStatusView()
         assetsStatusViewModel.fetchAssetsStatus()
+        currentMarketPriceViewModel.fetchPrice()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        currentMarketPriceViewModel.fetchPrice()
         currentMarketPriceViewModel.updatePrice()
    }
     
@@ -89,6 +89,7 @@ class DetailViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: nil)
     }
+    
     
     private func bindPriceView() {
         currentMarketPriceViewModel.price.subscribe { [weak self] observer in

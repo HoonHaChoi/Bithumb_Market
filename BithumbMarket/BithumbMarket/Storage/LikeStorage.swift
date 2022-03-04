@@ -67,15 +67,15 @@ final class LikeStorge {
     }
     
     @discardableResult
-    func find(symbol: String) -> Result<Bool, CoreDataError> {
+    func find(symbol: String) -> Bool {
         let request = Like.fetchRequest()
         request.predicate = NSPredicate(format: "symbol == %@", symbol)
         
         do {
             let likes = try context.fetch(request)
-            return .success(!likes.isEmpty)
+            return likes.first?.symbol == symbol
         } catch {
-            return .failure(.failiureFind)
+            return false
         }
     }
     

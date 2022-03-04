@@ -46,6 +46,7 @@
 		BFAD088A27D25BFC0055D691 /* Like+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD088827D25BFC0055D691 /* Like+CoreDataProperties.swift */; };
 		BFAD088D27D25F250055D691 /* LikeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD088C27D25F250055D691 /* LikeStorage.swift */; };
 		BFAD089827D2727A0055D691 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD089727D2727A0055D691 /* CoreDataError.swift */; };
+		BFAD089A27D28DFB0055D691 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD089927D28DFB0055D691 /* DetailViewModel.swift */; };
 		BFB8F15527CF66D300702FBB /* AssetsStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8F15427CF66D300702FBB /* AssetsStatusView.swift */; };
 		BFB9562927CCAD49001627C6 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB9562827CCAD49001627C6 /* MainViewModel.swift */; };
 		BFB9562C27CCADDC001627C6 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = BFB9562B27CCADDC001627C6 /* Starscream */; };
@@ -119,6 +120,7 @@
 		BFAD088827D25BFC0055D691 /* Like+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Like+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BFAD088C27D25F250055D691 /* LikeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeStorage.swift; sourceTree = "<group>"; };
 		BFAD089727D2727A0055D691 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
+		BFAD089927D28DFB0055D691 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		BFB8F15427CF66D300702FBB /* AssetsStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsStatusView.swift; sourceTree = "<group>"; };
 		BFB9562827CCAD49001627C6 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		BFB9562E27CCB35D001627C6 /* MainDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataSource.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				BF7D214A27CF39AF007F0DCE /* View */,
 				BF7D214827CF0C81007F0DCE /* DetailViewController.swift */,
 				7F844CFE27D0A92000C06084 /* CurrentMarketPriceViewModel.swift */,
+				BFAD089927D28DFB0055D691 /* DetailViewModel.swift */,
 				7F844CF627D0661000C06084 /* AssetsStatusViewModel.swift */,
 			);
 			path = Detail;
@@ -420,6 +423,7 @@
 				7F844CE227CFB63800C06084 /* ReceiveTransaction.swift in Sources */,
 				BFB9563927CCBD37001627C6 /* ReceiveTicker.swift in Sources */,
 				7F844CDF27CFB5F300C06084 /* ReceiveOrderbook.swift in Sources */,
+				BFAD089A27D28DFB0055D691 /* DetailViewModel.swift in Sources */,
 				7F844CDC27CFB58C00C06084 /* OrderbookDataSource.swift in Sources */,
 				BFB9563227CCB647001627C6 /* CoinSortControlView.swift in Sources */,
 				BFAD088627D25BCB0055D691 /* LikeSymbol.xcdatamodeld in Sources */,
