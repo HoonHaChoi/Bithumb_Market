@@ -34,6 +34,19 @@ class Graph: UIView {
         graph(width: frame.width, height: frame.height, color: color, values: values)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        show(touches: touches)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        remove()
+        show(touches: touches)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        remove()
+    }
+    
     private func show(touches: Set<UITouch>) {
          if let touch = touches.first {
              let position = touch.location(in: self)
