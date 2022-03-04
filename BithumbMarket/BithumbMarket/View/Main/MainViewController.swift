@@ -81,6 +81,7 @@ final class MainViewController: UIViewController {
     private func configureTableView() {
         mainTableView.register(TickerCell.self, forCellReuseIdentifier: TickerCell.reuseidentifier)
         mainTableView.dataSource = datasource
+        mainTableView.delegate = self
     }
     
     private func bind() {
@@ -141,4 +142,22 @@ final class MainViewController: UIViewController {
         mainTableView.reloadRows(at: [indexPath], with: .none)
     }
     
+}
+
+extension MainViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if datasource.isFiltering {
+            let ticker = datasource.filterItems[indexPath.row]
+            moveDetailViewController(ticker: ticker)
+        } else {
+            let ticker = datasource.items[indexPath.row]
+            moveDetailViewController(ticker: ticker)
+        }
+    }
+    
+    private func moveDetailViewController(ticker: Ticker) {
+        let detailViewController = DetailViewController(ticker: ticker)
+        self.navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
