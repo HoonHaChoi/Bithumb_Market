@@ -12,7 +12,7 @@ import AVFoundation
 class Graph: UIView {
     
     var offsetX = CGFloat()
-    var values = [CGFloat]()
+    var values = [Int]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +22,7 @@ class Graph: UIView {
         super.init(coder: coder)
     }
     
-    init(frame: CGRect, values: [CGFloat]) {
+    init(frame: CGRect, values: [Int]) {
         super.init(frame: frame)
         self.values = values
     }
@@ -66,12 +66,12 @@ extension Graph {
         }
     }
     
-    private func price(x: CGFloat, price: CGFloat) {
+    private func price(x: CGFloat, price: Int) {
         let x = checkX(x: x)
         let textLayer = CATextLayer()
         textLayer.frame = CGRect(x: x - 50, y: 10, width: 100, height: 30)
         
-        let stringPrice = (String(Int(price))).withComma()
+        let stringPrice = String(price).withComma()
         let text = stringPrice + "원"
         let attributedString = NSAttributedString(
             string: text,
@@ -95,28 +95,20 @@ extension Graph {
         self.layer.addSublayer(layers)
     }
     
-    private func graph(width: CGFloat, height: CGFloat, values: [CGFloat]) {
-        let path = UIBezierPath()
-        let layers = CAShapeLayer()
-        var currentX: CGFloat = 0
-        var scale: CGFloat = 0
-
-        if let first = values.first, let last = values.last {
-            scale = ((first + last) / 2) / 0.5
-        }
-        
+    private func graph(width: CGFloat, height: CGFloat, values: [Int]) {
         offsetX = frame.width / CGFloat(values.count)
         path.move(to: CGPoint(x: 0, y: frame.height - (frame.height * (values[0] / scale))))
         values.forEach {
             currentX += offsetX
-            path.addLine(to: CGPoint(x: currentX, y: frame.height - (frame.height * ($0 / scale))))
+            path.addLine(to: CGPoint(x: currentX, y: frame.height - 30 - (frame.height * (CGFloat($0) / scale))))
         }
-        
+    
         layers.fillColor = nil
         layers.strokeColor = UIColor.mainColor.cgColor
         layers.lineWidth = 4
         layers.lineCap = .round
         layers.path = path.cgPath
+        
         self.layer.addSublayer(layers)
     }
     

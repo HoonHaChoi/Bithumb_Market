@@ -11,7 +11,8 @@ class GraphViewModel {
     
     let symbole = "BTC"
     var data: [GraphData] = []
-    var price: [CGFloat] = []
+    var date: [String] = []
+    var price: [Int] = []
 
     private var service: APIService
     
@@ -30,7 +31,7 @@ class GraphViewModel {
                 
                 for i in (model.data.count - 100)..<model.data.count {
                     let closPrice = model.data[i].closPrice
-                    self.price.append(CGFloat((closPrice as NSString).floatValue))
+                    self.price.append(Int((closPrice as NSString).floatValue))
                 }
                 print(model.data[0].closPrice)
                 print((model.data.first?.date)!)
