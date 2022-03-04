@@ -11,10 +11,8 @@ import AVFoundation
 
 class Graph: UIView {
     
-    var offsetX: CGFloat = 0
-    
-    var color = UIColor.mainColor.cgColor
-    var values: [CGFloat] = []
+    var offsetX = CGFloat()
+    var values = [CGFloat]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,14 +22,13 @@ class Graph: UIView {
         super.init(coder: coder)
     }
     
-    init(frame: CGRect, values: [CGFloat], color: CGColor) {
+    init(frame: CGRect, values: [CGFloat]) {
         super.init(frame: frame)
         self.values = values
-        self.color = color
     }
     
     override func draw(_ rect: CGRect) {
-        graph(width: frame.width, height: frame.height, color: color, values: values)
+        graph(width: frame.width, height: frame.height, values: values)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -46,13 +43,16 @@ class Graph: UIView {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         remove()
     }
+ 
+}
+
+extension Graph {
     
     private func show(touches: Set<UITouch>) {
          if let touch = touches.first {
              let position = touch.location(in: self)
              let x = position.x
              let index = Int(Float(x / offsetX))
-             
              price(x: x, price: values[index])
              stick(x: x)
          }
@@ -87,15 +87,15 @@ class Graph: UIView {
         path.move(to: CGPoint(x: x, y: 40))
         path.addLine(to: CGPoint(x: x, y: 270))
         
-        layers.fillColor = nil
         layers.strokeColor = UIColor.typoColor.cgColor
         layers.lineWidth = 1
-        layers.lineCap = .round
         layers.path = path.cgPath
         self.layer.addSublayer(layers)
     }
     
-    private func graph(width: CGFloat, height: CGFloat, color: CGColor, values: [CGFloat]) {
+    private func graph(width: CGFloat, height: CGFloat, values: [CGFloat]) {
+        let path = UIBezierPath()
+        let layers = CAShapeLayer()
         
         var currentX: CGFloat = 0
         var scale: CGFloat = 0
@@ -105,19 +105,16 @@ class Graph: UIView {
             scale = ((first + last) / 2) / 0.5
         }
         
-        let path = UIBezierPath()
-        let layers = CAShapeLayer()
         offsetX = frame.width / CGFloat(values.count)
         
         path.move(to: CGPoint(x: 0, y: frame.height - (frame.height * (values[0] / scale))))
-        
         for i in 1..<values.count {
             currentX += offsetX
             path.addLine(to: CGPoint(x: currentX, y: frame.height - (frame.height * (values[i] / scale))))
         }
         
         layers.fillColor = nil
-        layers.strokeColor = color
+        layers.strokeColor = UIColor.mainColor.cgColor
         layers.lineWidth = 4
         layers.lineCap = .round
         layers.path = path.cgPath

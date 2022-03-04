@@ -32,8 +32,8 @@ final class TransactionPriceGraphView: UIView {
     private func drawgraph() {
         graph = Graph(
             frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 300),
-            values: self.viewmodel.price,
-            color: UIColor.mainColor.cgColor)
+            values: self.viewmodel.price
+        )
     }
     
 }
