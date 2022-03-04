@@ -43,7 +43,7 @@ class Graph: UIView {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         remove()
     }
- 
+    
 }
 
 extension Graph {
@@ -59,18 +59,20 @@ extension Graph {
     }
     
     private func remove() {
-          if let count = layer.sublayers?.count {
-              for _ in 1..<count {
-                  layer.sublayers?.remove(at: 1)
-              }
-          }
-      }
+        if let count = layer.sublayers?.count {
+            for _ in 1..<count {
+                layer.sublayers?.remove(at: 1)
+            }
+        }
+    }
     
     private func price(x: CGFloat, price: CGFloat) {
         let x = checkX(x: x)
         let textLayer = CATextLayer()
         textLayer.frame = CGRect(x: x - 50, y: 10, width: 100, height: 30)
-
+        
+        let stringPrice = (String(Int(price))).withComma()
+        let text = stringPrice + "원"
         let attributedString = NSAttributedString(
             string: text,
             attributes: [.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.textPrimary]
@@ -84,8 +86,7 @@ extension Graph {
         let layers = CAShapeLayer()
         
         path.move(to: CGPoint(x: x, y: 40))
-        path.addLine(to: CGPoint(x: x, y: 270))
-        
+        path.addLine(to: CGPoint(x: x, y: 300))
         layers.strokeColor = UIColor.typoColor.cgColor
         layers.lineWidth = 1
         layers.path = path.cgPath
@@ -97,17 +98,16 @@ extension Graph {
         let layers = CAShapeLayer()
         var currentX: CGFloat = 0
         var scale: CGFloat = 0
-        
-        if let first = values.first,
-           let last = values.last {
+
+        if let first = values.first, let last = values.last {
             scale = ((first + last) / 2) / 0.5
         }
         
         offsetX = frame.width / CGFloat(values.count)
         path.move(to: CGPoint(x: 0, y: frame.height - (frame.height * (values[0] / scale))))
-        for i in 1..<values.count {
+        values.forEach {
             currentX += offsetX
-            path.addLine(to: CGPoint(x: currentX, y: frame.height - (frame.height * (values[i] / scale))))
+            path.addLine(to: CGPoint(x: currentX, y: frame.height - (frame.height * ($0 / scale))))
         }
         
         layers.fillColor = nil
