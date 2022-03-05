@@ -76,6 +76,14 @@ extension Graph {
     private func price(x: CGFloat, price: Int) {
         let stringPrice = String(price).withComma()
         let text = stringPrice + "원"
+        drawText(x: x, text: text, y: 15, fontSize: 16, height: 20)
+    }
+    
+    private func drawText(x: CGFloat, text: String, y: CGFloat, fontSize: CGFloat, height: CGFloat) {
+        let x = checkX(x: x)
+        let textLayer = CATextLayer()
+        textLayer.frame = CGRect(x: x - 60, y: y, width: 120, height: height)
+        
         let attributedString = NSAttributedString(
             string: text,
             attributes: [.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.textPrimary]
