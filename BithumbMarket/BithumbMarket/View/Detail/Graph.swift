@@ -86,7 +86,7 @@ extension Graph {
         
         let attributedString = NSAttributedString(
             string: text,
-            attributes: [.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.textPrimary]
+            attributes: [.font: UIFont.systemFont(ofSize: fontSize ), .foregroundColor: UIColor.textPrimary]
         )
         textLayer.string = attributedString
         textLayer.alignmentMode = .center
@@ -114,21 +114,21 @@ extension Graph {
         var currentX: CGFloat = 0
         
         guard let min = values.min(), let max = values.max() else { return }
-        let scale = CGFloat(Double((max - min) / 2) / 0.35)
+        let scale = CGFloat(Double((max - min) / 2) / 0.4)
         let currentY = values.map{ max - $0 }
 
-        path.move(to: CGPoint(x: 0, y: frame.height - 30 - (frame.height * (CGFloat(currentY[0]) / scale))))
+        path.move(to: CGPoint(x: 0, y: (frame.height * (CGFloat(currentY[0]) / scale)) + 55))
         currentY.forEach {
             currentX += offsetX
-            path.addLine(to: CGPoint(x: currentX, y: frame.height - 30 - (frame.height * (CGFloat($0) / scale))))
+            path.addLine(to: CGPoint(x: currentX, y: (frame.height * (CGFloat($0) / scale)) + 55))
         }
     
         layers.fillColor = nil
         layers.strokeColor = UIColor.mainColor.cgColor
-        layers.lineWidth = 4
+        layers.lineWidth = 3
         layers.lineCap = .round
         layers.path = path.cgPath
-        
+        layers.lineJoin = .round
         self.layer.addSublayer(layers)
     }
     
