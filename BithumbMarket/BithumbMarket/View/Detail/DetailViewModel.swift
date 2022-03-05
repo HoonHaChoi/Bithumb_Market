@@ -15,7 +15,16 @@ struct DetailViewModel {
         self.storage = storage
     }
     
-    func hasTicker(symbol: String) -> Bool {
+    func hasLike(symbol: String) -> Bool {
          return storage.find(symbol: symbol)
     }
+    
+    func updateLike(symbol: String) {
+        if hasLike(symbol: symbol) {
+            storage.delete(symbol: symbol)
+        } else {
+            storage.save(symbol: symbol)
+        }
+    }
+    
 }

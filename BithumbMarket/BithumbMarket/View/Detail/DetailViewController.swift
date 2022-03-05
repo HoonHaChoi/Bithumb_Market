@@ -89,6 +89,7 @@ class DetailViewController: UIViewController {
     private lazy var barButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.setImage(UIImage(systemName: "heart.fill"), for: .selected)
         button.setPreferredSymbolConfiguration(.init(scale: .large), forImageIn: .normal)
         button.tintColor = .mainColor
         return button
@@ -97,11 +98,10 @@ class DetailViewController: UIViewController {
     private func configureNavigationBar() {
         title = ticker.symbol
         navigationController?.isNavigationBarHidden = false
-        let exist = detailViewModel.hasTicker(symbol: ticker.symbol)
-        exist ? barButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : barButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        let hasSymbol = detailViewModel.hasLike(symbol: ticker.symbol)
+        barButton.isSelected = hasSymbol
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: barButton)
     }
-    
     
     private func bindPriceView() {
         currentMarketPriceViewModel.price.subscribe { [weak self] observer in

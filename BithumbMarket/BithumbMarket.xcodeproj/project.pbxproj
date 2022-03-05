@@ -247,8 +247,8 @@
 			children = (
 				BF7D214A27CF39AF007F0DCE /* View */,
 				BF7D214827CF0C81007F0DCE /* DetailViewController.swift */,
-				7F844CFE27D0A92000C06084 /* CurrentMarketPriceViewModel.swift */,
 				BFAD089927D28DFB0055D691 /* DetailViewModel.swift */,
+				7F844CFE27D0A92000C06084 /* CurrentMarketPriceViewModel.swift */,
 				7F844CF627D0661000C06084 /* AssetsStatusViewModel.swift */,
 			);
 			path = Detail;
