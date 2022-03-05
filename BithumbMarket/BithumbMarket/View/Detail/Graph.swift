@@ -13,6 +13,7 @@ class Graph: UIView {
     
     var offsetX = CGFloat()
     var values = [Int]()
+    var date = [String]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,9 +23,10 @@ class Graph: UIView {
         super.init(coder: coder)
     }
     
-    init(frame: CGRect, values: [Int]) {
+    init(frame: CGRect, values: [Int], date: [String]) {
         super.init(frame: frame)
         self.values = values
+        self.date = date
     }
     
     override func draw(_ rect: CGRect) {
@@ -53,6 +55,7 @@ extension Graph {
             let position = touch.location(in: self)
             let x = position.x
             let index = checkIndex(index: Int(x / offsetX))
+            date(x: x, date: date[index])
             price(x: x, price: values[index])
             stick(x: x)
         }
@@ -66,11 +69,11 @@ extension Graph {
         }
     }
     
+    private func date(x: CGFloat, date: String) {
+        drawText(x: x, text: date, y: 0, fontSize: 11, height: 12)
+    }
+    
     private func price(x: CGFloat, price: Int) {
-        let x = checkX(x: x)
-        let textLayer = CATextLayer()
-        textLayer.frame = CGRect(x: x - 50, y: 10, width: 100, height: 30)
-        
         let stringPrice = String(price).withComma()
         let text = stringPrice + "원"
         let attributedString = NSAttributedString(
