@@ -90,6 +90,7 @@ extension Graph {
         )
         textLayer.string = attributedString
         textLayer.alignmentMode = .center
+        textLayer.contentsScale = UIScreen.main.scale
         self.layer.addSublayer(textLayer)
     }
     
