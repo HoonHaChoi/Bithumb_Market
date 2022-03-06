@@ -90,7 +90,6 @@ final class MainViewController: UIViewController {
     }
     
     private func bind() {
-        
         viewmodel.tickers.subscribe { [weak self] tickers in
             self?.diffableDatasource.updateItems(tickers: tickers)
         }
@@ -115,25 +114,6 @@ final class MainViewController: UIViewController {
             })
         }
     }
-    
-//    private func updateRows(index: Int) {
-//        if viewmodel.isFilter.value {
-//        } else {
-//            updateVisibleRows(index: index)
-//        }
-//    }
-//
-//    private func updateVisibleRows(index: Int) {
-//        mainTableView.indexPathsForVisibleRows?.forEach({ indexPath in
-//            if indexPath.row == index {
-//                reloadRow(indexPath: indexPath)
-//            }
-//        })
-//    }
-//
-//    private func reloadRow(indexPath: IndexPath) {
-//        mainTableView.reloadRows(at: [indexPath], with: .none)
-//    }
     
 }
 
