@@ -9,18 +9,15 @@ import UIKit
 
 final class MainViewController: UIViewController {
     
-    private let datasource: MainDataSource
     private let viewmodel: MainViewModel
     
-    init(viewmodel: MainViewModel, datasource: MainDataSource) {
+    init(viewmodel: MainViewModel) {
         self.viewmodel = viewmodel
-        self.datasource = datasource
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         self.viewmodel = .init()
-        self.datasource = .init()
         super.init(coder: coder)
     }
     
@@ -32,6 +29,14 @@ final class MainViewController: UIViewController {
         tableView.delaysContentTouches = false
         return tableView
     }()
+    
+    private lazy var datasource = MainDiffableDataSource(tableView: mainTableView) { tableView, indexPath, ticker in
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TickerCell.reuseidentifier, for: indexPath) as? TickerCell else {
+            return .init()
+        }
+        cell.configure(ticker: ticker)
+        return cell
+    }
     
     private lazy var coinSortView: CoinSortControlView = {
         let sortView = CoinSortControlView()
@@ -87,18 +92,7 @@ final class MainViewController: UIViewController {
     private func bind() {
         
         viewmodel.tickers.subscribe { [weak self] tickers in
-            self?.datasource.items = tickers
-        }
-        
-        viewmodel.filterTickers.subscribe { [weak self] tickers in
-            self?.datasource.filterItems = tickers
-        }
-        
-        viewmodel.isFilter.subscribe { [weak self] filter in
-            if filter != self?.datasource.isFiltering {
-                self?.updateTableView()
-            }
-            self?.datasource.isFiltering = filter
+            self?.datasource.updateItems(tickers: tickers)
         }
         
         viewmodel.updateTableHandler = updateTableView
@@ -122,9 +116,6 @@ final class MainViewController: UIViewController {
     
     private func updateRows(index: Int) {
         if viewmodel.isFilter.value {
-            if datasource.filterItems.count > index {
-                updateVisibleRows(index: index)
-            }
         } else {
             updateVisibleRows(index: index)
         }
@@ -147,13 +138,13 @@ final class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if datasource.isFiltering {
-            let ticker = datasource.filterItems[indexPath.row]
-            moveDetailViewController(ticker: ticker)
-        } else {
-            let ticker = datasource.items[indexPath.row]
-            moveDetailViewController(ticker: ticker)
-        }
+//        if datasource.isFiltering {
+//            let ticker = datasource.filterItems[indexPath.row]
+//            moveDetailViewController(ticker: ticker)
+//        } else {
+//            let ticker = datasource.items[indexPath.row]
+//            moveDetailViewController(ticker: ticker)
+//        }
     }
     
     private func moveDetailViewController(ticker: Ticker) {
