@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Ticker {
+struct Ticker: Hashable {
     
     let symbol: String
     var market: Market

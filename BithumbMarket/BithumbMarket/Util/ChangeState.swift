@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum ChangeState {
+enum ChangeState: Hashable {
     
     case rise
     case fall

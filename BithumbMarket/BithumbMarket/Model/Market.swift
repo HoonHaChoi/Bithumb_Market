@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Market: Decodable {
+struct Market: Decodable, Hashable {
     
     var openingPrice: String
     var closingPrice: String
