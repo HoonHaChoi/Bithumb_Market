@@ -86,7 +86,7 @@ class DetailViewController: UIViewController {
         currentMarketPriceViewModel.updatePrice()
     }
     
-    private lazy var barButton: UIButton = {
+    private lazy var likeButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(systemName: "heart"), for: .normal)
         button.setImage(UIImage(systemName: "heart.fill"), for: .selected)
@@ -99,16 +99,16 @@ class DetailViewController: UIViewController {
         title = ticker.symbol
         navigationController?.isNavigationBarHidden = false
         let hasSymbol = detailViewModel.hasLike(symbol: ticker.symbol)
-        barButton.isSelected = hasSymbol
-        barButton.tintColor = barButton.isSelected ? .mainColor : .textSecondary
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: barButton)
+        likeButton.isSelected = hasSymbol
+        likeButton.tintColor = likeButton.isSelected ? .mainColor : .textSecondary
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: likeButton)
     }
     
     @objc private func likeBarButtonAction(_ sender: UIButton) {
         switch detailViewModel.updateLike(symbol: ticker.symbol) {
         case .success(_):
-            barButton.isSelected = !barButton.isSelected
-            barButton.tintColor = barButton.isSelected ? .mainColor : .textSecondary
+            likeButton.isSelected = !likeButton.isSelected
+            likeButton.tintColor = likeButton.isSelected ? .mainColor : .textSecondary
         case .failure(let error):
             // 에러표시 추가
             break
