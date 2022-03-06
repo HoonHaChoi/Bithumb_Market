@@ -102,14 +102,13 @@ extension Graph {
         self.layer.addSublayer(textLayer)
     }
     
-    private func stick(x: CGFloat) {
+    private func stick(x: CGFloat, minY: CGFloat, maxY: CGFloat, color: CGColor) {
         let x = checkStick(x: x)
         let path = UIBezierPath()
         let layers = CAShapeLayer()
-        
-        path.move(to: CGPoint(x: x, y: 40))
-        path.addLine(to: CGPoint(x: x, y: 300))
-        layers.strokeColor = UIColor.typoColor.cgColor
+        path.move(to: CGPoint(x: x, y: maxY))
+        path.addLine(to: CGPoint(x: x, y: minY))
+        layers.strokeColor = color
         layers.lineWidth = 1
         layers.path = path.cgPath
         self.layer.addSublayer(layers)
