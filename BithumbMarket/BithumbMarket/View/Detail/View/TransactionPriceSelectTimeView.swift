@@ -29,6 +29,25 @@ final class TransactionPriceSelectTimeView: UIView {
         setConstraintLayout()
     }
     
+    var changeIntervalHandler: ((_ interval: ChartIntervals) -> Void)?
+    
+    @objc
+    func changeInterval(_ sender: UIButton) {
+        guard sender.isSelected != true else {
+            return
+        }
+        sender.isSelected = true
+        intervalButtons.forEach {
+            if $0 != sender, $0.isSelected == true {
+                $0.isSelected = false
+            }
+        }
+        guard let index = intervalButtons.firstIndex(of: sender) else {
+            return
+        }
+        changeIntervalHandler!(chartIntervals[index])
+    }
+    
 }
 
 extension TransactionPriceSelectTimeView {
@@ -41,6 +60,7 @@ extension TransactionPriceSelectTimeView {
             button.setTitleColor(.actionTextSecondary, for: .highlighted)
             button.setTitleColor(.textSecondary, for: .normal)
             button.titleLabel?.font = .preferredFont(forTextStyle: .headline)
+            button.addTarget(self, action: #selector(changeInterval), for: .touchUpInside)
             intervalButtons.append(button)
         }
         intervalButtons.last?.isSelected = true
