@@ -70,9 +70,9 @@ extension Graph {
     }
     
     private func remove() {
-        if let count = layer.sublayers?.count {
-            for _ in 1..<count {
-                layer.sublayers?.remove(at: 1)
+        for _ in 0..<3 {
+            if let count = layer.sublayers?.count {
+                layer.sublayers?.remove(at: count - 1)
             }
         }
     }
