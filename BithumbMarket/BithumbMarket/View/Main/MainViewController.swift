@@ -101,6 +101,10 @@ final class MainViewController: UIViewController {
     
     private func updateTableView(tickers: [Ticker]) {
         diffableDatasource.appendSnapshot(tickers: tickers)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.mainTableView.backgroundView = self.diffableDatasource.isEmptyItems() ? TableEmptyView() : .init()
+        }
     }
     
     private func updateTableViewRows(index: Int) {
