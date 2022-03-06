@@ -91,7 +91,7 @@ class DetailViewController: UIViewController {
         button.setImage(UIImage(systemName: "heart"), for: .normal)
         button.setImage(UIImage(systemName: "heart.fill"), for: .selected)
         button.setPreferredSymbolConfiguration(.init(scale: .large), forImageIn: .normal)
-        button.tintColor = .mainColor
+        button.addTarget(self, action: #selector(likeBarButtonAction(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -100,7 +100,19 @@ class DetailViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
         let hasSymbol = detailViewModel.hasLike(symbol: ticker.symbol)
         barButton.isSelected = hasSymbol
+        barButton.tintColor = barButton.isSelected ? .mainColor : .textSecondary
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: barButton)
+    }
+    
+    @objc private func likeBarButtonAction(_ sender: UIButton) {
+        switch detailViewModel.updateLike(symbol: ticker.symbol) {
+        case .success(_):
+            barButton.isSelected = !barButton.isSelected
+            barButton.tintColor = barButton.isSelected ? .mainColor : .textSecondary
+        case .failure(let error):
+            // 에러표시 추가
+            break
+        }
     }
     
     private func bindPriceView() {

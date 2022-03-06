@@ -19,11 +19,11 @@ struct DetailViewModel {
          return storage.find(symbol: symbol)
     }
     
-    func updateLike(symbol: String) {
+    func updateLike(symbol: String) -> Result<Bool, CoreDataError> {
         if hasLike(symbol: symbol) {
-            storage.delete(symbol: symbol)
+            return storage.delete(symbol: symbol)
         } else {
-            storage.save(symbol: symbol)
+            return storage.save(symbol: symbol)
         }
     }
     
