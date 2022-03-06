@@ -25,7 +25,7 @@ final class MainViewModel {
     }
     
     var updateTickersHandler: (([Ticker]) -> Void)?
-    var changeIndexHandler: ((Int, ChangeState) -> Void)?
+    var changeIndexHandler: ((Int) -> Void)?
     var errorHandler: ((Error) -> Void)?
     
     func fetchTickers() {
@@ -59,21 +59,27 @@ final class MainViewModel {
                 guard let index = self.findIndex(from: self.tickers, to: ticker) else {
                     return
                 }
-                self.updateTicker(index: index, to: ticker)
+                self.update(index: index, to: ticker)
             case .failure(let error):
                 self.errorHandler?(error)
             }
         }
     }
     
-    private func updateTicker(index: Int, to ticker: ReceiveTicker) {
+    private func update(index: Int, to ticker: ReceiveTicker) {
         tickers.value[index].compare(to: ticker) { [weak self] state in
             guard let self = self else { return }
             tickers.value[index].updatePrice(to: ticker)
             
-            if !isFilter {
-                let colorState = self.tickers.value[index].change
-                changeIndexHandlerAction(index: index, color: colorState, updateState: state)
+            if isFilter {
+                if symbols.contains(tickers.value[index].symbol) {
+                    guard let filterIndex = symbols.firstIndex(of: tickers.value[index].symbol) else {
+                        return
+                    }
+                    self.changeIndexHandler?(filterIndex)
+                }
+            } else {
+                self.changeIndexHandler?(index)
             }
         }
     }
@@ -98,13 +104,12 @@ final class MainViewModel {
         return ticker.value.firstIndex(where: { $0.equalSymbol(to: newTicker) })
     }
     
-    private func changeIndexHandlerAction(index: Int, color: ChangeState,
-                                          updateState: Ticker.UpdateState) {
+    private func changeIndexHandlerAction(index: Int, updateState: Ticker.UpdateState) {
         switch updateState {
         case .closePrice:
-            self.changeIndexHandler?(index, color)
+            self.changeIndexHandler?(index)
         case .tradeValue:
-            self.changeIndexHandler?(index, .even)
+            self.changeIndexHandler?(index)
         }
     }
     

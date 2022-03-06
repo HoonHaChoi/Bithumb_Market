@@ -96,7 +96,7 @@ final class MainViewController: UIViewController {
         }
         
         viewmodel.updateTickersHandler = updateTableView
-        viewmodel.changeIndexHandler = updateTableViewRows(index:state:)
+        viewmodel.changeIndexHandler = updateTableViewRows(index:)
         coinSortView.sortControlHandler = viewmodel.executeFilterTickers
     }
     
@@ -104,11 +104,15 @@ final class MainViewController: UIViewController {
         diffableDatasource.appendSnapshot(tickers: tickers)
     }
     
-    private func updateTableViewRows(index: Int, state: ChangeState) {
+    private func updateTableViewRows(index: Int) {
         DispatchQueue.main.async { [weak self] in
-//            self?.updateRows(index: index)
-            let cell = self?.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
-            cell?.updateAnimation(state: state)
+            guard let ticker = self?.diffableDatasource.itemIdentifier(for: IndexPath(row: index, section: 0)) else {
+                return
+            }
+            self?.diffableDatasource.reloadSnapshot(ticker: ticker, completion: {
+                let cell = self?.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
+                cell?.updateAnimation(state: ticker.change)
+            })
         }
     }
     
