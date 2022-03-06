@@ -64,8 +64,8 @@ extension Graph {
             let x = position.x
             let index = checkIndex(index: Int(x / offsetX))
             date(x: x, date: date[index])
-            price(x: x, price: values[index])
-            stick(x: x)
+            price(x: x, price: closePrice[index])
+            stick(x: x, minY: 300, maxY: 40, color: UIColor.textPrimary.cgColor)
         }
     }
     
@@ -78,16 +78,16 @@ extension Graph {
     }
     
     private func date(x: CGFloat, date: String) {
-        drawText(x: x, text: date, y: 0, fontSize: 11, height: 12)
+        drawText(x: x, y: 0, text: date,  fontSize: 11, height: 12)
     }
     
     private func price(x: CGFloat, price: Int) {
         let stringPrice = String(price).withComma()
         let text = stringPrice + "원"
-        drawText(x: x, text: text, y: 15, fontSize: 16, height: 20)
+        drawText(x: x, y: 15, text: text, fontSize: 16, height: 20)
     }
     
-    private func drawText(x: CGFloat, text: String, y: CGFloat, fontSize: CGFloat, height: CGFloat) {
+    private func drawText(x: CGFloat, y: CGFloat, text: String, fontSize: CGFloat, height: CGFloat) {
         let x = checkX(x: x)
         let textLayer = CATextLayer()
         textLayer.frame = CGRect(x: x - 60, y: y, width: 120, height: height)
