@@ -16,8 +16,8 @@ struct GraphData: Decodable {
     let time: Double
     let openPrice: String
     let closPrice: String
-    let minPrice: String
     let maxPrice: String
+    let minPrice: String
     let unitsTraded: String
     
     var date: Date {
@@ -31,8 +31,8 @@ extension GraphData {
         self.time = try container.decode(Double.self)
         self.openPrice = try container.decode(String.self)
         self.closPrice = try container.decode(String.self)
-        self.minPrice = try container.decode(String.self)
         self.maxPrice = try container.decode(String.self)
+        self.minPrice = try container.decode(String.self)
         self.unitsTraded = try container.decode(String.self)
     }
 }

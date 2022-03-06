@@ -12,7 +12,10 @@ class GraphViewModel {
     let symbole = "BTC"
     var data: [GraphData] = []
     var dateList: [String] = []
-    var priceList: [Int] = []
+    var closePriceList: [Int] = []
+    var openPriceList: [Int] = []
+    var minPriceList: [Int] = []
+    var maxPriceList: [Int] = []
 
     private var service: APIService
     
@@ -31,14 +34,24 @@ class GraphViewModel {
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy.MM.dd HH:mm"
+                print(model.data[model.data.count - 30])
                 
-                // model.data.count - 100
                 for i in model.data.count - 30..<model.data.count {
-                    let closPrice = model.data[i].closPrice
-                    self.priceList.append(Int(closPrice) ?? 0)
-                    
+                                        
                     let date = dateFormatter.string(from: model.data[i].date)
                     self.dateList.append(date)
+                    
+                    let openPrice = model.data[i].openPrice
+                    self.openPriceList.append(Int(openPrice) ?? 0)
+                    
+                    let closPrice = model.data[i].closPrice
+                    self.closePriceList.append(Int(closPrice) ?? 0)
+                    
+                    let maxPrice = model.data[i].maxPrice
+                    self.maxPriceList.append(Int(maxPrice) ?? 0)
+                    
+                    let minPrice = model.data[i].minPrice
+                    self.minPriceList.append(Int(minPrice) ?? 0)
                 }
                 
                 print((model.data.first?.date)!)

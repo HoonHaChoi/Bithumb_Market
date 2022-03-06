@@ -12,8 +12,12 @@ import AVFoundation
 class Graph: UIView {
     
     var offsetX = CGFloat()
-    var values = [Int]()
+
     var date = [String]()
+    var openPrice = [Int]()
+    var closePrice = [Int]()
+    var maxPrice = [Int]()
+    var minPrice = [Int]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -137,8 +141,8 @@ extension Graph {
         switch index {
         case ..<0:
             return 0
-        case (values.count - 1)...:
-            return values.count - 1
+        case (closePrice.count - 1)...:
+            return closePrice.count - 1
         default:
             return index
         }
