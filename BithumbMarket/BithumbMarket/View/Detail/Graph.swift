@@ -27,10 +27,14 @@ class Graph: UIView {
         super.init(coder: coder)
     }
     
-    init(frame: CGRect, values: [Int], date: [String]) {
+    init(frame: CGRect, values: [Int], date: [String], openPrice: [Int], maxPrice: [Int], minPrice: [Int]) {
+        // TODO: - Line or CandleStick 필요
         super.init(frame: frame)
-        self.values = values
         self.date = date
+        self.openPrice = openPrice
+        self.closePrice = values
+        self.maxPrice = maxPrice
+        self.minPrice = minPrice
     }
     
     override func draw(_ rect: CGRect) {
