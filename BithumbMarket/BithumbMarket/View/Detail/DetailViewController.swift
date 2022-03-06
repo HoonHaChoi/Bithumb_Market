@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     
     private var currentMarketPriceViewModel: CurrentMarketPriceViewModel
     private var assetsStatusViewModel: AssetsStatusViewModel
