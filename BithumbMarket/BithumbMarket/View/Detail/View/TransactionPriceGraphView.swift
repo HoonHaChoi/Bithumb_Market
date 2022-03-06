@@ -32,8 +32,11 @@ final class TransactionPriceGraphView: UIView {
     private func drawgraph() {
         graph = Graph(
             frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 300),
-            values: self.viewmodel.priceList,
-            date: self.viewmodel.dateList
+            values: self.viewmodel.closePriceList,
+            date: self.viewmodel.dateList,
+            openPrice: self.viewmodel.openPriceList,
+            maxPrice: self.viewmodel.maxPriceList,
+            minPrice: self.viewmodel.minPriceList
         )
     }
     
