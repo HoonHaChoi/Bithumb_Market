@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Ticker: Hashable {
+final class Ticker: Hashable {
     
     let symbol: String
-    var market: Market
+    private(set) var market: Market
     var change: ChangeState
     
     enum UpdateState {
@@ -32,11 +32,7 @@ struct Ticker: Hashable {
         return paymentCurrency == ticker.content.symbol
     }
     
-    func compare(to ticker: ReceiveTicker, state: (UpdateState) -> Void) {
-        market.isNotEqual(ticker.content.closePrice) ? state(.closePrice) : state(.tradeValue)
-    }
-    
-    mutating func updatePrice(to ticker: ReceiveTicker) {
+    func updatePrice(to ticker: ReceiveTicker) {
         updateTickerChangeState(to: ticker.content.closePrice)
         market.closingPrice = ticker.content.closePrice
         market.openingPrice = ticker.content.openPrice
@@ -47,19 +43,24 @@ struct Ticker: Hashable {
         market.fluctateRate24H = ticker.content.chgRate
     }
     
-    private mutating func updateTickerChangeState(to closePrice: String) {
+    private func updateTickerChangeState(to closePrice: String) {
         change = market.computeClosepriceState(to: closePrice)
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(symbol)
+        hasher.combine(market)
     }
     
 }
 
 extension Ticker: Comparable {
     
-    static func > (lhs: Self, rhs: Self) -> Bool {
+    static func > (lhs: Ticker, rhs: Ticker) -> Bool {
         lhs.market.accTradeValue24H.convertDouble() > rhs.market.accTradeValue24H.convertDouble()
     }
     
-    static func < (lhs: Self, rhs: Self) -> Bool {
+    static func < (lhs: Ticker, rhs: Ticker) -> Bool {
         lhs.market.accTradeValue24H.convertDouble() < rhs.market.accTradeValue24H.convertDouble()
     }
     

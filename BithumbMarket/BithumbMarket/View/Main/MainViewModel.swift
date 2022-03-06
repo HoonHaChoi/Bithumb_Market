@@ -66,49 +66,21 @@ final class MainViewModel {
         }
     }
     
-    private func update(index: Int, to ticker: ReceiveTicker) {
-        tickers.value[index].compare(to: ticker) { [weak self] state in
-            guard let self = self else { return }
-            tickers.value[index].updatePrice(to: ticker)
-            
-            if isFilter {
-                if symbols.contains(tickers.value[index].symbol) {
-                    guard let filterIndex = symbols.firstIndex(of: tickers.value[index].symbol) else {
-                        return
-                    }
-                    self.changeIndexHandler?(filterIndex)
-                }
-            } else {
-                self.changeIndexHandler?(index)
-            }
-        }
-    }
-    
-//    private func startFilterTickers(to ticker: ReceiveTicker) {
-//        guard let filterIndex = self.findIndex(from: self.filterTickers, to: ticker) else {
-//            return
-//        }
-//        self.updateFilterTicker(index: filterIndex, to: ticker)
-//    }
-//
-//    private func updateFilterTicker(index: Int, to ticker: ReceiveTicker) {
-//        filterTickers.value[index].compare(to: ticker) { [weak self] state in
-//            guard let self = self else { return }
-//            self.filterTickers.value[index].updatePrice(to: ticker)
-//            let colorState = self.filterTickers.value[index].change
-//            changeIndexHandlerAction(index: index, color: colorState, updateState: state)
-//        }
-//    }
-    
     private func findIndex(from ticker: Observable<[Ticker]>, to newTicker: ReceiveTicker) -> Int? {
         return ticker.value.firstIndex(where: { $0.equalSymbol(to: newTicker) })
     }
     
-    private func changeIndexHandlerAction(index: Int, updateState: Ticker.UpdateState) {
-        switch updateState {
-        case .closePrice:
-            self.changeIndexHandler?(index)
-        case .tradeValue:
+    private func update(index: Int, to ticker: ReceiveTicker) {
+        tickers.value[index].updatePrice(to: ticker)
+        
+        if isFilter {
+            if symbols.contains(tickers.value[index].symbol) {
+                guard let filterIndex = symbols.firstIndex(of: tickers.value[index].symbol) else {
+                    return
+                }
+                self.changeIndexHandler?(filterIndex)
+            }
+        } else {
             self.changeIndexHandler?(index)
         }
     }
