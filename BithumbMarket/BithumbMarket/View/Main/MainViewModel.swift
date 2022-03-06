@@ -10,21 +10,21 @@ import Foundation
 final class MainViewModel {
     
     var tickers: Observable<[Ticker]>
-    var filterTickers: Observable<[Ticker]>
-    var isFilter: Observable<Bool>
+    private var isFilter: Bool
     private var service: APIService
     private let storage: LikeStorge
+    private var symbols: [String]
     
     init(service: APIService = APIService(),
          storage: LikeStorge = LikeStorge()) {
         self.tickers = .init([])
-        self.filterTickers = .init([])
+        self.isFilter = false
         self.service = service
-        self.isFilter = .init(false)
         self.storage = storage
+        self.symbols = []
     }
     
-    var updateTableHandler: (() -> Void)?
+    var updateTickersHandler: (([Ticker]) -> Void)?
     var changeIndexHandler: ((Int, ChangeState) -> Void)?
     var errorHandler: ((Error) -> Void)?
     
@@ -34,7 +34,7 @@ final class MainViewModel {
             switch result {
             case .success(let tickers):
                 self.tickers.value = tickers.sorted(by: >)
-                self.updateTableHandler?()
+                self.updateTickersHandler?(self.tickers.value)
                 self.sendMessage()
             case .failure(let error):
                 self.errorHandler?(error)
@@ -60,10 +60,6 @@ final class MainViewModel {
                     return
                 }
                 self.updateTicker(index: index, to: ticker)
-                
-                if self.isFilter.value {
-                    self.startFilterTickers(to: ticker)
-                }
             case .failure(let error):
                 self.errorHandler?(error)
             }
@@ -75,28 +71,28 @@ final class MainViewModel {
             guard let self = self else { return }
             tickers.value[index].updatePrice(to: ticker)
             
-            if !isFilter.value {
+            if !isFilter {
                 let colorState = self.tickers.value[index].change
                 changeIndexHandlerAction(index: index, color: colorState, updateState: state)
             }
         }
     }
     
-    private func startFilterTickers(to ticker: ReceiveTicker) {
-        guard let filterIndex = self.findIndex(from: self.filterTickers, to: ticker) else {
-            return
-        }
-        self.updateFilterTicker(index: filterIndex, to: ticker)
-    }
-    
-    private func updateFilterTicker(index: Int, to ticker: ReceiveTicker) {
-        filterTickers.value[index].compare(to: ticker) { [weak self] state in
-            guard let self = self else { return }
-            self.filterTickers.value[index].updatePrice(to: ticker)
-            let colorState = self.filterTickers.value[index].change
-            changeIndexHandlerAction(index: index, color: colorState, updateState: state)
-        }
-    }
+//    private func startFilterTickers(to ticker: ReceiveTicker) {
+//        guard let filterIndex = self.findIndex(from: self.filterTickers, to: ticker) else {
+//            return
+//        }
+//        self.updateFilterTicker(index: filterIndex, to: ticker)
+//    }
+//
+//    private func updateFilterTicker(index: Int, to ticker: ReceiveTicker) {
+//        filterTickers.value[index].compare(to: ticker) { [weak self] state in
+//            guard let self = self else { return }
+//            self.filterTickers.value[index].updatePrice(to: ticker)
+//            let colorState = self.filterTickers.value[index].change
+//            changeIndexHandlerAction(index: index, color: colorState, updateState: state)
+//        }
+//    }
     
     private func findIndex(from ticker: Observable<[Ticker]>, to newTicker: ReceiveTicker) -> Int? {
         return ticker.value.firstIndex(where: { $0.equalSymbol(to: newTicker) })
@@ -113,19 +109,13 @@ final class MainViewModel {
     }
     
     func executeFilterTickers() {
-        isFilter.value = !isFilter.value
-        let symbols: [String] = fetctLikeSymbols()
+        isFilter = !isFilter
+        symbols = fetctLikeSymbols()
         
-        let tickerFilter = tickers.value.filter({
-            symbols.contains($0.symbol) == true
-        })
-        
-        filterTickers.value = tickerFilter.sorted() { first, second in
-            if let first = symbols.firstIndex(of: first.symbol),
-               let second = symbols.firstIndex(of: second.symbol) {
-               return first < second
-            }
-            return false
+        if isFilter {
+            updateTickersHandler?(tickers.value.filter { symbols.contains($0.symbol) })
+        } else {
+            updateTickersHandler?(tickers.value)
         }
     }
     
