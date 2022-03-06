@@ -18,6 +18,11 @@ class Graph: UIView {
     var closePrice = [Int]()
     var maxPrice = [Int]()
     var minPrice = [Int]()
+    var isLineGraph = false {
+          didSet {
+              setNeedsDisplay()
+          }
+      }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,7 +42,13 @@ class Graph: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        graph(width: frame.width, height: frame.height, values: values)
+        layer.sublayers?.removeAll()
+        switch isLineGraph {
+           case true:
+               return graph(width: frame.width, height: frame.height, values: closePrice)
+           case false:
+            return candleStick(width: frame.width, height: frame.height)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

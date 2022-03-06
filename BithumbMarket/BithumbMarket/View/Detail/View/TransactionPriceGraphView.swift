@@ -11,6 +11,12 @@ final class TransactionPriceGraphView: UIView {
     
     let viewmodel = GraphViewModel()
     var graph: Graph = Graph()
+    var isLineGraph = false {
+          didSet {
+              graph.isLineGraph = !graph.isLineGraph
+              setNeedsDisplay()
+          }
+      }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
