@@ -28,7 +28,6 @@ class Graph: UIView {
     }
     
     init(frame: CGRect, values: [Int], date: [String], openPrice: [Int], maxPrice: [Int], minPrice: [Int]) {
-        // TODO: - Line or CandleStick 필요
         super.init(frame: frame)
         self.date = date
         self.openPrice = openPrice
@@ -137,6 +136,44 @@ extension Graph {
         layers.lineCap = .round
         layers.path = path.cgPath
         layers.lineJoin = .round
+        self.layer.addSublayer(layers)
+    }
+    
+    private func candleStick(width: CGFloat, height: CGFloat) {
+        offsetX = frame.width / CGFloat(closePrice.count)
+        var currentX: CGFloat = 0
+        
+        guard let maxprice = maxPrice.max(), let minprice = minPrice.min() else {return}
+        let scale = CGFloat(Double((maxprice - minprice) / 2) / 0.4)
+        
+        
+        let close = closePrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + 55 }
+        let open = openPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + 55 }
+        let max = maxPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + 55 }
+        let min = minPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + 55 }
+        
+        for i in 0..<max.count{
+            currentX += offsetX
+            stick(x: currentX - 4, minY: min[i], maxY: max[i], color: UIColor.textSecondary.cgColor)
+            
+            if close[i] > open[i] {
+                rectangle(top: open[i], bottom: close[i], color: UIColor.fallColor.cgColor, currentX: currentX)
+            } else {
+                rectangle(top: close[i], bottom: open[i], color: UIColor.riseColor.cgColor, currentX: currentX)
+            }
+        }
+    }
+    
+    private func rectangle(top: CGFloat, bottom: CGFloat, color: CGColor, currentX: CGFloat) {
+        let layers = CAShapeLayer()
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: currentX-(offsetX/2)-3, y: top))
+        path.addLine(to: CGPoint(x: currentX-(offsetX/2) + offsetX - 5 , y: top))
+        path.addLine(to: CGPoint(x: currentX-(offsetX/2) + offsetX - 5, y: bottom))
+        path.addLine(to: CGPoint(x:  currentX-(offsetX/2)-3, y: bottom))
+        layers.lineCap = .round
+        layers.path = path.cgPath
+        layers.fillColor = color
         self.layer.addSublayer(layers)
     }
     
