@@ -45,7 +45,7 @@ final class TransactionPriceSelectTimeView: UIView {
         guard let index = intervalButtons.firstIndex(of: sender) else {
             return
         }
-        changeIntervalHandler!(chartIntervals[index])
+        changeIntervalHandler?(chartIntervals[index])
     }
     
 }

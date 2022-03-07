@@ -62,7 +62,6 @@ class DetailViewController: UIViewController {
     
     let transactionPricegraphView: TransactionPriceGraphView = {
         let view = TransactionPriceGraphView()
-        view.backgroundColor = .systemGreen
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -83,7 +82,7 @@ class DetailViewController: UIViewController {
             currentMarketPriceView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 20),
             currentMarketPriceView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -20),
             
-            transactionPricegraphView.heightAnchor.constraint(equalToConstant: 800),
+            transactionPricegraphView.heightAnchor.constraint(equalToConstant: 300),
             transactionPricegraphView.topAnchor.constraint(equalTo: currentMarketPriceView.bottomAnchor, constant: 20),
             transactionPricegraphView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             transactionPricegraphView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
@@ -103,6 +102,7 @@ class DetailViewController: UIViewController {
         ])
         bindPriceView()
         bindAssetsStatusView()
+        transactionPriceSelectTimeView.changeIntervalHandler = changeInterval
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -149,4 +149,7 @@ class DetailViewController: UIViewController {
         }
     }
     
+    private func changeInterval(_ interval: ChartIntervals) {
+        transactionPricegraphView.viewmodel.fetchGraphPrice(interval: interval)
+    }
 }
