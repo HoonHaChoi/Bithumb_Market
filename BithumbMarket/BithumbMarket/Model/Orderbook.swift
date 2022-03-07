@@ -30,10 +30,13 @@ extension OrderbookData {
         var rate = [Float]()
         let quantities = orders
             .map { Float($0.quantity) ?? 0 }
-        let sum = quantities
+        var sum = quantities
             .reduce(0) { $0 + $1 }
+        if sum == 0 {
+            sum = 1
+        }
         quantities.forEach {
-            rate.append(round($0 / sum * 5 * 100) / 100)
+            rate.append($0 / sum * 5 )
         }
         return rate
     }

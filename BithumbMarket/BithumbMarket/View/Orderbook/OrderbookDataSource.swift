@@ -9,7 +9,7 @@ import UIKit
 
 final class OrderbookDataSource: NSObject, UITableViewDataSource {
     
-    var items: Orderbook
+    var items: OrderbookData
     
     enum OrderType: CaseIterable {
         case ask
@@ -31,7 +31,7 @@ final class OrderbookDataSource: NSObject, UITableViewDataSource {
             bids: .init())
     }
     
-    func updateCellData(by orderbook: Orderbook) {
+    func updateCellData(by orderbook: OrderbookData) {
         self.items = orderbook
     }
     

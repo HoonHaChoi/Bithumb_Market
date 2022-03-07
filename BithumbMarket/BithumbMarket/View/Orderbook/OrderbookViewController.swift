@@ -68,9 +68,9 @@ class OrderbookViewController: UIViewController {
     }
 
     private func bind() {
-        viewModel.updateTableHandler = updateTableView
         viewModel.orderbook.subscribe { [weak self] observer in
             self?.dataSource.items = observer
+            self?.updateTableView()
         }
     }
 
