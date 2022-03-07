@@ -10,7 +10,7 @@ import UIKit
 class GraphViewModel {
     
     let symbole = "BTC"
-    var data: [GraphData] = []
+    var data: Observable<[GraphData]> = .init([])
     var dateList: [String] = []
     var closePriceList: [Int] = []
     var openPriceList: [Int] = []
@@ -23,13 +23,21 @@ class GraphViewModel {
         self.service = service
     }
     
-    func fetchGraphPrice(completion: @escaping () -> Void) {
-        service.request(endpoint: .candlestick(symbol: symbole, interval: .day)) { [weak self] (result: Result<CandleStick, HTTPError>) in
+    func fetchGraphPrice(interval: ChartIntervals = .day
+                         //, completion: @escaping () -> Void
+    ) {
+        service.request(endpoint: .candlestick(symbol: symbole, interval: interval)) { [weak self] (result: Result<CandleStick, HTTPError>) in
             guard let self = self else { return }
             switch result {
             case .success(let model):
-                self.data = model.data
     
+                //MARK: Data 초기화
+                self.dateList = []
+                self.closePriceList = []
+                self.openPriceList = []
+                self.minPriceList = []
+                self.maxPriceList = []
+                
                 print(model.data.count)
                 
                 let dateFormatter = DateFormatter()
@@ -53,15 +61,15 @@ class GraphViewModel {
                     let minPrice = model.data[i].minPrice
                     self.minPriceList.append(Int(minPrice) ?? 0)
                 }
-                
+                self.data.value = model.data
                 print((model.data.first?.date)!)
                 print(model.data[model.data.count - 100].date)
                 print(model.data.last!.date)
-                completion()
+//                completion()
                 
             case .failure(let error):
                 print(error)
-                completion()
+//                completion()
             }
         }
     }

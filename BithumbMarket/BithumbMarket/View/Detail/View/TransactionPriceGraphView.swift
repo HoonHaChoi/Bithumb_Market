@@ -21,12 +21,14 @@ final class TransactionPriceGraphView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
       
-        viewmodel.fetchGraphPrice() {
-            DispatchQueue.main.async {
-                self.drawgraph()
-                self.setupView()
-            }
-        }
+        viewmodel.fetchGraphPrice()
+//        {
+//            DispatchQueue.main.async {
+//                self.drawgraph()
+//                self.setupView()
+//            }
+//        }
+        bind()
     }
 
     required init?(coder: NSCoder) {
@@ -46,11 +48,26 @@ final class TransactionPriceGraphView: UIView {
         )
     }
     
+    //MARK: 그래프 바인딩 작업 추가
+    private func bind() {
+        viewmodel.data.subscribe { [weak self] observer in
+            DispatchQueue.main.async {
+                self?.drawgraph()
+                self?.setupView()
+            }
+        }
+    }
 }
 
 extension TransactionPriceGraphView {
     
     private func setupView() {
+        //MARK: 기존 그래프 삭제작업 추가
+        if let viewWithTag = self.viewWithTag(1) {
+            viewWithTag.removeFromSuperview()
+        }
+        graph.tag = 1
+        
         addSubview(graph)
         graph.translatesAutoresizingMaskIntoConstraints = false
         
