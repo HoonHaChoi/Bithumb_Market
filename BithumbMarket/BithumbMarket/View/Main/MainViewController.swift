@@ -34,6 +34,7 @@ final class MainViewController: UIViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TickerCell.reuseidentifier, for: indexPath) as? TickerCell else {
             return .init()
         }
+        cell.selectionStyle = .none
         cell.configure(ticker: ticker)
         return cell
     }
@@ -103,20 +104,22 @@ final class MainViewController: UIViewController {
         diffableDatasource.appendSnapshot(tickers: tickers)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.mainTableView.backgroundView = self.diffableDatasource.isEmptyItems() ? TableEmptyView() : .init()
+            if self.diffableDatasource.isEmptyItems() {
+                self.mainTableView.backgroundView = TableEmptyView()
+            } else {
+                self.mainTableView.backgroundView = .init()
+            }
         }
     }
     
     private func updateTableViewRows(index: Int) {
-        DispatchQueue.main.async { [weak self] in
-            guard let ticker = self?.diffableDatasource.itemIdentifier(for: IndexPath(row: index, section: 0)) else {
-                return
-            }
-            self?.diffableDatasource.reloadSnapshot(ticker: ticker, completion: {
-                let cell = self?.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
-                cell?.updateAnimation(state: ticker.change)
-            })
+        guard let ticker = self.diffableDatasource.itemIdentifier(for: IndexPath(row: index, section: 0)) else {
+            return
         }
+        self.diffableDatasource.reloadSnapshot(ticker: ticker, completion: {
+            let cell = self.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
+            cell?.updateAnimation(state: ticker.change)
+        })
     }
     
 }
@@ -127,7 +130,7 @@ extension MainViewController: UITableViewDelegate {
         guard let ticker = diffableDatasource.itemIdentifier(for: indexPath) else {
             return
         }
-        moveDetailViewController(ticker: ticker)
+        self.moveDetailViewController(ticker: ticker)
     }
     
     private func moveDetailViewController(ticker: Ticker) {
