@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navigationController = UINavigationController()
         //navigationController.setViewControllers([MainViewController(viewmodel: .init(), datasource: .init())], animated: true)
-        navigationController.setViewControllers([DetailViewController()], animated: true)
+        navigationController.setViewControllers([OrderbookViewController()], animated: true)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = screen
