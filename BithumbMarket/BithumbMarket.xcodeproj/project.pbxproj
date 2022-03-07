@@ -7,21 +7,124 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F2E004427CC9AE000752ABA /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004027CC9AE000752ABA /* Market.swift */; };
+		7F2E004527CC9AE000752ABA /* Orderbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004127CC9AE000752ABA /* Orderbook.swift */; };
+		7F2E004627CC9AE000752ABA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004227CC9AE000752ABA /* Message.swift */; };
+		7F2E004727CC9AE000752ABA /* OrderbookEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004327CC9AE000752ABA /* OrderbookEntity.swift */; };
+		7F2E004A27CC9B1400752ABA /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004827CC9B1400752ABA /* UIColor+Extension.swift */; };
+		7F2E004B27CC9B1400752ABA /* NumberFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004927CC9B1400752ABA /* NumberFormatter+Extension.swift */; };
+		7F2E005C27CC9F3300752ABA /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005A27CC9F3300752ABA /* SocketService.swift */; };
+		7F2E005D27CC9F3300752ABA /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005B27CC9F3300752ABA /* APIEndpoint.swift */; };
+		7F5AFC1E27D1A943002BECC3 /* AssetsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5AFC1D27D1A943002BECC3 /* AssetsState.swift */; };
+		7F844CDC27CFB58C00C06084 /* OrderbookDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CDB27CFB58C00C06084 /* OrderbookDataSource.swift */; };
+		7F844CDF27CFB5F300C06084 /* ReceiveOrderbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CDE27CFB5F300C06084 /* ReceiveOrderbook.swift */; };
+		7F844CE227CFB63800C06084 /* ReceiveTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CE127CFB63800C06084 /* ReceiveTransaction.swift */; };
+		7F844CE627CFB76400C06084 /* TransactionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CE427CFB76400C06084 /* TransactionDataSource.swift */; };
+		7F844CE927CFB81900C06084 /* TransactionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CE827CFB7D900C06084 /* TransactionHeaderView.swift */; };
+		7F844CF527D065A500C06084 /* AssetsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CF427D065A500C06084 /* AssetsStatus.swift */; };
+		7F844CF727D0661000C06084 /* AssetsStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CF627D0661000C06084 /* AssetsStatusViewModel.swift */; };
+		7F844CFF27D0A92000C06084 /* CurrentMarketPriceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CFE27D0A92000C06084 /* CurrentMarketPriceViewModel.swift */; };
+		7F844D0127D0A94100C06084 /* CurrentMarketPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844D0027D0A94000C06084 /* CurrentMarketPrice.swift */; };
+		7FBD63DA27D5945C00C9801C /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63D827D5945C00C9801C /* GraphViewModel.swift */; };
+		7FBD63DB27D5945C00C9801C /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63D927D5945C00C9801C /* Graph.swift */; };
+		7FBD63DD27D594B600C9801C /* CandleStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63DC27D594B600C9801C /* CandleStick.swift */; };
 		BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430C827C5C1D500A77A38 /* AppDelegate.swift */; };
 		BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */; };
-		BF0430CD27C5C1D500A77A38 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430CC27C5C1D500A77A38 /* ViewController.swift */; };
 		BF0430D227C5C1D700A77A38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF0430D127C5C1D700A77A38 /* Assets.xcassets */; };
 		BF0430D527C5C1D700A77A38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0430D327C5C1D700A77A38 /* LaunchScreen.storyboard */; };
+		BF5573C327CD43C30065B054 /* ChangeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5573C227CD43C30065B054 /* ChangeState.swift */; };
+		BF7D214227CE919C007F0DCE /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214127CE919C007F0DCE /* Double+Extension.swift */; };
+		BF7D214427CEA95A007F0DCE /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214327CEA95A007F0DCE /* MainHeaderView.swift */; };
+		BF7D214927CF0C81007F0DCE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214827CF0C81007F0DCE /* DetailViewController.swift */; };
+		BF7D214C27CF3A1A007F0DCE /* CurrentMarketPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214B27CF3A1A007F0DCE /* CurrentMarketPriceView.swift */; };
+		BF7D214E27CF4B06007F0DCE /* TransactionPriceGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214D27CF4B06007F0DCE /* TransactionPriceGraphView.swift */; };
+		BF7D215027CF4B90007F0DCE /* TransactionPriceSelectTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214F27CF4B90007F0DCE /* TransactionPriceSelectTimeView.swift */; };
+		BF7D215227CF5B0E007F0DCE /* TransactionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D215127CF5B0E007F0DCE /* TransactionHistoryView.swift */; };
+		BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5EF27C604B0005A2170 /* Ticker.swift */; };
+		BF86B5F327C60653005A2170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F227C60653005A2170 /* APIService.swift */; };
+		BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F427C606D8005A2170 /* EndPoint.swift */; };
+		BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F627C60B65005A2170 /* HTTPError.swift */; };
+		BFB8F15527CF66D300702FBB /* AssetsStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8F15427CF66D300702FBB /* AssetsStatusView.swift */; };
+		BFB9562927CCAD49001627C6 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB9562827CCAD49001627C6 /* MainViewModel.swift */; };
+		BFB9562C27CCADDC001627C6 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = BFB9562B27CCADDC001627C6 /* Starscream */; };
+		BFB9562D27CCB0F8001627C6 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004D27CC9B4B00752ABA /* Observable.swift */; };
+		BFB9562F27CCB35D001627C6 /* MainDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB9562E27CCB35D001627C6 /* MainDataSource.swift */; };
+		BFB9563027CCB3CC001627C6 /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004F27CC9B4B00752ABA /* TickerCell.swift */; };
+		BFB9563127CCB5A6001627C6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005027CC9B4B00752ABA /* MainViewController.swift */; };
+		BFB9563227CCB647001627C6 /* CoinSortControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005227CC9B4B00752ABA /* CoinSortControlView.swift */; };
+		BFB9563327CCB647001627C6 /* CoinSortSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005327CC9B4B00752ABA /* CoinSortSegmentControl.swift */; };
+		BFB9563427CCB6C5001627C6 /* OrderbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005927CC9B4B00752ABA /* OrderbookViewModel.swift */; };
+		BFB9563527CCB6C5001627C6 /* OrderbookNameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005627CC9B4B00752ABA /* OrderbookNameSpace.swift */; };
+		BFB9563627CCB6C5001627C6 /* OrderbookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005727CC9B4B00752ABA /* OrderbookTableViewCell.swift */; };
+		BFB9563727CCB6C5001627C6 /* OrderbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005527CC9B4B00752ABA /* OrderbookViewController.swift */; };
+		BFB9563927CCBD37001627C6 /* ReceiveTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB9563827CCBD37001627C6 /* ReceiveTicker.swift */; };
+		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
+		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
+		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
+		E8AC90B527C8745100C50FA3 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B427C8745100C50FA3 /* TransactionViewModel.swift */; };
+		E8AC90BA27C8BB5600C50FA3 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B927C8BB5600C50FA3 /* String+Extension.swift */; };
+		E8AC90BC27C8D12100C50FA3 /* TransactionNameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90BB27C8D12100C50FA3 /* TransactionNameSpace.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F2E004027CC9AE000752ABA /* Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
+		7F2E004127CC9AE000752ABA /* Orderbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orderbook.swift; sourceTree = "<group>"; };
+		7F2E004227CC9AE000752ABA /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		7F2E004327CC9AE000752ABA /* OrderbookEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderbookEntity.swift; sourceTree = "<group>"; };
+		7F2E004827CC9B1400752ABA /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		7F2E004927CC9B1400752ABA /* NumberFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Extension.swift"; sourceTree = "<group>"; };
+		7F2E004D27CC9B4B00752ABA /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		7F2E004F27CC9B4B00752ABA /* TickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerCell.swift; sourceTree = "<group>"; };
+		7F2E005027CC9B4B00752ABA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		7F2E005227CC9B4B00752ABA /* CoinSortControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSortControlView.swift; sourceTree = "<group>"; };
+		7F2E005327CC9B4B00752ABA /* CoinSortSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSortSegmentControl.swift; sourceTree = "<group>"; };
+		7F2E005527CC9B4B00752ABA /* OrderbookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderbookViewController.swift; sourceTree = "<group>"; };
+		7F2E005627CC9B4B00752ABA /* OrderbookNameSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderbookNameSpace.swift; sourceTree = "<group>"; };
+		7F2E005727CC9B4B00752ABA /* OrderbookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderbookTableViewCell.swift; sourceTree = "<group>"; };
+		7F2E005927CC9B4B00752ABA /* OrderbookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderbookViewModel.swift; sourceTree = "<group>"; };
+		7F2E005A27CC9F3300752ABA /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
+		7F2E005B27CC9F3300752ABA /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
+		7F5AFC1D27D1A943002BECC3 /* AssetsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsState.swift; sourceTree = "<group>"; };
+		7F844CDB27CFB58C00C06084 /* OrderbookDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderbookDataSource.swift; sourceTree = "<group>"; };
+		7F844CDE27CFB5F300C06084 /* ReceiveOrderbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveOrderbook.swift; sourceTree = "<group>"; };
+		7F844CE127CFB63800C06084 /* ReceiveTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveTransaction.swift; sourceTree = "<group>"; };
+		7F844CE427CFB76400C06084 /* TransactionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDataSource.swift; sourceTree = "<group>"; };
+		7F844CE827CFB7D900C06084 /* TransactionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHeaderView.swift; sourceTree = "<group>"; };
+		7F844CF427D065A500C06084 /* AssetsStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsStatus.swift; sourceTree = "<group>"; };
+		7F844CF627D0661000C06084 /* AssetsStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsStatusViewModel.swift; sourceTree = "<group>"; };
+		7F844CFE27D0A92000C06084 /* CurrentMarketPriceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMarketPriceViewModel.swift; sourceTree = "<group>"; };
+		7F844D0027D0A94000C06084 /* CurrentMarketPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMarketPrice.swift; sourceTree = "<group>"; };
+		7FBD63D827D5945C00C9801C /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
+		7FBD63D927D5945C00C9801C /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		7FBD63DC27D594B600C9801C /* CandleStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleStick.swift; sourceTree = "<group>"; };
 		BF0430C527C5C1D500A77A38 /* BithumbMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BithumbMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF0430C827C5C1D500A77A38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BF0430CC27C5C1D500A77A38 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BF0430D127C5C1D700A77A38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF0430D427C5C1D700A77A38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF0430D627C5C1D700A77A38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF5573C227CD43C30065B054 /* ChangeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeState.swift; sourceTree = "<group>"; };
+		BF7D214127CE919C007F0DCE /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		BF7D214327CEA95A007F0DCE /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
+		BF7D214827CF0C81007F0DCE /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		BF7D214B27CF3A1A007F0DCE /* CurrentMarketPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMarketPriceView.swift; sourceTree = "<group>"; };
+		BF7D214D27CF4B06007F0DCE /* TransactionPriceGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionPriceGraphView.swift; sourceTree = "<group>"; };
+		BF7D214F27CF4B90007F0DCE /* TransactionPriceSelectTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionPriceSelectTimeView.swift; sourceTree = "<group>"; };
+		BF7D215127CF5B0E007F0DCE /* TransactionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryView.swift; sourceTree = "<group>"; };
+		BF86B5EF27C604B0005A2170 /* Ticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticker.swift; sourceTree = "<group>"; };
+		BF86B5F227C60653005A2170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		BF86B5F427C606D8005A2170 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		BF86B5F627C60B65005A2170 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
+		BFB8F15427CF66D300702FBB /* AssetsStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsStatusView.swift; sourceTree = "<group>"; };
+		BFB9562827CCAD49001627C6 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		BFB9562E27CCB35D001627C6 /* MainDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataSource.swift; sourceTree = "<group>"; };
+		BFB9563827CCBD37001627C6 /* ReceiveTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveTicker.swift; sourceTree = "<group>"; };
+		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
+		E8AC90B027C8700500C50FA3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		E8AC90B427C8745100C50FA3 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
+		E8AC90B927C8BB5600C50FA3 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		E8AC90BB27C8D12100C50FA3 /* TransactionNameSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionNameSpace.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,12 +132,76 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFB9562C27CCADDC001627C6 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F2E004C27CC9B4B00752ABA /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				7F2E004D27CC9B4B00752ABA /* Observable.swift */,
+				BF5573C227CD43C30065B054 /* ChangeState.swift */,
+				7F5AFC1D27D1A943002BECC3 /* AssetsState.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		7F2E004E27CC9B4B00752ABA /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7F2E004F27CC9B4B00752ABA /* TickerCell.swift */,
+				7F2E005027CC9B4B00752ABA /* MainViewController.swift */,
+				BFB9562827CCAD49001627C6 /* MainViewModel.swift */,
+				BFB9562E27CCB35D001627C6 /* MainDataSource.swift */,
+				7F2E005127CC9B4B00752ABA /* View */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		7F2E005127CC9B4B00752ABA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7F2E005227CC9B4B00752ABA /* CoinSortControlView.swift */,
+				7F2E005327CC9B4B00752ABA /* CoinSortSegmentControl.swift */,
+				BF7D214327CEA95A007F0DCE /* MainHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7F2E005427CC9B4B00752ABA /* Orderbook */ = {
+			isa = PBXGroup;
+			children = (
+				7F2E005527CC9B4B00752ABA /* OrderbookViewController.swift */,
+				7F2E005727CC9B4B00752ABA /* OrderbookTableViewCell.swift */,
+				7F2E005927CC9B4B00752ABA /* OrderbookViewModel.swift */,
+				7F844CDB27CFB58C00C06084 /* OrderbookDataSource.swift */,
+				7F2E005627CC9B4B00752ABA /* OrderbookNameSpace.swift */,
+			);
+			path = Orderbook;
+			sourceTree = "<group>";
+		};
+		7F2E005E27CCA15400752ABA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7F2E004E27CC9B4B00752ABA /* Main */,
+				BF7D214727CF0C6E007F0DCE /* Detail */,
+				E8AC90A927C71DFC00C50FA3 /* Transaction */,
+				7F2E005427CC9B4B00752ABA /* Orderbook */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7F844CE727CFB7D900C06084 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7F844CE827CFB7D900C06084 /* TransactionHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BF0430BC27C5C1D500A77A38 = {
 			isa = PBXGroup;
 			children = (
@@ -56,12 +223,96 @@
 			children = (
 				BF0430C827C5C1D500A77A38 /* AppDelegate.swift */,
 				BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */,
-				BF0430CC27C5C1D500A77A38 /* ViewController.swift */,
+				7F2E005E27CCA15400752ABA /* View */,
+				BF86B5F127C60638005A2170 /* Network */,
+				BF86B5EE27C602D4005A2170 /* Model */,
+				E8AC90B627C8BB2300C50FA3 /* Extension */,
+				7F2E004C27CC9B4B00752ABA /* Util */,
 				BF0430D127C5C1D700A77A38 /* Assets.xcassets */,
 				BF0430D327C5C1D700A77A38 /* LaunchScreen.storyboard */,
 				BF0430D627C5C1D700A77A38 /* Info.plist */,
 			);
 			path = BithumbMarket;
+			sourceTree = "<group>";
+		};
+		BF7D214727CF0C6E007F0DCE /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				BF7D214A27CF39AF007F0DCE /* View */,
+				BF7D214827CF0C81007F0DCE /* DetailViewController.swift */,
+				7F844CFE27D0A92000C06084 /* CurrentMarketPriceViewModel.swift */,
+				7F844CF627D0661000C06084 /* AssetsStatusViewModel.swift */,
+				7FBD63D827D5945C00C9801C /* GraphViewModel.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		BF7D214A27CF39AF007F0DCE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7FBD63D927D5945C00C9801C /* Graph.swift */,
+				BF7D214B27CF3A1A007F0DCE /* CurrentMarketPriceView.swift */,
+				BF7D214D27CF4B06007F0DCE /* TransactionPriceGraphView.swift */,
+				BF7D214F27CF4B90007F0DCE /* TransactionPriceSelectTimeView.swift */,
+				BF7D215127CF5B0E007F0DCE /* TransactionHistoryView.swift */,
+				BFB8F15427CF66D300702FBB /* AssetsStatusView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BF86B5EE27C602D4005A2170 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7FBD63DC27D594B600C9801C /* CandleStick.swift */,
+				7F2E004227CC9AE000752ABA /* Message.swift */,
+				7F2E004127CC9AE000752ABA /* Orderbook.swift */,
+				7F2E004327CC9AE000752ABA /* OrderbookEntity.swift */,
+				BF86B5EF27C604B0005A2170 /* Ticker.swift */,
+				7F844D0027D0A94000C06084 /* CurrentMarketPrice.swift */,
+				E8AC90B027C8700500C50FA3 /* Transaction.swift */,
+				7F2E004027CC9AE000752ABA /* Market.swift */,
+				BFB9563827CCBD37001627C6 /* ReceiveTicker.swift */,
+				7F844CDE27CFB5F300C06084 /* ReceiveOrderbook.swift */,
+				7F844CE127CFB63800C06084 /* ReceiveTransaction.swift */,
+				7F844CF427D065A500C06084 /* AssetsStatus.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BF86B5F127C60638005A2170 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				7F2E005B27CC9F3300752ABA /* APIEndpoint.swift */,
+				7F2E005A27CC9F3300752ABA /* SocketService.swift */,
+				BF86B5F227C60653005A2170 /* APIService.swift */,
+				BF86B5F627C60B65005A2170 /* HTTPError.swift */,
+				BF86B5F427C606D8005A2170 /* EndPoint.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E8AC90A927C71DFC00C50FA3 /* Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				7F844CE727CFB7D900C06084 /* View */,
+				E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */,
+				E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */,
+				7F844CE427CFB76400C06084 /* TransactionDataSource.swift */,
+				E8AC90B427C8745100C50FA3 /* TransactionViewModel.swift */,
+				E8AC90BB27C8D12100C50FA3 /* TransactionNameSpace.swift */,
+			);
+			path = Transaction;
+			sourceTree = "<group>";
+		};
+		E8AC90B627C8BB2300C50FA3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7F2E004827CC9B1400752ABA /* UIColor+Extension.swift */,
+				E8AC90B927C8BB5600C50FA3 /* String+Extension.swift */,
+				7F2E004927CC9B1400752ABA /* NumberFormatter+Extension.swift */,
+				BF7D214127CE919C007F0DCE /* Double+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,6 +331,9 @@
 			dependencies = (
 			);
 			name = BithumbMarket;
+			packageProductDependencies = (
+				BFB9562B27CCADDC001627C6 /* Starscream */,
+			);
 			productName = BithumbMarket;
 			productReference = BF0430C527C5C1D500A77A38 /* BithumbMarket.app */;
 			productType = "com.apple.product-type.application";
@@ -108,6 +362,9 @@
 				Base,
 			);
 			mainGroup = BF0430BC27C5C1D500A77A38;
+			packageReferences = (
+				BFB9562A27CCADDC001627C6 /* XCRemoteSwiftPackageReference "Starscream" */,
+			);
 			productRefGroup = BF0430C627C5C1D500A77A38 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -134,9 +391,60 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF0430CD27C5C1D500A77A38 /* ViewController.swift in Sources */,
+				7FBD63DD27D594B600C9801C /* CandleStick.swift in Sources */,
+				7FBD63DA27D5945C00C9801C /* GraphViewModel.swift in Sources */,
+				7FBD63DB27D5945C00C9801C /* Graph.swift in Sources */,
+				7F844D0127D0A94100C06084 /* CurrentMarketPrice.swift in Sources */,
+				7F844CFF27D0A92000C06084 /* CurrentMarketPriceViewModel.swift in Sources */,
+				7F844CE927CFB81900C06084 /* TransactionHeaderView.swift in Sources */,
+				7F844CE627CFB76400C06084 /* TransactionDataSource.swift in Sources */,
+				7F844CE227CFB63800C06084 /* ReceiveTransaction.swift in Sources */,
+				BFB9563927CCBD37001627C6 /* ReceiveTicker.swift in Sources */,
+				7F844CDF27CFB5F300C06084 /* ReceiveOrderbook.swift in Sources */,
+				7F844CDC27CFB58C00C06084 /* OrderbookDataSource.swift in Sources */,
+				BFB9563227CCB647001627C6 /* CoinSortControlView.swift in Sources */,
+				BFB9563727CCB6C5001627C6 /* OrderbookViewController.swift in Sources */,
+				BFB9563327CCB647001627C6 /* CoinSortSegmentControl.swift in Sources */,
+				7F844CF527D065A500C06084 /* AssetsStatus.swift in Sources */,
+				BFB9563127CCB5A6001627C6 /* MainViewController.swift in Sources */,
+				BF7D214E27CF4B06007F0DCE /* TransactionPriceGraphView.swift in Sources */,
+				BF7D214227CE919C007F0DCE /* Double+Extension.swift in Sources */,
+				BFB9563027CCB3CC001627C6 /* TickerCell.swift in Sources */,
+				BFB9562D27CCB0F8001627C6 /* Observable.swift in Sources */,
+				7F2E005C27CC9F3300752ABA /* SocketService.swift in Sources */,
+				7F2E005D27CC9F3300752ABA /* APIEndpoint.swift in Sources */,
+				7F2E004A27CC9B1400752ABA /* UIColor+Extension.swift in Sources */,
+				7F2E004B27CC9B1400752ABA /* NumberFormatter+Extension.swift in Sources */,
+				7F2E004427CC9AE000752ABA /* Market.swift in Sources */,
+				BFB9562F27CCB35D001627C6 /* MainDataSource.swift in Sources */,
+				7F2E004527CC9AE000752ABA /* Orderbook.swift in Sources */,
+				7F2E004627CC9AE000752ABA /* Message.swift in Sources */,
+				7F5AFC1E27D1A943002BECC3 /* AssetsState.swift in Sources */,
+				BFB9563627CCB6C5001627C6 /* OrderbookTableViewCell.swift in Sources */,
+				7F2E004727CC9AE000752ABA /* OrderbookEntity.swift in Sources */,
+				7F844CF727D0661000C06084 /* AssetsStatusViewModel.swift in Sources */,
+				BFB9563427CCB6C5001627C6 /* OrderbookViewModel.swift in Sources */,
+				E8AC90BC27C8D12100C50FA3 /* TransactionNameSpace.swift in Sources */,
+				E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */,
+				BF5573C327CD43C30065B054 /* ChangeState.swift in Sources */,
+				BF7D215027CF4B90007F0DCE /* TransactionPriceSelectTimeView.swift in Sources */,
+				BFB8F15527CF66D300702FBB /* AssetsStatusView.swift in Sources */,
+				BFB9563527CCB6C5001627C6 /* OrderbookNameSpace.swift in Sources */,
+				BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */,
+				BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */,
+				E8AC90BA27C8BB5600C50FA3 /* String+Extension.swift in Sources */,
+				E8AC90B527C8745100C50FA3 /* TransactionViewModel.swift in Sources */,
+				BF7D214927CF0C81007F0DCE /* DetailViewController.swift in Sources */,
+				BFB9562927CCAD49001627C6 /* MainViewModel.swift in Sources */,
+				BF86B5F327C60653005A2170 /* APIService.swift in Sources */,
+				BF86B5F027C604B0005A2170 /* Ticker.swift in Sources */,
+				BF7D214427CEA95A007F0DCE /* MainHeaderView.swift in Sources */,
 				BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */,
 				BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */,
+				BF7D215227CF5B0E007F0DCE /* TransactionHistoryView.swift in Sources */,
+				BF7D214C27CF3A1A007F0DCE /* CurrentMarketPriceView.swift in Sources */,
+				E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */,
+				E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +585,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 27BW92Z482;
+				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BithumbMarket/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -304,7 +612,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 27BW92Z482;
+				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BithumbMarket/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -346,6 +654,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BFB9562A27CCADDC001627C6 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BFB9562B27CCADDC001627C6 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFB9562A27CCADDC001627C6 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BF0430BD27C5C1D500A77A38 /* Project object */;
 }
