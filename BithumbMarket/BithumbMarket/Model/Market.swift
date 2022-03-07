@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Market: Decodable {
+struct Market: Decodable, Hashable {
     
     var openingPrice: String
     var closingPrice: String
@@ -22,25 +22,25 @@ struct Market: Decodable {
     var fluctateRate24H: String
     
     func computePriceChangeState() -> ChangeState {
-        return setChangeState(openingPrice, closingPrice)
-    }
-    
-    func computeClosepriceState(to newClosePrice: String) -> ChangeState {
-        return setChangeState(closingPrice, newClosePrice)
-    }
-    
-    func isNotEqual(_ newClosePrice: String) -> Bool {
-        closingPrice != newClosePrice
-    }
-
-    private func setChangeState(_ priceA: String,_ priceB : String) -> ChangeState {
-        if priceA.equalStringDouble(priceB) {
+        if fluctate24H.convertDouble() == 0 {
             return .even
         }
         
-        if priceA.isLessStringDouble(priceB) {
+        if fluctate24H.convertDouble() > 0 {
             return .rise
         }
         return .fall
     }
+    
+    func computeClosepriceState(to newClosePrice: String) -> ChangeState {
+        if closingPrice.equalStringDouble(newClosePrice) {
+            return .even
+        }
+        
+        if closingPrice.isLessStringDouble(newClosePrice) {
+            return .rise
+        }
+        return .fall
+    }
+
 }

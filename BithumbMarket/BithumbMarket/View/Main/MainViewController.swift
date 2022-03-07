@@ -9,18 +9,15 @@ import UIKit
 
 final class MainViewController: UIViewController {
     
-    private let datasource: MainDataSource
     private let viewmodel: MainViewModel
     
-    init(viewmodel: MainViewModel, datasource: MainDataSource) {
+    init(viewmodel: MainViewModel) {
         self.viewmodel = viewmodel
-        self.datasource = datasource
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         self.viewmodel = .init()
-        self.datasource = .init()
         super.init(coder: coder)
     }
     
@@ -32,6 +29,15 @@ final class MainViewController: UIViewController {
         tableView.delaysContentTouches = false
         return tableView
     }()
+    
+    private lazy var diffableDatasource = MainDiffableDataSource(tableView: mainTableView) { tableView, indexPath, ticker in
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TickerCell.reuseidentifier, for: indexPath) as? TickerCell else {
+            return .init()
+        }
+        cell.selectionStyle = .none
+        cell.configure(ticker: ticker)
+        return cell
+    }
     
     private lazy var coinSortView: CoinSortControlView = {
         let sortView = CoinSortControlView()
@@ -80,67 +86,55 @@ final class MainViewController: UIViewController {
     
     private func configureTableView() {
         mainTableView.register(TickerCell.self, forCellReuseIdentifier: TickerCell.reuseidentifier)
-        mainTableView.dataSource = datasource
+        mainTableView.dataSource = diffableDatasource
+        mainTableView.delegate = self
     }
     
     private func bind() {
-        
         viewmodel.tickers.subscribe { [weak self] tickers in
-            self?.datasource.items = tickers
+            self?.diffableDatasource.updateItems(tickers: tickers)
         }
         
-        viewmodel.filterTickers.subscribe { [weak self] tickers in
-            self?.datasource.filterItems = tickers
-        }
-        
-        viewmodel.isFilter.subscribe { [weak self] filter in
-            if filter != self?.datasource.isFiltering {
-                self?.updateTableView()
-            }
-            self?.datasource.isFiltering = filter
-        }
-        
-        viewmodel.updateTableHandler = updateTableView
-        viewmodel.changeIndexHandler = updateTableViewRows(index:state:)
+        viewmodel.updateTickersHandler = updateTableView
+        viewmodel.changeIndexHandler = updateTableViewRows(index:)
         coinSortView.sortControlHandler = viewmodel.executeFilterTickers
     }
     
-    private func updateTableView() {
+    private func updateTableView(tickers: [Ticker]) {
+        diffableDatasource.appendSnapshot(tickers: tickers)
         DispatchQueue.main.async { [weak self] in
-            self?.mainTableView.reloadData()
+            guard let self = self else { return }
+            if self.diffableDatasource.isEmptyItems() {
+                self.mainTableView.backgroundView = TableEmptyView()
+            } else {
+                self.mainTableView.backgroundView = .init()
+            }
         }
     }
     
-    private func updateTableViewRows(index: Int, state: ChangeState) {
-        DispatchQueue.main.async { [weak self] in
-            UIView.performWithoutAnimation {
-                self?.updateRows(index: index)
-            }
-            let cell = self?.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
-            cell?.updateAnimation(state: state)
+    private func updateTableViewRows(index: Int) {
+        guard let ticker = self.diffableDatasource.itemIdentifier(for: IndexPath(row: index, section: 0)) else {
+            return
         }
-    }
-    
-    private func updateRows(index: Int) {
-        if viewmodel.isFilter.value {
-            if datasource.filterItems.count > index {
-                updateVisibleRows(index: index)
-            }
-        } else {
-            updateVisibleRows(index: index)
-        }
-    }
-    
-    private func updateVisibleRows(index: Int) {
-        mainTableView.indexPathsForVisibleRows?.forEach({ indexPath in
-            if indexPath.row == index {
-                reloadRow(indexPath: indexPath)
-            }
+        self.diffableDatasource.reloadSnapshot(ticker: ticker, completion: {
+            let cell = self.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
+            cell?.updateAnimation(state: ticker.change)
         })
     }
     
-    private func reloadRow(indexPath: IndexPath) {
-        mainTableView.reloadRows(at: [indexPath], with: .none)
+}
+
+extension MainViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let ticker = diffableDatasource.itemIdentifier(for: indexPath) else {
+            return
+        }
+        self.moveDetailViewController(ticker: ticker)
     }
     
+    private func moveDetailViewController(ticker: Ticker) {
+        let detailViewController = DetailViewController(ticker: ticker)
+        self.navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }

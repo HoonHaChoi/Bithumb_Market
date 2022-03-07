@@ -39,10 +39,10 @@ final class MainHeaderView: UIView {
             label.textColor = .typoColor.withAlphaComponent(0.7)
         }
                 
-        symbolsTitleLabel.text = "가산자산명"
-        currentPriceTitleLabel.text = "현재가"
-        fluctuateTitleLabel.text = "변동률"
-        accTradeValueTitleLabel.text = "거래금액"
+        symbolsTitleLabel.text = MainHeaderViewNameSpace.symbolsTitle
+        currentPriceTitleLabel.text = MainHeaderViewNameSpace.currentPriceTitle
+        fluctuateTitleLabel.text = MainHeaderViewNameSpace.fluctuateTitle
+        accTradeValueTitleLabel.text = MainHeaderViewNameSpace.accTradeValueTitle
         
         accTradeValueTitleLabel.textAlignment = .right
         fluctuateTitleLabel.textAlignment = .right

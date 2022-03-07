@@ -22,7 +22,7 @@ final class CoinSortControlView: UIView {
     }
     
     private let coinsortSegmentControl: CoinSortSegmentControl = {
-        let segmentControl = CoinSortSegmentControl(items: ["목록", "관심"])
+        let segmentControl = CoinSortSegmentControl(items: [MainViewNameSpace.segmentListTitle, MainViewNameSpace.segmentLikeTitle])
         segmentControl.addTarget(self, action: #selector(changeSegmentedControlLinePosition), for: .valueChanged)
         segmentControl.translatesAutoresizingMaskIntoConstraints = false
         return segmentControl

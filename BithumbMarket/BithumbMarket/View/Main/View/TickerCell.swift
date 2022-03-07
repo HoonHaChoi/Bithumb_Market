@@ -50,9 +50,9 @@ final class TickerCell: UITableViewCell {
     }
     
     func updateAnimation(state: ChangeState) {
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.backgroundColor = state.backgroundColor.withAlphaComponent(0.2)
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.allowUserInteraction]) { [weak self] in
             self?.createCurrentUnderLineLayer(color: state.backgroundColor)
+            self?.backgroundColor = state.backgroundColor.withAlphaComponent(0.2)
         } completion: { _ in
             self.currentPriceLabel.layer.sublayers?.removeLast()
             self.backgroundColor = .systemBackground
