@@ -7,14 +7,7 @@
 
 import Foundation
 
-protocol OrderbookViewModelType {
-    var orderbook: Observable<Orderbook> { get }
-    var updateTableHandler: (() -> Void)? { get set }
-    var errorHandler: ((HTTPError) -> Void)? { get set }
-    func featchOrderbook(completion: @escaping () -> Void)
-}
-
-final class OrderbookViewModel: OrderbookViewModelType {
+final class OrderbookViewModel {
 
     var symbol: String
     var orderbook: Observable<Orderbook>

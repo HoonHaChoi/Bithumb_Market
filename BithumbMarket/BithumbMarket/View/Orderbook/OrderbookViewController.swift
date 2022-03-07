@@ -10,9 +10,9 @@ import UIKit
 class OrderbookViewController: UIViewController {
     
     private let dataSource: OrderbookDataSource
-    private var viewModel: OrderbookViewModelType
+    private var viewModel: OrderbookViewModel
     
-    init(viewModel: OrderbookViewModelType = OrderbookViewModel(symbol: "BTC_KRW"), dataSource: OrderbookDataSource) {
+    init(viewModel: OrderbookViewModel = OrderbookViewModel(symbol: "BTC_KRW"), dataSource: OrderbookDataSource = .init()) {
         self.viewModel = viewModel
         self.dataSource = dataSource
         super.init(nibName: nil, bundle: nil)
