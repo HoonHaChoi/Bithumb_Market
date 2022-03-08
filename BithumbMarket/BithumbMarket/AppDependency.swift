@@ -21,7 +21,7 @@ struct AppDependency {
     }
     
     func orderbookViewControllerFactory(symbol: String) -> OrderbookViewController {
-        OrderbookViewController(viewModel: .init(symbol: symbol), dataSource: .init())
+        return initialOrderbookViewController(symbol: symbol)
     }
     
     func initialMainViewController() -> MainViewController {
@@ -72,6 +72,19 @@ struct AppDependency {
         transactionViewController.fetchTransactionHandler = transactionViewModel.fetchTransaction
         transactionViewController.bindHandler = transactionViewModel.transactionData.subscribe(bind: transactionViewController.updateDataSource)
         return transactionViewController
+    }
+    
+    private func initialOrderbookViewController(symbol: String) -> OrderbookViewController {
+        let orderbookViewModel = OrderbookViewModel(service: service,
+                                                    symbol: symbol)
+        let orderbookViewController = OrderbookViewController(dataSource: .init())
+        orderbookViewController.fetchHandler = orderbookViewModel.fetchOrderbook
+        
+        orderbookViewController.bindHandler = orderbookViewModel.orderbook.subscribe(bind: orderbookViewController.updateDataSource)
+        
+        orderbookViewModel.updateHandler = orderbookViewController.updateTableView
+ 
+        return orderbookViewController
     }
     
 }

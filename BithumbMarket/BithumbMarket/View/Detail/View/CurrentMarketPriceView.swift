@@ -32,6 +32,13 @@ final class CurrentMarketPriceView: UIView {
         setConstraintLayout()
     }
     
+    var orderbookButtonHandler: (() -> Void)?
+    
+    @objc
+    func showOrderbook() {
+        orderbookButtonHandler?()
+    }
+
     func updateUI(_ currentPrice: CurrentMarketPrice) {
         currentPriceLabel.text = currentPrice.currentPrice.withComma()
         changePriceLabel.text = currentPrice.changePrice.withComma()
@@ -61,6 +68,7 @@ extension CurrentMarketPriceView {
         orderBookButton.titleLabel?.font = .boldSystemFont(ofSize: 17)
         orderBookButton.backgroundColor = .actionBackgroundPrimary
         orderBookButton.layer.cornerRadius = 10
+        orderBookButton.addTarget(self, action: #selector(showOrderbook), for: .touchUpInside)
         
         currentPriceLabel.textColor = .riseColor
         changePriceLabel.textColor = .riseColor

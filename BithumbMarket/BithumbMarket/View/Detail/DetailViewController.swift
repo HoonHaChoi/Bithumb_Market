@@ -84,6 +84,7 @@ final class DetailViewController: UIViewController {
         configureScrollView()
         configureUI()
         
+        currentMarketPriceView.orderbookButtonHandler = moveOrderbookViewController
         transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
         
         _ = bindPriceHandler
@@ -148,6 +149,9 @@ final class DetailViewController: UIViewController {
         self.navigationController?.pushViewController(transactionViewControllerFactory(symbol), animated: true)
     }
     
+    private func moveOrderbookViewController() {
+        self.navigationController?.pushViewController(orderbookViewControllerFactory(symbol), animated: true)
+    }
 }
 
 extension DetailViewController {
