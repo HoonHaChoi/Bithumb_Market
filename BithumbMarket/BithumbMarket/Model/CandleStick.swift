@@ -35,4 +35,13 @@ extension GraphData {
         self.minPrice = try container.decode(String.self)
         self.unitsTraded = try container.decode(String.self)
     }
+    
+    func toEntity() -> GraphDataEntity {
+        .init(time: self.time,
+              openPrice: self.openPrice,
+              closePrice: self.closPrice,
+              minPrice: self.minPrice,
+              maxPrice: self.maxPrice,
+              unitsTraded: self.unitsTraded)
+    }
 }
