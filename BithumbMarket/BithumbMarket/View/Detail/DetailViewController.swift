@@ -9,22 +9,31 @@ import UIKit
 
 final class DetailViewController: UIViewController {
     
-    private var currentMarketPriceViewModel: CurrentMarketPriceViewModel
-    private var assetsStatusViewModel: AssetsStatusViewModel
-    private var detailViewModel: DetailViewModel
-    private let ticker: Ticker
+    private let symbol: String
     
-    init(ticker: Ticker) {
-        self.ticker = ticker
-        self.currentMarketPriceViewModel = CurrentMarketPriceViewModel(symbol: ticker.symbol)
-        self.assetsStatusViewModel = AssetsStatusViewModel(symbol: ticker.symbol)
-        self.detailViewModel = DetailViewModel()
+    private var transactionViewControllerFactory: (String) -> UIViewController
+    private var orderbookViewControllerFactory: (String) -> UIViewController
+    
+    init(symbol: String,
+         transactionViewControllerFactory: @escaping (String) -> UIViewController,
+         orderbookViewControllerFactory: @escaping (String) -> UIViewController) {
+        self.symbol = symbol
+        self.transactionViewControllerFactory = transactionViewControllerFactory
+        self.orderbookViewControllerFactory = orderbookViewControllerFactory
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("")
     }
+    
+    var fetchAssetsStatusHandler: (() -> Void)?
+    var fetchCurrentMarketPrice: (() -> Void)?
+    var updateCurrentMarketPriceHandler: (() -> Void)?//
+    var likeHandler: Bool?
+    var updateLikeHandler: Result<Bool, CoreDataError>?
+    var bindPriceHandler: Void?
+    var bindAssetsStatusHandler: Void?
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -75,15 +84,15 @@ final class DetailViewController: UIViewController {
         configureScrollView()
         configureUI()
         
-        bindPriceView()
-        bindAssetsStatusView()
-        assetsStatusViewModel.fetchAssetsStatus()
-        currentMarketPriceViewModel.fetchPrice()
+        _ = bindPriceHandler
+        _ = bindAssetsStatusHandler
+        fetchAssetsStatusHandler?()
+        fetchCurrentMarketPrice?()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        currentMarketPriceViewModel.updatePrice()
+        updateCurrentMarketPriceHandler?()
     }
     
     private lazy var likeButton: UIButton = {
@@ -96,16 +105,21 @@ final class DetailViewController: UIViewController {
     }()
     
     private func configureNavigationBar() {
-        title = ticker.symbol
+        title = symbol
         navigationController?.isNavigationBarHidden = false
-        let hasSymbol = detailViewModel.hasLike(symbol: ticker.symbol)
+        guard let hasSymbol = likeHandler else {
+            return
+        }
         likeButton.isSelected = hasSymbol
         likeButton.tintColor = likeButton.isSelected ? .mainColor : .textSecondary
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: likeButton)
     }
     
     @objc private func likeBarButtonAction(_ sender: UIButton) {
-        switch detailViewModel.updateLike(symbol: ticker.symbol) {
+        guard let updateLikeHandler = updateLikeHandler else {
+            return
+        }
+        switch updateLikeHandler {
         case .success(_):
             likeButton.isSelected = !likeButton.isSelected
             likeButton.tintColor = likeButton.isSelected ? .mainColor : .textSecondary
@@ -115,19 +129,16 @@ final class DetailViewController: UIViewController {
         }
     }
     
-    private func bindPriceView() {
-        currentMarketPriceViewModel.price.subscribe { [weak self] observer in
-            DispatchQueue.main.async {
-                self?.currentMarketPriceView.updateUI(observer)
-            }
+    lazy var updateAssetsStatusView = { [weak self] (status: AssetsStatusData) -> Void in
+        DispatchQueue.main.async {
+            print(status)
+            self?.assetsStatusView.updateUI(status)
         }
     }
     
-    private func bindAssetsStatusView() {
-        assetsStatusViewModel.assetsStatus.subscribe { [weak self] observer in
-            DispatchQueue.main.async {
-                self?.assetsStatusView.updateUI(observer)
-            }
+    lazy var updatePriceView = { [weak self] (price: CurrentMarketPrice) -> Void in
+        DispatchQueue.main.async {
+            self?.currentMarketPriceView.updateUI(price)
         }
     }
     
