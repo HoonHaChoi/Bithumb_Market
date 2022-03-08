@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="GraphChartEntity" representedClassName="GraphChartEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="graphData" optional="YES" attributeType="Transformable" customClassName="[GraphDataEntity]"/>
+        <attribute name="graphData" optional="YES" attributeType="Transformable" valueTransformerName="GraphDataEntityValueTransformer" customClassName="[GraphDataEntity]"/>
         <attribute name="interval" optional="YES" attributeType="String"/>
         <relationship name="graphEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GraphEntity" inverseName="graphChartEntity" inverseEntity="GraphEntity"/>
     </entity>
