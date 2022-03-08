@@ -80,11 +80,8 @@ struct AppDependency {
                                                     symbol: ticker.paymentCurrency)
         let orderbookViewController = OrderbookViewController(dataSource: .init())
         orderbookViewController.fetchHandler = orderbookViewModel.fetchOrderbook
-        
-        orderbookViewController.bindHandler = orderbookViewModel.orderbook.subscribe(bind: orderbookViewController.updateDataSource)
-        
+        orderbookViewModel.orderbook.bind = orderbookViewController.updateDataSource
         orderbookViewModel.updateHandler = orderbookViewController.updateTableView
- 
         return orderbookViewController
     }
     

@@ -24,11 +24,10 @@ final class OrderbookViewModel {
     var errorHandler: ((HTTPError) -> Void)?
     var updateHandler: (() -> Void)?
     
-    lazy var fetchOrderbook = { 
-        self.service.request(endpoint: .orderBook(symbol: self.symbol)) { [weak self] (result: Result<Orderbook, HTTPError>) in
+    func fetchOrderbook() {
+        service.request(endpoint: .orderBook(symbol: symbol)) { [weak self] (result: Result<Orderbook, HTTPError>) in
             switch result {
             case .success(let success):
-                print(success)
                 self?.orderbook.value = success.data
                 self?.updateHandler?()
                 self?.sendMessage()
@@ -97,7 +96,6 @@ final class OrderbookViewModel {
             }
         }
         order.sort{ Double($0.price) ?? 0 > Double($1.price) ?? 0 }
-        
         return order
     }
     

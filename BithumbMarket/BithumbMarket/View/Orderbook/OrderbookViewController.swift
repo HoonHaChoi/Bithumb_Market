@@ -32,14 +32,13 @@ class OrderbookViewController: UIViewController {
     }()
     
     var fetchHandler: (() -> Void)?
-    var bindHandler: Void?
     
-    lazy var updateDataSource = { [weak self] (orderbook: OrderbookData) -> Void in
+    lazy var updateDataSource: ((OrderbookData) -> Void)? = { [weak self] orderbook in
         self?.dataSource.items = orderbook
     }
     
-    lazy var updateTableView = {
-        DispatchQueue.main.async { [weak self] in
+    lazy var updateTableView = { [weak self] in
+        DispatchQueue.main.async {
             self?.orderbookTableView.reloadData()
         }
     }
@@ -58,12 +57,11 @@ class OrderbookViewController: UIViewController {
         super.viewDidLoad()
         title = OrderbookNameSpace.navigationTitle
         configureTableView()
-        _ = bindHandler
+        fetchHandler?()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchHandler?()
         scrollToCenter()
    }
     
