@@ -24,4 +24,12 @@ struct TransactionList: Codable {
     let contDtm: String
     let updn: String
     let symbol: String
+    
+    func toTransaction() -> TransactionData {
+        .init(transactionDate: contDtm,
+              type: buySellGb,
+              unitsTraded: contQty,
+              price: contPrice,
+              total: contAmt)
+    }
 }

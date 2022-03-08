@@ -17,13 +17,12 @@ final class TransactionViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        self.datasource = .init()
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     private lazy var headerView: TransactionHeaderView = {
-        let view = TransactionHeaderView()
-        return view
+        let transactionHeaderView = TransactionHeaderView()
+        return transactionHeaderView
     }()
     
     private lazy var tableView: UITableView = {

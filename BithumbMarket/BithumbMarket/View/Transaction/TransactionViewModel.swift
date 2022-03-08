@@ -25,7 +25,7 @@ final class TransactionViewModel {
     var errorHandler: ((HTTPError) -> Void)?
     
     func fetchTransaction() {
-        self.service.request(endpoint: .transactionHistory(symbol: self.symbol)) { [weak self] (result: Result<Transaction, HTTPError>)  in
+        service.request(endpoint: .transactionHistory(symbol: symbol)) { [weak self] (result: Result<Transaction, HTTPError>)  in
             guard let self = self else { return }
             switch result {
             case .success(let transaction):
@@ -53,14 +53,7 @@ final class TransactionViewModel {
             switch result {
             case .success(let transaction):
                 if let data = transaction.content.list.first {
-                    let transactionData = TransactionData(
-                        transactionDate: data.contDtm,
-                        type: data.buySellGb,
-                        unitsTraded: data.contQty,
-                        price: data.contPrice,
-                        total: data.contAmt
-                    )
-                    self.transactionData.value.append(transactionData)
+                    self.transactionData.value.append(data.toTransaction())
                     self.insertTableHandler?()
                 }
             case .failure(let error):
