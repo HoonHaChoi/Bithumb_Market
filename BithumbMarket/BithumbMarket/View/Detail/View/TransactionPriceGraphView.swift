@@ -21,29 +21,26 @@ final class TransactionPriceGraphView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
       
-        viewmodel.fetchGraphPrice() {
+        viewmodel.fetchGraph(symbol: "BTC", interval: .day, completion: { graph in
+        
             DispatchQueue.main.async {
-                self.drawgraph()
+                self.graph = Graph(
+                    frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 300),
+                    values: graph.closePriceList,
+                    date: graph.dateList,
+                    openPrice: graph.openPriceList,
+                    maxPrice: graph.maxPriceList,
+                    minPrice: graph.minPriceList
+                )
+                
                 self.setupView()
             }
-        }
+        })
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        drawgraph()
         setupView()
-    }
-    
-    private func drawgraph() {
-        graph = Graph(
-            frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 300),
-            values: self.viewmodel.closePriceList,
-            date: self.viewmodel.dateList,
-            openPrice: self.viewmodel.openPriceList,
-            maxPrice: self.viewmodel.maxPriceList,
-            minPrice: self.viewmodel.minPriceList
-        )
     }
     
 }

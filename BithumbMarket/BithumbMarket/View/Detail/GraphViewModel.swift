@@ -9,13 +9,6 @@ import UIKit
 
 class GraphViewModel {
     
-    let symbole = "BTC"
-    var dateList: [String] = []
-    var closePriceList: [Double] = []
-    var openPriceList: [Double] = []
-    var minPriceList: [Double] = []
-    var maxPriceList: [Double] = []
-
     private var service: APIService
     private let storage: GraphStorage
     
@@ -25,48 +18,6 @@ class GraphViewModel {
     }
     
     var errorHandler: ((Error) -> Void)?
-    
-    func fetchGraphPrice(completion: @escaping () -> Void) {
-        service.request(endpoint: .candlestick(symbol: symbole, interval: .day)) { [weak self] (result: Result<CandleStick, HTTPError>) in
-            guard let self = self else { return }
-            switch result {
-            case .success(let model):
-
-                print(model.data.count)
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy.MM.dd HH:mm"
-                print(model.data[model.data.count - 30])
-
-                for i in model.data.count - 30..<model.data.count {
-
-                    let date = dateFormatter.string(from: model.data[i].date)
-                    self.dateList.append(date)
-
-                    let openPrice = model.data[i].openPrice
-                    self.openPriceList.append(openPrice.convertDouble())
-
-                    let closPrice = model.data[i].closPrice
-                    self.closePriceList.append(closPrice.convertDouble())
-
-                    let maxPrice = model.data[i].maxPrice
-                    self.maxPriceList.append(maxPrice.convertDouble())
-
-                    let minPrice = model.data[i].minPrice
-                    self.minPriceList.append(minPrice.convertDouble())
-                }
-
-//                print((model.data.first?.date)!)
-//                print(model.data[model.data.count - 100].date)
-//                print(model.data.last!.date)
-                completion()
-
-            case .failure(let error):
-                print(error)
-                completion()
-            }
-        }
-        
-    }
     
     func fetchGraph(symbol: String, interval: ChartIntervals, completion: @escaping (GraphData) -> Void) {
         if let graphData = hasGraphData(symbol: symbol, interval: interval) {
@@ -112,7 +63,7 @@ class GraphViewModel {
     }
     
     private func fetchCandleStick(symbol: String, interval: ChartIntervals, compleiton: @escaping ([GraphDataDTO]) -> Void) {
-        service.request(endpoint: .candlestick(symbol: symbole, interval: interval)) { [weak self] (result: Result<CandleStick, HTTPError>) in
+        service.request(endpoint: .candlestick(symbol: symbol, interval: interval)) { [weak self] (result: Result<CandleStick, HTTPError>) in
             switch result {
             case .success(let candleStick):
                 compleiton(candleStick.data)
