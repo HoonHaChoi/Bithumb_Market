@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransactionViewController: UIViewController {
+final class TransactionViewController: UIViewController {
     
     private let datasource: TransactionDataSource
     
@@ -36,24 +36,7 @@ class TransactionViewController: UIViewController {
         return view
     }()
     
-    var bindHandler: Void?
     var fetchTransactionHandler: (() -> Void)?
-    
-    lazy var updateDataSource = { [weak self] (transactions: [TransactionData]) -> Void in
-        self?.datasource.items = transactions
-    }
-    
-    lazy var updateTableView = {
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-        }
-    }
-    
-    lazy var insertRowTableView = {
-        UIView.performWithoutAnimation {
-            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,21 +45,31 @@ class TransactionViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.shadowImage = UIImage()
         setupView()
-        _ = bindHandler
         fetchTransactionHandler?()
     }
+    
+    lazy var updateDataSource: (([TransactionData]) -> Void)? = { [weak self] transactionData in
+        self?.datasource.items = transactionData
+    }
 
+    lazy var updateTableView = { [weak self] in
+        DispatchQueue.main.async {
+            self?.tableView.reloadData()
+        }
+    }
+
+    lazy var insertRowTableView = { [weak self] in
+        UIView.performWithoutAnimation {
+            self?.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        }
+    }
+    
 }
 
 extension TransactionViewController {
     
     func setupView() {
-
-        [
-            headerView,
-            tableView
-            
-        ].forEach{
+        [headerView, tableView].forEach{
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }

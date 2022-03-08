@@ -63,15 +63,15 @@ struct AppDependency {
     }
     
     private func initialTransactionViewController(ticker: Ticker) -> TransactionViewController {
-        let transactionViewController = TransactionViewController(datasource: .init())
         let transactionViewModel = TransactionViewModel(
             service: service,
             symbol: ticker.paymentCurrency)
+        let transactionViewController = TransactionViewController(datasource: .init())
         
         transactionViewModel.updateTableHandler = transactionViewController.updateTableView
-        transactionViewModel.insertTableHandler = transactionViewController.insertRowTableView
         transactionViewController.fetchTransactionHandler = transactionViewModel.fetchTransaction
-        transactionViewController.bindHandler = transactionViewModel.transactionData.subscribe(bind: transactionViewController.updateDataSource)
+        transactionViewModel.insertTableHandler = transactionViewController.insertRowTableView
+        transactionViewModel.transactionData.bind = transactionViewController.updateDataSource
         return transactionViewController
     }
     
