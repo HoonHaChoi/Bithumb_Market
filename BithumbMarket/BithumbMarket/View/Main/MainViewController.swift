@@ -9,17 +9,20 @@ import UIKit
 
 final class MainViewController: UIViewController {
     
-    private let viewmodel: MainViewModel
+    private var detailViewControllerFactory: (Ticker) -> UIViewController
     
-    init(viewmodel: MainViewModel) {
-        self.viewmodel = viewmodel
+    init(detailViewControllerFactory: @escaping (Ticker) -> UIViewController) {
+        self.detailViewControllerFactory = detailViewControllerFactory
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        self.viewmodel = .init()
-        super.init(coder: coder)
+        fatalError("")
     }
+    
+    var fetchTickersHandler: (() -> Void)?
+    var updateTickersHandler: (() -> Void)?
+    var bindHandler: Void?
     
     private let mainTableView: UITableView = {
         let tableView = UITableView()
@@ -30,7 +33,7 @@ final class MainViewController: UIViewController {
         return tableView
     }()
     
-    private lazy var diffableDatasource = MainDiffableDataSource(tableView: mainTableView) { tableView, indexPath, ticker in
+    lazy var diffableDatasource = MainDiffableDataSource(tableView: mainTableView) { tableView, indexPath, ticker in
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TickerCell.reuseidentifier, for: indexPath) as? TickerCell else {
             return .init()
         }
@@ -39,7 +42,7 @@ final class MainViewController: UIViewController {
         return cell
     }
     
-    private lazy var coinSortView: CoinSortControlView = {
+    lazy var coinSortView: CoinSortControlView = {
         let sortView = CoinSortControlView()
         sortView.translatesAutoresizingMaskIntoConstraints = false
         return sortView
@@ -56,9 +59,9 @@ final class MainViewController: UIViewController {
         view.backgroundColor = .systemBackground
         configureUI()
         configureTableView()
-        bind()
-        viewmodel.fetchTickers()
-        viewmodel.updateTickers()
+        _ = bindHandler
+        fetchTickersHandler?()
+        updateTickersHandler?()
     }
 
     private func configureUI() {
@@ -90,18 +93,8 @@ final class MainViewController: UIViewController {
         mainTableView.delegate = self
     }
     
-    private func bind() {
-        viewmodel.tickers.subscribe { [weak self] tickers in
-            self?.diffableDatasource.updateItems(tickers: tickers)
-        }
-        
-        viewmodel.updateTickersHandler = updateTableView
-        viewmodel.changeIndexHandler = updateTableViewRows(index:)
-        coinSortView.sortControlHandler = viewmodel.executeFilterTickers
-    }
-    
-    private func updateTableView(tickers: [Ticker]) {
-        diffableDatasource.appendSnapshot(tickers: tickers)
+    lazy var updateTableView = { [weak self] (tickers: [Ticker]) in
+        self?.diffableDatasource.appendSnapshot(tickers: tickers)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if self.diffableDatasource.isEmptyItems() {
@@ -112,14 +105,18 @@ final class MainViewController: UIViewController {
         }
     }
     
-    private func updateTableViewRows(index: Int) {
-        guard let ticker = self.diffableDatasource.itemIdentifier(for: IndexPath(row: index, section: 0)) else {
+    lazy var updateTableViewRows = { [weak self] (index: Int) in
+        guard let ticker = self?.diffableDatasource.itemIdentifier(for: IndexPath(row: index, section: 0)) else {
             return
         }
-        self.diffableDatasource.reloadSnapshot(ticker: ticker, completion: {
-            let cell = self.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
+        self?.diffableDatasource.reloadSnapshot(ticker: ticker, completion: {
+            let cell = self?.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
             cell?.updateAnimation(state: ticker.change)
         })
+    }
+    
+    private func moveDetailViewController(ticker: Ticker) {
+        self.navigationController?.pushViewController(detailViewControllerFactory(ticker), animated: true)
     }
     
 }
@@ -133,8 +130,4 @@ extension MainViewController: UITableViewDelegate {
         self.moveDetailViewController(ticker: ticker)
     }
     
-    private func moveDetailViewController(ticker: Ticker) {
-        let detailViewController = DetailViewController(ticker: ticker)
-        self.navigationController?.pushViewController(detailViewController, animated: true)
-    }
 }

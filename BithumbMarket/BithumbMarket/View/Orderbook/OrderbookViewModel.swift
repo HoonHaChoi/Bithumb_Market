@@ -22,23 +22,17 @@ final class OrderbookViewModel {
     }
     
     var errorHandler: ((HTTPError) -> Void)?
+    var updateHandler: (() -> Void)?
     
-    func featchOrderbook(completion: @escaping () -> Void) {
-        completion()
-        requestOrderbook { [weak self] in
-            self?.updateOrderbook()
-        }
-    }
-    
-    private func requestOrderbook(completion: @escaping () -> Void) {
-        service.request(endpoint: .orderBook(symbol: symbol)) { [weak self] (result: Result<Orderbook, HTTPError>) in
+    lazy var fetchOrderbook = { 
+        self.service.request(endpoint: .orderBook(symbol: self.symbol)) { [weak self] (result: Result<Orderbook, HTTPError>) in
             switch result {
             case .success(let success):
+                print(success)
                 self?.orderbook.value = success.data
+                self?.updateHandler?()
                 self?.sendMessage()
-                DispatchQueue.main.async {
-                    completion()
-                }
+                self?.updateOrderbook()
             case .failure(let error):
                 self?.errorHandler?(error)
             }
@@ -67,6 +61,7 @@ final class OrderbookViewModel {
                 
                 self.orderbook.value = .init(asks: asks,
                                              bids: bids)
+                self.updateHandler?()
             case .failure(let error):
                 self?.errorHandler?(error)
             }

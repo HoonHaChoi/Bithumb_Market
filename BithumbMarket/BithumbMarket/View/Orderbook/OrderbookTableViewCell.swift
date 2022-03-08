@@ -70,13 +70,13 @@ final class OrderbookTableViewCell: UITableViewCell {
     func configure(items: OrderbookData, section: Int, index: Int) {
         switch section {
         case 0:
-            priceLabel.text = items.asks[index].price.withComma().withDecimal(maximumDigit: 4)
+            priceLabel.text = items.asks[index].price.withComma()
             askQuantityLabel.text = items.asks[index].quantity.withComma().withDecimal(maximumDigit: 4)
             UIView.animate(withDuration: 0.3) {
                 self.askQuantityBarView.setProgress(items.calculateRateOfAsks()[index], animated: true)
             }
         case 1:
-            priceLabel.text = items.bids[index].price.withComma().withDecimal(maximumDigit: 4)
+            priceLabel.text = items.bids[index].price.withComma()
             bidQuantityLabel.text = items.bids[index].quantity.withComma().withDecimal(maximumDigit: 4)
             UIView.animate(withDuration: 0.3) {
                 self.bidQuantityBarView.setProgress(items.calculateRateOfBids()[index], animated: true)

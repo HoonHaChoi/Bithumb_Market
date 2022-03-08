@@ -9,24 +9,31 @@ import UIKit
 
 final class DetailViewController: UIViewController {
     
-    private var currentMarketPriceViewModel: CurrentMarketPriceViewModel
-    private var assetsStatusViewModel: AssetsStatusViewModel
-    private var detailViewModel: DetailViewModel
-    private var graphViewModel: GraphViewModel
     private let ticker: Ticker
     
-    init(ticker: Ticker) {
+    private var transactionViewControllerFactory: (Ticker) -> UIViewController
+    private var orderbookViewControllerFactory: (Ticker) -> UIViewController
+    
+    init(ticker: Ticker,
+         transactionViewControllerFactory: @escaping (Ticker) -> UIViewController,
+         orderbookViewControllerFactory: @escaping (Ticker) -> UIViewController) {
         self.ticker = ticker
-        self.currentMarketPriceViewModel = CurrentMarketPriceViewModel(symbol: ticker.symbol)
-        self.assetsStatusViewModel = AssetsStatusViewModel(symbol: ticker.symbol)
-        self.detailViewModel = DetailViewModel()
-        self.graphViewModel = GraphViewModel()
+        self.transactionViewControllerFactory = transactionViewControllerFactory
+        self.orderbookViewControllerFactory = orderbookViewControllerFactory
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("")
     }
+    
+    var fetchAssetsStatusHandler: (() -> Void)?
+    var fetchCurrentMarketPrice: (() -> Void)?
+    var updateCurrentMarketPriceHandler: (() -> Void)?//
+    var likeHandler: Bool?
+    var updateLikeHandler: Result<Bool, CoreDataError>?
+    var bindPriceHandler: Void?
+    var bindAssetsStatusHandler: Void?
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -70,13 +77,6 @@ final class DetailViewController: UIViewController {
         return view
     }()
     
-    private lazy var loadingView: LoadingView = {
-        let loadingView = LoadingView()
-        loadingView.translatesAutoresizingMaskIntoConstraints = false
-        loadingView.isHidden = true
-        return loadingView
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
@@ -84,18 +84,18 @@ final class DetailViewController: UIViewController {
         configureScrollView()
         configureUI()
         
-        bindPriceView()
-        bindAssetsStatusView()
-        assetsStatusViewModel.fetchAssetsStatus()
-        currentMarketPriceViewModel.fetchPrice()
-        transactionPriceSelectTimeView.changeIntervalHandler = selectItem(interval:)
-        graphViewModel.loadingHandelr = showLoadingView
-        selectItem(interval: .day)
+        currentMarketPriceView.orderbookButtonHandler = moveOrderbookViewController
+        transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
+        
+        _ = bindPriceHandler
+        _ = bindAssetsStatusHandler
+        fetchAssetsStatusHandler?()
+        fetchCurrentMarketPrice?()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        currentMarketPriceViewModel.updatePrice()
+        updateCurrentMarketPriceHandler?()
     }
     
     private lazy var likeButton: UIButton = {
@@ -110,14 +110,19 @@ final class DetailViewController: UIViewController {
     private func configureNavigationBar() {
         title = ticker.symbol
         navigationController?.isNavigationBarHidden = false
-        let hasSymbol = detailViewModel.hasLike(symbol: ticker.symbol)
+        guard let hasSymbol = likeHandler else {
+            return
+        }
         likeButton.isSelected = hasSymbol
         likeButton.tintColor = likeButton.isSelected ? .mainColor : .textSecondary
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: likeButton)
     }
     
     @objc private func likeBarButtonAction(_ sender: UIButton) {
-        switch detailViewModel.updateLike(symbol: ticker.symbol) {
+        guard let updateLikeHandler = updateLikeHandler else {
+            return
+        }
+        switch updateLikeHandler {
         case .success(_):
             likeButton.isSelected = !likeButton.isSelected
             likeButton.tintColor = likeButton.isSelected ? .mainColor : .textSecondary
@@ -127,32 +132,25 @@ final class DetailViewController: UIViewController {
         }
     }
     
-    private func bindPriceView() {
-        currentMarketPriceViewModel.price.subscribe { [weak self] observer in
-            DispatchQueue.main.async {
-                self?.currentMarketPriceView.updateUI(observer)
-            }
-        }
-    }
-    
-    private func bindAssetsStatusView() {
-        assetsStatusViewModel.assetsStatus.subscribe { [weak self] observer in
-            DispatchQueue.main.async {
-                self?.assetsStatusView.updateUI(observer)
-            }
-        }
-    }
-    
-    lazy var showLoadingView: ((Bool) -> Void) = { [weak self] state in
+    lazy var updateAssetsStatusView = { [weak self] (status: AssetsStatusData) -> Void in
         DispatchQueue.main.async {
-            self?.loadingView.isHidden = state
+            print(status)
+            self?.assetsStatusView.updateUI(status)
         }
     }
     
-    func selectItem(interval: ChartIntervals) {
-        graphViewModel.fetchGraph(symbol: ticker.symbol, interval: interval) { [weak self] graph in
-            self?.transactionPricegraphView.updateGraph(graph)
+    lazy var updatePriceView = { [weak self] (price: CurrentMarketPrice) -> Void in
+        DispatchQueue.main.async {
+            self?.currentMarketPriceView.updateUI(price)
         }
+    }
+    
+    private func moveTransactionViewController() {
+        self.navigationController?.pushViewController(transactionViewControllerFactory(ticker), animated: true)
+    }
+    
+    private func moveOrderbookViewController() {
+        self.navigationController?.pushViewController(orderbookViewControllerFactory(ticker), animated: true)
     }
 }
 
@@ -164,7 +162,6 @@ extension DetailViewController {
         scrollContentView.addSubview(transactionPricegraphView)
         scrollContentView.addSubview(transactionHistoryView)
         scrollContentView.addSubview(assetsStatusView)
-        scrollContentView.addSubview(loadingView)
         
         NSLayoutConstraint.activate([
             currentMarketPriceView.topAnchor.constraint(equalTo: scrollContentView.topAnchor, constant: 20),
@@ -187,12 +184,7 @@ extension DetailViewController {
             assetsStatusView.topAnchor.constraint(equalTo: transactionHistoryView.bottomAnchor, constant: 20),
             assetsStatusView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             assetsStatusView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
-            assetsStatusView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -20),
-            
-            loadingView.topAnchor.constraint(equalTo: transactionPricegraphView.topAnchor),
-            loadingView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
-            loadingView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
-            loadingView.bottomAnchor.constraint(equalTo: transactionPriceSelectTimeView.bottomAnchor)
+            assetsStatusView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -20)
         ])
     }
     

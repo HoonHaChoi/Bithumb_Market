@@ -25,8 +25,8 @@ final class CurrentMarketPriceViewModel {
         )
     }
     
-    func fetchPrice() {
-        service.request(endpoint: .ticker(symbol: symbol)) { [weak self] (result: Result<CurrentPrice, HTTPError>) in
+    lazy var fetchPrice: () -> Void = {
+        self.service.request(endpoint: .ticker(symbol: self.symbol)) { [weak self] (result: Result<CurrentPrice, HTTPError>) in
             switch result {
             case .success(let ticker):
                 guard let currentPrice = self?.convert(from: ticker.data) else { return }
@@ -46,15 +46,17 @@ final class CurrentMarketPriceViewModel {
         }
     }
     
-    func updatePrice() {
-        service.perform { [weak self] (result: Result<ReceiveTicker, HTTPError>) in
+    lazy var updatePrice:() -> Void = {
+        self.service.perform { [weak self] (result: Result<ReceiveTicker, HTTPError>) in
             switch result {
             case .success(let ticker):
+                print(ticker)
                 guard let currentPrice = self?.convert(from: ticker) else {
                     return
                 }
                 self?.price.value = currentPrice
             case .failure(let error):
+                print(error)
                 self?.errorHandler?(error)
             }
         }

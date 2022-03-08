@@ -9,17 +9,14 @@ import UIKit
 
 class OrderbookViewController: UIViewController {
     
-    private let dataSource: OrderbookDataSource
-    private var viewModel: OrderbookViewModel
+    let dataSource: OrderbookDataSource
     
-    init(viewModel: OrderbookViewModel = OrderbookViewModel(symbol: "BTC_KRW"), dataSource: OrderbookDataSource = .init()) {
-        self.viewModel = viewModel
+    init(dataSource: OrderbookDataSource = .init()) {
         self.dataSource = dataSource
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        self.viewModel = OrderbookViewModel(symbol: "BTC_KRW")
         self.dataSource = .init()
         super.init(coder: coder)
     }
@@ -34,6 +31,24 @@ class OrderbookViewController: UIViewController {
         return tableView
     }()
     
+    var fetchHandler: (() -> Void)?
+    var bindHandler: Void?
+    
+    lazy var updateDataSource = { [weak self] (orderbook: OrderbookData) -> Void in
+        self?.dataSource.items = orderbook
+    }
+    
+    lazy var updateTableView = {
+        DispatchQueue.main.async { [weak self] in
+            self?.orderbookTableView.reloadData()
+        }
+    }
+    
+    private func scrollToCenter() {
+        let indexPath = IndexPath(row: 0, section: 1)
+        orderbookTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+    }
+    
     override func loadView() {
         super.loadView()
         view.backgroundColor = .systemBackground
@@ -43,41 +58,24 @@ class OrderbookViewController: UIViewController {
         super.viewDidLoad()
         title = OrderbookNameSpace.navigationTitle
         configureTableView()
-        bind()
+        _ = bindHandler
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.featchOrderbook { [weak self] in
-            let indexPath = IndexPath(row: 0, section: 1)
-            self?.orderbookTableView.scrollToRow(at: indexPath, at: .middle, animated: false)
-        }
+        fetchHandler?()
+        scrollToCenter()
    }
-    
-    private lazy var orderbookTableViewConstraints = [
-        orderbookTableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-        orderbookTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        orderbookTableView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-        orderbookTableView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
-    ]
     
     private func configureTableView() {
         view.addSubview(orderbookTableView)
-        NSLayoutConstraint.activate(orderbookTableViewConstraints)
+        NSLayoutConstraint.activate([
+            orderbookTableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            orderbookTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            orderbookTableView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            orderbookTableView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+        ])
         orderbookTableView.dataSource = dataSource
-    }
-
-    private func bind() {
-        viewModel.orderbook.subscribe { [weak self] observer in
-            self?.dataSource.items = observer
-            self?.updateTableView()
-        }
-    }
-
-    private func updateTableView() {
-        DispatchQueue.main.async { [weak self] in
-            self?.orderbookTableView.reloadData()
-        }
     }
 
 }
