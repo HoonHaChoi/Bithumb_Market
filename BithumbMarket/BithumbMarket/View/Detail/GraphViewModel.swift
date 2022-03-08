@@ -10,7 +10,6 @@ import UIKit
 class GraphViewModel {
     
     let symbole = "BTC"
-    var data: [GraphData] = []
     var dateList: [String] = []
     var closePriceList: [Double] = []
     var openPriceList: [Double] = []
@@ -32,10 +31,8 @@ class GraphViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let model):
-                self.data = model.data
 
                 print(model.data.count)
-
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy.MM.dd HH:mm"
                 print(model.data[model.data.count - 30])
@@ -68,22 +65,23 @@ class GraphViewModel {
                 completion()
             }
         }
+        
     }
     
-    func fetchGraph(symbol: String, interval: ChartIntervals, completion: @escaping (GraphEntity) -> Void) {
+    func fetchGraph(symbol: String, interval: ChartIntervals, completion: @escaping (GraphData) -> Void) {
         if let graphData = hasGraphData(symbol: symbol, interval: interval) {
             if hasNotPassedDate(entity: graphData, interval: interval) {
-                completion(graphData)
+                completion(graphData.toDomain())
             } else {
                 deleteGraph(entity: graphData) { [weak self] in
                     self?.fetchDataSave(symbol: symbol, interval: interval) { entity in
-                        completion(entity)
+                        completion(entity.toDomain())
                     }
                 }
             }
         } else {
             fetchDataSave(symbol: symbol, interval: interval) { entity in
-                completion(entity)
+                completion(entity.toDomain())
             }
         }
     }
@@ -113,7 +111,7 @@ class GraphViewModel {
         }
     }
     
-    private func fetchCandleStick(symbol: String, interval: ChartIntervals, compleiton: @escaping ([GraphData]) -> Void) {
+    private func fetchCandleStick(symbol: String, interval: ChartIntervals, compleiton: @escaping ([GraphDataDTO]) -> Void) {
         service.request(endpoint: .candlestick(symbol: symbole, interval: interval)) { [weak self] (result: Result<CandleStick, HTTPError>) in
             switch result {
             case .success(let candleStick):

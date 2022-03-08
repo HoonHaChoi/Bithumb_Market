@@ -9,10 +9,10 @@ import Foundation
 
 struct CandleStick: Decodable {
     let status: String
-    let data: [GraphData]
+    let data: [GraphDataDTO]
 }
 
-struct GraphData: Decodable {
+struct GraphDataDTO: Decodable {
     let time: Double
     let openPrice: String
     let closPrice: String
@@ -25,7 +25,7 @@ struct GraphData: Decodable {
     }
 }
 
-extension GraphData {
+extension GraphDataDTO {
     init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         self.time = try container.decode(Double.self)
