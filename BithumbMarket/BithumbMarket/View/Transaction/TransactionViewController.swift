@@ -9,17 +9,14 @@ import UIKit
 
 class TransactionViewController: UIViewController {
     
-    private let viewmodel: TransactionViewModel
     private let datasource: TransactionDataSource
     
-    init(viewmodel: TransactionViewModel, datasource: TransactionDataSource) {
-        self.viewmodel = viewmodel
+    init(datasource: TransactionDataSource) {
         self.datasource = datasource
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        self.viewmodel = .init()
         self.datasource = .init()
         super.init(coder: coder)
     }
@@ -30,7 +27,6 @@ class TransactionViewController: UIViewController {
     }()
     
     private lazy var tableView: UITableView = {
-        
         let view = UITableView()
         view.rowHeight = 45
         view.estimatedRowHeight = 45
@@ -40,23 +36,22 @@ class TransactionViewController: UIViewController {
         return view
     }()
     
-    private func bind() {
-        viewmodel.transactionData.subscribe { [weak self] transactions in
-            self?.datasource.items = transactions
-        }
-        viewmodel.updateTableHandler = updateTableView
-        viewmodel.insertTableHandler = insertRowTableView
+    var bindHandler: Void?
+    var fetchTransactionHandler: (() -> Void)?
+    
+    lazy var updateDataSource = { [weak self] (transactions: [TransactionData]) -> Void in
+        self?.datasource.items = transactions
     }
     
-    private func updateTableView() {
+    lazy var updateTableView = {
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
         }
     }
     
-    private func insertRowTableView() {
+    lazy var insertRowTableView = {
         UIView.performWithoutAnimation {
-            tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
         }
     }
     
@@ -67,8 +62,8 @@ class TransactionViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.shadowImage = UIImage()
         setupView()
-        bind()
-        viewmodel.fetchTransaction()
+        _ = bindHandler
+        fetchTransactionHandler?()
     }
 
 }

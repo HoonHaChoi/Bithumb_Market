@@ -17,7 +17,7 @@ struct AppDependency {
     }
     
     func transactionViewControllerFactory(symbol: String) -> TransactionViewController {
-        TransactionViewController(viewmodel: .init(), datasource: .init())
+        return initialTransactionViewController(symbol: symbol)
     }
     
     func orderbookViewControllerFactory(symbol: String) -> OrderbookViewController {
@@ -59,6 +59,19 @@ struct AppDependency {
         detailViewController.bindAssetsStatusHandler = assetsStatusViewModel.assetsStatus.subscribe(bind: detailViewController.updateAssetsStatusView)
         
         return detailViewController
+    }
+    
+    private func initialTransactionViewController(symbol: String) -> TransactionViewController {
+        let transactionViewController = TransactionViewController(datasource: .init())
+        let transactionViewModel = TransactionViewModel(
+            service: service,
+            symbol: symbol)
+        
+        transactionViewModel.updateTableHandler = transactionViewController.updateTableView
+        transactionViewModel.insertTableHandler = transactionViewController.insertRowTableView
+        transactionViewController.fetchTransactionHandler = transactionViewModel.fetchTransaction
+        transactionViewController.bindHandler = transactionViewModel.transactionData.subscribe(bind: transactionViewController.updateDataSource)
+        return transactionViewController
     }
     
 }

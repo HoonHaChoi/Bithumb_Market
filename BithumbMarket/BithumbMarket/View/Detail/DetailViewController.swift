@@ -84,6 +84,8 @@ final class DetailViewController: UIViewController {
         configureScrollView()
         configureUI()
         
+        transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
+        
         _ = bindPriceHandler
         _ = bindAssetsStatusHandler
         fetchAssetsStatusHandler?()
@@ -140,6 +142,10 @@ final class DetailViewController: UIViewController {
         DispatchQueue.main.async {
             self?.currentMarketPriceView.updateUI(price)
         }
+    }
+    
+    private func moveTransactionViewController() {
+        self.navigationController?.pushViewController(transactionViewControllerFactory(symbol), animated: true)
     }
     
 }

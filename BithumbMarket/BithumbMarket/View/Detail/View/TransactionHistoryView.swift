@@ -27,6 +27,13 @@ final class TransactionHistoryView: UIView {
         setConstraintLayout()
     }
     
+    var transactionHistoryButtonHandler: (() -> Void)?
+    
+    @objc
+    private func showTransactionView() {
+        transactionHistoryButtonHandler?()
+    }
+    
 }
 
 extension TransactionHistoryView {
@@ -38,6 +45,7 @@ extension TransactionHistoryView {
         
         transactionHistoryButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         transactionHistoryButton.tintColor = .actionTextSecondary
+        transactionHistoryButton.addTarget(self, action: #selector(showTransactionView), for: .touchUpInside)
     }
     
     private func configureStackViewUI() {

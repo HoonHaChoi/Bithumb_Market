@@ -9,15 +9,15 @@ import Foundation
 
 final class TransactionViewModel {
     
-    private let symbol = "BTC"
-    private let name = "BTC_KRW"
+    private let symbol: String
     
     var transactionData: Observable<[TransactionData]>
     private var service: APIService
     
-    init(service: APIService = APIService()) {
+    init(service: APIService = APIService(), symbol: String = "BTC_KRW") {
         self.transactionData = .init([])
         self.service = service
+        self.symbol = symbol
     }
     
     var updateTableHandler: (() -> Void)?
@@ -42,7 +42,7 @@ final class TransactionViewModel {
     private func sendMessage() {
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self = self else { return }
-            let message = Message(type: .transaction, symbols: .name(self.name))
+            let message = Message(type: .transaction, symbols: .name(self.symbol))
             self.service.sendSocketMessage(to: message)
         }
     }
