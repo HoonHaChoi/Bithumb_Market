@@ -65,6 +65,7 @@
 		BFB9563627CCB6C5001627C6 /* OrderbookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005727CC9B4B00752ABA /* OrderbookTableViewCell.swift */; };
 		BFB9563727CCB6C5001627C6 /* OrderbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005527CC9B4B00752ABA /* OrderbookViewController.swift */; };
 		BFB9563927CCBD37001627C6 /* ReceiveTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB9563827CCBD37001627C6 /* ReceiveTicker.swift */; };
+		BFDE910727D6FB8900CC4FF5 /* GraphStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFDE910527D6FB8900CC4FF5 /* GraphStorage.xcdatamodeld */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
@@ -133,6 +134,7 @@
 		BFB8F15427CF66D300702FBB /* AssetsStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsStatusView.swift; sourceTree = "<group>"; };
 		BFB9562827CCAD49001627C6 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		BFB9563827CCBD37001627C6 /* ReceiveTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveTicker.swift; sourceTree = "<group>"; };
+		BFDE910627D6FB8900CC4FF5 /* GraphStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GraphStorage.xcdatamodel; sourceTree = "<group>"; };
 		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E8AC90B027C8700500C50FA3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				7FBD63F327D62D9E00C9801C /* CoreDataError.swift */,
 				7FBD63F427D62D9E00C9801C /* LikeStorage.swift */,
 				7FBD63F527D62D9E00C9801C /* CoreDataStorage */,
+				BFDE910527D6FB8900CC4FF5 /* GraphStorage.xcdatamodeld */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 			files = (
 				7FBD63EF27D62CF300C9801C /* DetailViewModel.swift in Sources */,
 				7FBD63EB27D62B3300C9801C /* TickerCell.swift in Sources */,
+				BFDE910727D6FB8900CC4FF5 /* GraphStorage.xcdatamodeld in Sources */,
 				7FBD63E827D62AED00C9801C /* MainViewNameSpace.swift in Sources */,
 				7FBD63E927D62AED00C9801C /* TableEmptyView.swift in Sources */,
 				7FBD63E527D62A7E00C9801C /* MainDiffableDataSource.swift in Sources */,
@@ -726,6 +730,16 @@
 			);
 			currentVersion = 7FBD63F727D62D9E00C9801C /* LikeEntity.xcdatamodel */;
 			path = LikeSymbol.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		BFDE910527D6FB8900CC4FF5 /* GraphStorage.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BFDE910627D6FB8900CC4FF5 /* GraphStorage.xcdatamodel */,
+			);
+			currentVersion = BFDE910627D6FB8900CC4FF5 /* GraphStorage.xcdatamodel */;
+			path = GraphStorage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

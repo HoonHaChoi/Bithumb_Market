@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="GraphChartEntity" representedClassName="GraphChartEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="graphData" optional="YES" attributeType="Transformable" customClassName="[GraphData]"/>
+        <attribute name="interval" optional="YES" attributeType="String"/>
+        <relationship name="graphEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GraphEntity" inverseName="graphChartEntity" inverseEntity="GraphEntity"/>
+    </entity>
+    <entity name="GraphEntity" representedClassName="GraphEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="createTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="symbol" optional="YES" attributeType="String"/>
+        <relationship name="graphChartEntity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GraphChartEntity" inverseName="graphEntity" inverseEntity="GraphChartEntity"/>
+    </entity>
+    <elements>
+        <element name="GraphEntity" positionX="-63" positionY="-18" width="128" height="74"/>
+        <element name="GraphChartEntity" positionX="-54" positionY="-9" width="128" height="74"/>
+    </elements>
+</model>
