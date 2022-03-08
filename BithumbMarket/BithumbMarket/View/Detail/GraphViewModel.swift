@@ -18,10 +18,14 @@ class GraphViewModel {
     var maxPriceList: [Int] = []
 
     private var service: APIService
+    private let storage: GraphStorage
     
-    init(service: APIService = APIService()) {
+    init(service: APIService = APIService(), storage: GraphStorage = GraphStorage()) {
         self.service = service
+        self.storage = storage
     }
+    
+    var errorHandler: ((Error) -> Void)?
     
     func fetchGraphPrice(completion: @escaping () -> Void) {
         service.request(endpoint: .candlestick(symbol: symbole, interval: .day)) { [weak self] (result: Result<CandleStick, HTTPError>) in
@@ -29,7 +33,7 @@ class GraphViewModel {
             switch result {
             case .success(let model):
                 self.data = model.data
-    
+                
                 print(model.data.count)
                 
                 let dateFormatter = DateFormatter()
@@ -64,5 +68,28 @@ class GraphViewModel {
                 completion()
             }
         }
+    }
+    
+    private func fetchCandleStick(symbol: String, interval: ChartIntervals, compleiton: @escaping ([GraphData]) -> Void) {
+        service.request(endpoint: .candlestick(symbol: symbole, interval: .day)) { [weak self] (result: Result<CandleStick, HTTPError>) in
+            switch result {
+            case .success(let candleStick):
+                compleiton(candleStick.data)
+            case .failure(let error):
+                self?.errorHandler?(error)
+                return
+            }
+        }
+    }
+    
+    private func saveGraph(symbol: String,
+                           interval: ChartIntervals,
+                           graphData: [GraphDataEntity],
+                           completion: @escaping (Result<GraphEntity, CoreDataError>) -> Void) {
+        storage.save(symbol: symbol, graphData: graphData, interval: interval.type, completion: completion)
+    }
+    
+    private func deleteGraph(symbol: String, interval: ChartIntervals, completion: ((Result<Bool, CoreDataError>) -> Void)?) {
+        storage.delete(symbol: symbol, interval: interval, completion: completion)
     }
 }
