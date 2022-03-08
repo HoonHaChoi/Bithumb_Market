@@ -9,7 +9,7 @@ import UIKit
 
 final class OrderbookTableViewCell: UITableViewCell {
     
-    let priceLabel: UILabel = {
+    private let priceLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 17, weight: .semibold)
@@ -18,7 +18,7 @@ final class OrderbookTableViewCell: UITableViewCell {
         return label
     }()
     
-    let askQuantityLabel: UILabel = {
+    private let askQuantityLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textAlignment = .right
@@ -29,7 +29,7 @@ final class OrderbookTableViewCell: UITableViewCell {
         return label
     }()
     
-    let bidQuantityLabel: UILabel = {
+    private let bidQuantityLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textAlignment = .left
@@ -40,7 +40,7 @@ final class OrderbookTableViewCell: UITableViewCell {
         return label
     }()
 
-    let askQuantityBarView: UIProgressView = {
+    private let askQuantityBarView: UIProgressView = {
         let progreesBar = UIProgressView()
         progreesBar.semanticContentAttribute = .forceRightToLeft
         progreesBar.progressTintColor = .orderBookSellBackground
@@ -49,7 +49,7 @@ final class OrderbookTableViewCell: UITableViewCell {
         return progreesBar
     }()
     
-    let bidQuantityBarView: UIProgressView = {
+    private let bidQuantityBarView: UIProgressView = {
         let progreesBar = UIProgressView()
         progreesBar.progressTintColor = .orderBookBuyBackground
         progreesBar.trackTintColor = .clear
@@ -96,27 +96,27 @@ final class OrderbookTableViewCell: UITableViewCell {
     }
     
     private lazy var cellConstraint = [
-        ///Tag - Price Constraint
+
         priceLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 3),
         priceLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         priceLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         priceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
         priceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
-        ///Tag - 매도량 그래프 Constraint
+
         askQuantityBarView.heightAnchor.constraint(equalTo: priceLabel.heightAnchor),
         askQuantityBarView.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
         askQuantityBarView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
         askQuantityBarView.trailingAnchor.constraint(equalTo: priceLabel.leadingAnchor),
-        ///Tag - 매수량 그래프 Constraint
+
         bidQuantityBarView.heightAnchor.constraint(equalTo: priceLabel.heightAnchor),
         bidQuantityBarView.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
         bidQuantityBarView.leadingAnchor.constraint(equalTo: priceLabel.trailingAnchor),
         bidQuantityBarView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-        ///Tag - 매도 수량 Constraint
+        
         askQuantityLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         askQuantityLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
         askQuantityLabel.trailingAnchor.constraint(equalTo: priceLabel.leadingAnchor, constant: -10),
-        ///Tag - 매수 수량 Constraint
+        
         bidQuantityLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         bidQuantityLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         bidQuantityLabel.leadingAnchor.constraint(equalTo: priceLabel.trailingAnchor, constant: 10)
