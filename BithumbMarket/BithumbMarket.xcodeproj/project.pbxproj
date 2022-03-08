@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F2A6BC827D7B7AC00486F36 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2A6BC727D7B7AB00486F36 /* AppDependency.swift */; };
 		7F2E004427CC9AE000752ABA /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004027CC9AE000752ABA /* Market.swift */; };
 		7F2E004627CC9AE000752ABA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004227CC9AE000752ABA /* Message.swift */; };
 		7F2E004727CC9AE000752ABA /* Orderbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004327CC9AE000752ABA /* Orderbook.swift */; };
@@ -83,6 +84,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F2A6BC727D7B7AB00486F36 /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 		7F2E004027CC9AE000752ABA /* Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
 		7F2E004227CC9AE000752ABA /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7F2E004327CC9AE000752ABA /* Orderbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orderbook.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 		BF0430C727C5C1D500A77A38 /* BithumbMarket */ = {
 			isa = PBXGroup;
 			children = (
+				7F2A6BC727D7B7AB00486F36 /* AppDependency.swift */,
 				BF0430C827C5C1D500A77A38 /* AppDelegate.swift */,
 				BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */,
 				7F2E005E27CCA15400752ABA /* View */,
@@ -463,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F2A6BC827D7B7AC00486F36 /* AppDependency.swift in Sources */,
 				7FBD63EF27D62CF300C9801C /* DetailViewModel.swift in Sources */,
 				7FBD63EB27D62B3300C9801C /* TickerCell.swift in Sources */,
 				BFDE910727D6FB8900CC4FF5 /* GraphStorage.xcdatamodeld in Sources */,
