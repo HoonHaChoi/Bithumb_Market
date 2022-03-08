@@ -14,17 +14,16 @@ enum AssetsState {
     case possibleAll
     case impossible
     
- 
-    var attributedText: NSMutableAttributedString {
+    var description: NSMutableAttributedString {
         switch self {
         case .possibleDeposit:
-            return setAttributedString("● 입금가능", color: .mainColor)
+            return setAttributedString("●  입금가능", color: .mainColor)
         case .possibleWithdrawal:
-            return setAttributedString("● 출금가능", color: .mainColor)
+            return setAttributedString("●  출금가능", color: .mainColor)
         case .possibleAll:
-            return setAttributedString("● 입출금가능", color: .systemGreen)
+            return setAttributedString("●  입출금가능", color: .mainColor)
         case .impossible:
-            return setAttributedString("● 입출금불가", color: .systemRed)
+            return setAttributedString("●  입출금불가", color: .systemRed)
         }
     }
     
