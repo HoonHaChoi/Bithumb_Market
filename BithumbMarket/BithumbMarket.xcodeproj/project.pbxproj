@@ -69,6 +69,7 @@
 		BFDE910927D71BE500CC4FF5 /* GraphDataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE910827D71BE500CC4FF5 /* GraphDataEntity.swift */; };
 		BFDE910B27D71CA600CC4FF5 /* GraphDataEntityValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE910A27D71CA600CC4FF5 /* GraphDataEntityValueTransformer.swift */; };
 		BFDE910E27D71D8500CC4FF5 /* GraphStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE910D27D71D8500CC4FF5 /* GraphStorage.swift */; };
+		BFDE911027D7310900CC4FF5 /* ChartIntervals.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE910F27D7310900CC4FF5 /* ChartIntervals.swift */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
@@ -141,6 +142,7 @@
 		BFDE910827D71BE500CC4FF5 /* GraphDataEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphDataEntity.swift; sourceTree = "<group>"; };
 		BFDE910A27D71CA600CC4FF5 /* GraphDataEntityValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphDataEntityValueTransformer.swift; sourceTree = "<group>"; };
 		BFDE910D27D71D8500CC4FF5 /* GraphStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphStorage.swift; sourceTree = "<group>"; };
+		BFDE910F27D7310900CC4FF5 /* ChartIntervals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartIntervals.swift; sourceTree = "<group>"; };
 		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E8AC90B027C8700500C50FA3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				7F2E004D27CC9B4B00752ABA /* Observable.swift */,
 				BF5573C227CD43C30065B054 /* ChangeState.swift */,
 				7F5AFC1D27D1A943002BECC3 /* AssetsState.swift */,
+				BFDE910F27D7310900CC4FF5 /* ChartIntervals.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				BFB9563227CCB647001627C6 /* CoinSortControlView.swift in Sources */,
 				BFB9563727CCB6C5001627C6 /* OrderbookViewController.swift in Sources */,
 				BFB9563327CCB647001627C6 /* CoinSortSegmentControl.swift in Sources */,
+				BFDE911027D7310900CC4FF5 /* ChartIntervals.swift in Sources */,
 				7F844CF527D065A500C06084 /* AssetsStatus.swift in Sources */,
 				BFB9563127CCB5A6001627C6 /* MainViewController.swift in Sources */,
 				BF7D214E27CF4B06007F0DCE /* TransactionPriceGraphView.swift in Sources */,
