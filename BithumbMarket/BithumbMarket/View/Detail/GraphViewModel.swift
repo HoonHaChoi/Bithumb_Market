@@ -12,10 +12,10 @@ class GraphViewModel {
     let symbole = "BTC"
     var data: [GraphData] = []
     var dateList: [String] = []
-    var closePriceList: [Int] = []
-    var openPriceList: [Int] = []
-    var minPriceList: [Int] = []
-    var maxPriceList: [Int] = []
+    var closePriceList: [Double] = []
+    var openPriceList: [Double] = []
+    var minPriceList: [Double] = []
+    var maxPriceList: [Double] = []
 
     private var service: APIService
     private let storage: GraphStorage
@@ -46,21 +46,21 @@ class GraphViewModel {
                     self.dateList.append(date)
 
                     let openPrice = model.data[i].openPrice
-                    self.openPriceList.append(Int(openPrice) ?? 0)
+                    self.openPriceList.append(openPrice.convertDouble())
 
                     let closPrice = model.data[i].closPrice
-                    self.closePriceList.append(Int(closPrice) ?? 0)
+                    self.closePriceList.append(closPrice.convertDouble())
 
                     let maxPrice = model.data[i].maxPrice
-                    self.maxPriceList.append(Int(maxPrice) ?? 0)
+                    self.maxPriceList.append(maxPrice.convertDouble())
 
                     let minPrice = model.data[i].minPrice
-                    self.minPriceList.append(Int(minPrice) ?? 0)
+                    self.minPriceList.append(minPrice.convertDouble())
                 }
 
-                print((model.data.first?.date)!)
-                print(model.data[model.data.count - 100].date)
-                print(model.data.last!.date)
+//                print((model.data.first?.date)!)
+//                print(model.data[model.data.count - 100].date)
+//                print(model.data.last!.date)
                 completion()
 
             case .failure(let error):
@@ -70,15 +70,51 @@ class GraphViewModel {
         }
     }
     
-    func fetchGraph(symbol: String, interval: ChartIntervals) {
+    func fetchGraph(symbol: String, interval: ChartIntervals, completion: @escaping (GraphEntity) -> Void) {
+        if let graphData = hasGraphData(symbol: symbol, interval: interval) {
+            if hasNotPassedDate(entity: graphData, interval: interval) {
+                completion(graphData)
+            } else {
+                deleteGraph(entity: graphData) { [weak self] in
+                    self?.fetchDataSave(symbol: symbol, interval: interval) { entity in
+                        completion(entity)
+                    }
+                }
+            }
+        } else {
+            fetchDataSave(symbol: symbol, interval: interval) { entity in
+                completion(entity)
+            }
+        }
     }
     
     private func hasGraphData(symbol: String, interval: ChartIntervals) -> GraphEntity? {
         return storage.fetch(symbol: symbol, interval: interval)
     }
     
+    private func hasNotPassedDate(entity: GraphEntity, interval: ChartIntervals) -> Bool  {
+        guard let saveDateTime = entity.createTime?.addingTimeInterval(interval.second) else {
+            return false
+        }
+        return Date() < saveDateTime
+    }
+    
+    private func fetchDataSave(symbol: String, interval: ChartIntervals, completion: @escaping (GraphEntity) -> Void) {
+        fetchCandleStick(symbol: symbol, interval: interval) { [weak self] graphData in
+            let graphDataEntity = graphData.map { $0.toEntity() }
+            self?.saveGraph(symbol: symbol, interval: interval, graphData: graphDataEntity) { result in
+                switch result{
+                case.success(let entity):
+                    completion(entity)
+                case .failure(let error):
+                    self?.errorHandler?(error)
+                }
+            }
+        }
+    }
+    
     private func fetchCandleStick(symbol: String, interval: ChartIntervals, compleiton: @escaping ([GraphData]) -> Void) {
-        service.request(endpoint: .candlestick(symbol: symbole, interval: .day)) { [weak self] (result: Result<CandleStick, HTTPError>) in
+        service.request(endpoint: .candlestick(symbol: symbole, interval: interval)) { [weak self] (result: Result<CandleStick, HTTPError>) in
             switch result {
             case .success(let candleStick):
                 compleiton(candleStick.data)
@@ -96,7 +132,15 @@ class GraphViewModel {
         storage.save(symbol: symbol, graphData: graphData, interval: interval.type, completion: completion)
     }
     
-    private func deleteGraph(symbol: String, interval: ChartIntervals, completion: ((Result<Bool, CoreDataError>) -> Void)?) {
-        storage.delete(symbol: symbol, interval: interval, completion: completion)
+    private func deleteGraph(entity: GraphEntity, completion: (() -> Void)?) {
+        storage.delete(entity: entity) { [weak self] result in
+            switch result {
+            case.success(_):
+                completion?()
+            case.failure(let error):
+                self?.errorHandler?(error)
+            }
+        }
     }
+    
 }

@@ -58,18 +58,12 @@ final class GraphStorage {
          }
      }
     
-    func delete(symbol: String, interval: ChartIntervals, completion: ((Result<Bool, CoreDataError>) -> Void)?) {
+    func delete(entity: GraphEntity, completion: ((Result<Bool, CoreDataError>) -> Void)?) {
         privateManagedObjectContext.perform { [weak self] in
-            let request = GraphEntity.fetchRequest()
-            request.predicate = NSPredicate(format: "symbol == %@ && ANY graphChartEntity.interval == %@", symbol, interval.type)
-            
             do {
-                let fetchResult = try self?.privateManagedObjectContext.fetch(request)
-                if let object = fetchResult?.first {
-                    self?.privateManagedObjectContext.delete(object)
-                    try self?.privateManagedObjectContext.save()
-                    completion?(.success(true))
-                }
+                self?.privateManagedObjectContext.delete(entity)
+                try self?.privateManagedObjectContext.save()
+                completion?(.success(true))
             } catch {
                 self?.privateManagedObjectContext.rollback()
                 completion?(.failure(.failureDelete))
