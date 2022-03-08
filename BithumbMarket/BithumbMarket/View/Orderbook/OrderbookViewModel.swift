@@ -9,11 +9,11 @@ import Foundation
 
 final class OrderbookViewModel {
 
-    var symbol: String
     var orderbook: Observable<OrderbookData>
-    private var service: APIService
+    private let symbol: String
+    private let service: APIService
     
-    init(service: APIService = APIService(), symbol: String) {
+    init(service: APIService, symbol: String) {
         self.orderbook = .init(OrderbookData(
             asks: Array(repeating: .init(quantity: "", price: ""), count: 30),
             bids: Array(repeating: .init(quantity: "", price: ""), count: 30)))
@@ -58,8 +58,7 @@ final class OrderbookViewModel {
                 let asks = Array(self.mergeOrders(self.orderbook.value.asks, into: receivedAsks).prefix(30))
                 let bids = Array(self.mergeOrders(self.orderbook.value.bids, into: receivedBids).suffix(30))
                 
-                self.orderbook.value = .init(asks: asks,
-                                             bids: bids)
+                self.orderbook.value = .init(asks: asks, bids: bids)
                 self.updateHandler?()
             case .failure(let error):
                 self?.errorHandler?(error)
@@ -74,25 +73,17 @@ final class OrderbookViewModel {
         
         for (index, price) in newOrderPrice.enumerated() {
             if previousOrderPrice.contains(price) {
-                guard let samePrice = order.firstIndex(where: {
-                    $0.price == price
-                }) else {
+                guard let samePrice = order.firstIndex(where: { $0.price == price }) else {
                     continue
                 }
                 order.remove(at: samePrice)
                 if new[index].quantity != OrderbookNameSpace.noQuantity {
-                    order.append(
-                        Order(
-                            quantity: new[index].quantity,
-                            price: new[index].price)
-                    )
+                    order.append(Order(quantity: new[index].quantity,
+                                       price: new[index].price))
                 }
             } else if new[index].quantity != OrderbookNameSpace.noQuantity {
-                order.append(
-                    Order(
-                        quantity: new[index].quantity,
-                        price: new[index].price)
-                )
+                order.append(Order(quantity: new[index].quantity,
+                                   price: new[index].price))
             }
         }
         order.sort{ Double($0.price) ?? 0 > Double($1.price) ?? 0 }

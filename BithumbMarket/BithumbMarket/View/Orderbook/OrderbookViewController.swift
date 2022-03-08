@@ -7,9 +7,9 @@
 
 import UIKit
 
-class OrderbookViewController: UIViewController {
+final class OrderbookViewController: UIViewController {
     
-    let dataSource: OrderbookDataSource
+    private let dataSource: OrderbookDataSource
     
     init(dataSource: OrderbookDataSource = .init()) {
         self.dataSource = dataSource
@@ -17,8 +17,7 @@ class OrderbookViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        self.dataSource = .init()
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     private let orderbookTableView: UITableView = {
@@ -44,17 +43,15 @@ class OrderbookViewController: UIViewController {
     }
     
     private func scrollToCenter() {
-        let indexPath = IndexPath(row: 0, section: 1)
-        orderbookTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
-    }
-    
-    override func loadView() {
-        super.loadView()
-        view.backgroundColor = .systemBackground
+        if orderbookTableView.numberOfSections > .zero {
+            let indexPath = IndexPath(row: 0, section: 1)
+            orderbookTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         title = OrderbookNameSpace.navigationTitle
         configureTableView()
         fetchHandler?()
