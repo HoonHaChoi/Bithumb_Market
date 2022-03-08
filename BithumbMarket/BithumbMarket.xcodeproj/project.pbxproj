@@ -73,6 +73,7 @@
 		BFDE911327D742F500CC4FF5 /* GraphEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE911127D742F500CC4FF5 /* GraphEntity+CoreDataClass.swift */; };
 		BFDE911427D742F500CC4FF5 /* GraphEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE911227D742F500CC4FF5 /* GraphEntity+CoreDataProperties.swift */; };
 		BFDE911827D7447900CC4FF5 /* GraphData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE911727D7447900CC4FF5 /* GraphData.swift */; };
+		BFDE916827D79EA600CC4FF5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE916727D79EA600CC4FF5 /* LoadingView.swift */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
@@ -149,6 +150,7 @@
 		BFDE911127D742F500CC4FF5 /* GraphEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BFDE911227D742F500CC4FF5 /* GraphEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BFDE911727D7447900CC4FF5 /* GraphData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphData.swift; sourceTree = "<group>"; };
+		BFDE916727D79EA600CC4FF5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E8AC90B027C8700500C50FA3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				BF7D214F27CF4B90007F0DCE /* TransactionPriceSelectTimeView.swift */,
 				BF7D215127CF5B0E007F0DCE /* TransactionHistoryView.swift */,
 				BFB8F15427CF66D300702FBB /* AssetsStatusView.swift */,
+				BFDE916727D79EA600CC4FF5 /* LoadingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 				BF7D214227CE919C007F0DCE /* Double+Extension.swift in Sources */,
 				BFB9562D27CCB0F8001627C6 /* Observable.swift in Sources */,
 				7F2E005C27CC9F3300752ABA /* SocketService.swift in Sources */,
+				BFDE916827D79EA600CC4FF5 /* LoadingView.swift in Sources */,
 				7F2E005D27CC9F3300752ABA /* APIEndpoint.swift in Sources */,
 				7F2E004A27CC9B1400752ABA /* UIColor+Extension.swift in Sources */,
 				7F2E004B27CC9B1400752ABA /* NumberFormatter+Extension.swift in Sources */,

@@ -12,6 +12,7 @@ final class DetailViewController: UIViewController {
     private var currentMarketPriceViewModel: CurrentMarketPriceViewModel
     private var assetsStatusViewModel: AssetsStatusViewModel
     private var detailViewModel: DetailViewModel
+    private var graphViewModel: GraphViewModel
     private let ticker: Ticker
     
     init(ticker: Ticker) {
@@ -19,6 +20,7 @@ final class DetailViewController: UIViewController {
         self.currentMarketPriceViewModel = CurrentMarketPriceViewModel(symbol: ticker.symbol)
         self.assetsStatusViewModel = AssetsStatusViewModel(symbol: ticker.symbol)
         self.detailViewModel = DetailViewModel()
+        self.graphViewModel = GraphViewModel()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -66,6 +68,13 @@ final class DetailViewController: UIViewController {
         let view = TransactionPriceGraphView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    private lazy var loadingView: LoadingView = {
+        let loadingView = LoadingView()
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.isHidden = true
+        return loadingView
     }()
     
     override func viewDidLoad() {
@@ -141,6 +150,7 @@ extension DetailViewController {
         scrollContentView.addSubview(transactionPricegraphView)
         scrollContentView.addSubview(transactionHistoryView)
         scrollContentView.addSubview(assetsStatusView)
+        scrollContentView.addSubview(loadingView)
         
         NSLayoutConstraint.activate([
             currentMarketPriceView.topAnchor.constraint(equalTo: scrollContentView.topAnchor, constant: 20),
@@ -163,7 +173,12 @@ extension DetailViewController {
             assetsStatusView.topAnchor.constraint(equalTo: transactionHistoryView.bottomAnchor, constant: 20),
             assetsStatusView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             assetsStatusView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
-            assetsStatusView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -20)
+            assetsStatusView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -20),
+            
+            loadingView.topAnchor.constraint(equalTo: transactionPricegraphView.topAnchor),
+            loadingView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
+            loadingView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: transactionPriceSelectTimeView.bottomAnchor)
         ])
     }
     
