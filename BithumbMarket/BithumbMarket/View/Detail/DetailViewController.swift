@@ -88,6 +88,9 @@ final class DetailViewController: UIViewController {
         bindAssetsStatusView()
         assetsStatusViewModel.fetchAssetsStatus()
         currentMarketPriceViewModel.fetchPrice()
+        transactionPriceSelectTimeView.changeIntervalHandler = selectItem(interval:)
+        graphViewModel.loadingHandelr = showLoadingView
+        selectItem(interval: .day)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -140,6 +143,17 @@ final class DetailViewController: UIViewController {
         }
     }
     
+    lazy var showLoadingView: ((Bool) -> Void) = { [weak self] state in
+        DispatchQueue.main.async {
+            self?.loadingView.isHidden = state
+        }
+    }
+    
+    func selectItem(interval: ChartIntervals) {
+        graphViewModel.fetchGraph(symbol: ticker.symbol, interval: interval) { [weak self] graph in
+            self?.transactionPricegraphView.updateGraph(graph)
+        }
+    }
 }
 
 extension DetailViewController {

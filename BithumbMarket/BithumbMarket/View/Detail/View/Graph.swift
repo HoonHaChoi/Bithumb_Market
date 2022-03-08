@@ -14,10 +14,10 @@ class Graph: UIView {
     var offsetX = CGFloat()
 
     var date = [String]()
-    var openPrice = [Int]()
-    var closePrice = [Int]()
-    var maxPrice = [Int]()
-    var minPrice = [Int]()
+    var openPrice = [Double]()
+    var closePrice = [Double]()
+    var maxPrice = [Double]()
+    var minPrice = [Double]()
     var isLineGraph = false {
           didSet {
               setNeedsDisplay()
@@ -32,7 +32,7 @@ class Graph: UIView {
         super.init(coder: coder)
     }
     
-    init(frame: CGRect, values: [Int], date: [String], openPrice: [Int], maxPrice: [Int], minPrice: [Int]) {
+    init(frame: CGRect, values: [Double], date: [String], openPrice: [Double], maxPrice: [Double], minPrice: [Double]) {
         super.init(frame: frame)
         self.date = date
         self.openPrice = openPrice
@@ -91,7 +91,7 @@ extension Graph {
         drawText(x: x, y: 0, text: date,  fontSize: 11, height: 12)
     }
     
-    private func price(x: CGFloat, price: Int) {
+    private func price(x: CGFloat, price: Double) {
         let stringPrice = String(price).withComma()
         let text = stringPrice + "원"
         drawText(x: x, y: 15, text: text, fontSize: 16, height: 20)
@@ -124,7 +124,7 @@ extension Graph {
         self.layer.addSublayer(layers)
     }
     
-    private func graph(width: CGFloat, height: CGFloat, values: [Int]) {
+    private func graph(width: CGFloat, height: CGFloat, values: [Double]) {
         offsetX = frame.width / CGFloat(values.count)
         
         let path = UIBezierPath()
@@ -156,7 +156,6 @@ extension Graph {
         
         guard let maxprice = maxPrice.max(), let minprice = minPrice.min() else {return}
         let scale = CGFloat(Double((maxprice - minprice) / 2) / 0.4)
-        
         
         let close = closePrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + 55 }
         let open = openPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + 55 }

@@ -18,6 +18,7 @@ class GraphViewModel {
     }
     
     var errorHandler: ((Error) -> Void)?
+    var loadingHandelr: ((Bool) -> Void)?
     
     func fetchGraph(symbol: String, interval: ChartIntervals, completion: @escaping (GraphData) -> Void) {
         if let graphData = hasGraphData(symbol: symbol, interval: interval) {
@@ -25,13 +26,17 @@ class GraphViewModel {
                 completion(graphData.toDomain())
             } else {
                 deleteGraph(entity: graphData) { [weak self] in
+                    self?.loadingHandelr?(false)
                     self?.fetchDataSave(symbol: symbol, interval: interval) { entity in
+                        self?.loadingHandelr?(true)
                         completion(entity.toDomain())
                     }
                 }
             }
         } else {
-            fetchDataSave(symbol: symbol, interval: interval) { entity in
+            loadingHandelr?(false)
+            fetchDataSave(symbol: symbol, interval: interval) { [weak self] entity in
+                self?.loadingHandelr?(true)
                 completion(entity.toDomain())
             }
         }

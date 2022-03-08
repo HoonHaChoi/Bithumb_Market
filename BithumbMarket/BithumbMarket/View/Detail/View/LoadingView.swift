@@ -12,7 +12,6 @@ final class LoadingView: UIView {
     private let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.translatesAutoresizingMaskIntoConstraints = false
-        spinner.isHidden = true
         return spinner
     }()
 
