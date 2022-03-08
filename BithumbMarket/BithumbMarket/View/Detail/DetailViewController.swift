@@ -77,6 +77,13 @@ final class DetailViewController: UIViewController {
         return view
     }()
     
+    private lazy var loadingView: LoadingView = {
+        let loadingView = LoadingView()
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.isHidden = true
+        return loadingView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
@@ -91,6 +98,9 @@ final class DetailViewController: UIViewController {
         _ = bindAssetsStatusHandler
         fetchAssetsStatusHandler?()
         fetchCurrentMarketPrice?()
+        transactionPriceSelectTimeView.changeIntervalHandler = selectItem(interval:)
+        //graphViewModel.loadingHandelr = showLoadingView
+        selectItem(interval: .day)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -152,6 +162,19 @@ final class DetailViewController: UIViewController {
     private func moveOrderbookViewController() {
         self.navigationController?.pushViewController(orderbookViewControllerFactory(ticker), animated: true)
     }
+    
+    lazy var showLoadingView: ((Bool) -> Void) = { [weak self] state in
+        DispatchQueue.main.async {
+            self?.loadingView.isHidden = state
+        }
+    }
+    
+    func selectItem(interval: ChartIntervals) {
+//        graphViewModel.fetchGraph(symbol: ticker.symbol, interval: interval) { [weak self] graph in
+//            self?.transactionPricegraphView.updateGraph(graph)
+//        }
+    }
+    
 }
 
 extension DetailViewController {
