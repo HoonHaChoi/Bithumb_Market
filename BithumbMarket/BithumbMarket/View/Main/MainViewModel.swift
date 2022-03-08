@@ -28,8 +28,8 @@ final class MainViewModel {
     var changeIndexHandler: ((Int) -> Void)?
     var errorHandler: ((Error) -> Void)?
     
-    func fetchTickers() {
-        service.requestTickers(endpoint: .ticker()) { [weak self] result in
+    lazy var fetchTickers: () -> Void = { [weak self] in
+        self?.service.requestTickers(endpoint: .ticker()) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let tickers):
@@ -51,8 +51,8 @@ final class MainViewModel {
         }
     }
     
-    func updateTickers() {
-        service.perform { [weak self] (respone: Result<ReceiveTicker, HTTPError>) in
+    lazy var updateTickers: () -> Void = { [weak self] in
+        self?.service.perform { [weak self] (respone: Result<ReceiveTicker, HTTPError>) in
             guard let self = self else { return }
             switch respone {
             case .success(let ticker):

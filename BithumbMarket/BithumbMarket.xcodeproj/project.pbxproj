@@ -37,6 +37,7 @@
 		7FBD63FC27D62DDB00C9801C /* Like+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F827D62D9E00C9801C /* Like+CoreDataClass.swift */; };
 		7FBD63FD27D62DDE00C9801C /* Like+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F927D62D9E00C9801C /* Like+CoreDataProperties.swift */; };
 		7FBD63FE27D62DE200C9801C /* LikeSymbol.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F627D62D9E00C9801C /* LikeSymbol.xcdatamodeld */; };
+		7FBD640227D6EF3A00C9801C /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD640127D6EF3900C9801C /* AppDependency.swift */; };
 		BF0430C927C5C1D500A77A38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430C827C5C1D500A77A38 /* AppDelegate.swift */; };
 		BF0430CB27C5C1D500A77A38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */; };
 		BF0430D227C5C1D700A77A38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF0430D127C5C1D700A77A38 /* Assets.xcassets */; };
@@ -112,6 +113,7 @@
 		7FBD63F727D62D9E00C9801C /* LikeEntity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LikeEntity.xcdatamodel; sourceTree = "<group>"; };
 		7FBD63F827D62D9E00C9801C /* Like+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Like+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7FBD63F927D62D9E00C9801C /* Like+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Like+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7FBD640127D6EF3900C9801C /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 		BF0430C527C5C1D500A77A38 /* BithumbMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BithumbMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF0430C827C5C1D500A77A38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			children = (
 				BF0430C827C5C1D500A77A38 /* AppDelegate.swift */,
 				BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */,
+				7FBD640127D6EF3900C9801C /* AppDependency.swift */,
 				7F2E005E27CCA15400752ABA /* View */,
 				BF86B5F127C60638005A2170 /* Network */,
 				BF86B5EE27C602D4005A2170 /* Model */,
@@ -434,6 +437,7 @@
 				7FBD63E927D62AED00C9801C /* TableEmptyView.swift in Sources */,
 				7FBD63E527D62A7E00C9801C /* MainDiffableDataSource.swift in Sources */,
 				7FBD63DD27D594B600C9801C /* CandleStick.swift in Sources */,
+				7FBD640227D6EF3A00C9801C /* AppDependency.swift in Sources */,
 				7FBD63DB27D5945C00C9801C /* Graph.swift in Sources */,
 				7F844D0127D0A94100C06084 /* CurrentMarketPrice.swift in Sources */,
 				7F844CFF27D0A92000C06084 /* CurrentMarketPriceViewModel.swift in Sources */,
