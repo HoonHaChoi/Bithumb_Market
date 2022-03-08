@@ -68,6 +68,7 @@
 		BFDE910727D6FB8900CC4FF5 /* GraphStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFDE910527D6FB8900CC4FF5 /* GraphStorage.xcdatamodeld */; };
 		BFDE910927D71BE500CC4FF5 /* GraphDataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE910827D71BE500CC4FF5 /* GraphDataEntity.swift */; };
 		BFDE910B27D71CA600CC4FF5 /* GraphDataEntityValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE910A27D71CA600CC4FF5 /* GraphDataEntityValueTransformer.swift */; };
+		BFDE910E27D71D8500CC4FF5 /* GraphStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE910D27D71D8500CC4FF5 /* GraphStorage.swift */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
@@ -139,6 +140,7 @@
 		BFDE910627D6FB8900CC4FF5 /* GraphStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GraphStorage.xcdatamodel; sourceTree = "<group>"; };
 		BFDE910827D71BE500CC4FF5 /* GraphDataEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphDataEntity.swift; sourceTree = "<group>"; };
 		BFDE910A27D71CA600CC4FF5 /* GraphDataEntityValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphDataEntityValueTransformer.swift; sourceTree = "<group>"; };
+		BFDE910D27D71D8500CC4FF5 /* GraphStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphStorage.swift; sourceTree = "<group>"; };
 		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E8AC90B027C8700500C50FA3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -229,9 +231,9 @@
 			children = (
 				7FBD63F327D62D9E00C9801C /* CoreDataError.swift */,
 				7FBD63F427D62D9E00C9801C /* LikeStorage.swift */,
+				BFDE910D27D71D8500CC4FF5 /* GraphStorage.swift */,
 				7FBD63F527D62D9E00C9801C /* CoreDataStorage */,
-				BFDE910527D6FB8900CC4FF5 /* GraphStorage.xcdatamodeld */,
-				BFDE910A27D71CA600CC4FF5 /* GraphDataEntityValueTransformer.swift */,
+				BFDE910C27D71D6D00CC4FF5 /* GraphStorage */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -335,6 +337,15 @@
 				BF86B5F427C606D8005A2170 /* EndPoint.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		BFDE910C27D71D6D00CC4FF5 /* GraphStorage */ = {
+			isa = PBXGroup;
+			children = (
+				BFDE910527D6FB8900CC4FF5 /* GraphStorage.xcdatamodeld */,
+				BFDE910A27D71CA600CC4FF5 /* GraphDataEntityValueTransformer.swift */,
+			);
+			path = GraphStorage;
 			sourceTree = "<group>";
 		};
 		E8AC90A927C71DFC00C50FA3 /* Transaction */ = {
@@ -444,6 +455,7 @@
 				7FBD63E927D62AED00C9801C /* TableEmptyView.swift in Sources */,
 				7FBD63E527D62A7E00C9801C /* MainDiffableDataSource.swift in Sources */,
 				7FBD63DD27D594B600C9801C /* CandleStick.swift in Sources */,
+				BFDE910E27D71D8500CC4FF5 /* GraphStorage.swift in Sources */,
 				7FBD63DB27D5945C00C9801C /* Graph.swift in Sources */,
 				7F844D0127D0A94100C06084 /* CurrentMarketPrice.swift in Sources */,
 				7F844CFF27D0A92000C06084 /* CurrentMarketPriceViewModel.swift in Sources */,
