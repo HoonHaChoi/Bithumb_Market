@@ -9,15 +9,15 @@ import UIKit
 
 final class DetailViewController: UIViewController {
     
-    private let symbol: String
+    private let ticker: Ticker
     
-    private var transactionViewControllerFactory: (String) -> UIViewController
-    private var orderbookViewControllerFactory: (String) -> UIViewController
+    private var transactionViewControllerFactory: (Ticker) -> UIViewController
+    private var orderbookViewControllerFactory: (Ticker) -> UIViewController
     
-    init(symbol: String,
-         transactionViewControllerFactory: @escaping (String) -> UIViewController,
-         orderbookViewControllerFactory: @escaping (String) -> UIViewController) {
-        self.symbol = symbol
+    init(ticker: Ticker,
+         transactionViewControllerFactory: @escaping (Ticker) -> UIViewController,
+         orderbookViewControllerFactory: @escaping (Ticker) -> UIViewController) {
+        self.ticker = ticker
         self.transactionViewControllerFactory = transactionViewControllerFactory
         self.orderbookViewControllerFactory = orderbookViewControllerFactory
         super.init(nibName: nil, bundle: nil)
@@ -108,7 +108,7 @@ final class DetailViewController: UIViewController {
     }()
     
     private func configureNavigationBar() {
-        title = symbol
+        title = ticker.symbol
         navigationController?.isNavigationBarHidden = false
         guard let hasSymbol = likeHandler else {
             return
@@ -146,11 +146,11 @@ final class DetailViewController: UIViewController {
     }
     
     private func moveTransactionViewController() {
-        self.navigationController?.pushViewController(transactionViewControllerFactory(symbol), animated: true)
+        self.navigationController?.pushViewController(transactionViewControllerFactory(ticker), animated: true)
     }
     
     private func moveOrderbookViewController() {
-        self.navigationController?.pushViewController(orderbookViewControllerFactory(symbol), animated: true)
+        self.navigationController?.pushViewController(orderbookViewControllerFactory(ticker), animated: true)
     }
 }
 

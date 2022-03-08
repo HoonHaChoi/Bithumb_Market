@@ -50,6 +50,7 @@ final class CurrentMarketPriceViewModel {
         self.service.perform { [weak self] (result: Result<ReceiveTicker, HTTPError>) in
             switch result {
             case .success(let ticker):
+                print(ticker)
                 guard let currentPrice = self?.convert(from: ticker) else {
                     return
                 }

@@ -24,7 +24,7 @@ final class AssetsStatusViewModel {
         self.symbol = symbol
     }
     
-    lazy var fetchAssetsStatus: () -> Void =  {
+    lazy var fetchAssetsStatus: () -> Void =  { 
         self.service.request(endpoint: .assetsstatus(symbol: self.symbol)) { [weak self] (result: Result<AssetsStatus, HTTPError>) in
             switch result {
             case .success(let assetsStatus):

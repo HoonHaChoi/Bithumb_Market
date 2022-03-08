@@ -12,16 +12,16 @@ struct AppDependency {
     let service = APIService()
     let storage = LikeStorge()
     
-    func detailViewControllerFactory(symbol: String) -> DetailViewController {
-        return initialDetailViewController(symbol: symbol)
+    func detailViewControllerFactory(ticker: Ticker) -> DetailViewController {
+        return initialDetailViewController(ticker: ticker)
     }
     
-    func transactionViewControllerFactory(symbol: String) -> TransactionViewController {
-        return initialTransactionViewController(symbol: symbol)
+    func transactionViewControllerFactory(ticker: Ticker) -> TransactionViewController {
+        return initialTransactionViewController(ticker: ticker)
     }
     
-    func orderbookViewControllerFactory(symbol: String) -> OrderbookViewController {
-        return initialOrderbookViewController(symbol: symbol)
+    func orderbookViewControllerFactory(ticker: Ticker) -> OrderbookViewController {
+        return initialOrderbookViewController(ticker: ticker)
     }
     
     func initialMainViewController() -> MainViewController {
@@ -39,21 +39,22 @@ struct AppDependency {
         return mainViewController
     }
     
-    private func initialDetailViewController(symbol: String) -> DetailViewController {
-        let detailViewController = DetailViewController(
-            symbol: symbol,
-            transactionViewControllerFactory: transactionViewControllerFactory,
-            orderbookViewControllerFactory: orderbookViewControllerFactory)
-        let currentMarketPriceViewModel = CurrentMarketPriceViewModel(service: service, symbol: symbol)
-        let assetsStatusViewModel = AssetsStatusViewModel(service: service, symbol: symbol)
+    private func initialDetailViewController(ticker: Ticker) -> DetailViewController {
+        let detailViewController = DetailViewController(ticker: ticker,
+                                                        transactionViewControllerFactory: transactionViewControllerFactory,
+                                                        orderbookViewControllerFactory: orderbookViewControllerFactory)
+        let currentMarketPriceViewModel = CurrentMarketPriceViewModel(service: service,
+                                                                      symbol: ticker.paymentCurrency)
+        let assetsStatusViewModel = AssetsStatusViewModel(service: service,
+                                                          symbol: ticker.paymentCurrency)
         let detailViewModel = DetailViewModel(storage: storage)
         
         detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
         detailViewController.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
         detailViewController.fetchAssetsStatusHandler = assetsStatusViewModel.fetchAssetsStatus
-
-        detailViewController.likeHandler = detailViewModel.hasLike(symbol: symbol)
-        detailViewController.updateLikeHandler = detailViewModel.updateLike(symbol: symbol)
+        
+        detailViewController.likeHandler = detailViewModel.hasLike(symbol: ticker.symbol)
+        detailViewController.updateLikeHandler = detailViewModel.updateLike(symbol: ticker.symbol)
         
         detailViewController.bindPriceHandler = currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
         detailViewController.bindAssetsStatusHandler = assetsStatusViewModel.assetsStatus.subscribe(bind: detailViewController.updateAssetsStatusView)
@@ -61,11 +62,11 @@ struct AppDependency {
         return detailViewController
     }
     
-    private func initialTransactionViewController(symbol: String) -> TransactionViewController {
+    private func initialTransactionViewController(ticker: Ticker) -> TransactionViewController {
         let transactionViewController = TransactionViewController(datasource: .init())
         let transactionViewModel = TransactionViewModel(
             service: service,
-            symbol: symbol)
+            symbol: ticker.paymentCurrency)
         
         transactionViewModel.updateTableHandler = transactionViewController.updateTableView
         transactionViewModel.insertTableHandler = transactionViewController.insertRowTableView
@@ -74,9 +75,9 @@ struct AppDependency {
         return transactionViewController
     }
     
-    private func initialOrderbookViewController(symbol: String) -> OrderbookViewController {
+    private func initialOrderbookViewController(ticker: Ticker) -> OrderbookViewController {
         let orderbookViewModel = OrderbookViewModel(service: service,
-                                                    symbol: symbol)
+                                                    symbol: ticker.paymentCurrency)
         let orderbookViewController = OrderbookViewController(dataSource: .init())
         orderbookViewController.fetchHandler = orderbookViewModel.fetchOrderbook
         

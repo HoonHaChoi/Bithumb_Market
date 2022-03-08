@@ -24,8 +24,8 @@ final class OrderbookViewModel {
     var errorHandler: ((HTTPError) -> Void)?
     var updateHandler: (() -> Void)?
     
-    func fetchOrderbook() {
-        service.request(endpoint: .orderBook(symbol: symbol)) { [weak self] (result: Result<Orderbook, HTTPError>) in
+    lazy var fetchOrderbook = { 
+        self.service.request(endpoint: .orderBook(symbol: self.symbol)) { [weak self] (result: Result<Orderbook, HTTPError>) in
             switch result {
             case .success(let success):
                 print(success)

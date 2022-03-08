@@ -24,8 +24,8 @@ final class TransactionViewModel {
     var insertTableHandler: (() -> Void)?
     var errorHandler: ((HTTPError) -> Void)?
     
-    func fetchTransaction() {
-        service.request(endpoint: .transactionHistory(symbol: symbol)) { [weak self] (result:  Result<Transaction, HTTPError>)  in
+    lazy var fetchTransaction = {
+        self.service.request(endpoint: .transactionHistory(symbol: self.symbol)) { [weak self] (result:  Result<Transaction, HTTPError>)  in
             guard let self = self else { return }
             switch result {
             case .success(let transaction):

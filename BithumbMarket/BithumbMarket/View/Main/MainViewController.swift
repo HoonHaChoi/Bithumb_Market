@@ -9,9 +9,9 @@ import UIKit
 
 final class MainViewController: UIViewController {
     
-    private var detailViewControllerFactory: (String) -> UIViewController
+    private var detailViewControllerFactory: (Ticker) -> UIViewController
     
-    init(detailViewControllerFactory: @escaping (String) -> UIViewController) {
+    init(detailViewControllerFactory: @escaping (Ticker) -> UIViewController) {
         self.detailViewControllerFactory = detailViewControllerFactory
         super.init(nibName: nil, bundle: nil)
     }
@@ -115,8 +115,8 @@ final class MainViewController: UIViewController {
         })
     }
     
-    private func moveDetailViewController(symbol: String) {
-        self.navigationController?.pushViewController(detailViewControllerFactory("\(symbol)_KRW"), animated: true)
+    private func moveDetailViewController(ticker: Ticker) {
+        self.navigationController?.pushViewController(detailViewControllerFactory(ticker), animated: true)
     }
     
 }
@@ -127,7 +127,7 @@ extension MainViewController: UITableViewDelegate {
         guard let ticker = diffableDatasource.itemIdentifier(for: indexPath) else {
             return
         }
-        self.moveDetailViewController(symbol: ticker.symbol)
+        self.moveDetailViewController(ticker: ticker)
     }
     
 }
