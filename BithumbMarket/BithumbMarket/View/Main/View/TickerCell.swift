@@ -40,7 +40,7 @@ final class TickerCell: UITableViewCell {
         setConstraintLayout()
     }
     
-    private func configure(ticker: Ticker) {
+    func configure(ticker: Ticker) {
         symbolLabel.text = ticker.symbol
         currentPriceLabel.text = ticker.market.closingPrice.withComma()
         changeRateLabel.text = ticker.market.fluctateRate24H.withDecimal(maximumDigit: 2) + "%"

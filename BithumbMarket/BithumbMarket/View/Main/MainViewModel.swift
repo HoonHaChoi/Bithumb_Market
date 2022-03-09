@@ -10,12 +10,11 @@ import Foundation
 final class MainViewModel {
     
     var tickers: Observable<[Ticker]>
-    private var isFilter: Bool
-    private var service: APIService
+    private let service: APIService
     private let storage: LikeStorge
-    private var symbols: [String]
-    
     private var socket: SocketService?
+    private var symbols: [String]
+    private var isFilter: Bool
     
     init(service: APIService, storage: LikeStorge) {
         self.tickers = .init([])
@@ -54,6 +53,11 @@ final class MainViewModel {
             self.socket?.sendMessage(message: message)
         }
         completion()
+    }
+    
+    func disconnect() {
+        socket?.disconnect()
+        socket = nil
     }
     
     private func updateTickers() {
