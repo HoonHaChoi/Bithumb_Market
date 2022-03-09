@@ -34,6 +34,7 @@ struct AppDependency {
         mainViewController.fetchTickersHandler = mainViewModel.fetchTickers
         mainViewController.updateTickersHandler = mainViewModel.updateTickers
         mainViewController.coinSortView.sortControlHandler = mainViewModel.executeFilterTickers
+        mainViewController.disconnectHandler = mainViewModel.disconnect
         
         mainViewModel.updateTickersHandler = mainViewController.updateTableView
         mainViewModel.changeIndexHandler = mainViewController.updateTableViewRows
@@ -44,14 +45,14 @@ struct AppDependency {
         let detailViewController = DetailViewController(ticker: ticker,
                                                         transactionViewControllerFactory: transactionViewControllerFactory,
                                                         orderbookViewControllerFactory: orderbookViewControllerFactory)
-//        let currentMarketPriceViewModel = CurrentMarketPriceViewModel(service: service,
-//                                                                      symbol: ticker.paymentCurrency)
+        let currentMarketPriceViewModel = CurrentMarketPriceViewModel(service: service,
+                                                                      symbol: ticker.paymentCurrency)
         let assetsStatusViewModel = AssetsStatusViewModel(service: service,
                                                           symbol: ticker.paymentCurrency)
         let detailViewModel = DetailViewModel(storage: likeStorage)
         let graphViewModel = GraphViewModel(service: service, storage: graphStorage)
 //        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
-//        detailViewController.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
+        detailViewController.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
         
         detailViewController.fetchAssetsStatusHandler = assetsStatusViewModel.fetchAssetsStatus
         assetsStatusViewModel.assetsStateHandler = detailViewController.updateAssetsStatusView
@@ -60,6 +61,8 @@ struct AppDependency {
         detailViewModel.hasLikeHandler = detailViewController.hasSymbolButton
         detailViewController.updateLikeHandler = detailViewModel.updateLike(symbol:)
         detailViewModel.updateCompleteHandler = detailViewController.updateSymbolButton
+        
+        detailViewController.disconnectHandler = currentMarketPriceViewModel.disconnect
         
         detailViewController.fetchGraphHandler = graphViewModel.fetchGraph(symbol:interval:)
         graphViewModel.updateGraphHandler = detailViewController.updateGraphView
@@ -72,7 +75,7 @@ struct AppDependency {
 //        detailViewController.likeHandler(ticker.symbol) = detailViewModel.hasLike(symbol: ticker.symbol)
 //        detailViewController.updateLikeHandler = detailViewModel.updateLike(symbol: ticker.symbol)
 
-//        detailViewController.bindPriceHandler = currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
+        detailViewController.bindPriceHandler = currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
         
         return detailViewController
     }
@@ -82,6 +85,8 @@ struct AppDependency {
             service: service,
             symbol: ticker.paymentCurrency)
         let transactionViewController = TransactionViewController(datasource: .init())
+        
+        transactionViewController.disconnectHandler = transactionViewModel.disconnect
         
         transactionViewModel.updateTableHandler = transactionViewController.updateTableView
         transactionViewController.fetchTransactionHandler = transactionViewModel.fetchTransaction
@@ -97,6 +102,9 @@ struct AppDependency {
         orderbookViewController.fetchHandler = orderbookViewModel.fetchOrderbook
         orderbookViewModel.orderbook.bind = orderbookViewController.updateDataSource
         orderbookViewModel.updateHandler = orderbookViewController.updateTableView
+        
+        orderbookViewController.disconnectHandler = orderbookViewModel.disconnect
+        
         return orderbookViewController
     }
     

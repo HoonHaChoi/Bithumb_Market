@@ -13,6 +13,7 @@ final class TransactionViewModel {
     
     var transactionData: Observable<[TransactionData]>
     private let service: APIService
+    var socket: SocketService?
     
     init(service: APIService, symbol: String) {
         self.transactionData = .init([])
@@ -39,16 +40,22 @@ final class TransactionViewModel {
         }
     }
     
+    lazy var disconnect: () -> Void = { [weak self] in
+        self?.socket?.disconnect()
+        self?.socket = nil
+    }
+    
     private func sendMessage() {
+        self.socket = SocketService()
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self = self else { return }
             let message = Message(type: .transaction, symbols: .name(self.symbol))
-            self.service.sendSocketMessage(to: message)
+            self.socket?.sendMessage(message: message)
         }
     }
     
     private func updateTransaction() {
-        service.perform { [weak self] (result: Result<ReceiveTransaction, HTTPError>) in
+        self.socket?.perform { [weak self] (result: Result<ReceiveTransaction, HTTPError>) in
             guard let self = self else { return }
             switch result {
             case .success(let transaction):
@@ -57,6 +64,7 @@ final class TransactionViewModel {
                     self.insertTableHandler?()
                 }
             case .failure(let error):
+                print("체결내역 : \(error)")
                 self.errorHandler?(error)
             }
         }

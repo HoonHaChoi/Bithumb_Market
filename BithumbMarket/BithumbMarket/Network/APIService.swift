@@ -10,12 +10,14 @@ import Foundation
 struct APIService {
     
     private let session: URLSession
-    private let socket: SocketService
+    //private let socket: SocketService
     
-    init(session: URLSession = URLSession(configuration: .ephemeral),
-         socket: SocketService = SocketService(url: APIEndpoint.socket.url)) {
+    init(session: URLSession = URLSession(configuration: .ephemeral)
+         //, socket: SocketService = SocketService(url: APIEndpoint.socket.url)
+    )
+    {
         self.session = session
-        self.socket = socket
+        //self.socket = socket
     }
     
     func request<T: Decodable>(endpoint: APIEndpoint, completion: @escaping (Result<T, HTTPError>) -> Void) {
@@ -122,25 +124,25 @@ struct APIService {
         return .success(decoding)
     }
     
-    func sendSocketMessage(to message: Message) {
-        guard let encoder = try? JSONEncoder().encode(message) else {
-             return
-        }
-        socket.sendMessage(data: encoder)
-    }
-    
-    func perform<T: Decodable>(completion: @escaping (Result<T, HTTPError>) -> Void) {
-        socket.reciveText { tickerString in
-            guard let data = tickerString.data(using: .utf8) else {
-                completion(.failure(.failureDecode))
-                return
-            }
-            completion(self.decode(data: data))
-        }
-    }
-    
-    func disconnectSocket() {
-        socket.disconnect()
-    }
+//    func sendSocketMessage(to message: Message) {
+//        guard let encoder = try? JSONEncoder().encode(message) else {
+//             return
+//        }
+//        socket.sendMessage(data: encoder)
+//    }
+//
+//    func perform<T: Decodable>(completion: @escaping (Result<T, HTTPError>) -> Void) {
+//        socket.reciveText { tickerString in
+//            guard let data = tickerString.data(using: .utf8) else {
+//                completion(.failure(.failureDecode))
+//                return
+//            }
+//            completion(self.decode(data: data))
+//        }
+//    }
+//
+//    func disconnectSocket() {
+//        socket.disconnect()
+//    }
     
 }

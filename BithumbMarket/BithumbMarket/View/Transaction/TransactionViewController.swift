@@ -47,6 +47,12 @@ final class TransactionViewController: UIViewController {
         fetchTransactionHandler?()
     }
     
+    var disconnectHandler: (() -> Void)?
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disconnectHandler?()
+    }
+    
     lazy var updateDataSource: (([TransactionData]) -> Void)? = { [weak self] transactionData in
         self?.datasource.items = transactionData
     }

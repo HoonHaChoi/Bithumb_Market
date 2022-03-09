@@ -57,6 +57,12 @@ final class OrderbookViewController: UIViewController {
         fetchHandler?()
     }
     
+    var disconnectHandler: (() -> Void)?
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disconnectHandler?()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scrollToCenter()

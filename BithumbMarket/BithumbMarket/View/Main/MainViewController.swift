@@ -22,6 +22,7 @@ final class MainViewController: UIViewController {
     
     var fetchTickersHandler: (() -> Void)?
     var updateTickersHandler: (() -> Void)?
+    var disconnectHandler: (() -> Void)?
     var bindHandler: Void?
     
     private let mainTableView: UITableView = {
@@ -61,9 +62,18 @@ final class MainViewController: UIViewController {
         configureTableView()
         _ = bindHandler
         fetchTickersHandler?()
-        updateTickersHandler?()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateTickersHandler?()
+
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disconnectHandler?()
+    }
+    
     private func configureUI() {
         view.addSubview(coinSortView)
         view.addSubview(mainTableView)

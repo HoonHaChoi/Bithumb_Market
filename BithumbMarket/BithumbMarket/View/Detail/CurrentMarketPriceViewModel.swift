@@ -10,6 +10,7 @@ import Foundation
 final class CurrentMarketPriceViewModel {
     
     private var service: APIService
+    var socket: SocketService?
     private var symbol: String
     var price : Observable<CurrentMarketPrice>
     
@@ -23,6 +24,11 @@ final class CurrentMarketPriceViewModel {
             changePrice: "",
             changeRate: "")
         )
+    }
+    
+    lazy var disconnect: () -> Void = { [weak self] in
+        self?.socket?.disconnect()
+        self?.socket = nil
     }
     
     lazy var fetchPrice: () -> Void = {
@@ -39,24 +45,26 @@ final class CurrentMarketPriceViewModel {
     }
     
     private func sendMessage() {
+        self.socket = SocketService()
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let symbol = self?.symbol else { return }
             let message = Message(type: .ticker, symbols: .name(symbol), tickTypes: .mid)
-            self?.service.sendSocketMessage(to: message)
+            self?.socket?.sendMessage(message: message)
         }
     }
     
-    lazy var updatePrice:() -> Void = {
-        self.service.perform { [weak self] (result: Result<ReceiveTicker, HTTPError>) in
+    lazy var updatePrice:() -> Void = { [weak self] in
+        self?.socket?.perform { [weak self] (result: Result<ReceiveTicker, HTTPError>) in
             switch result {
             case .success(let ticker):
-                print(ticker)
-                guard let currentPrice = self?.convert(from: ticker) else {
-                    return
+                if ticker.content.symbol == self?.symbol {
+                    guard let currentPrice = self?.convert(from: ticker) else {
+                        return
+                    }
+                    self?.price.value = currentPrice
                 }
-                self?.price.value = currentPrice
             case .failure(let error):
-                print(error)
+                print("현재가: \(error)")
                 self?.errorHandler?(error)
             }
         }

@@ -11,7 +11,9 @@ final class OrderbookViewModel {
 
     var orderbook: Observable<OrderbookData>
     private let symbol: String
-    private let service: APIService
+    private var service: APIService
+    
+    var socket: SocketService?
     
     init(service: APIService, symbol: String) {
         self.orderbook = .init(OrderbookData(
@@ -39,15 +41,15 @@ final class OrderbookViewModel {
     }
     
     private func sendMessage() {
+        self.socket = SocketService()
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let symbol = self?.symbol else { return }
             let message = Message(type: .orderbookdepth, symbols: .name(symbol))
-            self?.service.sendSocketMessage(to: message)
-        }
+            self?.socket?.sendMessage(message: message)        }
     }
     
     private func updateOrderbook() {
-        self.service.perform { [weak self] (result: Result<ReceiveOrderbook, HTTPError>) in
+        self.socket?.perform { [weak self] (result: Result<ReceiveOrderbook, HTTPError>) in
             switch result {
             case .success(let success):
                 guard let self = self else { return }
@@ -64,6 +66,11 @@ final class OrderbookViewModel {
                 self?.errorHandler?(error)
             }
         }
+    }
+    
+    lazy var disconnect: () -> Void = { [weak self] in
+        self?.socket?.disconnect()
+        self?.socket = nil
     }
     
     private func mergeOrders(_ old: [Order], into new: [ReceiveOrder]) -> [Order] {

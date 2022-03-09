@@ -117,6 +117,12 @@ final class DetailViewController: UIViewController {
         fetchGraphHandler?(ticker.symbol, .day)
     }
     
+    var disconnectHandler: (() -> Void)?
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disconnectHandler?()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateCurrentMarketPriceHandler?()

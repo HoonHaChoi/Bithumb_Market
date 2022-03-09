@@ -28,6 +28,8 @@ final class TransactionPriceGraphView: UIView {
             self.graph.maxPrice = graph.maxPriceList[graph.startPoint..<graph.count].map { Double($0) }
             self.graph.minPrice = graph.minPriceList[graph.startPoint..<graph.count].map { Double($0) }
             self.graph.date = graph.dateList[graph.startPoint..<graph.count].map { String($0) }
+            self.graph.boundMinX = 0
+            self.graph.boundMaxX = self.frame.width
             self.graph.layer.setNeedsDisplay()
         }
     }
