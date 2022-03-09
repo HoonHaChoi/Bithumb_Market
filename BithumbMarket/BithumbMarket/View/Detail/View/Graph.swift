@@ -18,6 +18,21 @@ class Graph: UIView {
     var closePrice = [Double]()
     var maxPrice = [Double]()
     var minPrice = [Double]()
+    private var date = [String]()
+    private var openPrice = [Int]()
+    private var closePrice = [Int]()
+    private var maxPrice = [Int]()
+    private var minPrice = [Int]()
+    
+    private var layerCount = 0
+    private var offsetX = CGFloat()
+    
+    var boundMinX = CGFloat()
+    var boundMaxX = CGFloat() {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     var isLineGraph = false {
           didSet {
               setNeedsDisplay()
@@ -32,26 +47,32 @@ class Graph: UIView {
         super.init(coder: coder)
     }
     
-    init(frame: CGRect, values: [Double], date: [String], openPrice: [Double], maxPrice: [Double], minPrice: [Double]) {
+    init(frame: CGRect, values: [Int], date: [String], openPrice: [Int], maxPrice: [Int], minPrice: [Int], boundMinX: CGFloat, boundMaxX: CGFloat) {
         super.init(frame: frame)
         self.date = date
         self.openPrice = openPrice
         self.closePrice = values
         self.maxPrice = maxPrice
         self.minPrice = minPrice
+        self.boundMinX = boundMinX
+        self.boundMaxX = boundMaxX
     }
     
     override func draw(_ rect: CGRect) {
         layer.sublayers?.removeAll()
         switch isLineGraph {
-           case true:
-               return graph(width: frame.width, height: frame.height, values: closePrice)
-           case false:
-            return candleStick(width: frame.width, height: frame.height)
+        case true:
+            lineGraph(width: frame.width, height: frame.height, values: closePrice)
+        case false:
+            candleStickGraph(width: frame.width, height: frame.height, boundMinX: boundMinX, boundMaxX: boundMaxX)
+        }
+        if let count = layer.sublayers?.count {
+            layerCount = count
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        remove()
         show(touches: touches)
     }
     
@@ -69,32 +90,32 @@ class Graph: UIView {
 extension Graph {
     
     private func show(touches: Set<UITouch>) {
-        if let touch = touches.first {
+        if let touch = touches.first { 
             let position = touch.location(in: self)
             let x = position.x
             let index = checkIndex(index: Int(x / offsetX))
             date(x: x, date: date[index])
             price(x: x, price: closePrice[index])
-            stick(x: x, minY: 300, maxY: 40, color: UIColor.textPrimary.cgColor)
+            stick(x: x, minY: frame.minY + 40, maxY: frame.maxY, color: UIColor.textPrimary.cgColor)
         }
     }
     
     private func remove() {
-        for _ in 0..<3 {
-            if let count = layer.sublayers?.count {
-                layer.sublayers?.remove(at: count - 1)
+        if let count = layer.sublayers?.count {
+            for _ in layerCount..<count {
+                layer.sublayers?.remove(at: layerCount)
             }
         }
     }
     
     private func date(x: CGFloat, date: String) {
-        drawText(x: x, y: 0, text: date,  fontSize: 11, height: 12)
+        drawText(x: x, y: 5, text: date,  fontSize: 11, height: 12)
     }
     
     private func price(x: CGFloat, price: Double) {
         let stringPrice = String(price).withComma()
         let text = stringPrice + "원"
-        drawText(x: x, y: 15, text: text, fontSize: 16, height: 20)
+        drawText(x: x, y: 20, text: text, fontSize: 16, height: 20)
     }
     
     private func drawText(x: CGFloat, y: CGFloat, text: String, fontSize: CGFloat, height: CGFloat) {
@@ -124,23 +145,21 @@ extension Graph {
         self.layer.addSublayer(layers)
     }
     
-    private func graph(width: CGFloat, height: CGFloat, values: [Double]) {
+    private func lineGraph(width: CGFloat, height: CGFloat, values: [Double]) {
         offsetX = frame.width / CGFloat(values.count)
-        
         let path = UIBezierPath()
         let layers = CAShapeLayer()
-        var currentX: CGFloat = 0
         
         guard let min = values.min(), let max = values.max() else { return }
-        let scale = CGFloat(Double((max - min) / 2) / 0.4)
+        let scale = CGFloat(Double(max - min) / 0.8)
         let currentY = values.map{ max - $0 }
-
+        var currentX: CGFloat = 0
+        
         path.move(to: CGPoint(x: 0, y: (frame.height * (CGFloat(currentY[0]) / scale)) + 55))
         currentY.forEach {
             currentX += offsetX
             path.addLine(to: CGPoint(x: currentX, y: (frame.height * (CGFloat($0) / scale)) + 55))
         }
-    
         layers.fillColor = nil
         layers.strokeColor = UIColor.mainColor.cgColor
         layers.lineWidth = 3
@@ -150,37 +169,56 @@ extension Graph {
         self.layer.addSublayer(layers)
     }
     
-    private func candleStick(width: CGFloat, height: CGFloat) {
-        offsetX = frame.width / CGFloat(closePrice.count)
-        var currentX: CGFloat = 0
+    private func candleStickGraph(width: CGFloat, height: CGFloat, boundMinX: CGFloat, boundMaxX: CGFloat) {
+        offsetX = frame.width / CGFloat(closePrice.count + 1)
+        let start = checkIndex(index: Int(boundMinX / offsetX))
+        let end = checkIndex(index: Int(boundMaxX / offsetX))
         
-        guard let maxprice = maxPrice.max(), let minprice = minPrice.min() else {return}
+        guard let maxprice = maxPrice[start...end].max(),
+              let minprice = minPrice[start...end].min() else {return}
+        
+        let labelSpace: CGFloat = 55
+        var currentX: CGFloat = boundMinX
         let scale = CGFloat(Double((maxprice - minprice) / 2) / 0.4)
+        let close = closePrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
+        let open = openPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
+        let max = maxPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
+        let min = minPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
         
-        let close = closePrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + 55 }
-        let open = openPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + 55 }
-        let max = maxPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + 55 }
-        let min = minPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + 55 }
-        
-        for i in 0..<max.count{
+        for i in start...end{
             currentX += offsetX
-            stick(x: currentX - 4, minY: min[i], maxY: max[i], color: UIColor.textSecondary.cgColor)
+            stick(x: currentX - 4, minY: min[i] , maxY: max[i], color: UIColor.textSecondary.cgColor)
             
-            if close[i] > open[i] {
-                rectangle(top: open[i], bottom: close[i], color: UIColor.fallColor.cgColor, currentX: currentX)
-            } else {
-                rectangle(top: close[i], bottom: open[i], color: UIColor.riseColor.cgColor, currentX: currentX)
-            }
+            close[i] > open[i]
+            ? rectangle(top: open[i] , bottom: close[i], color: UIColor.fallColor.cgColor, currentX: currentX)
+            : rectangle(top: close[i], bottom: open[i], color: UIColor.riseColor.cgColor, currentX: currentX)
         }
+        currentPriceBar(open: open[open.count - 1], close: close[close.count - 1])
     }
-    
+ 
+    private func currentPriceBar(open: CGFloat, close: CGFloat) {
+        let layers = CAShapeLayer()
+        let path = UIBezierPath()
+        let color: CGColor = close < open ? UIColor.riseColor.cgColor : UIColor.fallColor.cgColor
+      
+        path.move(to: CGPoint(x: 0, y: close))
+        path.addLine(to: CGPoint(x: frame.width, y: close))
+        layers.fillColor = nil
+        layers.strokeColor = color
+        layers.lineWidth = 1
+        layers.lineCap = .round
+        layers.path = path.cgPath
+        layers.lineDashPattern = [3, 3]
+        self.layer.addSublayer(layers)
+    }
+
     private func rectangle(top: CGFloat, bottom: CGFloat, color: CGColor, currentX: CGFloat) {
         let layers = CAShapeLayer()
         let path = UIBezierPath()
-        path.move(to: CGPoint(x: currentX-(offsetX/2)-3, y: top))
-        path.addLine(to: CGPoint(x: currentX-(offsetX/2) + offsetX - 5 , y: top))
-        path.addLine(to: CGPoint(x: currentX-(offsetX/2) + offsetX - 5, y: bottom))
-        path.addLine(to: CGPoint(x:  currentX-(offsetX/2)-3, y: bottom))
+        path.move(to: CGPoint(x: currentX - (offsetX/2) - 3, y: top))
+        path.addLine(to: CGPoint(x: currentX - (offsetX/2) + offsetX - 5 , y: top))
+        path.addLine(to: CGPoint(x: currentX - (offsetX/2) + offsetX - 5, y: bottom))
+        path.addLine(to: CGPoint(x:  currentX - (offsetX/2) - 3, y: bottom))
         layers.lineCap = .round
         layers.path = path.cgPath
         layers.fillColor = color
@@ -191,7 +229,7 @@ extension Graph {
         switch index {
         case ..<0:
             return 0
-        case (closePrice.count - 1)...:
+        case (closePrice.count)...:
             return closePrice.count - 1
         default:
             return index
@@ -200,10 +238,10 @@ extension Graph {
     
     private func checkX(x: CGFloat) -> CGFloat {
         switch x {
-        case ..<50:
-            return 50
-        case UIScreen.main.bounds.width - 80..<UIScreen.main.bounds.width:
-            return UIScreen.main.bounds.width - 80
+        case ..<(boundMinX + 55):
+            return boundMinX + 55
+        case (boundMaxX - 55)...:
+            return boundMaxX - 55
         default:
             return x
         }
@@ -213,8 +251,8 @@ extension Graph {
         switch x {
         case ..<0:
             return 0
-        case (UIScreen.main.bounds.width - 40)...:
-            return UIScreen.main.bounds.width - 40
+        case frame.width...:
+            return frame.width
         default:
             return x
         }
