@@ -56,9 +56,9 @@ class Graph: UIView {
         layer.sublayers?.removeAll()
         switch isLineGraph {
         case true:
-            graph(width: frame.width, height: frame.height, values: closePrice)
+            lineGraph(width: frame.width, height: frame.height, values: closePrice)
         case false:
-            candleStick(width: frame.width, height: frame.height, boundMinX: boundMinX, boundMaxX: boundMaxX)
+            candleStickGraph(width: frame.width, height: frame.height, boundMinX: boundMinX, boundMaxX: boundMaxX)
         }
         if let count = layer.sublayers?.count {
             layerCount = count
@@ -139,7 +139,7 @@ extension Graph {
         self.layer.addSublayer(layers)
     }
     
-    private func graph(width: CGFloat, height: CGFloat, values: [Int]) {
+    private func lineGraph(width: CGFloat, height: CGFloat, values: [Int]) {
         offsetX = frame.width / CGFloat(values.count)
         let path = UIBezierPath()
         let layers = CAShapeLayer()
@@ -163,7 +163,7 @@ extension Graph {
         self.layer.addSublayer(layers)
     }
     
-    private func candleStick(width: CGFloat, height: CGFloat, boundMinX: CGFloat, boundMaxX: CGFloat) {
+    private func candleStickGraph(width: CGFloat, height: CGFloat, boundMinX: CGFloat, boundMaxX: CGFloat) {
         
         offsetX = frame.width / CGFloat(closePrice.count + 1)
         let start = checkIndex(index: Int(boundMinX / offsetX))
