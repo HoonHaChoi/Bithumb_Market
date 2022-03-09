@@ -38,6 +38,7 @@ final class DetailViewController: UIViewController {
     var fetchGraphHandler: ((String, ChartIntervals) -> Void)?
     var passGraphHandler: (() -> Void)?
     var bindPriceHandler: Void?
+    var disconnectHandler: (() -> Void)?
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()

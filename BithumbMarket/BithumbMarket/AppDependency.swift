@@ -38,6 +38,7 @@ struct AppDependency {
         mainViewController.fetchTickersHandler = mainViewModel.fetchTickers
         //mainViewController.updateTickersHandler = mainViewModel.updateTickers
         mainViewController.coinSortView.sortControlHandler = mainViewModel.executeFilterTickers
+        mainViewController.disconnectHandler = mainViewModel.disconnect
         
         mainViewModel.updateTickersHandler = mainViewController.updateTableView
         mainViewModel.changeIndexHandler = mainViewController.updateTableViewRows
@@ -58,7 +59,7 @@ struct AppDependency {
         detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
         //detailViewContrller.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
         detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
-
+        detailViewController.disconnectHandler = currentMarketPriceViewModel.disconnect
         
         detailViewController.fetchAssetsStatusHandler = assetsStatusViewModel.fetchAssetsStatus
         assetsStatusViewModel.assetsStateHandler = detailViewController.updateAssetsStatusView
@@ -79,7 +80,7 @@ struct AppDependency {
         detailViewController.passGraphHandler = graphViewModel.passGraphData
         graphViewModel.passGraphHandler = detailViewController.showGraphDetailViewController
         
-//        detailViewController.bindPriceHandler = currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
+        detailViewController.bindPriceHandler = currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
         
         return detailViewController
     }
@@ -90,8 +91,9 @@ struct AppDependency {
             symbol: ticker.paymentCurrency)
         let transactionViewController = TransactionViewController(datasource: .init())
         
-        transactionViewModel.updateTableHandler = transactionViewController.updateTableView
+        //transactionViewModel.updateTableHandler = transactionViewController.updateTableView
         transactionViewController.fetchTransactionHandler = transactionViewModel.fetchTransaction
+        transactionViewController.disconnectHandler = transactionViewModel.disconnect
         transactionViewModel.insertTableHandler = transactionViewController.insertRowTableView
         transactionViewModel.transactionData.bind = transactionViewController.updateDataSource
         return transactionViewController
@@ -101,6 +103,7 @@ struct AppDependency {
         let orderbookViewModel = OrderbookViewModel(service: service,
                                                     symbol: ticker.paymentCurrency)
         let orderbookViewController = OrderbookViewController(dataSource: .init())
+        orderbookViewController.disconnectHandler = orderbookViewModel.disconnect
         orderbookViewController.fetchHandler = orderbookViewModel.fetchOrderbook
         orderbookViewModel.orderbook.bind = orderbookViewController.updateDataSource
         orderbookViewModel.updateHandler = orderbookViewController.updateTableView
