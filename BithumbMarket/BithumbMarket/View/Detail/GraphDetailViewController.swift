@@ -29,7 +29,7 @@ final class GraphDetailViewController: UIViewController {
     private func drawgraph() {
         // TODO: date struct 처리 필요
         graph = Graph(
-            frame: CGRect(x: 0, y: 0, width: width, height: UIScreen.main.bounds.height - 200),
+            frame: CGRect(x: 0, y: 0, width: width, height: UIScreen.main.bounds.height),
             values: self.viewmodel.closePriceList,
             date: self.viewmodel.dateList,
             openPrice: self.viewmodel.openPriceList,
@@ -54,7 +54,6 @@ final class GraphDetailViewController: UIViewController {
         setupView()
         viewmodel.fetchGraphPrice {
             self.bind()
-         
         }
         // TODO: scrollTOEnd() * 2 문제 해결
         scrollView.scrollToEnd(x: width)
