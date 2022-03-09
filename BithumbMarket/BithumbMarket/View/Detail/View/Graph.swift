@@ -37,16 +37,7 @@ final class Graph: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-    init(frame: CGRect, values: [Double], date: [String], openPrice: [Double], maxPrice: [Double], minPrice: [Double]) {
-        super.init(frame: frame)
-        self.date = date
-        self.openPrice = openPrice
-        self.closePrice = values
-        self.maxPrice = maxPrice
-        self.minPrice = minPrice
-    }
-    
+
     override func draw(_ rect: CGRect) {
         layer.sublayers?.removeAll()
         switch isLineGraph {
