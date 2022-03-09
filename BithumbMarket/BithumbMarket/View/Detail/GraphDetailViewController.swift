@@ -113,12 +113,3 @@ extension GraphDetailViewController: UIScrollViewDelegate {
     
 }
 
-extension UIScrollView {
-    
-    func scrollToEnd(x: CGFloat) {
-        let offset = CGPoint(x: x, y: 0)
-        self.setContentOffset(offset, animated: true)
-        self.layoutIfNeeded()
-    }
-}
-
