@@ -34,9 +34,9 @@ struct AppDependency {
         let mainViewModel = MainViewModel(service: service,
                                           storage: likeStorage)
         
-        mainViewController.bindHandler = mainViewModel.tickers.subscribe(bind: mainViewController.diffableDatasource.updateItems)
+        mainViewModel.tickers.bind = mainViewController.updateDiffableDataSource
         mainViewController.fetchTickersHandler = mainViewModel.fetchTickers
-        //mainViewController.updateTickersHandler = mainViewModel.updateTickers
+        
         mainViewController.coinSortView.sortControlHandler = mainViewModel.executeFilterTickers
         mainViewController.disconnectHandler = mainViewModel.disconnect
         

@@ -17,13 +17,11 @@ final class MainViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("")
+        fatalError("init(coder:) has not been implemented")
     }
     
     var fetchTickersHandler: (() -> Void)?
-    var updateTickersHandler: (() -> Void)?
     var disconnectHandler: (() -> Void)?
-    var bindHandler: Void?
     
     private let mainTableView: UITableView = {
         let tableView = UITableView()
@@ -60,7 +58,6 @@ final class MainViewController: UIViewController {
         view.backgroundColor = .systemBackground
         configureUI()
         configureTableView()
-        _ = bindHandler
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -104,14 +101,11 @@ final class MainViewController: UIViewController {
     
     lazy var updateTableView = { [weak self] (tickers: [Ticker]) in
         self?.diffableDatasource.appendSnapshot(tickers: tickers)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            if self.diffableDatasource.isEmptyItems() {
-                self.mainTableView.backgroundView = TableEmptyView()
-            } else {
-                self.mainTableView.backgroundView = .init()
-            }
-        }
+        self?.setEmptyTableView()
+    }
+    
+    lazy var updateDiffableDataSource = { [weak self] (items: [Ticker]) -> Void in
+        self?.diffableDatasource.updateItems(tickers: items)
     }
     
     lazy var updateTableViewRows = { [weak self] (index: Int) in
@@ -122,6 +116,17 @@ final class MainViewController: UIViewController {
             let cell = self?.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
             cell?.updateAnimation(state: ticker.change)
         })
+    }
+    
+    private func setEmptyTableView() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if self.diffableDatasource.isEmptyItems() {
+                self.mainTableView.backgroundView = TableEmptyView()
+            } else {
+                self.mainTableView.backgroundView = .init()
+            }
+        }
     }
     
     private func moveDetailViewController(ticker: Ticker) {
