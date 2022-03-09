@@ -7,29 +7,30 @@
 
 import UIKit
 
-class GraphViewModel {
+final class GraphViewModel {
     
-    private var service: APIService
+    private let service: APIService
     private let storage: GraphStorage
     
-    init(service: APIService = APIService(), storage: GraphStorage = GraphStorage()) {
+    init(service: APIService, storage: GraphStorage) {
         self.service = service
         self.storage = storage
     }
     
     var errorHandler: ((Error) -> Void)?
     var loadingHandelr: ((Bool) -> Void)?
+    var updateGraphHandler: ((GraphData) -> Void)?
     
-    func fetchGraph(symbol: String, interval: ChartIntervals, completion: @escaping (GraphData) -> Void) {
+    func fetchGraph(symbol: String, interval: ChartIntervals) {
         if let graphData = hasGraphData(symbol: symbol, interval: interval) {
             if hasNotPassedDate(entity: graphData, interval: interval) {
-                completion(graphData.toDomain())
+                updateGraphHandler?(graphData.toDomain())
             } else {
                 deleteGraph(entity: graphData) { [weak self] in
                     self?.loadingHandelr?(false)
                     self?.fetchDataSave(symbol: symbol, interval: interval) { entity in
                         self?.loadingHandelr?(true)
-                        completion(entity.toDomain())
+                        self?.updateGraphHandler?(entity.toDomain())
                     }
                 }
             }
@@ -37,7 +38,7 @@ class GraphViewModel {
             loadingHandelr?(false)
             fetchDataSave(symbol: symbol, interval: interval) { [weak self] entity in
                 self?.loadingHandelr?(true)
-                completion(entity.toDomain())
+                self?.updateGraphHandler?(entity.toDomain())
             }
         }
     }

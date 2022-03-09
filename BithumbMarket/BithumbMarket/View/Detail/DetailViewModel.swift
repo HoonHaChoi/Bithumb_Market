@@ -7,23 +7,45 @@
 
 import Foundation
 
-struct DetailViewModel {
+final class DetailViewModel {
     
     private let storage: LikeStorge
     
-    init(storage: LikeStorge = LikeStorge()) {
+    init(storage: LikeStorge) {
         self.storage = storage
     }
     
-    func hasLike(symbol: String) -> Bool {
-         return storage.find(symbol: symbol)
+    var hasLikeHandler: ((Bool) -> Void)?
+    var updateCompleteHandler: (() -> Void)?
+    var errorHandler: ((CoreDataError) -> Void)?
+    
+    func hasLike(symbol: String) {
+        hasLikeHandler?(storage.find(symbol: symbol))
     }
     
-    func updateLike(symbol: String) -> Result<Bool, CoreDataError> {
-        if hasLike(symbol: symbol) {
-            return storage.delete(symbol: symbol)
+    func updateLike(symbol: String) {
+        if storage.find(symbol: symbol) {
+            deleteLike(symbol: symbol)
         } else {
-            return storage.save(symbol: symbol)
+            saveLike(symbol: symbol)
+        }
+    }
+    
+    private func deleteLike(symbol: String) {
+        switch storage.delete(symbol: symbol) {
+        case .success(_):
+            updateCompleteHandler?()
+        case .failure(let error):
+            errorHandler?(error)
+        }
+    }
+    
+    private func saveLike(symbol: String) {
+        switch storage.save(symbol: symbol) {
+        case .success(_):
+            updateCompleteHandler?()
+        case .failure(let error):
+            errorHandler?(error)
         }
     }
     

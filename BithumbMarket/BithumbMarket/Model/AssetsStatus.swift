@@ -23,10 +23,8 @@ struct AssetsStatusData: Decodable {
             return .possibleAll
         case depositStatus == 0 && withdrawalStatus == 1:
             return .possibleDeposit
-        case depositStatus == 0 && withdrawalStatus == 0:
-            return .impossible
         default:
-            fatalError()
+            return .impossible
         }
     }
 }

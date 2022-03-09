@@ -64,12 +64,7 @@ extension TransactionTableViewCell {
     
     func setupView() {
         
-        [
-            timeLabel,
-            priceLabel,
-            quntityLabel
-
-        ].forEach{
+        [timeLabel, priceLabel, quntityLabel].forEach{
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -89,7 +84,6 @@ extension TransactionTableViewCell {
             quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             quntityLabel.widthAnchor.constraint(equalToConstant: 100),
         ])
-
     }
     
 }

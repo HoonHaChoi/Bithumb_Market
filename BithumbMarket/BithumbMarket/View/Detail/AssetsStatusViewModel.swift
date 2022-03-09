@@ -9,26 +9,22 @@ import Foundation
 
 final class AssetsStatusViewModel {
     
-    private var symbol: String
-    private var service: APIService
+    private let symbol: String
+    private let service: APIService
     
-    var assetsStatus: Observable<AssetsStatusData>
-    var errorHandler: ((HTTPError) -> Void)?
-    
-    init(service: APIService = APIService(), symbol: String) {
-        self.assetsStatus = .init(AssetsStatusData(
-            depositStatus: 0,
-            withdrawalStatus: 0
-        ))
+    init(service: APIService, symbol: String) {
         self.service = service
         self.symbol = symbol
     }
     
-    lazy var fetchAssetsStatus: () -> Void =  { 
-        self.service.request(endpoint: .assetsstatus(symbol: self.symbol)) { [weak self] (result: Result<AssetsStatus, HTTPError>) in
+    var assetsStateHandler: ((AssetsState) -> Void)?
+    var errorHandler: ((HTTPError) -> Void)?
+    
+    func fetchAssetsStatus() {
+        service.request(endpoint: .assetsstatus(symbol: symbol)) { [weak self] (result: Result<AssetsStatus, HTTPError>) in
             switch result {
             case .success(let assetsStatus):
-                self?.assetsStatus.value = assetsStatus.data
+                self?.assetsStateHandler?(assetsStatus.data.setState())
             case .failure(let error):
                 self?.errorHandler?(error)
             }

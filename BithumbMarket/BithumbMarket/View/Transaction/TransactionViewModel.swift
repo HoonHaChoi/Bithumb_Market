@@ -12,9 +12,9 @@ final class TransactionViewModel {
     private let symbol: String
     
     var transactionData: Observable<[TransactionData]>
-    private var service: APIService
+    private let service: APIService
     
-    init(service: APIService = APIService(), symbol: String = "BTC_KRW") {
+    init(service: APIService, symbol: String) {
         self.transactionData = .init([])
         self.service = service
         self.symbol = symbol
@@ -24,8 +24,8 @@ final class TransactionViewModel {
     var insertTableHandler: (() -> Void)?
     var errorHandler: ((HTTPError) -> Void)?
     
-    lazy var fetchTransaction = {
-        self.service.request(endpoint: .transactionHistory(symbol: self.symbol)) { [weak self] (result:  Result<Transaction, HTTPError>)  in
+    func fetchTransaction() {
+        service.request(endpoint: .transactionHistory(symbol: symbol)) { [weak self] (result: Result<Transaction, HTTPError>)  in
             guard let self = self else { return }
             switch result {
             case .success(let transaction):
@@ -53,14 +53,7 @@ final class TransactionViewModel {
             switch result {
             case .success(let transaction):
                 if let data = transaction.content.list.first {
-                    let transactionData = TransactionData(
-                        transactionDate: data.contDtm,
-                        type: data.buySellGb,
-                        unitsTraded: data.contQty,
-                        price: data.contPrice,
-                        total: data.contAmt
-                    )
-                    self.transactionData.value.append(transactionData)
+                    self.transactionData.value.append(data.toTransaction())
                     self.insertTableHandler?()
                 }
             case .failure(let error):
@@ -68,4 +61,5 @@ final class TransactionViewModel {
             }
         }
     }
+    
 }

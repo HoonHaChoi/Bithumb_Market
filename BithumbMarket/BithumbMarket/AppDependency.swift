@@ -10,7 +10,8 @@ import Foundation
 struct AppDependency {
     
     let service = APIService()
-    let storage = LikeStorge()
+    let likeStorage = LikeStorge()
+    let graphStorage = GraphStorage()
     
     func detailViewControllerFactory(ticker: Ticker) -> DetailViewController {
         return initialDetailViewController(ticker: ticker)
@@ -27,7 +28,7 @@ struct AppDependency {
     func initialMainViewController() -> MainViewController {
         let mainViewController = MainViewController(detailViewControllerFactory: detailViewControllerFactory)
         let mainViewModel = MainViewModel(service: service,
-                                          storage: storage)
+                                          storage: likeStorage)
         
         mainViewController.bindHandler = mainViewModel.tickers.subscribe(bind: mainViewController.diffableDatasource.updateItems)
         mainViewController.fetchTickersHandler = mainViewModel.fetchTickers
@@ -43,35 +44,49 @@ struct AppDependency {
         let detailViewController = DetailViewController(ticker: ticker,
                                                         transactionViewControllerFactory: transactionViewControllerFactory,
                                                         orderbookViewControllerFactory: orderbookViewControllerFactory)
-        let currentMarketPriceViewModel = CurrentMarketPriceViewModel(service: service,
-                                                                      symbol: ticker.paymentCurrency)
+//        let currentMarketPriceViewModel = CurrentMarketPriceViewModel(service: service,
+//                                                                      symbol: ticker.paymentCurrency)
         let assetsStatusViewModel = AssetsStatusViewModel(service: service,
                                                           symbol: ticker.paymentCurrency)
-        let detailViewModel = DetailViewModel(storage: storage)
+        let detailViewModel = DetailViewModel(storage: likeStorage)
+        let graphViewModel = GraphViewModel(service: service, storage: graphStorage)
+//        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
+//        detailViewController.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
         
-        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
-        detailViewController.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
         detailViewController.fetchAssetsStatusHandler = assetsStatusViewModel.fetchAssetsStatus
+        assetsStatusViewModel.assetsStateHandler = detailViewController.updateAssetsStatusView
         
-        detailViewController.likeHandler = detailViewModel.hasLike(symbol: ticker.symbol)
-        detailViewController.updateLikeHandler = detailViewModel.updateLike(symbol: ticker.symbol)
+        detailViewController.likeHandler = detailViewModel.hasLike(symbol:)
+        detailViewModel.hasLikeHandler = detailViewController.hasSymbolButton
+        detailViewController.updateLikeHandler = detailViewModel.updateLike(symbol:)
+        detailViewModel.updateCompleteHandler = detailViewController.updateSymbolButton
         
-        detailViewController.bindPriceHandler = currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
-        detailViewController.bindAssetsStatusHandler = assetsStatusViewModel.assetsStatus.subscribe(bind: detailViewController.updateAssetsStatusView)
+        detailViewController.fetchGraphHandler = graphViewModel.fetchGraph(symbol:interval:)
+        graphViewModel.updateGraphHandler = detailViewController.updateGraphView
+        graphViewModel.loadingHandelr = detailViewController.showLoadingView
+        
+        // assetsStatusViewModel.errorHandler
+        // detailViewModel.errorHandler
+        // graphViewModel.errorHandler
+        
+//        detailViewController.likeHandler(ticker.symbol) = detailViewModel.hasLike(symbol: ticker.symbol)
+//        detailViewController.updateLikeHandler = detailViewModel.updateLike(symbol: ticker.symbol)
+
+//        detailViewController.bindPriceHandler = currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
         
         return detailViewController
     }
     
     private func initialTransactionViewController(ticker: Ticker) -> TransactionViewController {
-        let transactionViewController = TransactionViewController(datasource: .init())
         let transactionViewModel = TransactionViewModel(
             service: service,
             symbol: ticker.paymentCurrency)
+        let transactionViewController = TransactionViewController(datasource: .init())
         
         transactionViewModel.updateTableHandler = transactionViewController.updateTableView
-        transactionViewModel.insertTableHandler = transactionViewController.insertRowTableView
         transactionViewController.fetchTransactionHandler = transactionViewModel.fetchTransaction
-        transactionViewController.bindHandler = transactionViewModel.transactionData.subscribe(bind: transactionViewController.updateDataSource)
+        transactionViewModel.insertTableHandler = transactionViewController.insertRowTableView
+        transactionViewModel.transactionData.bind = transactionViewController.updateDataSource
         return transactionViewController
     }
     
@@ -80,11 +95,8 @@ struct AppDependency {
                                                     symbol: ticker.paymentCurrency)
         let orderbookViewController = OrderbookViewController(dataSource: .init())
         orderbookViewController.fetchHandler = orderbookViewModel.fetchOrderbook
-        
-        orderbookViewController.bindHandler = orderbookViewModel.orderbook.subscribe(bind: orderbookViewController.updateDataSource)
-        
+        orderbookViewModel.orderbook.bind = orderbookViewController.updateDataSource
         orderbookViewModel.updateHandler = orderbookViewController.updateTableView
- 
         return orderbookViewController
     }
     

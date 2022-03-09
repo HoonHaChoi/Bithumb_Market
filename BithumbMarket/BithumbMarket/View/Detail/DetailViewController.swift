@@ -24,16 +24,16 @@ final class DetailViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("")
+        fatalError("init(coder:) has not been implemented")
     }
     
     var fetchAssetsStatusHandler: (() -> Void)?
     var fetchCurrentMarketPrice: (() -> Void)?
     var updateCurrentMarketPriceHandler: (() -> Void)?//
-    var likeHandler: Bool?
-    var updateLikeHandler: Result<Bool, CoreDataError>?
+    var likeHandler: ((String) -> Void)?
+    var updateLikeHandler: ((String) -> Void)?
+    var fetchGraphHandler: ((String, ChartIntervals) -> Void)?
     var bindPriceHandler: Void?
-    var bindAssetsStatusHandler: Void?
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -84,23 +84,36 @@ final class DetailViewController: UIViewController {
         return loadingView
     }()
     
+    private let graphDetailButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("자세히보기", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 11)
+        button.setTitleColor(UIColor.textSecondary, for: .normal)
+        button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.textSecondary.cgColor
+        button.addTarget(self, action: #selector(showGraph), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
         view.backgroundColor = .systemBackground
+        configureNavigationBar()
         configureScrollView()
         configureUI()
-        
+        bind()
+//        _ = bindPriceHandler
+//        fetchCurrentMarketPrice?()
+    }
+    
+    func bind() {
         currentMarketPriceView.orderbookButtonHandler = moveOrderbookViewController
         transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
-        
-        _ = bindPriceHandler
-        _ = bindAssetsStatusHandler
+        transactionPriceSelectTimeView.changeIntervalHandler = selectIntervalAction
         fetchAssetsStatusHandler?()
-        fetchCurrentMarketPrice?()
-        transactionPriceSelectTimeView.changeIntervalHandler = selectItem(interval:)
-        //graphViewModel.loadingHandelr = showLoadingView
-        selectItem(interval: .day)
+        fetchGraphHandler?(ticker.symbol, .day)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -120,31 +133,32 @@ final class DetailViewController: UIViewController {
     private func configureNavigationBar() {
         title = ticker.symbol
         navigationController?.isNavigationBarHidden = false
-        guard let hasSymbol = likeHandler else {
-            return
-        }
-        likeButton.isSelected = hasSymbol
-        likeButton.tintColor = likeButton.isSelected ? .mainColor : .textSecondary
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: likeButton)
+        likeHandler?(ticker.symbol)
     }
     
     @objc private func likeBarButtonAction(_ sender: UIButton) {
-        guard let updateLikeHandler = updateLikeHandler else {
-            return
-        }
-        switch updateLikeHandler {
-        case .success(_):
-            likeButton.isSelected = !likeButton.isSelected
-            likeButton.tintColor = likeButton.isSelected ? .mainColor : .textSecondary
-        case .failure(let error):
-            // 에러표시 추가
-            break
+        updateLikeHandler?(ticker.symbol)
+    }
+    
+    lazy var hasSymbolButton = { [weak self] (state: Bool) -> Void in
+        guard let self = self else { return }
+        DispatchQueue.main.async {
+            self.likeButton.isSelected = state
+            self.likeButton.tintColor = self.likeButton.isSelected ? .mainColor : .textSecondary
         }
     }
     
-    lazy var updateAssetsStatusView = { [weak self] (status: AssetsStatusData) -> Void in
+    lazy var updateSymbolButton = { [weak self] () -> Void in
+        guard let self = self else { return }
         DispatchQueue.main.async {
-            print(status)
+            self.likeButton.isSelected = !self.likeButton.isSelected
+            self.likeButton.tintColor = self.likeButton.isSelected ? .mainColor : .textSecondary
+        }
+    }
+    
+    lazy var updateAssetsStatusView = { [weak self] (status: AssetsState) -> Void in
+        DispatchQueue.main.async {
             self?.assetsStatusView.updateUI(status)
         }
     }
@@ -155,39 +169,35 @@ final class DetailViewController: UIViewController {
         }
     }
     
-    private func moveTransactionViewController() {
-        self.navigationController?.pushViewController(transactionViewControllerFactory(ticker), animated: true)
+    lazy var moveTransactionViewController = { [weak self] in
+        guard let self = self else { return }
+        self.navigationController?.pushViewController(self.transactionViewControllerFactory(self.ticker), animated: true)
     }
     
-    private func moveOrderbookViewController() {
-        self.navigationController?.pushViewController(orderbookViewControllerFactory(ticker), animated: true)
+    lazy var moveOrderbookViewController = { [weak self] in
+        guard let self = self else { return }
+        self.navigationController?.pushViewController(self.orderbookViewControllerFactory(self.ticker), animated: true)
     }
     
-    lazy var showLoadingView: ((Bool) -> Void) = { [weak self] state in
+    lazy var showLoadingView = { [weak self] (state: Bool) -> Void in
         DispatchQueue.main.async {
             self?.loadingView.isHidden = state
         }
     }
     
-    func selectItem(interval: ChartIntervals) {
-//        graphViewModel.fetchGraph(symbol: ticker.symbol, interval: interval) { [weak self] graph in
-//            self?.transactionPricegraphView.updateGraph(graph)
-//        }
+    lazy var selectIntervalAction = { [weak self] (interval: ChartIntervals) -> Void in
+        self?.fetchGraphHandler?(self?.ticker.symbol ?? "", interval)
     }
     
-    private let graphDetailButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("자세히보기", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 11)
-        button.setTitleColor(UIColor.textSecondary, for: .normal)
-        button.layer.cornerRadius = 5
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.textSecondary.cgColor
-        button.addTarget(self, action: #selector(showGraph), for: .touchUpInside)
-        return button
-    }()
-   
+    lazy var updateGraphView = { [weak self] (graphData: GraphData) -> Void in
+        guard let self = self else { return }
+        self.transactionPricegraphView.updateGraph(graphData)
+    }
+    
+    deinit {
+        print(#function)
+    }
+
 }
 
 extension DetailViewController {
@@ -199,6 +209,7 @@ extension DetailViewController {
         scrollContentView.addSubview(transactionHistoryView)
         scrollContentView.addSubview(assetsStatusView)
         scrollContentView.addSubview(graphDetailButton)
+        scrollContentView.addSubview(loadingView)
         
         NSLayoutConstraint.activate([
             graphDetailButton.bottomAnchor.constraint(equalTo: transactionPricegraphView.bottomAnchor),
@@ -225,7 +236,12 @@ extension DetailViewController {
             assetsStatusView.topAnchor.constraint(equalTo: transactionHistoryView.bottomAnchor, constant: 20),
             assetsStatusView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             assetsStatusView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
-            assetsStatusView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -20)
+            assetsStatusView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -20),
+            
+            loadingView.topAnchor.constraint(equalTo: transactionPricegraphView.topAnchor),
+            loadingView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
+            loadingView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: transactionPriceSelectTimeView.bottomAnchor)
         ])
         transactionPriceSelectTimeView.changeIntervalHandler = changeInterval
     }
