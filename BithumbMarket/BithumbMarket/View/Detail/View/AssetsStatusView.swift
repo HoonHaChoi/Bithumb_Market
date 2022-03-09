@@ -27,10 +27,10 @@ final class AssetsStatusView: UIView {
         setConstraintLayout()
     }
     
-    func updateUI(_ assetsStatus: AssetsStatusData) {
+    func updateUI(_ assetsState: AssetsState) {
         assetsStatusLabel.font = .preferredFont(forTextStyle: .headline)
         assetsStatusLabel.textColor = .typoColor
-        assetsStatusLabel.attributedText = assetsStatus.setState().attributedText
+        assetsStatusLabel.attributedText = assetsState.description
     }
     
 }
