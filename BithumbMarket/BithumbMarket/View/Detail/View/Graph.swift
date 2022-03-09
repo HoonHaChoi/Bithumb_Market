@@ -5,11 +5,9 @@
 //  Created by jiinheo on 2022/03/03.
 //
 
-import Foundation
 import UIKit
-import AVFoundation
 
-class Graph: UIView {
+final class Graph: UIView {
     
     var offsetX = CGFloat()
 
