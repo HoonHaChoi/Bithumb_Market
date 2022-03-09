@@ -30,10 +30,9 @@ final class DetailViewController: UIViewController {
     var fetchAssetsStatusHandler: (() -> Void)?
     var fetchCurrentMarketPrice: (() -> Void)?
     var updateCurrentMarketPriceHandler: (() -> Void)?//
-    var likeHandler: Bool?
-    var updateLikeHandler: Result<Bool, CoreDataError>?
+    var likeHandler: ((String) -> Void)?
+    var updateLikeHandler: ((String) -> Void)?
     var bindPriceHandler: Void?
-    var bindAssetsStatusHandler: Void?
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -86,21 +85,20 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
         view.backgroundColor = .systemBackground
+        configureNavigationBar()
         configureScrollView()
         configureUI()
         
-        currentMarketPriceView.orderbookButtonHandler = moveOrderbookViewController
-        transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
+//        currentMarketPriceView.orderbookButtonHandler = moveOrderbookViewController
+//        transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
         
-        _ = bindPriceHandler
-        _ = bindAssetsStatusHandler
+//        _ = bindPriceHandler
         fetchAssetsStatusHandler?()
-        fetchCurrentMarketPrice?()
-        transactionPriceSelectTimeView.changeIntervalHandler = selectItem(interval:)
+//        fetchCurrentMarketPrice?()
+//        transactionPriceSelectTimeView.changeIntervalHandler = selectItem(interval:)
         //graphViewModel.loadingHandelr = showLoadingView
-        selectItem(interval: .day)
+//        selectItem(interval: .day)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -120,31 +118,32 @@ final class DetailViewController: UIViewController {
     private func configureNavigationBar() {
         title = ticker.symbol
         navigationController?.isNavigationBarHidden = false
-        guard let hasSymbol = likeHandler else {
-            return
-        }
-        likeButton.isSelected = hasSymbol
-        likeButton.tintColor = likeButton.isSelected ? .mainColor : .textSecondary
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: likeButton)
+        likeHandler?(ticker.symbol)
     }
     
     @objc private func likeBarButtonAction(_ sender: UIButton) {
-        guard let updateLikeHandler = updateLikeHandler else {
-            return
-        }
-        switch updateLikeHandler {
-        case .success(_):
-            likeButton.isSelected = !likeButton.isSelected
-            likeButton.tintColor = likeButton.isSelected ? .mainColor : .textSecondary
-        case .failure(let error):
-            // 에러표시 추가
-            break
+        updateLikeHandler?(ticker.symbol)
+    }
+    
+    lazy var hasSymbolButton = { [weak self] (state: Bool) -> Void in
+        guard let self = self else { return }
+        DispatchQueue.main.async {
+            self.likeButton.isSelected = state
+            self.likeButton.tintColor = self.likeButton.isSelected ? .mainColor : .textSecondary
         }
     }
     
-    lazy var updateAssetsStatusView = { [weak self] (status: AssetsStatusData) -> Void in
+    lazy var updateSymbolButton = { [weak self] () -> Void in
+        guard let self = self else { return }
         DispatchQueue.main.async {
-            print(status)
+            self.likeButton.isSelected = !self.likeButton.isSelected
+            self.likeButton.tintColor = self.likeButton.isSelected ? .mainColor : .textSecondary
+        }
+    }
+    
+    lazy var updateAssetsStatusView = { [weak self] (status: AssetsState) -> Void in
+        DispatchQueue.main.async {
             self?.assetsStatusView.updateUI(status)
         }
     }
@@ -175,6 +174,9 @@ final class DetailViewController: UIViewController {
 //        }
     }
     
+    deinit {
+        print(#function)
+    }
 }
 
 extension DetailViewController {

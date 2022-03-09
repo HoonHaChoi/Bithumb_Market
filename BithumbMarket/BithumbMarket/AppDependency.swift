@@ -43,21 +43,30 @@ struct AppDependency {
         let detailViewController = DetailViewController(ticker: ticker,
                                                         transactionViewControllerFactory: transactionViewControllerFactory,
                                                         orderbookViewControllerFactory: orderbookViewControllerFactory)
-        let currentMarketPriceViewModel = CurrentMarketPriceViewModel(service: service,
-                                                                      symbol: ticker.paymentCurrency)
+//        let currentMarketPriceViewModel = CurrentMarketPriceViewModel(service: service,
+//                                                                      symbol: ticker.paymentCurrency)
         let assetsStatusViewModel = AssetsStatusViewModel(service: service,
                                                           symbol: ticker.paymentCurrency)
         let detailViewModel = DetailViewModel(storage: storage)
+//
+//        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
+//        detailViewController.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
         
-        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
-        detailViewController.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
         detailViewController.fetchAssetsStatusHandler = assetsStatusViewModel.fetchAssetsStatus
+        assetsStatusViewModel.assetsStateHandler = detailViewController.updateAssetsStatusView
         
-        detailViewController.likeHandler = detailViewModel.hasLike(symbol: ticker.symbol)
-        detailViewController.updateLikeHandler = detailViewModel.updateLike(symbol: ticker.symbol)
+        detailViewController.likeHandler = detailViewModel.hasLike(symbol:)
+        detailViewModel.hasLikeHandler = detailViewController.hasSymbolButton
+        detailViewController.updateLikeHandler = detailViewModel.updateLike(symbol:)
+        detailViewModel.updateCompleteHandler = detailViewController.updateSymbolButton
         
-        detailViewController.bindPriceHandler = currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
-        detailViewController.bindAssetsStatusHandler = assetsStatusViewModel.assetsStatus.subscribe(bind: detailViewController.updateAssetsStatusView)
+        // assetsStatusViewModel.errorHandler
+        // detailViewModel.errorHandler
+        
+//        detailViewController.likeHandler(ticker.symbol) = detailViewModel.hasLike(symbol: ticker.symbol)
+//        detailViewController.updateLikeHandler = detailViewModel.updateLike(symbol: ticker.symbol)
+
+//        detailViewController.bindPriceHandler = currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
         
         return detailViewController
     }
