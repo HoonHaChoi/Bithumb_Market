@@ -189,8 +189,34 @@ extension Graph {
                 rectangle(top: close[i], bottom: open[i], color: UIColor.riseColor.cgColor, currentX: currentX)
             }
         }
+        currentPriceBar(open: open[open.count - 1], close: close[close.count - 1])
     }
+ 
+    private func currentPriceBar(open: CGFloat, close: CGFloat) {
+        var y: CGFloat
+        var color: CGColor
+
+        if close < open {
+            y = close
+            color = UIColor.riseColor.cgColor
+        } else {
+            y = open
+            color = UIColor.fallColor.cgColor
+        }
     
+        let layers = CAShapeLayer()
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0, y: y))
+        path.addLine(to: CGPoint(x: frame.width, y: y))
+        layers.fillColor = nil
+        layers.strokeColor = color
+        layers.lineWidth = 1
+        layers.lineCap = .round
+        layers.path = path.cgPath
+        layers.lineDashPattern = [3, 3]
+        self.layer.addSublayer(layers)
+    }
+
     private func rectangle(top: CGFloat, bottom: CGFloat, color: CGColor, currentX: CGFloat) {
         let layers = CAShapeLayer()
         let path = UIBezierPath()
