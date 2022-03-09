@@ -11,6 +11,8 @@ final class TransactionPriceSelectTimeView: UIView {
     
     private let chartIntervals: [ChartIntervals]
     private var intervalButtons: [UIButton]
+    private let graphChangeButton = UIButton(type: .custom)
+    
     private lazy var selectStackView = UIStackView(arrangedSubviews: intervalButtons)
     
     override init(frame: CGRect) {
@@ -64,6 +66,10 @@ extension TransactionPriceSelectTimeView {
         }
         intervalButtons.last?.isSelected = true
         
+        let image = UserDefaults.standard.bool(forKey: UserDefaults.Key.isLine) ? UIImage(named: "line") : UIImage(named: "candlestick")
+        graphChangeButton.translatesAutoresizingMaskIntoConstraints = false
+        graphChangeButton.setImage(image, for: .normal)
+        
         selectStackView.translatesAutoresizingMaskIntoConstraints = false
         selectStackView.alignment = .fill
         selectStackView.distribution = .equalSpacing
@@ -71,12 +77,17 @@ extension TransactionPriceSelectTimeView {
     
     private func setConstraintLayout() {
         addSubview(selectStackView)
+        addSubview(graphChangeButton)
         
         NSLayoutConstraint.activate([
             selectStackView.topAnchor.constraint(equalTo: topAnchor),
             selectStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            selectStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            selectStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            selectStackView.trailingAnchor.constraint(equalTo: graphChangeButton.leadingAnchor, constant: -20),
+            selectStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            graphChangeButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            graphChangeButton.topAnchor.constraint(equalTo: topAnchor),
+            graphChangeButton.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
     }

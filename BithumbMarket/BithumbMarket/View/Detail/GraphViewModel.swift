@@ -5,7 +5,7 @@
 //  Created by jiinheo on 2022/03/03.
 //
 
-import UIKit
+import Foundation
 
 final class GraphViewModel {
     
