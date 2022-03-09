@@ -183,31 +183,20 @@ extension Graph {
             currentX += offsetX
             stick(x: currentX - 4, minY: min[i] , maxY: max[i], color: UIColor.textSecondary.cgColor)
             
-            if close[i] > open[i] {
-                rectangle(top: open[i] , bottom: close[i], color: UIColor.fallColor.cgColor, currentX: currentX)
-            } else {
-                rectangle(top: close[i], bottom: open[i], color: UIColor.riseColor.cgColor, currentX: currentX)
-            }
+            close[i] > open[i]
+            ? rectangle(top: open[i] , bottom: close[i], color: UIColor.fallColor.cgColor, currentX: currentX)
+            : rectangle(top: close[i], bottom: open[i], color: UIColor.riseColor.cgColor, currentX: currentX)
         }
         currentPriceBar(open: open[open.count - 1], close: close[close.count - 1])
     }
  
     private func currentPriceBar(open: CGFloat, close: CGFloat) {
-        var y: CGFloat
-        var color: CGColor
-
-        if close < open {
-            y = close
-            color = UIColor.riseColor.cgColor
-        } else {
-            y = open
-            color = UIColor.fallColor.cgColor
-        }
-    
         let layers = CAShapeLayer()
         let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: y))
-        path.addLine(to: CGPoint(x: frame.width, y: y))
+        let color: CGColor = close < open ? UIColor.riseColor.cgColor : UIColor.fallColor.cgColor
+      
+        path.move(to: CGPoint(x: 0, y: close))
+        path.addLine(to: CGPoint(x: frame.width, y: close))
         layers.fillColor = nil
         layers.strokeColor = color
         layers.lineWidth = 1
