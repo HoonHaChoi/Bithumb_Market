@@ -99,6 +99,7 @@ final class DetailViewController: UIViewController {
         currentMarketPriceView.orderbookButtonHandler = moveOrderbookViewController
         transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
         transactionPriceSelectTimeView.changeIntervalHandler = selectIntervalAction
+        transactionPriceSelectTimeView.changeGraphTypeHandler = changeGraphType
         fetchAssetsStatusHandler?()
         fetchGraphHandler?(ticker.symbol, .day)
     }
@@ -179,6 +180,10 @@ final class DetailViewController: UIViewController {
     lazy var updateGraphView = { [weak self] (graphData: GraphData) -> Void in
         guard let self = self else { return }
         self.transactionPricegraphView.updateGraph(graphData)
+    }
+    
+    lazy var changeGraphType = { [weak self] (state: Bool) -> Void in
+        self?.transactionPricegraphView.changeGraph(isLine: state)
     }
     
     deinit {
