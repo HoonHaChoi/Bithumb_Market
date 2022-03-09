@@ -9,8 +9,18 @@ import UIKit
 
 final class GraphDetailViewController: UIViewController {
     
-    var graph = Graph()
+    private let graph = Graph()
     var width: CGFloat = 30000
+    private let graphData: GraphData
+    
+    init(graphData: GraphData) {
+        self.graphData = graphData
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -25,30 +35,48 @@ final class GraphDetailViewController: UIViewController {
         return view
     }()
         
-    func updateGraph(_ graph: GraphData) {
+    func updateGraph() {
         DispatchQueue.main.async {
-            self.graph.closePrice = graph.closePriceList
-            self.graph.openPrice = graph.openPriceList
-            self.graph.maxPrice = graph.maxPriceList
-            self.graph.minPrice = graph.minPriceList
+            self.graph.closePrice = self.graphData.closePriceList
+            self.graph.openPrice = self.graphData.openPriceList
+            self.graph.maxPrice = self.graphData.maxPriceList
+            self.graph.minPrice = self.graphData.minPriceList
             self.graph.boundMaxX = self.scrollView.bounds.maxX
             self.graph.boundMinX = self.scrollView.bounds.minX
-            self.graph.date = graph.dateList
+            self.graph.date = self.graphData.dateList
             self.graph.layer.setNeedsDisplay()
+            
+            print("count: ", self.graphData.closePriceList.count)
+            print(self.scrollView.bounds.midX, self.scrollView.bounds.maxX)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-//        viewmodel.fetchGraphPrice {
-//            self.bind()
-//         
-//        }
+        updateGraph()
+//        self.graph.closePrice = graphData.closePriceList
+//        self.graph.openPrice = graphData.openPriceList
+//        self.graph.maxPrice = graphData.maxPriceList
+//        self.graph.minPrice = graphData.minPriceList
+//        self.graph.boundMaxX = self.scrollView.bounds.maxX
+//        self.graph.boundMinX = self.scrollView.bounds.minX
+//        self.graph.date = graphData.dateList
+//        self.graph.layer.setNeedsDisplay()
+        
         // TODO: scrollTOEnd() * 2 문제 해결
         scrollView.scrollToEnd(x: width)
         scrollView.scrollToEnd(x: width)
         scrollView.delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupView()
+    }
+    
+    deinit {
+        print(#function)
     }
     
 }
@@ -99,7 +127,6 @@ extension UIScrollView {
         let offset = CGPoint(x: x, y: 0)
         self.setContentOffset(offset, animated: true)
         self.layoutIfNeeded()
-        
     }
 }
 
