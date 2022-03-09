@@ -7,12 +7,12 @@
 
 import UIKit
 
-class GraphViewModel {
+final class GraphViewModel {
     
-    private var service: APIService
+    private let service: APIService
     private let storage: GraphStorage
     
-    init(service: APIService = APIService(), storage: GraphStorage = GraphStorage()) {
+    init(service: APIService, storage: GraphStorage) {
         self.service = service
         self.storage = storage
     }

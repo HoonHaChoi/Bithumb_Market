@@ -9,7 +9,6 @@ import UIKit
 
 final class TransactionPriceGraphView: UIView {
     
-    let viewmodel = GraphViewModel()
     var graph: Graph = Graph()
     var isLineGraph = false {
           didSet {

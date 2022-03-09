@@ -10,7 +10,8 @@ import Foundation
 struct AppDependency {
     
     let service = APIService()
-    let storage = LikeStorge()
+    let likeStorage = LikeStorge()
+    let graphStorage = GraphStorage()
     
     func detailViewControllerFactory(ticker: Ticker) -> DetailViewController {
         return initialDetailViewController(ticker: ticker)
@@ -27,7 +28,7 @@ struct AppDependency {
     func initialMainViewController() -> MainViewController {
         let mainViewController = MainViewController(detailViewControllerFactory: detailViewControllerFactory)
         let mainViewModel = MainViewModel(service: service,
-                                          storage: storage)
+                                          storage: likeStorage)
         
         mainViewController.bindHandler = mainViewModel.tickers.subscribe(bind: mainViewController.diffableDatasource.updateItems)
         mainViewController.fetchTickersHandler = mainViewModel.fetchTickers
@@ -47,8 +48,8 @@ struct AppDependency {
 //                                                                      symbol: ticker.paymentCurrency)
         let assetsStatusViewModel = AssetsStatusViewModel(service: service,
                                                           symbol: ticker.paymentCurrency)
-        let detailViewModel = DetailViewModel(storage: storage)
-//
+        let detailViewModel = DetailViewModel(storage: likeStorage)
+        let graphViewModel = GraphViewModel(service: service, storage: graphStorage)
 //        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
 //        detailViewController.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
         
@@ -62,6 +63,7 @@ struct AppDependency {
         
         // assetsStatusViewModel.errorHandler
         // detailViewModel.errorHandler
+        // graphViewModel.errorHandler
         
 //        detailViewController.likeHandler(ticker.symbol) = detailViewModel.hasLike(symbol: ticker.symbol)
 //        detailViewController.updateLikeHandler = detailViewModel.updateLike(symbol: ticker.symbol)
