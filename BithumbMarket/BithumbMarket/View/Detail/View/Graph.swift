@@ -156,8 +156,8 @@ extension Graph {
         if start < 0 || end < 0 {
             return
         }
-        guard let maxprice = maxPrice[start..<end].max(),
-              let minprice = minPrice[start..<end].min() else {return}
+        guard let maxprice = maxPrice[start...end].max(),
+              let minprice = minPrice[start...end].min() else {return}
 
         let labelSpace: CGFloat = 55
         var currentX: CGFloat = boundMinX
