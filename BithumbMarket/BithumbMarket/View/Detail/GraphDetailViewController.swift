@@ -106,7 +106,6 @@ extension GraphDetailViewController: UIScrollViewDelegate {
 extension UIScrollView {
     
     func scrollToEnd() {
-        print("??")
         let offset = CGPoint(x: 30000, y: 0)
         setContentOffset(offset, animated: true)
         self.layoutIfNeeded()
