@@ -18,7 +18,7 @@ class Graph: UIView {
     var closePrice = [Double]()
     var maxPrice = [Double]()
     var minPrice = [Double]()
-    var isLineGraph = false {
+    var isLineGraph = UserDefaults.standard.isLine() {
           didSet {
               setNeedsDisplay()
           }
