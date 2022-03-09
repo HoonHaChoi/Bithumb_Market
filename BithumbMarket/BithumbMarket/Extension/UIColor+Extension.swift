@@ -53,5 +53,9 @@ extension UIColor {
         .init(named: "TypoColor") ?? .init()
     }
     
+    static var textTertiary: UIColor {
+        .init(named: "TextTertiary") ?? .init()
+    }
+    
 }
 

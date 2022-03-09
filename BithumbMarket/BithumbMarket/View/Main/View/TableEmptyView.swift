@@ -12,7 +12,7 @@ final class TableEmptyView: UIView {
     private lazy var messageLabel: UILabel = {
         let label = UILabel()
         label.text = MainViewNameSpace.emptyMessage
-        label.textColor = .actionTextSecondary
+        label.textColor = .textTertiary
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .headline)
         return label
@@ -28,7 +28,7 @@ final class TableEmptyView: UIView {
         configure()
     }
     
-    func configure() {
+    private func configure() {
         addSubview(messageLabel)
         
         NSLayoutConstraint.activate([
