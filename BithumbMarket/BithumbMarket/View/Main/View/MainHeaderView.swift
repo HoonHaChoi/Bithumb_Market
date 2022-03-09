@@ -55,7 +55,8 @@ final class MainHeaderView: UIView {
         titleStackView.alignment = .fill
         titleStackView.spacing = 0
         
-        [symbolsTitleLabel, currentPriceTitleLabel, fluctuateTitleLabel, accTradeValueTitleLabel].forEach { label in
+        [symbolsTitleLabel, currentPriceTitleLabel,
+         fluctuateTitleLabel, accTradeValueTitleLabel].forEach { label in
             titleStackView.addArrangedSubview(label)
         }
     }
@@ -66,7 +67,6 @@ final class MainHeaderView: UIView {
     }
     
     private func setConstraintLayout() {
-        
         addSubview(titleStackView)
         addSubview(separatorView)
         

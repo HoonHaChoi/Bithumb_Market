@@ -17,8 +17,7 @@ final class MainViewModel {
     
     private var socket: SocketService?
     
-    init(service: APIService = APIService(),
-         storage: LikeStorge = LikeStorge()) {
+    init(service: APIService, storage: LikeStorge) {
         self.tickers = .init([])
         self.isFilter = false
         self.service = service
@@ -29,12 +28,7 @@ final class MainViewModel {
     var updateTickersHandler: (([Ticker]) -> Void)?
     var changeIndexHandler: ((Int) -> Void)?
     var errorHandler: ((Error) -> Void)?
-    
-    func disconnect() {
-        socket?.disconnect()
-        socket = nil
-    }
-    
+        
     func fetchTickers() {
         service.requestTickers(endpoint: .ticker()) { [weak self] result in
             guard let self = self else { return }
@@ -64,8 +58,7 @@ final class MainViewModel {
     
     private func updateTickers() {
         self.socket?.perform { [weak self] (respone: Result<ReceiveTicker, HTTPError>) in
-            guard let self = self else {
-                return }
+            guard let self = self else { return }
             switch respone {
             case .success(let ticker):
                 guard let index = self.findIndex(from: self.tickers, to: ticker) else {

@@ -13,18 +13,18 @@ final class TickerCell: UITableViewCell {
         return String(describing: self)
     }
     
-    let symbolLabel = UILabel()
-    let paymentLabel = UILabel()
-    let currentPriceLabel = UILabel()
-    let changeRateLabel = UILabel()
-    let changePriceLabel = UILabel()
-    let accTradeValueLabel = UILabel()
+    private let symbolLabel = UILabel()
+    private let paymentLabel = UILabel()
+    private let currentPriceLabel = UILabel()
+    private let changeRateLabel = UILabel()
+    private let changePriceLabel = UILabel()
+    private let accTradeValueLabel = UILabel()
     
-    let symbolStackView = UIStackView()
-    let currentStackView = UIStackView()
-    let changeStackView = UIStackView()
-    let accTradeValueStackView = UIStackView()
-    let bundleStackView = UIStackView()
+    private let symbolStackView = UIStackView()
+    private let currentStackView = UIStackView()
+    private let changeStackView = UIStackView()
+    private let accTradeValueStackView = UIStackView()
+    private let bundleStackView = UIStackView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -40,7 +40,7 @@ final class TickerCell: UITableViewCell {
         setConstraintLayout()
     }
     
-    func configure(ticker: Ticker) {
+    private func configure(ticker: Ticker) {
         symbolLabel.text = ticker.symbol
         currentPriceLabel.text = ticker.market.closingPrice.withComma()
         changeRateLabel.text = ticker.market.fluctateRate24H.withDecimal(maximumDigit: 2) + "%"
@@ -91,7 +91,7 @@ final class TickerCell: UITableViewCell {
 
 extension TickerCell {
     
-    func configureLabel() {
+    private func configureLabel() {
         symbolLabel.font = .preferredFont(forTextStyle: .callout)
         paymentLabel.font = .preferredFont(forTextStyle: .caption1)
         currentPriceLabel.font = .preferredFont(forTextStyle: .callout)
@@ -109,7 +109,7 @@ extension TickerCell {
         accTradeValueLabel.textAlignment = .right
     }
     
-    func configureStackView() {
+    private func configureStackView() {
         bundleStackView.translatesAutoresizingMaskIntoConstraints = false
         
         symbolStackView.axis = .vertical
@@ -133,7 +133,7 @@ extension TickerCell {
         bundleStackView.spacing = 0
     }
     
-    func setConstraintLayout() {
+    private func setConstraintLayout() {
         symbolStackView.addArrangedSubview(symbolLabel)
         symbolStackView.addArrangedSubview(paymentLabel)
         currentStackView.addArrangedSubview(currentPriceLabel)
