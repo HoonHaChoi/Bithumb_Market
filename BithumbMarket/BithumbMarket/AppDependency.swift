@@ -49,16 +49,16 @@ struct AppDependency {
                                                         transactionViewControllerFactory: transactionViewControllerFactory,
                                                         orderbookViewControllerFactory: orderbookViewControllerFactory,
         graphDetailViewControllerFactory: graphDetailViewControllerFactory(graphData:))
-//        let currentMarketPriceViewModel = CurrentMarketPriceViewModel(service: service,
-//                                                                      symbol: ticker.paymentCurrency)
+        let currentMarketPriceViewModel = CurrentMarketPriceViewModel(service: service,
+                                                                      symbol: ticker.paymentCurrency)
         let assetsStatusViewModel = AssetsStatusViewModel(service: service,
                                                           symbol: ticker.paymentCurrency)
         let detailViewModel = DetailViewModel(storage: likeStorage)
         let graphViewModel = GraphViewModel(service: service, storage: graphStorage)
         detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
         //detailViewContrller.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
-//        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
-//        detailViewController.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
+        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
+
         
         detailViewController.fetchAssetsStatusHandler = assetsStatusViewModel.fetchAssetsStatus
         assetsStatusViewModel.assetsStateHandler = detailViewController.updateAssetsStatusView
