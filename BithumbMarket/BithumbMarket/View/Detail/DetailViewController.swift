@@ -89,16 +89,18 @@ final class DetailViewController: UIViewController {
         configureNavigationBar()
         configureScrollView()
         configureUI()
-        
-//        currentMarketPriceView.orderbookButtonHandler = moveOrderbookViewController
-//        transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
-        
+        bind()
 //        _ = bindPriceHandler
-        fetchAssetsStatusHandler?()
 //        fetchCurrentMarketPrice?()
 //        transactionPriceSelectTimeView.changeIntervalHandler = selectItem(interval:)
         //graphViewModel.loadingHandelr = showLoadingView
 //        selectItem(interval: .day)
+    }
+    
+    func bind() {
+        currentMarketPriceView.orderbookButtonHandler = moveOrderbookViewController
+        transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
+        fetchAssetsStatusHandler?()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -154,12 +156,14 @@ final class DetailViewController: UIViewController {
         }
     }
     
-    private func moveTransactionViewController() {
-        self.navigationController?.pushViewController(transactionViewControllerFactory(ticker), animated: true)
+    lazy var moveTransactionViewController = { [weak self] in
+        guard let self = self else { return }
+        self.navigationController?.pushViewController(self.transactionViewControllerFactory(self.ticker), animated: true)
     }
     
-    private func moveOrderbookViewController() {
-        self.navigationController?.pushViewController(orderbookViewControllerFactory(ticker), animated: true)
+    lazy var moveOrderbookViewController = { [weak self] in
+        guard let self = self else { return }
+        self.navigationController?.pushViewController(self.orderbookViewControllerFactory(self.ticker), animated: true)
     }
     
     lazy var showLoadingView: ((Bool) -> Void) = { [weak self] state in
