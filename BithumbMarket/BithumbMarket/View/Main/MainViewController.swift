@@ -61,12 +61,11 @@ final class MainViewController: UIViewController {
         configureUI()
         configureTableView()
         _ = bindHandler
-        fetchTickersHandler?()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateTickersHandler?()
+        fetchTickersHandler?()
 
     }
     override func viewDidDisappear(_ animated: Bool) {

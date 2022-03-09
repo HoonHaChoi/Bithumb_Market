@@ -25,6 +25,11 @@ final class TransactionViewModel {
     var insertTableHandler: (() -> Void)?
     var errorHandler: ((HTTPError) -> Void)?
     
+    func disconnect() {
+        socket?.disconnect()
+        socket = nil
+    }
+    
     func fetchTransaction() {
         service.request(endpoint: .transactionHistory(symbol: symbol)) { [weak self] (result: Result<Transaction, HTTPError>)  in
             guard let self = self else { return }
@@ -32,26 +37,23 @@ final class TransactionViewModel {
             case .success(let transaction):
                 self.transactionData.value = transaction.data
                 self.updateTableHandler?()
-                self.sendMessage()
-                self.updateTransaction()
+                self.sendMessage {
+                    self.updateTransaction()
+                }
             case.failure(let error):
                 self.errorHandler?(error)
             }
         }
     }
     
-    lazy var disconnect: () -> Void = { [weak self] in
-        self?.socket?.disconnect()
-        self?.socket = nil
-    }
-    
-    private func sendMessage() {
+    private func sendMessage(completion: @escaping () -> Void) {
         self.socket = SocketService()
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self = self else { return }
             let message = Message(type: .transaction, symbols: .name(self.symbol))
             self.socket?.sendMessage(message: message)
         }
+        completion()
     }
     
     private func updateTransaction() {
@@ -64,7 +66,6 @@ final class TransactionViewModel {
                     self.insertTableHandler?()
                 }
             case .failure(let error):
-                print("체결내역 : \(error)")
                 self.errorHandler?(error)
             }
         }

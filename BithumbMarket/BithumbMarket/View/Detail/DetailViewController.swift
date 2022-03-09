@@ -105,7 +105,6 @@ final class DetailViewController: UIViewController {
         configureUI()
         bind()
 //        _ = bindPriceHandler
-//        fetchCurrentMarketPrice?()
     }
     
     func bind() {
@@ -125,7 +124,7 @@ final class DetailViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateCurrentMarketPriceHandler?()
+        fetchCurrentMarketPrice?()
     }
     
     private lazy var likeButton: UIButton = {

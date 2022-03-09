@@ -26,29 +26,38 @@ final class OrderbookViewModel {
     var errorHandler: ((HTTPError) -> Void)?
     var updateHandler: (() -> Void)?
     
+    func disconnect() {
+        socket?.disconnect()
+        socket = nil
+    }
+    
     func fetchOrderbook() {
         service.request(endpoint: .orderBook(symbol: symbol)) { [weak self] (result: Result<Orderbook, HTTPError>) in
             switch result {
             case .success(let success):
                 self?.orderbook.value = success.data
                 self?.updateHandler?()
-                self?.sendMessage()
-                self?.updateOrderbook()
+                self?.sendMessage {
+                    self?.updateOrderbook()
+                }
             case .failure(let error):
                 self?.errorHandler?(error)
             }
         }
     }
     
-    private func sendMessage() {
+    private func sendMessage(completion: @escaping () -> Void) {
         self.socket = SocketService()
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let symbol = self?.symbol else { return }
             let message = Message(type: .orderbookdepth, symbols: .name(symbol))
-            self?.socket?.sendMessage(message: message)        }
+            self?.socket?.sendMessage(message: message)
+        }
+        completion()
     }
     
     private func updateOrderbook() {
+        print(self.socket)
         self.socket?.perform { [weak self] (result: Result<ReceiveOrderbook, HTTPError>) in
             switch result {
             case .success(let success):
@@ -66,11 +75,6 @@ final class OrderbookViewModel {
                 self?.errorHandler?(error)
             }
         }
-    }
-    
-    lazy var disconnect: () -> Void = { [weak self] in
-        self?.socket?.disconnect()
-        self?.socket = nil
     }
     
     private func mergeOrders(_ old: [Order], into new: [ReceiveOrder]) -> [Order] {

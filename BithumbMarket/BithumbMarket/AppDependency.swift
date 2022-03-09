@@ -32,7 +32,7 @@ struct AppDependency {
         
         mainViewController.bindHandler = mainViewModel.tickers.subscribe(bind: mainViewController.diffableDatasource.updateItems)
         mainViewController.fetchTickersHandler = mainViewModel.fetchTickers
-        mainViewController.updateTickersHandler = mainViewModel.updateTickers
+        //mainViewController.updateTickersHandler = mainViewModel.updateTickers
         mainViewController.coinSortView.sortControlHandler = mainViewModel.executeFilterTickers
         mainViewController.disconnectHandler = mainViewModel.disconnect
         
@@ -51,8 +51,8 @@ struct AppDependency {
                                                           symbol: ticker.paymentCurrency)
         let detailViewModel = DetailViewModel(storage: likeStorage)
         let graphViewModel = GraphViewModel(service: service, storage: graphStorage)
-//        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
-        detailViewController.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
+        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
+        //detailViewContrller.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
         
         detailViewController.fetchAssetsStatusHandler = assetsStatusViewModel.fetchAssetsStatus
         assetsStatusViewModel.assetsStateHandler = detailViewController.updateAssetsStatusView

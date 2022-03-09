@@ -26,35 +26,38 @@ final class CurrentMarketPriceViewModel {
         )
     }
     
-    lazy var disconnect: () -> Void = { [weak self] in
-        self?.socket?.disconnect()
-        self?.socket = nil
+    func disconnect() {
+        socket?.disconnect()
+        socket = nil
     }
     
-    lazy var fetchPrice: () -> Void = {
-        self.service.request(endpoint: .ticker(symbol: self.symbol)) { [weak self] (result: Result<CurrentPrice, HTTPError>) in
+    func fetchPrice() {
+        service.request(endpoint: .ticker(symbol: self.symbol)) { [weak self] (result: Result<CurrentPrice, HTTPError>) in
             switch result {
             case .success(let ticker):
                 guard let currentPrice = self?.convert(from: ticker.data) else { return }
                 self?.price.value = currentPrice
-                self?.sendMessage()
+                self?.sendMessage {
+                    self?.updatePrice()
+                }
             case .failure(let error):
                 self?.errorHandler?(error)
             }
         }
     }
     
-    private func sendMessage() {
+    private func sendMessage(completion: @escaping () -> Void) {
         self.socket = SocketService()
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let symbol = self?.symbol else { return }
             let message = Message(type: .ticker, symbols: .name(symbol), tickTypes: .mid)
             self?.socket?.sendMessage(message: message)
         }
+        completion()
     }
     
-    lazy var updatePrice:() -> Void = { [weak self] in
-        self?.socket?.perform { [weak self] (result: Result<ReceiveTicker, HTTPError>) in
+    private func updatePrice() {
+        self.socket?.perform { [weak self] (result: Result<ReceiveTicker, HTTPError>) in
             switch result {
             case .success(let ticker):
                 if ticker.content.symbol == self?.symbol {
@@ -64,7 +67,6 @@ final class CurrentMarketPriceViewModel {
                     self?.price.value = currentPrice
                 }
             case .failure(let error):
-                print("현재가: \(error)")
                 self?.errorHandler?(error)
             }
         }

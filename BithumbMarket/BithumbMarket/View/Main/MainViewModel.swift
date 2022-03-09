@@ -30,27 +30,28 @@ final class MainViewModel {
     var changeIndexHandler: ((Int) -> Void)?
     var errorHandler: ((Error) -> Void)?
     
-    lazy var disconnect: () -> Void = { [weak self] in
-        print("disconnect")
-        self?.socket?.disconnect()
-        self?.socket = nil
+    func disconnect() {
+        socket?.disconnect()
+        socket = nil
     }
     
-    lazy var fetchTickers: () -> Void = { [weak self] in
-        self?.service.requestTickers(endpoint: .ticker()) { [weak self] result in
+    func fetchTickers() {
+        service.requestTickers(endpoint: .ticker()) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let tickers):
                 self.tickers.value = tickers.sorted(by: >)
                 self.updateTickersHandler?(self.tickers.value)
-                self.sendMessage()
+                self.sendMessage {
+                    self.updateTickers()
+                }
             case .failure(let error):
                 self.errorHandler?(error)
             }
         }
     }
     
-    private func sendMessage() {
+    private func sendMessage(completion: @escaping () -> Void) {
         self.socket = SocketService()
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self = self else { return }
@@ -58,24 +59,21 @@ final class MainViewModel {
             let message = Message(type: .ticker, symbols: .names(symbols), tickTypes: .twentyfourHour)
             self.socket?.sendMessage(message: message)
         }
+        completion()
     }
     
-    func updateTickers() {
+    private func updateTickers() {
         self.socket?.perform { [weak self] (respone: Result<ReceiveTicker, HTTPError>) in
-            print("update")
             guard let self = self else {
-                print("nil")
                 return }
             switch respone {
             case .success(let ticker):
-                print(ticker)
                 guard let index = self.findIndex(from: self.tickers, to: ticker) else {
                     return
                 }
                 self.update(index: index, to: ticker)
             case .failure(let error):
                 self.errorHandler?(error)
-                print(error)
             }
         }
     }

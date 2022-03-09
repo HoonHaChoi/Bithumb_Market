@@ -31,6 +31,7 @@ final class OrderbookViewController: UIViewController {
     }()
     
     var fetchHandler: (() -> Void)?
+    var disconnectHandler: (() -> Void)?
     
     lazy var updateDataSource: ((OrderbookData) -> Void)? = { [weak self] orderbook in
         self?.dataSource.items = orderbook
@@ -54,19 +55,18 @@ final class OrderbookViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = OrderbookNameSpace.navigationTitle
         configureTableView()
-        fetchHandler?()
-    }
-    
-    var disconnectHandler: (() -> Void)?
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        disconnectHandler?()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        scrollToCenter()
+        //scrollToCenter()
+        fetchHandler?()
    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disconnectHandler?()
+    }
     
     private func configureTableView() {
         view.addSubview(orderbookTableView)
