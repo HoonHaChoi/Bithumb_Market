@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "line - chart 27.png",
+      "filename" : "candlestick.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "line - chart 27@2x.png",
+      "filename" : "candlestick@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "line - chart 27@3x.png",
+      "filename" : "candlestick@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

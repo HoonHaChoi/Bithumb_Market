@@ -49,6 +49,13 @@ final class TransactionPriceSelectTimeView: UIView {
         changeIntervalHandler?(chartIntervals[index])
     }
     
+    @objc private func graphChangeButtonTapped(_ sender: UIButton) {
+        let imageName = UserDefaults.standard.isLine() ? "line" : "candlestick"
+        DispatchQueue.main.async { [weak self] in
+            self?.graphChangeButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+    }
+    
 }
 
 extension TransactionPriceSelectTimeView {
@@ -66,9 +73,10 @@ extension TransactionPriceSelectTimeView {
         }
         intervalButtons.last?.isSelected = true
         
-        let image = UserDefaults.standard.bool(forKey: UserDefaults.Key.isLine) ? UIImage(named: "line") : UIImage(named: "candlestick")
+        let imageName = UserDefaults.standard.isLine() ? "line" : "candlestick"
         graphChangeButton.translatesAutoresizingMaskIntoConstraints = false
-        graphChangeButton.setImage(image, for: .normal)
+        graphChangeButton.setImage(UIImage(named: imageName), for: .normal)
+        graphChangeButton.addTarget(self, action: #selector(graphChangeButtonTapped(_:)), for: .touchUpInside)
         
         selectStackView.translatesAutoresizingMaskIntoConstraints = false
         selectStackView.alignment = .fill

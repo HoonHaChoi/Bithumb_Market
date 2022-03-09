@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "line - chart 28.png",
+      "filename" : "line.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "line - chart 28@2x.png",
+      "filename" : "line@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "line - chart 28@3x.png",
+      "filename" : "line@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

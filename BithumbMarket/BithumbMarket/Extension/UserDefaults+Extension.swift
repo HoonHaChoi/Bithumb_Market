@@ -10,7 +10,15 @@ import Foundation
 extension UserDefaults {
     
     enum Key {
-        static let isLine = "isLine"
+        static let line = "line"
+    }
+    
+    func isLine() -> Bool {
+        self.bool(forKey: Key.line)
+    }
+    
+    func changeisLine() {
+        self.set(!isLine(), forKey: Key.line)
     }
     
 }
