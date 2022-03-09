@@ -9,7 +9,6 @@ import UIKit
 
 final class GraphDetailViewController: UIViewController {
     
-    let viewmodel = GraphViewModel()
     var graph = Graph()
     var width: CGFloat = 30000
     
@@ -25,28 +24,18 @@ final class GraphDetailViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    private func drawgraph() {
-        // TODO: date struct 처리 필요
-//        graph = Graph(
-//            frame: CGRect(x: 0, y: 0, width: width, height: UIScreen.main.bounds.height - 200),
-//            values: self.viewmodel.closePriceList,
-//            date: self.viewmodel.dateList,
-//            openPrice: self.viewmodel.openPriceList,
-//            maxPrice: self.viewmodel.maxPriceList,
-//            minPrice: self.viewmodel.minPriceList,
-//            boundMinX: self.scrollView.bounds.minX,
-//            boundMaxX: self.scrollView.bounds.maxX
-//        )
-    }
-    
-    private func bind() {
-//        viewmodel.data.subscribe { [weak self] observer in
-//            DispatchQueue.main.async {
-//                self?.drawgraph()
-//                self?.setupView()
-//            }
-//        }
+        
+    func updateGraph(_ graph: GraphData) {
+        DispatchQueue.main.async {
+            self.graph.closePrice = graph.closePriceList
+            self.graph.openPrice = graph.openPriceList
+            self.graph.maxPrice = graph.maxPriceList
+            self.graph.minPrice = graph.minPriceList
+            self.graph.boundMaxX = self.scrollView.bounds.maxX
+            self.graph.boundMinX = self.scrollView.bounds.minX
+            self.graph.date = graph.dateList
+            self.graph.layer.setNeedsDisplay()
+        }
     }
     
     override func viewDidLoad() {

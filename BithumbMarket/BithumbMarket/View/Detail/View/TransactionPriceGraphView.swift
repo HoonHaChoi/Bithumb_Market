@@ -20,8 +20,6 @@ final class TransactionPriceGraphView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupView()
-//        viewmodel.fetchGraphPrice()
-//        bind()
     }
 
     required init?(coder: NSCoder) {
@@ -35,20 +33,13 @@ final class TransactionPriceGraphView: UIView {
             self.graph.openPrice = graph.openPriceList
             self.graph.maxPrice = graph.maxPriceList
             self.graph.minPrice = graph.minPriceList
+            self.graph.boundMaxX = UIScreen.main.bounds.width
+            self.graph.boundMinX = 0
             self.graph.date = graph.dateList
             self.graph.layer.setNeedsDisplay()
         }
     }
-    
-    //MARK: 그래프 바인딩 작업 추가
-//    private func bind() {
-//        viewmodel.data.subscribe { [weak self] observer in
-//            DispatchQueue.main.async {
-//                self?.drawgraph()
-//                self?.setupView()
-//            }
-//        }
-//    }
+
 }
 
 extension TransactionPriceGraphView {

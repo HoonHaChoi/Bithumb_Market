@@ -243,7 +243,6 @@ extension DetailViewController {
             loadingView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
             loadingView.bottomAnchor.constraint(equalTo: transactionPriceSelectTimeView.bottomAnchor)
         ])
-        transactionPriceSelectTimeView.changeIntervalHandler = changeInterval
     }
     
     private func configureScrollView() {
@@ -261,9 +260,6 @@ extension DetailViewController {
             scrollContentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
             scrollContentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor)
         ])
-    }
-    private func changeInterval(_ interval: ChartIntervals) {
-        //transactionPricegraphView.viewmodel.fetchGraphPrice(interval: interval) { }
     }
     
     @objc private func showGraph() {

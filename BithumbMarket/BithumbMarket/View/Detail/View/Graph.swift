@@ -5,9 +5,7 @@
 //  Created by jiinheo on 2022/03/03.
 //
 
-import Foundation
 import UIKit
-import AVFoundation
 
 class Graph: UIView {
     
@@ -18,14 +16,8 @@ class Graph: UIView {
     var closePrice = [Double]()
     var maxPrice = [Double]()
     var minPrice = [Double]()
-//    private var date = [String]()
-//    private var openPrice = [Int]()
-//    private var closePrice = [Int]()
-//    private var maxPrice = [Int]()
-//    private var minPrice = [Int]()
     
     private var layerCount = 0
-//    private var offsetX = CGFloat()
     
     var boundMinX = CGFloat()
     var boundMaxX = CGFloat() {
@@ -47,15 +39,13 @@ class Graph: UIView {
         super.init(coder: coder)
     }
     
-    init(frame: CGRect, values: [Double], date: [String], openPrice: [Double], maxPrice: [Double], minPrice: [Double], boundMinX: CGFloat, boundMaxX: CGFloat) {
+    init(frame: CGRect, values: [Double], date: [String], openPrice: [Double], maxPrice: [Double], minPrice: [Double]) {
         super.init(frame: frame)
         self.date = date
         self.openPrice = openPrice
         self.closePrice = values
         self.maxPrice = maxPrice
         self.minPrice = minPrice
-        self.boundMinX = boundMinX
-        self.boundMaxX = boundMaxX
     }
     
     override func draw(_ rect: CGRect) {
@@ -173,10 +163,12 @@ extension Graph {
         offsetX = frame.width / CGFloat(closePrice.count + 1)
         let start = checkIndex(index: Int(boundMinX / offsetX))
         let end = checkIndex(index: Int(boundMaxX / offsetX))
-        
-        guard let maxprice = maxPrice[start...end].max(),
-              let minprice = minPrice[start...end].min() else {return}
-        
+        if start < 0 || end < 0 {
+            return
+        }
+        guard let maxprice = maxPrice[start..<end].max(),
+              let minprice = minPrice[start..<end].min() else {return}
+
         let labelSpace: CGFloat = 55
         var currentX: CGFloat = boundMinX
         let scale = CGFloat(Double((maxprice - minprice) / 2) / 0.4)
@@ -184,11 +176,11 @@ extension Graph {
         let open = openPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
         let max = maxPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
         let min = minPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
-        
+
         for i in start...end{
             currentX += offsetX
             stick(x: currentX - 4, minY: min[i] , maxY: max[i], color: UIColor.textSecondary.cgColor)
-            
+
             close[i] > open[i]
             ? rectangle(top: open[i] , bottom: close[i], color: UIColor.fallColor.cgColor, currentX: currentX)
             : rectangle(top: close[i], bottom: open[i], color: UIColor.riseColor.cgColor, currentX: currentX)
@@ -229,7 +221,7 @@ extension Graph {
         switch index {
         case ..<0:
             return 0
-        case (closePrice.count)...:
+        case (closePrice.count - 1)...:
             return closePrice.count - 1
         default:
             return index
