@@ -41,7 +41,7 @@ final class MainViewModel {
             switch result {
             case .success(let tickers):
                 self.tickers.value = tickers.sorted(by: >)
-                self.updateTickersHandler?(self.tickers.value)
+                self.updateFilterTickers()
                 self.sendMessage {
                     self.updateTickers()
                 }
@@ -99,9 +99,12 @@ final class MainViewModel {
     
     func executeFilterTickers() {
         isFilter = !isFilter
-        symbols = fetctLikeSymbols()
-        
+        updateFilterTickers()
+    }
+    
+    private func updateFilterTickers() {
         if isFilter {
+            symbols = fetctLikeSymbols()
             updateTickersHandler?(tickers.value.filter { symbols.contains($0.symbol) })
         } else {
             updateTickersHandler?(tickers.value)
