@@ -63,6 +63,7 @@ struct AppDependency {
         
         detailViewController.fetchGraphHandler = graphViewModel.fetchGraph(symbol:interval:)
         graphViewModel.updateGraphHandler = detailViewController.updateGraphView
+        graphViewModel.loadingHandelr = detailViewController.showLoadingView
         
         // assetsStatusViewModel.errorHandler
         // detailViewModel.errorHandler

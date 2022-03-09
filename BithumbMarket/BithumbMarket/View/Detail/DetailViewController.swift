@@ -24,7 +24,7 @@ final class DetailViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("")
+        fatalError("init(coder:) has not been implemented")
     }
     
     var fetchAssetsStatusHandler: (() -> Void)?
@@ -93,8 +93,6 @@ final class DetailViewController: UIViewController {
         bind()
 //        _ = bindPriceHandler
 //        fetchCurrentMarketPrice?()
-        //graphViewModel.loadingHandelr = showLoadingView
-//        selectItem(interval: .day)
     }
     
     func bind() {
@@ -102,6 +100,7 @@ final class DetailViewController: UIViewController {
         transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
         transactionPriceSelectTimeView.changeIntervalHandler = selectIntervalAction
         fetchAssetsStatusHandler?()
+        fetchGraphHandler?(ticker.symbol, .day)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -167,20 +166,17 @@ final class DetailViewController: UIViewController {
         self.navigationController?.pushViewController(self.orderbookViewControllerFactory(self.ticker), animated: true)
     }
     
-    lazy var showLoadingView: ((Bool) -> Void) = { [weak self] state in
+    lazy var showLoadingView = { [weak self] (state: Bool) -> Void in
         DispatchQueue.main.async {
             self?.loadingView.isHidden = state
         }
     }
     
-    lazy var selectIntervalAction: (ChartIntervals) -> Void = { [weak self] interval in
+    lazy var selectIntervalAction = { [weak self] (interval: ChartIntervals) -> Void in
         self?.fetchGraphHandler?(self?.ticker.symbol ?? "", interval)
-//        graphViewModel.fetchGraph(symbol: ticker.symbol, interval: interval) { [weak self] graph in
-//            self?.transactionPricegraphView.updateGraph(graph)
-//        }
     }
     
-    lazy var updateGraphView: (GraphData) -> Void = { [weak self] graphData in
+    lazy var updateGraphView = { [weak self] (graphData: GraphData) -> Void in
         guard let self = self else { return }
         self.transactionPricegraphView.updateGraph(graphData)
     }
@@ -198,6 +194,7 @@ extension DetailViewController {
         scrollContentView.addSubview(transactionPricegraphView)
         scrollContentView.addSubview(transactionHistoryView)
         scrollContentView.addSubview(assetsStatusView)
+        scrollContentView.addSubview(loadingView)
         
         NSLayoutConstraint.activate([
             currentMarketPriceView.topAnchor.constraint(equalTo: scrollContentView.topAnchor, constant: 20),
@@ -220,7 +217,12 @@ extension DetailViewController {
             assetsStatusView.topAnchor.constraint(equalTo: transactionHistoryView.bottomAnchor, constant: 20),
             assetsStatusView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             assetsStatusView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
-            assetsStatusView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -20)
+            assetsStatusView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -20),
+            
+            loadingView.topAnchor.constraint(equalTo: transactionPricegraphView.topAnchor),
+            loadingView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
+            loadingView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: transactionPriceSelectTimeView.bottomAnchor)
         ])
     }
     
