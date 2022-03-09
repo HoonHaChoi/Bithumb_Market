@@ -24,6 +24,19 @@ class DetailViewController: UIViewController {
         super.init(coder: coder)
     }
     
+    private let graphDetailButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("자세히보기", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 11)
+        button.setTitleColor(UIColor.textSecondary, for: .normal)
+        button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.textSecondary.cgColor
+        button.addTarget(self, action: #selector(showGraph), for: .touchUpInside)
+        return button
+    }()
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,8 +89,14 @@ class DetailViewController: UIViewController {
         scrollContentView.addSubview(transactionPricegraphView)
         scrollContentView.addSubview(transactionHistoryView)
         scrollContentView.addSubview(assetsStatusView)
+        scrollContentView.addSubview(graphDetailButton)
         
         NSLayoutConstraint.activate([
+            
+            graphDetailButton.bottomAnchor.constraint(equalTo: transactionPricegraphView.bottomAnchor),
+            graphDetailButton.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 20),
+            graphDetailButton.widthAnchor.constraint(equalToConstant: 100),
+            
             currentMarketPriceView.topAnchor.constraint(equalTo: scrollContentView.topAnchor, constant: 20),
             currentMarketPriceView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 20),
             currentMarketPriceView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -20),
