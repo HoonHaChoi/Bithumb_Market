@@ -169,6 +169,10 @@ class DetailViewController: UIViewController {
     }
     
     private func changeInterval(_ interval: ChartIntervals) {
-        transactionPricegraphView.viewmodel.fetchGraphPrice(interval: interval)
+        transactionPricegraphView.viewmodel.fetchGraphPrice(interval: interval) { }
+    }
+    
+    @objc private func showGraph() {
+        self.present(GraphDetailViewController(), animated: true, completion: nil)
     }
 }
