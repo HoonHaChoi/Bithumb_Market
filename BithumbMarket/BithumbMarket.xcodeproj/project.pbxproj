@@ -15,6 +15,7 @@
 		7F2E004B27CC9B1400752ABA /* NumberFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004927CC9B1400752ABA /* NumberFormatter+Extension.swift */; };
 		7F2E005C27CC9F3300752ABA /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005A27CC9F3300752ABA /* SocketService.swift */; };
 		7F2E005D27CC9F3300752ABA /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005B27CC9F3300752ABA /* APIEndpoint.swift */; };
+		7F34013927D88F2A00511464 /* GraphDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F34013827D88F2A00511464 /* GraphDetailViewController.swift */; };
 		7F5AFC1E27D1A943002BECC3 /* AssetsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5AFC1D27D1A943002BECC3 /* AssetsState.swift */; };
 		7F844CDC27CFB58C00C06084 /* OrderbookDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CDB27CFB58C00C06084 /* OrderbookDataSource.swift */; };
 		7F844CDF27CFB5F300C06084 /* ReceiveOrderbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CDE27CFB5F300C06084 /* ReceiveOrderbook.swift */; };
@@ -100,6 +101,7 @@
 		7F2E005927CC9B4B00752ABA /* OrderbookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderbookViewModel.swift; sourceTree = "<group>"; };
 		7F2E005A27CC9F3300752ABA /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		7F2E005B27CC9F3300752ABA /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
+		7F34013827D88F2A00511464 /* GraphDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphDetailViewController.swift; sourceTree = "<group>"; };
 		7F5AFC1D27D1A943002BECC3 /* AssetsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsState.swift; sourceTree = "<group>"; };
 		7F844CDB27CFB58C00C06084 /* OrderbookDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderbookDataSource.swift; sourceTree = "<group>"; };
 		7F844CDE27CFB5F300C06084 /* ReceiveOrderbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveOrderbook.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 			children = (
 				BF7D214A27CF39AF007F0DCE /* View */,
 				BF7D214827CF0C81007F0DCE /* DetailViewController.swift */,
+				7F34013827D88F2A00511464 /* GraphDetailViewController.swift */,
 				7F844CFE27D0A92000C06084 /* CurrentMarketPriceViewModel.swift */,
 				7F844CF627D0661000C06084 /* AssetsStatusViewModel.swift */,
 				7FBD63EC27D62C8B00C9801C /* GraphViewModel.swift */,
@@ -466,6 +469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F34013927D88F2A00511464 /* GraphDetailViewController.swift in Sources */,
 				7F2A6BC827D7B7AC00486F36 /* AppDependency.swift in Sources */,
 				7FBD63EF27D62CF300C9801C /* DetailViewModel.swift in Sources */,
 				7FBD63EB27D62B3300C9801C /* TickerCell.swift in Sources */,

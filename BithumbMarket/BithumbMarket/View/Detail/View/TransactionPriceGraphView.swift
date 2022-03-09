@@ -21,8 +21,8 @@ final class TransactionPriceGraphView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupView()
-        viewmodel.fetchGraphPrice()
-        bind()
+//        viewmodel.fetchGraphPrice()
+//        bind()
     }
 
     required init?(coder: NSCoder) {
@@ -42,14 +42,14 @@ final class TransactionPriceGraphView: UIView {
     }
     
     //MARK: 그래프 바인딩 작업 추가
-    private func bind() {
-        viewmodel.data.subscribe { [weak self] observer in
-            DispatchQueue.main.async {
-                self?.drawgraph()
-                self?.setupView()
-            }
-        }
-    }
+//    private func bind() {
+//        viewmodel.data.subscribe { [weak self] observer in
+//            DispatchQueue.main.async {
+//                self?.drawgraph()
+//                self?.setupView()
+//            }
+//        }
+//    }
 }
 
 extension TransactionPriceGraphView {

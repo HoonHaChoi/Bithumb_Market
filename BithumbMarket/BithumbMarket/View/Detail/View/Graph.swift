@@ -18,14 +18,14 @@ class Graph: UIView {
     var closePrice = [Double]()
     var maxPrice = [Double]()
     var minPrice = [Double]()
-    private var date = [String]()
-    private var openPrice = [Int]()
-    private var closePrice = [Int]()
-    private var maxPrice = [Int]()
-    private var minPrice = [Int]()
+//    private var date = [String]()
+//    private var openPrice = [Int]()
+//    private var closePrice = [Int]()
+//    private var maxPrice = [Int]()
+//    private var minPrice = [Int]()
     
     private var layerCount = 0
-    private var offsetX = CGFloat()
+//    private var offsetX = CGFloat()
     
     var boundMinX = CGFloat()
     var boundMaxX = CGFloat() {
@@ -47,7 +47,7 @@ class Graph: UIView {
         super.init(coder: coder)
     }
     
-    init(frame: CGRect, values: [Int], date: [String], openPrice: [Int], maxPrice: [Int], minPrice: [Int], boundMinX: CGFloat, boundMaxX: CGFloat) {
+    init(frame: CGRect, values: [Double], date: [String], openPrice: [Double], maxPrice: [Double], minPrice: [Double], boundMinX: CGFloat, boundMaxX: CGFloat) {
         super.init(frame: frame)
         self.date = date
         self.openPrice = openPrice
