@@ -13,4 +13,16 @@ struct GraphData {
     let openPriceList: [Double]
     let minPriceList: [Double]
     let maxPriceList: [Double]
+    
+    var count: Int {
+        dateList.count
+    }
+    
+    var startPoint: Int {
+        if dateList.count > 30 {
+            return dateList.count - 30
+        }
+        return .zero
+    }
+    
 }

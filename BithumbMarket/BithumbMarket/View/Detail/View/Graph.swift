@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Graph: UIView {
+final class Graph: UIView {
     
     var offsetX = CGFloat()
 
@@ -16,7 +16,6 @@ class Graph: UIView {
     var closePrice = [Double]()
     var maxPrice = [Double]()
     var minPrice = [Double]()
-    
     private var layerCount = 0
     
     var boundMinX = CGFloat()
@@ -25,7 +24,7 @@ class Graph: UIView {
             setNeedsDisplay()
         }
     }
-    var isLineGraph = false {
+    var isLineGraph = UserDefaults.standard.isLine() {
           didSet {
               setNeedsDisplay()
           }

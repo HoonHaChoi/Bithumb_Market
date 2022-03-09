@@ -9,13 +9,7 @@ import UIKit
 
 final class TransactionPriceGraphView: UIView {
     
-    var graph: Graph = Graph()
-    var isLineGraph = false {
-          didSet {
-              graph.isLineGraph = !graph.isLineGraph
-              setNeedsDisplay()
-          }
-      }
+    private let graph: Graph = Graph()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,17 +23,18 @@ final class TransactionPriceGraphView: UIView {
     
     func updateGraph(_ graph: GraphData) {
         DispatchQueue.main.async {
-            self.graph.closePrice = graph.closePriceList
-            self.graph.openPrice = graph.openPriceList
-            self.graph.maxPrice = graph.maxPriceList
-            self.graph.minPrice = graph.minPriceList
-            self.graph.boundMaxX = UIScreen.main.bounds.width
-            self.graph.boundMinX = 0
-            self.graph.date = graph.dateList
+            self.graph.closePrice = graph.closePriceList[graph.startPoint..<graph.count].map { Double($0) }
+            self.graph.openPrice = graph.openPriceList[graph.startPoint..<graph.count].map { Double($0) }
+            self.graph.maxPrice = graph.maxPriceList[graph.startPoint..<graph.count].map { Double($0) }
+            self.graph.minPrice = graph.minPriceList[graph.startPoint..<graph.count].map { Double($0) }
+            self.graph.date = graph.dateList[graph.startPoint..<graph.count].map { String($0) }
             self.graph.layer.setNeedsDisplay()
         }
     }
-
+    
+    func changeGraph(isLine: Bool) {
+        graph.isLineGraph = isLine
+    }
 }
 
 extension TransactionPriceGraphView {
