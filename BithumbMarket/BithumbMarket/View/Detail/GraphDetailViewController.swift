@@ -11,7 +11,7 @@ final class GraphDetailViewController: UIViewController {
     
     let viewmodel = GraphViewModel()
     var graph = Graph()
-    let width: CGFloat = 30000
+    var width: CGFloat = 30000
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -54,10 +54,11 @@ final class GraphDetailViewController: UIViewController {
         setupView()
         viewmodel.fetchGraphPrice {
             self.bind()
+         
         }
         // TODO: scrollTOEnd() * 2 문제 해결
-        scrollView.scrollToEnd()
-        scrollView.scrollToEnd()
+        scrollView.scrollToEnd(x: width)
+        scrollView.scrollToEnd(x: width)
         scrollView.delegate = self
     }
     
@@ -105,10 +106,11 @@ extension GraphDetailViewController: UIScrollViewDelegate {
 
 extension UIScrollView {
     
-    func scrollToEnd() {
-        let offset = CGPoint(x: 30000, y: 0)
-        setContentOffset(offset, animated: true)
+    func scrollToEnd(x: CGFloat) {
+        let offset = CGPoint(x: x, y: 0)
+        self.setContentOffset(offset, animated: true)
         self.layoutIfNeeded()
+        
     }
 }
 
