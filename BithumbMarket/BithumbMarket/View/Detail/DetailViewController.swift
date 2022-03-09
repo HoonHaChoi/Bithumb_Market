@@ -13,13 +13,16 @@ final class DetailViewController: UIViewController {
     
     private var transactionViewControllerFactory: (Ticker) -> UIViewController
     private var orderbookViewControllerFactory: (Ticker) -> UIViewController
+    private var graphDetailViewControllerFactory: (GraphData) -> UIViewController
     
     init(ticker: Ticker,
          transactionViewControllerFactory: @escaping (Ticker) -> UIViewController,
-         orderbookViewControllerFactory: @escaping (Ticker) -> UIViewController) {
+         orderbookViewControllerFactory: @escaping (Ticker) -> UIViewController,
+         graphDetailViewControllerFactory: @escaping (GraphData) -> UIViewController) {
         self.ticker = ticker
         self.transactionViewControllerFactory = transactionViewControllerFactory
         self.orderbookViewControllerFactory = orderbookViewControllerFactory
+        self.graphDetailViewControllerFactory = graphDetailViewControllerFactory
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,10 +32,11 @@ final class DetailViewController: UIViewController {
     
     var fetchAssetsStatusHandler: (() -> Void)?
     var fetchCurrentMarketPrice: (() -> Void)?
-    var updateCurrentMarketPriceHandler: (() -> Void)?//
+    var updateCurrentMarketPriceHandler: (() -> Void)?
     var likeHandler: ((String) -> Void)?
     var updateLikeHandler: ((String) -> Void)?
     var fetchGraphHandler: ((String, ChartIntervals) -> Void)?
+    var passGraphHandler: (() -> Void)?
     var bindPriceHandler: Void?
     
     private let scrollView: UIScrollView = {
@@ -117,12 +121,6 @@ final class DetailViewController: UIViewController {
         fetchGraphHandler?(ticker.symbol, .day)
     }
     
-    var disconnectHandler: (() -> Void)?
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        disconnectHandler?()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateCurrentMarketPriceHandler?()
@@ -186,6 +184,11 @@ final class DetailViewController: UIViewController {
         self.navigationController?.pushViewController(self.orderbookViewControllerFactory(self.ticker), animated: true)
     }
     
+    lazy var moveGraphDetailViewController = { [weak self] (graph: GraphData) -> Void in
+        guard let self = self else { return }
+        self.present(self.graphDetailViewControllerFactory(graph), animated: true)
+    }
+    
     lazy var showLoadingView = { [weak self] (state: Bool) -> Void in
         DispatchQueue.main.async {
             self?.loadingView.isHidden = state
@@ -203,6 +206,10 @@ final class DetailViewController: UIViewController {
     
     lazy var changeGraphType = { [weak self] (state: Bool) -> Void in
         self?.transactionPricegraphView.changeGraph(isLine: state)
+    }
+    
+    lazy var showGraphDetailViewController = { [weak self] (data: GraphData) -> Void in
+        self?.moveGraphDetailViewController(data)
     }
     
     deinit {
@@ -274,6 +281,6 @@ extension DetailViewController {
     }
     
     @objc private func showGraph() {
-        self.present(GraphDetailViewController(), animated: true, completion: nil)
+        passGraphHandler?()
     }
 }

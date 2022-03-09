@@ -11,25 +11,34 @@ final class GraphViewModel {
     
     private let service: APIService
     private let storage: GraphStorage
+    private var graphData: GraphData
     
     init(service: APIService, storage: GraphStorage) {
         self.service = service
         self.storage = storage
+        self.graphData = .init(dateList: [],
+                               closePriceList: [],
+                               openPriceList: [],
+                               minPriceList: [],
+                               maxPriceList: [])
     }
     
     var errorHandler: ((Error) -> Void)?
     var loadingHandelr: ((Bool) -> Void)?
     var updateGraphHandler: ((GraphData) -> Void)?
+    var passGraphHandler: ((GraphData) -> Void)?
     
     func fetchGraph(symbol: String, interval: ChartIntervals) {
         if let graphData = hasGraphData(symbol: symbol, interval: interval) {
             if hasNotPassedDate(entity: graphData, interval: interval) {
+                self.graphData = graphData.toDomain()
                 updateGraphHandler?(graphData.toDomain())
             } else {
                 deleteGraph(entity: graphData) { [weak self] in
                     self?.loadingHandelr?(false)
                     self?.fetchDataSave(symbol: symbol, interval: interval) { entity in
                         self?.loadingHandelr?(true)
+                        self?.graphData = entity.toDomain()
                         self?.updateGraphHandler?(entity.toDomain())
                     }
                 }
@@ -38,6 +47,7 @@ final class GraphViewModel {
             loadingHandelr?(false)
             fetchDataSave(symbol: symbol, interval: interval) { [weak self] entity in
                 self?.loadingHandelr?(true)
+                self?.graphData = entity.toDomain()
                 self?.updateGraphHandler?(entity.toDomain())
             }
         }
@@ -98,4 +108,7 @@ final class GraphViewModel {
         }
     }
     
+    func passGraphData() {
+        passGraphHandler?(graphData)
+    }
 }
