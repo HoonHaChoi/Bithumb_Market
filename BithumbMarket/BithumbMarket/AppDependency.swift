@@ -61,6 +61,9 @@ struct AppDependency {
         detailViewController.updateLikeHandler = detailViewModel.updateLike(symbol:)
         detailViewModel.updateCompleteHandler = detailViewController.updateSymbolButton
         
+        detailViewController.fetchGraphHandler = graphViewModel.fetchGraph(symbol:interval:)
+        graphViewModel.updateGraphHandler = detailViewController.updateGraphView
+        
         // assetsStatusViewModel.errorHandler
         // detailViewModel.errorHandler
         // graphViewModel.errorHandler

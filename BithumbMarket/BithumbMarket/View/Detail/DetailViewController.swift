@@ -32,6 +32,7 @@ final class DetailViewController: UIViewController {
     var updateCurrentMarketPriceHandler: (() -> Void)?//
     var likeHandler: ((String) -> Void)?
     var updateLikeHandler: ((String) -> Void)?
+    var fetchGraphHandler: ((String, ChartIntervals) -> Void)?
     var bindPriceHandler: Void?
     
     private let scrollView: UIScrollView = {
@@ -92,7 +93,6 @@ final class DetailViewController: UIViewController {
         bind()
 //        _ = bindPriceHandler
 //        fetchCurrentMarketPrice?()
-//        transactionPriceSelectTimeView.changeIntervalHandler = selectItem(interval:)
         //graphViewModel.loadingHandelr = showLoadingView
 //        selectItem(interval: .day)
     }
@@ -100,6 +100,7 @@ final class DetailViewController: UIViewController {
     func bind() {
         currentMarketPriceView.orderbookButtonHandler = moveOrderbookViewController
         transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
+        transactionPriceSelectTimeView.changeIntervalHandler = selectIntervalAction
         fetchAssetsStatusHandler?()
     }
     
@@ -172,10 +173,16 @@ final class DetailViewController: UIViewController {
         }
     }
     
-    func selectItem(interval: ChartIntervals) {
+    lazy var selectIntervalAction: (ChartIntervals) -> Void = { [weak self] interval in
+        self?.fetchGraphHandler?(self?.ticker.symbol ?? "", interval)
 //        graphViewModel.fetchGraph(symbol: ticker.symbol, interval: interval) { [weak self] graph in
 //            self?.transactionPricegraphView.updateGraph(graph)
 //        }
+    }
+    
+    lazy var updateGraphView: (GraphData) -> Void = { [weak self] graphData in
+        guard let self = self else { return }
+        self.transactionPricegraphView.updateGraph(graphData)
     }
     
     deinit {

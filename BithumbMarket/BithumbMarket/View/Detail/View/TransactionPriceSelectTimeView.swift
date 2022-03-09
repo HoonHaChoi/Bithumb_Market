@@ -31,8 +31,7 @@ final class TransactionPriceSelectTimeView: UIView {
     
     var changeIntervalHandler: ((_ interval: ChartIntervals) -> Void)?
     
-    @objc
-    func changeInterval(_ sender: UIButton) {
+    @objc private func changeInterval(_ sender: UIButton) {
         guard sender.isSelected != true else {
             return
         }
