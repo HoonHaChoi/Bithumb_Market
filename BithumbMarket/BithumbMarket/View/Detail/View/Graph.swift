@@ -63,6 +63,12 @@ final class Graph: UIView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         remove()
+        switch isLineGraph {
+        case true:
+            minMaxText(minList: closePrice, maxList: closePrice)
+        case false:
+            minMaxText(minList: minPrice, maxList: maxPrice)
+        }
     }
     
 }
@@ -159,22 +165,20 @@ extension Graph {
     }
     
     private func candleStickGraph(width: CGFloat, height: CGFloat, boundMinX: CGFloat, boundMaxX: CGFloat) {
-        offsetX = frame.width / CGFloat(closePrice.count + 1)
         let start = checkIndex(index: Int(boundMinX / offsetX))
         let end = checkIndex(index: Int(boundMaxX / offsetX))
-        if start < 0 || end < 0 {
-            return
-        }
+        if start < 0 || end < 0 { return }
+        
         guard let maxprice = maxPrice[start...end].max(),
               let minprice = minPrice[start...end].min() else {return}
 
         let labelSpace: CGFloat = 55
         var currentX: CGFloat = boundMinX
-        let scale = CGFloat(Double((maxprice - minprice) / 2) / 0.4)
-        let close = closePrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
-        let open = openPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
-        let max = maxPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
-        let min = minPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
+        let scale = CGFloat(Double(maxprice - minprice) / 0.8 / frame.height)
+        let close = closePrice.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
+        let open = openPrice.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
+        let max = maxPrice.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
+        let min = minPrice.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
 
         for i in start...end{
             currentX += offsetX
@@ -184,11 +188,12 @@ extension Graph {
             ? rectangle(top: open[i] , bottom: close[i], color: UIColor.fallColor.cgColor, currentX: currentX)
             : rectangle(top: close[i], bottom: open[i], color: UIColor.riseColor.cgColor, currentX: currentX)
         }
-        currentPriceBar(open: open[open.count - 1], close: close[close.count - 1])
-        
+  
         close[close.count - 1] > open[open.count - 1]
         ? currnetText(x: frame.width + 2, y: close[close.count - 1] - 8, color: UIColor.fallColor.cgColor )
         : currnetText(x: frame.width + 2, y: close[close.count - 1] - 8, color: UIColor.riseColor.cgColor)
+        
+        currentPriceBar(open: open[open.count - 1], close: close[close.count - 1])
     }
     
     private func currnetText(x: CGFloat, y: CGFloat, color: CGColor ) {
