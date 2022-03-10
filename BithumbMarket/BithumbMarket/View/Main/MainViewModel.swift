@@ -21,6 +21,7 @@ final class MainViewModel {
         self.isFilter = false
         self.service = service
         self.storage = storage
+        self.socket = .init()
         self.symbols = []
     }
     
@@ -45,7 +46,6 @@ final class MainViewModel {
     }
     
     private func sendMessage(completion: @escaping () -> Void) {
-        self.socket = SocketService()
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self = self else { return }
             let symbols = self.tickers.value.map { $0.paymentCurrency }
@@ -99,10 +99,12 @@ final class MainViewModel {
         updateFilterTickers()
     }
     
-    private func updateFilterTickers() {
+    func updateFilterTickers() {
         if isFilter {
-            symbols = fetctLikeSymbols()
-            updateTickersHandler?(tickers.value.filter { symbols.contains($0.symbol) })
+            let likeSymbols = fetctLikeSymbols()
+            let filterTickers = tickers.value.filter { likeSymbols.contains($0.symbol) }
+            symbols = filterTickers.map { $0.symbol }
+            updateTickersHandler?(filterTickers)
         } else {
             updateTickersHandler?(tickers.value)
         }

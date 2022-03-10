@@ -33,13 +33,13 @@ struct AppDependency {
         let mainViewController = MainViewController(detailViewControllerFactory: detailViewControllerFactory)
         let mainViewModel = MainViewModel(service: service,
                                           storage: likeStorage)
-        
-        mainViewModel.tickers.bind = mainViewController.updateDiffableDataSource
+        mainViewModel.tickers.bind  = mainViewController.updateDiffableDataSource
         mainViewController.fetchTickersHandler = mainViewModel.fetchTickers
         
         mainViewController.coinSortView.sortControlHandler = mainViewModel.executeFilterTickers
         mainViewController.disconnectHandler = mainViewModel.disconnect
         
+        mainViewController.testHandler = mainViewModel.updateFilterTickers
         mainViewModel.updateTickersHandler = mainViewController.updateTableView
         mainViewModel.changeIndexHandler = mainViewController.updateTableViewRows
         return mainViewController

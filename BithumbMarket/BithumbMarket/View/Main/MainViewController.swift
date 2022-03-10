@@ -22,6 +22,7 @@ final class MainViewController: UIViewController {
     
     var fetchTickersHandler: (() -> Void)?
     var disconnectHandler: (() -> Void)?
+    var testHandler: (() -> Void)?
     
     private let mainTableView: UITableView = {
         let tableView = UITableView()
@@ -58,16 +59,39 @@ final class MainViewController: UIViewController {
         view.backgroundColor = .systemBackground
         configureUI()
         configureTableView()
+        fetchTickersHandler?()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchTickersHandler?()
-
+        isUpdateLayout = true
+        
+        mainTableView.indexPathsForVisibleRows?.forEach({ indexPath in
+            guard let ticker = self.diffableDatasource.itemIdentifier(for: indexPath) else {
+                return
+            }
+            diffableDatasource.reloadSnapshot(ticker: ticker)
+        })
+        
+        if !diffableDatasource.isEmptyItems() {
+            testHandler?()
+        }
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        disconnectHandler?()
+//        disconnectHandler?()
+        isUpdateLayout = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func configureUI() {
@@ -108,14 +132,18 @@ final class MainViewController: UIViewController {
         self?.diffableDatasource.updateItems(tickers: items)
     }
     
+    var isUpdateLayout = true
+    
     lazy var updateTableViewRows = { [weak self] (index: Int) in
-        guard let ticker = self?.diffableDatasource.itemIdentifier(for: IndexPath(row: index, section: 0)) else {
-            return
+        if self?.isUpdateLayout ?? false {
+            guard let ticker = self?.diffableDatasource.itemIdentifier(for: IndexPath(row: index, section: 0)) else {
+                return
+            }
+            self?.diffableDatasource.reloadSnapshot(ticker: ticker, completion: {
+                let cell = self?.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
+                cell?.updateAnimation(state: ticker.change)
+            })
         }
-        self?.diffableDatasource.reloadSnapshot(ticker: ticker, completion: {
-            let cell = self?.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
-            cell?.updateAnimation(state: ticker.change)
-        })
     }
     
     private func setEmptyTableView() {

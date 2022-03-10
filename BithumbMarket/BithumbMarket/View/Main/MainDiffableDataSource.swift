@@ -27,7 +27,7 @@ final class MainDiffableDataSource: UITableViewDiffableDataSource<Section, Ticke
         apply(snapshot: snapshot)
     }
     
-    func reloadSnapshot(ticker: Ticker, completion: (() -> Void)?) {
+    func reloadSnapshot(ticker: Ticker, completion: (() -> Void)? = nil) {
         var currentSnapshot = self.snapshot()
         currentSnapshot.reloadItems([ticker])
         apply(snapshot: currentSnapshot, completion: completion)

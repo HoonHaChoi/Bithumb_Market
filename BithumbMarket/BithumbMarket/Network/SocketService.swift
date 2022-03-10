@@ -8,7 +8,7 @@
 import Foundation
 import Starscream
 
-struct SocketService {
+final class SocketService {
     
     private var webSocket: WebSocket
     
@@ -30,10 +30,10 @@ struct SocketService {
     }
     
     func reciveText(completion: @escaping (String) -> Void) {
-        webSocket.onEvent = { result in
+        webSocket.onEvent = { [weak self] result in
             switch result {
             case .text(let string):
-                shouldConfirm(message: string, completion: completion)
+                self?.shouldConfirm(message: string, completion: completion)
             default:
                 break
             }
@@ -52,7 +52,8 @@ struct SocketService {
     }
     
     func perform<T: Decodable>(completion: @escaping (Result<T, HTTPError>) -> Void) {
-        reciveText { tickerString in
+        reciveText { [weak self] tickerString in
+            guard let self = self else { return }
             guard let data = tickerString.data(using: .utf8) else {
                 completion(.failure(.failureDecode))
                 return
