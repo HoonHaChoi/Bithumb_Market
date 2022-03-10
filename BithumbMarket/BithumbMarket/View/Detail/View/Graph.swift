@@ -45,6 +45,7 @@ final class Graph: UIView {
             lineGraph(width: frame.width, height: frame.height, values: closePrice)
         case false:
             candleStickGraph(width: frame.width, height: frame.height, boundMinX: boundMinX, boundMaxX: boundMaxX)
+            minMaxText(minList: minPrice, maxList: maxPrice)
         }
         if let count = layer.sublayers?.count {
             layerCount = count
@@ -88,10 +89,52 @@ extension Graph {
     
     private func remove() {
         if let count = layer.sublayers?.count {
-            for _ in layerCount..<count {
-                layer.sublayers?.remove(at: layerCount)
+            for _ in layerCount - 2..<count {
+                layer.sublayers?.remove(at: layerCount - 2)
             }
         }
+    }
+    
+    private func minMaxText(minList: [Double], maxList: [Double]) {
+        let start = checkIndex(index: Int(boundMinX / offsetX))
+        let end = checkIndex(index: Int(boundMaxX / offsetX))
+        if start < 0 || end < 0 { return }
+        
+        guard let maxprice = maxList[start...end].max(),
+              let minprice = minList[start...end].min() else {return}
+        
+        let labelSpace: CGFloat = 55
+        let scale = CGFloat(Double(maxprice - minprice) / 0.8 / frame.height)
+        let max = maxList.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
+        let min = minList.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
+
+        guard let maxPriceIndex = maxList[start...end].firstIndex(of: maxprice),
+           let minPriceIndex = minList[start...end].firstIndex(of: minprice) else { return }
+        
+        let boundMinPriceX = offsetX * CGFloat(minPriceIndex)
+        let boundMaxPriceX = offsetX * CGFloat(maxPriceIndex)
+        let maxpriceString = convertString(price: maxprice)
+        let minpriceString = convertString(price: minprice)
+        
+        let minX = checkMinMaxX(x: boundMinPriceX + offsetX)
+        let maxX = checkMinMaxX(x: boundMaxPriceX + offsetX)
+ 
+        drawMinMaxText(x: minX, y: min[minPriceIndex] + 10, text: "최저 " + minpriceString, color: UIColor.fallColor.cgColor)
+        drawMinMaxText(x: maxX, y: max[maxPriceIndex] - 25, text: "최고 " + maxpriceString, color: UIColor.riseColor.cgColor)
+    }
+    
+    private func drawMinMaxText(x: CGFloat, y: CGFloat, text: String, color: CGColor) {
+        let textLayer = CATextLayer()
+        textLayer.frame = CGRect(x: x - 60 , y: y, width: 120, height: 10)
+        
+        let attributedString = NSAttributedString(
+            string: text,
+            attributes: [.font: UIFont.systemFont(ofSize: 10), .foregroundColor: color]
+        )
+        textLayer.string = attributedString
+        textLayer.alignmentMode = .center
+        textLayer.contentsScale = UIScreen.main.scale
+        self.layer.addSublayer(textLayer)
     }
     
     private func date(x: CGFloat, date: String) {
@@ -253,10 +296,27 @@ extension Graph {
     
     private func checkX(x: CGFloat) -> CGFloat {
         switch x {
-        case ..<(boundMinX + 55):
-            return boundMinX + 55
         case (boundMaxX - 55)...:
             return boundMaxX - 55
+        case ..<(boundMinX + 55):
+            return boundMinX + 55
+        default:
+            return x
+        }
+    }
+    
+    private func checkMinMaxX(x: CGFloat) -> CGFloat {
+        switch x {
+        case (boundMaxX - 55)...:
+            if frame.width < UIScreen.main.bounds.width {
+                return boundMaxX - 30
+            }
+            return boundMaxX - 55
+        case ..<(boundMinX + 55):
+            if frame.width < UIScreen.main.bounds.width {
+                return boundMinX + 30
+            }
+            return boundMinX + 55
         default:
             return x
         }
