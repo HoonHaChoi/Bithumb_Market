@@ -9,10 +9,10 @@ import Foundation
 
 final class OrderbookViewModel {
 
+    var orderbook: Observable<OrderbookData>
     private let symbol: String
     private var service: APIService
-    var orderbook: Observable<OrderbookData>
-    var socket: SocketService?
+    private var socket: SocketService?
     
     init(service: APIService, symbol: String) {
         self.orderbook = .init(OrderbookData(
