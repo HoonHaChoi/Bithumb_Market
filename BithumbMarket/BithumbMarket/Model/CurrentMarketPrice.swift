@@ -12,22 +12,20 @@ struct CurrentMarketPrice {
     let changePrice: String
     let changeRate: String
     
-    func setChangeState() -> ChangeState {
-        switch true{
-        case changeRate.convertDouble() == 0:
+    static let empty = CurrentMarketPrice(currentPrice: "",
+                                          changePrice: "",
+                                          changeRate: "")
+    
+    var setChange: ChangeState {
+        let currentPrice = changePrice.convertDouble()
+        if currentPrice == .zero {
             return .even
-        case changeRate.convertDouble() > 0:
-            return .rise
-        case changeRate.convertDouble() < 0:
-            return .fall
-        default:
-            fatalError()
         }
+        
+        if currentPrice > 0 {
+            return .rise
+        }
+        return .fall
     }
     
-    
-}
-
-struct CurrentPrice: Decodable {
-    let data: Market
 }

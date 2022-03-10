@@ -51,8 +51,8 @@ final class CurrentMarketPriceView: UIView {
         currentPriceLabel.text = currentPrice.currentPrice.withComma() + "원"
         changePriceLabel.text = currentPrice.changePrice.withComma() + "원"
         changeRateLabel.text =  "(\(currentPrice.changeRate.withComma())%)"
-        changePriceLabel.textColor = currentPrice.setChangeState().textColor
-        changeRateLabel.textColor = currentPrice.setChangeState().textColor
+        changePriceLabel.textColor = currentPrice.setChange.textColor
+        changeRateLabel.textColor = currentPrice.setChange.textColor
     }
     
 }

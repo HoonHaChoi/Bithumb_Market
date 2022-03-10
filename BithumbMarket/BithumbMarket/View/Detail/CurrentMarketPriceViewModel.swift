@@ -9,26 +9,17 @@ import Foundation
 
 final class CurrentMarketPriceViewModel {
     
-    private var service: APIService
-    var socket: SocketService?
-    private var symbol: String
     var price : Observable<CurrentMarketPrice>
+    private var socket: SocketService?
+    private var service: APIService
+    private var symbol: String
     
     var errorHandler: ((HTTPError) -> Void)?
     
-    init(service: APIService = APIService(), symbol: String) {
+    init(service: APIService, symbol: String) {
         self.service = service
         self.symbol = symbol
-        self.price = .init(CurrentMarketPrice(
-            currentPrice: "",
-            changePrice: "",
-            changeRate: "")
-        )
-    }
-    
-    func disconnect() {
-        socket?.disconnect()
-        socket = nil
+        self.price = .init(CurrentMarketPrice.empty)
     }
     
     func sendMessage() {
@@ -55,20 +46,15 @@ final class CurrentMarketPriceViewModel {
         }
     }
     
-    private func convert(from market: Market) -> CurrentMarketPrice {
-        return CurrentMarketPrice(
-            currentPrice: market.closingPrice,
-            changePrice: market.fluctate24H,
-            changeRate: market.fluctateRate24H
-        )
+    private func convert(from ticker: ReceiveTicker) -> CurrentMarketPrice {
+        return CurrentMarketPrice(currentPrice: ticker.content.closePrice,
+                                  changePrice: ticker.content.chgAmt,
+                                  changeRate: ticker.content.chgRate)
     }
     
-    private func convert(from ticker: ReceiveTicker) -> CurrentMarketPrice {
-        return CurrentMarketPrice(
-            currentPrice: ticker.content.closePrice,
-            changePrice: ticker.content.chgAmt,
-            changeRate: ticker.content.chgRate
-        )
+    func disconnect() {
+        socket?.disconnect()
+        socket = nil
     }
     
 }
