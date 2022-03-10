@@ -30,10 +30,10 @@ final class DetailViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var fetchAssetsStatusHandler: (() -> Void)?
-    var sendMessageHanlder: (() -> Void)?
     var likeHandler: ((String) -> Void)?
     var updateLikeHandler: ((String) -> Void)?
+    var sendMessageHanlder: (() -> Void)?
+    var fetchAssetsStatusHandler: (() -> Void)?
     var fetchGraphHandler: ((String, ChartIntervals) -> Void)?
     var passGraphHandler: (() -> Void)?
     var bindPriceHandler: Void?
@@ -98,6 +98,15 @@ final class DetailViewController: BaseViewController {
         return button
     }()
     
+    private lazy var likeButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.setImage(UIImage(systemName: "heart.fill"), for: .selected)
+        button.setPreferredSymbolConfiguration(.init(scale: .large), forImageIn: .normal)
+        button.addTarget(self, action: #selector(likeBarButtonAction(_:)), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
@@ -113,12 +122,12 @@ final class DetailViewController: BaseViewController {
         transactionPriceSelectTimeView.changeIntervalHandler = selectIntervalAction
         transactionPriceSelectTimeView.changeGraphTypeHandler = changeGraphType
         fetchAssetsStatusHandler?()
-        sendMessageHanlder?()
         fetchGraphHandler?(ticker.symbol, .day)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        sendMessageHanlder?()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -126,15 +135,6 @@ final class DetailViewController: BaseViewController {
         disconnectHandler?()
         navigationItem.backButtonTitle = ""
     }
-    
-    private lazy var likeButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "heart"), for: .normal)
-        button.setImage(UIImage(systemName: "heart.fill"), for: .selected)
-        button.setPreferredSymbolConfiguration(.init(scale: .large), forImageIn: .normal)
-        button.addTarget(self, action: #selector(likeBarButtonAction(_:)), for: .touchUpInside)
-        return button
-    }()
     
     private func configureNavigationBar() {
         title = ticker.symbol
@@ -154,6 +154,10 @@ final class DetailViewController: BaseViewController {
     
     @objc private func likeBarButtonAction(_ sender: UIButton) {
         updateLikeHandler?(ticker.symbol)
+    }
+    
+    @objc private func showGraph() {
+        passGraphHandler?()
     }
     
     lazy var hasSymbolButton = { [weak self] (state: Bool) -> Void in
@@ -231,13 +235,10 @@ final class DetailViewController: BaseViewController {
 extension DetailViewController {
     
     private func configureUI() {
-        scrollContentView.addSubview(currentMarketPriceView)
-        scrollContentView.addSubview(transactionPriceSelectTimeView)
-        scrollContentView.addSubview(transactionPricegraphView)
-        scrollContentView.addSubview(transactionHistoryView)
-        scrollContentView.addSubview(assetsStatusView)
-        scrollContentView.addSubview(graphDetailButton)
-        scrollContentView.addSubview(loadingView)
+        [currentMarketPriceView, transactionPriceSelectTimeView, transactionPricegraphView,
+         transactionHistoryView, assetsStatusView, graphDetailButton, loadingView].forEach {
+            scrollContentView.addSubview($0)
+        }
         
         NSLayoutConstraint.activate([
             graphDetailButton.bottomAnchor.constraint(equalTo: transactionPricegraphView.bottomAnchor),
@@ -291,7 +292,4 @@ extension DetailViewController {
         ])
     }
     
-    @objc private func showGraph() {
-        passGraphHandler?()
-    }
 }
