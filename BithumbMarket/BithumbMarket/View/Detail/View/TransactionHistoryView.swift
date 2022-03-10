@@ -44,7 +44,7 @@ extension TransactionHistoryView {
         transactionHistoryNameLabel.text = "채결 내역 보기"
         
         transactionHistoryButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
-        transactionHistoryButton.tintColor = .actionTextSecondary
+        transactionHistoryButton.tintColor = .textTertiary
         transactionHistoryButton.addTarget(self, action: #selector(showTransactionView), for: .touchUpInside)
     }
     

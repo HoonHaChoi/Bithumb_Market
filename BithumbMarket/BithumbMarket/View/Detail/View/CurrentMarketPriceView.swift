@@ -64,9 +64,9 @@ extension CurrentMarketPriceView {
         
         orderBookButton.translatesAutoresizingMaskIntoConstraints = false
         orderBookButton.setTitle("호가", for: .normal)
-        orderBookButton.setTitleColor(.textSecondary, for: .normal)
+        orderBookButton.setTitleColor(.typoColor, for: .normal)
         orderBookButton.titleLabel?.font = .boldSystemFont(ofSize: 17)
-        orderBookButton.backgroundColor = .actionBackgroundPrimary
+        orderBookButton.backgroundColor = .actionBackgroundTertiary
         orderBookButton.layer.cornerRadius = 10
         orderBookButton.addTarget(self, action: #selector(showOrderbook), for: .touchUpInside)
         

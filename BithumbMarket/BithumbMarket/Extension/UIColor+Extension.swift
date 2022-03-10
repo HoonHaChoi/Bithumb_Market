@@ -13,6 +13,14 @@ extension UIColor {
         .init(named: "ActionBackgroundPrimary") ?? .init()
     }
     
+    static var actionBackgroundSecondary: UIColor {
+        .init(named: "ActionBackgroundSecondary") ?? .init()
+    }
+    
+    static var actionBackgroundTertiary: UIColor {
+        .init(named: "ActionBackgroundTertiary") ?? .init()
+    }
+    
     static var actionTextPrimary: UIColor {
         .init(named: "ActionTextPrimary") ?? .init()
     }
