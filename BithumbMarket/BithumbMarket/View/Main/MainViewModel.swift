@@ -84,7 +84,7 @@ final class MainViewModel {
         
         if isFilter {
             if symbols.contains(tickers.value[index].symbol) {
-                guard let filterIndex = symbols.firstIndex(of: tickers.value[index].symbol) else {
+                guard let filterIndex = findSymbolIndex(of: tickers.value[index].symbol) else {
                     return
                 }
                 self.changeIndexHandler?(filterIndex)
@@ -94,6 +94,10 @@ final class MainViewModel {
         }
     }
     
+    private func findSymbolIndex(of symbol: String) -> Int? {
+        return symbols.firstIndex(of: symbol)
+    }
+    
     func executeFilterTickers() {
         isFilter = !isFilter
         updateFilterTickers()
@@ -101,10 +105,7 @@ final class MainViewModel {
     
     func updateFilterTickers() {
         if isFilter {
-            let likeSymbols = fetctLikeSymbols()
-            let filterTickers = tickers.value.filter { likeSymbols.contains($0.symbol) }
-            symbols = filterTickers.map { $0.symbol }
-            updateTickersHandler?(filterTickers)
+            updateTickersHandler?(filterTickers())
         } else {
             updateTickersHandler?(tickers.value)
         }
@@ -118,6 +119,17 @@ final class MainViewModel {
             errorHandler?(error)
         }
         return .init()
+    }
+    
+    private func filterTickers() -> [Ticker] {
+        let likeSymbols = fetctLikeSymbols()
+        let filterTickers = tickers.value.filter { likeSymbols.contains($0.symbol) }
+        updateSymbol(filterTickers: filterTickers)
+        return filterTickers
+    }
+    
+    private func updateSymbol(filterTickers: [Ticker]) {
+        symbols = filterTickers.map { $0.symbol }
     }
 
 }
