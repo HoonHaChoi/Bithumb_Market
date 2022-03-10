@@ -36,7 +36,6 @@ final class DetailViewController: BaseViewController {
     var fetchAssetsStatusHandler: (() -> Void)?
     var fetchGraphHandler: ((String, ChartIntervals) -> Void)?
     var passGraphHandler: (() -> Void)?
-    var bindPriceHandler: Void?
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -116,15 +115,6 @@ final class DetailViewController: BaseViewController {
         bind()
     }
     
-    func bind() {
-        currentMarketPriceView.orderbookButtonHandler = moveOrderbookViewController
-        transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
-        transactionPriceSelectTimeView.changeIntervalHandler = selectIntervalAction
-        transactionPriceSelectTimeView.changeGraphTypeHandler = changeGraphType
-        fetchAssetsStatusHandler?()
-        fetchGraphHandler?(ticker.symbol, .day)
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         sendMessageHanlder?()
@@ -134,6 +124,15 @@ final class DetailViewController: BaseViewController {
         super.viewWillDisappear(animated)
         disconnectHandler?()
         navigationItem.backButtonTitle = ""
+    }
+    
+    func bind() {
+        currentMarketPriceView.orderbookButtonHandler = moveOrderbookViewController
+        transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
+        transactionPriceSelectTimeView.changeIntervalHandler = selectIntervalAction
+        transactionPriceSelectTimeView.changeGraphTypeHandler = changeGraphType
+        fetchAssetsStatusHandler?()
+        fetchGraphHandler?(ticker.symbol, .day)
     }
     
     private func configureNavigationBar() {

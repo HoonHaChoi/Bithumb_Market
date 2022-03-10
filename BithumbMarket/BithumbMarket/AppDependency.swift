@@ -75,7 +75,7 @@ struct AppDependency {
         detailViewController.passGraphHandler = graphViewModel.passGraphData
         graphViewModel.passGraphHandler = detailViewController.showGraphDetailViewController
         
-        detailViewController.bindPriceHandler = currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
+        currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
         
         assetsStatusViewModel.errorHandler = detailViewController.showError
         detailViewModel.errorHandler = detailViewController.showError
