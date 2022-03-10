@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailViewController: UIViewController {
+final class DetailViewController: BaseViewController {
     
     private let ticker: Ticker
     

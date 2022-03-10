@@ -27,7 +27,7 @@ final class MainViewModel {
     
     var updateTickersHandler: (([Ticker]) -> Void)?
     var changeIndexHandler: ((Int) -> Void)?
-    var errorHandler: ((String) -> Void)?
+    var errorHandler: ((Error) -> Void)?
         
     func fetchTickers() {
         service.requestTickers(endpoint: .ticker()) { [weak self] result in
@@ -40,7 +40,7 @@ final class MainViewModel {
                     self.updateTickers()
                 }
             case .failure(let error):
-                self.errorHandler?(error.description)
+                self.errorHandler?(error)
             }
         }
     }
@@ -70,7 +70,7 @@ final class MainViewModel {
                 }
                 self.update(index: index, to: ticker)
             case .failure(let error):
-                self.errorHandler?(error.description)
+                self.errorHandler?(error)
             }
         }
     }
@@ -116,7 +116,7 @@ final class MainViewModel {
         case .success(let likes):
             return likes.compactMap { $0.symbol }
         case .failure(let error):
-            errorHandler?(error.description)
+            errorHandler?(error)
         }
         return .init()
     }

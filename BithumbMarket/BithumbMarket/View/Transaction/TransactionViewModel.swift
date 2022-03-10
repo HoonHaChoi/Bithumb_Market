@@ -23,7 +23,7 @@ final class TransactionViewModel {
     
     var updateTableHandler: (() -> Void)?
     var insertTableHandler: (() -> Void)?
-    var errorHandler: ((String) -> Void)?
+    var errorHandler: ((Error) -> Void)?
     
     func disconnect() {
         socket?.disconnect()
@@ -41,7 +41,7 @@ final class TransactionViewModel {
                     self.updateTransaction()
                 }
             case.failure(let error):
-                self.errorHandler?(error.description)
+                self.errorHandler?(error)
             }
         }
     }
@@ -66,7 +66,7 @@ final class TransactionViewModel {
                     self.insertTableHandler?()
                 }
             case .failure(let error):
-                self.errorHandler?(error.description)
+                self.errorHandler?(error)
             }
         }
     }

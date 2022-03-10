@@ -22,7 +22,7 @@ final class OrderbookViewModel {
         self.symbol = symbol
     }
     
-    var errorHandler: ((String) -> Void)?
+    var errorHandler: ((Error) -> Void)?
     var updateHandler: (() -> Void)?
     
     func disconnect() {
@@ -40,7 +40,7 @@ final class OrderbookViewModel {
                     self?.updateOrderbook()
                 }
             case .failure(let error):
-                self?.errorHandler?(error.description)
+                self?.errorHandler?(error)
             }
         }
     }
@@ -70,7 +70,7 @@ final class OrderbookViewModel {
                 self.orderbook.value = .init(asks: asks, bids: bids)
                 self.updateHandler?()
             case .failure(let error):
-                self?.errorHandler?(error.description)
+                self?.errorHandler?(error)
             }
         }
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HTTPError: Error, CustomStringConvertible {
+enum HTTPError: Error, LocalizedError {
     
     case invalidURL
     case invalidRequset
@@ -16,7 +16,7 @@ enum HTTPError: Error, CustomStringConvertible {
     case emptyData
     case failureDecode
     
-    var description: String {
+    var errorDescription: String? {
         switch self {
         case .invalidURL:
             return "잘못된 URL 입니다."

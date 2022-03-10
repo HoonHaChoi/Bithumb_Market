@@ -17,7 +17,7 @@ final class DetailViewModel {
     
     var hasLikeHandler: ((Bool) -> Void)?
     var updateCompleteHandler: (() -> Void)?
-    var errorHandler: ((CoreDataError) -> Void)?
+    var errorHandler: ((Error) -> Void)?
     
     func hasLike(symbol: String) {
         hasLikeHandler?(storage.find(symbol: symbol))
@@ -27,7 +27,7 @@ final class DetailViewModel {
         if storage.find(symbol: symbol) {
             deleteLike(symbol: symbol)
         } else {
-            saveLike(symbol: symbol)
+            saveLike(symbol: symbol.description)
         }
     }
     

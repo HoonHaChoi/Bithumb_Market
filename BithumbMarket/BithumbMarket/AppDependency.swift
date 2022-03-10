@@ -75,14 +75,15 @@ struct AppDependency {
         graphViewModel.updateGraphHandler = detailViewController.updateGraphView
         graphViewModel.loadingHandelr = detailViewController.showLoadingView
         
-        // assetsStatusViewModel.errorHandler
-        // detailViewModel.errorHandler
-        // graphViewModel.errorHandler
-        
         detailViewController.passGraphHandler = graphViewModel.passGraphData
         graphViewModel.passGraphHandler = detailViewController.showGraphDetailViewController
         
         detailViewController.bindPriceHandler = currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
+        
+        
+        // assetsStatusViewModel.errorHandler
+        // detailViewModel.errorHandler
+        // graphViewModel.errorHandler
         
         return detailViewController
     }

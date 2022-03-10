@@ -14,8 +14,8 @@ class BaseViewController: UIViewController {
         view.backgroundColor = .systemBackground
     }
     
-    lazy var showError = { [weak self] (message: String) -> Void in
-        self?.showErrorMessage(message)
+    lazy var showError = { [weak self] (error: Error) -> Void in
+        self?.showErrorMessage(error)
     }
 
 }
