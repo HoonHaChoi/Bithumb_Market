@@ -92,12 +92,10 @@ final class DetailViewController: BaseViewController {
     private let graphDetailButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("자세히보기", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 11)
-        button.setTitleColor(UIColor.textSecondary, for: .normal)
-        button.layer.cornerRadius = 5
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.textSecondary.cgColor
+        button.setBackgroundImage(UIImage(named: "scale"), for: .normal)
+//        button.layer.borderColor = UIColor.textSecondary.cgColor
+//        button.layer.borderWidth = 1
+//        button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(showGraph), for: .touchUpInside)
         return button
     }()
@@ -245,8 +243,9 @@ extension DetailViewController {
         
         NSLayoutConstraint.activate([
             graphDetailButton.bottomAnchor.constraint(equalTo: transactionPricegraphView.bottomAnchor),
-            graphDetailButton.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 20),
-            graphDetailButton.widthAnchor.constraint(equalToConstant: 100),
+            graphDetailButton.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 10),
+            graphDetailButton.widthAnchor.constraint(equalToConstant: 50),
+            graphDetailButton.heightAnchor.constraint(equalToConstant: 50),
             
             currentMarketPriceView.topAnchor.constraint(equalTo: scrollContentView.topAnchor, constant: 20),
             currentMarketPriceView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 20),
@@ -255,7 +254,7 @@ extension DetailViewController {
             transactionPricegraphView.heightAnchor.constraint(equalToConstant: 400),
             transactionPricegraphView.topAnchor.constraint(equalTo: currentMarketPriceView.bottomAnchor, constant: 5),
             transactionPricegraphView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
-            transactionPricegraphView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
+            transactionPricegraphView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor, constant: -20),
             
             transactionPriceSelectTimeView.topAnchor.constraint(equalTo: transactionPricegraphView.bottomAnchor, constant: 20),
             transactionPriceSelectTimeView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),

@@ -9,9 +9,9 @@ import UIKit
 
 final class GraphDetailViewController: UIViewController {
     
-    private let graph = Graph()
-    var width: CGFloat = 30000
+    private lazy var graph = Graph()
     private let graphData: GraphData
+    private lazy var width: CGFloat = CGFloat(graphData.closePriceList.count * 12)
     
     init(graphData: GraphData) {
         self.graphData = graphData
@@ -45,9 +45,6 @@ final class GraphDetailViewController: UIViewController {
             self.graph.boundMinX = self.scrollView.bounds.minX
             self.graph.date = self.graphData.dateList
             self.graph.layer.setNeedsDisplay()
-            
-            print("count: ", self.graphData.closePriceList.count)
-            print(self.scrollView.bounds.midX, self.scrollView.bounds.maxX)
         }
     }
     
@@ -55,14 +52,6 @@ final class GraphDetailViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         updateGraph()
-//        self.graph.closePrice = graphData.closePriceList
-//        self.graph.openPrice = graphData.openPriceList
-//        self.graph.maxPrice = graphData.maxPriceList
-//        self.graph.minPrice = graphData.minPriceList
-//        self.graph.boundMaxX = self.scrollView.bounds.maxX
-//        self.graph.boundMinX = self.scrollView.bounds.minX
-//        self.graph.date = graphData.dateList
-//        self.graph.layer.setNeedsDisplay()
         
         // TODO: scrollTOEnd() * 2 문제 해결
         scrollView.scrollToEnd(x: width)
@@ -72,9 +61,8 @@ final class GraphDetailViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupView()
     }
-    
+
     deinit {
         print(#function)
     }
@@ -87,10 +75,13 @@ extension GraphDetailViewController {
         view.backgroundColor = .systemBackground
         configureScrollView()
         scrollContentView.addSubview(graph)
+        graph.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             graph.topAnchor.constraint(equalTo: scrollContentView.topAnchor),
             graph.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor),
+            graph.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor),
+            graph.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -35)
         ])
     }
     
@@ -119,14 +110,5 @@ extension GraphDetailViewController: UIScrollViewDelegate {
         graph.boundMaxX = self.scrollView.bounds.maxX
     }
     
-}
-
-extension UIScrollView {
-    
-    func scrollToEnd(x: CGFloat) {
-        let offset = CGPoint(x: x, y: 0)
-        self.setContentOffset(offset, animated: true)
-        self.layoutIfNeeded()
-    }
 }
 

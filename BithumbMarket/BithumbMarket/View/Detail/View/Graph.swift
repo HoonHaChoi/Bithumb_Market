@@ -37,16 +37,7 @@ final class Graph: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-    init(frame: CGRect, values: [Double], date: [String], openPrice: [Double], maxPrice: [Double], minPrice: [Double]) {
-        super.init(frame: frame)
-        self.date = date
-        self.openPrice = openPrice
-        self.closePrice = values
-        self.maxPrice = maxPrice
-        self.minPrice = minPrice
-    }
-    
+
     override func draw(_ rect: CGRect) {
         layer.sublayers?.removeAll()
         switch isLineGraph {
@@ -102,7 +93,7 @@ extension Graph {
     }
     
     private func price(x: CGFloat, price: Double) {
-        let stringPrice = String(price).withComma()
+        let stringPrice = price < 1 ? String(format: "%.4f", price) : String(price).withComma()
         let text = stringPrice + "원"
         drawText(x: x, y: 20, text: text, fontSize: 16, height: 20)
     }
@@ -156,6 +147,9 @@ extension Graph {
         layers.path = path.cgPath
         layers.lineJoin = .round
         self.layer.addSublayer(layers)
+
+        currentPriceBar(open: currentY[currentY.count - 1], close: currentY[currentY.count - 1])
+        currnetText(x: frame.width + 2, y: currentY[currentY.count - 1] - 8 , color: UIColor.mainColor.cgColor )
     }
     
     private func candleStickGraph(width: CGFloat, height: CGFloat, boundMinX: CGFloat, boundMaxX: CGFloat) {
@@ -165,8 +159,8 @@ extension Graph {
         if start < 0 || end < 0 {
             return
         }
-        guard let maxprice = maxPrice[start..<end].max(),
-              let minprice = minPrice[start..<end].min() else {return}
+        guard let maxprice = maxPrice[start...end].max(),
+              let minprice = minPrice[start...end].min() else {return}
 
         let labelSpace: CGFloat = 55
         var currentX: CGFloat = boundMinX
@@ -185,6 +179,27 @@ extension Graph {
             : rectangle(top: close[i], bottom: open[i], color: UIColor.riseColor.cgColor, currentX: currentX)
         }
         currentPriceBar(open: open[open.count - 1], close: close[close.count - 1])
+        
+        close[close.count - 1] > open[open.count - 1]
+        ? currnetText(x: frame.width + 2, y: close[close.count - 1] - 8, color: UIColor.fallColor.cgColor )
+        : currnetText(x: frame.width + 2, y: close[close.count - 1] - 8, color: UIColor.riseColor.cgColor)
+    }
+    
+    private func currnetText(x: CGFloat, y: CGFloat, color: CGColor ) {
+        let textLayer = CATextLayer()
+        textLayer.frame = CGRect(x: x , y: y, width: 30, height: 16)
+        
+        let attributedString = NSAttributedString(
+            string: "현재",
+            attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: color]
+        )
+        textLayer.cornerRadius = 5
+        textLayer.string = attributedString
+        textLayer.alignmentMode = .center
+        textLayer.borderWidth = 1
+        textLayer.borderColor = color
+        textLayer.contentsScale = UIScreen.main.scale
+        self.layer.addSublayer(textLayer)
     }
  
     private func currentPriceBar(open: CGFloat, close: CGFloat) {
@@ -202,14 +217,12 @@ extension Graph {
         layers.lineDashPattern = [3, 3]
         self.layer.addSublayer(layers)
     }
-
+    
     private func rectangle(top: CGFloat, bottom: CGFloat, color: CGColor, currentX: CGFloat) {
         let layers = CAShapeLayer()
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: currentX - (offsetX/2) - 3, y: top))
-        path.addLine(to: CGPoint(x: currentX - (offsetX/2) + offsetX - 5 , y: top))
-        path.addLine(to: CGPoint(x: currentX - (offsetX/2) + offsetX - 5, y: bottom))
-        path.addLine(to: CGPoint(x:  currentX - (offsetX/2) - 3, y: bottom))
+        let path = UIBezierPath(
+            roundedRect: CGRect(x: currentX - (offsetX/2) - 3, y: top, width: offsetX - 2, height: bottom - top),
+            cornerRadius: 2)
         layers.lineCap = .round
         layers.path = path.cgPath
         layers.fillColor = color
