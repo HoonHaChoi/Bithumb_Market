@@ -59,9 +59,9 @@ final class TransactionPriceSelectTimeView: UIView {
         UserDefaults.standard.changeisLine()
         let isLine = UserDefaults.standard.isLine()
         changeGraphTypeHandler?(isLine)
-        let imageName = isLine ? GraphType.line : GraphType.candlestick
+        let imageName = isLine ? GraphType.candlestick : GraphType.line
         DispatchQueue.main.async { [weak self] in
-            self?.graphChangeButton.setImage(UIImage(named: imageName), for: .normal)
+            self?.graphChangeButton.setImage(UIImage(named: imageName)?.withTintColor(.typoColor), for: .normal)
         }
     }
     
@@ -82,9 +82,9 @@ extension TransactionPriceSelectTimeView {
         }
         intervalButtons.last?.isSelected = true
         
-        let imageName = UserDefaults.standard.isLine() ? GraphType.line : GraphType.candlestick
+        let imageName = UserDefaults.standard.isLine() ? GraphType.candlestick : GraphType.line
         graphChangeButton.translatesAutoresizingMaskIntoConstraints = false
-        graphChangeButton.setImage(UIImage(named: imageName), for: .normal)
+        graphChangeButton.setImage(UIImage(named: imageName)?.withTintColor(.typoColor), for: .normal)
         graphChangeButton.addTarget(self, action: #selector(graphChangeButtonTapped(_:)), for: .touchUpInside)
         
         selectStackView.translatesAutoresizingMaskIntoConstraints = false
