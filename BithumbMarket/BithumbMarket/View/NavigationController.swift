@@ -12,15 +12,14 @@ final class NavigationController: UINavigationController {
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
         let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithDefaultBackground()
+        navigationBarAppearance.configureWithTransparentBackground()
         self.navigationItem.scrollEdgeAppearance = navigationBarAppearance
         self.navigationItem.standardAppearance = navigationBarAppearance
         self.navigationItem.compactAppearance = navigationBarAppearance
         self.navigationBar.tintColor = .typoColor
-        self.navigationBar.backgroundColor = .systemBackground
-        self.setNeedsStatusBarAppearanceUpdate()
         self.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationBar.shadowImage = UIImage()
+        self.navigationItem.backButtonTitle = ""
     }
     
     required init?(coder aDecoder: NSCoder) {

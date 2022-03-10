@@ -126,6 +126,11 @@ final class DetailViewController: UIViewController {
         fetchCurrentMarketPrice?()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationItem.backButtonTitle = ""
+    }
+    
     private lazy var likeButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(systemName: "heart"), for: .normal)
