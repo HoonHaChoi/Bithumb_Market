@@ -104,7 +104,6 @@ final class DetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         configureNavigationBar()
         configureScrollView()
         configureUI()

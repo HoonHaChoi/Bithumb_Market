@@ -31,19 +31,17 @@ struct AppDependency {
     
     func initialMainViewController() -> MainViewController {
         let mainViewController = MainViewController(detailViewControllerFactory: detailViewControllerFactory)
-        let mainViewModel = MainViewModel(service: service,
-                                          storage: likeStorage)
+        let mainViewModel = MainViewModel(service: service, storage: likeStorage)
         mainViewModel.tickers.bind  = mainViewController.updateDiffableDataSource
         mainViewController.fetchTickersHandler = mainViewModel.fetchTickers
-        
         mainViewController.coinSortView.sortControlHandler = mainViewModel.executeFilterTickers
         mainViewController.disconnectHandler = mainViewModel.disconnect
         
         mainViewController.updateTickers = mainViewModel.updateFilterTickers
         mainViewModel.updateTickersHandler = mainViewController.updateTableView
         mainViewModel.changeIndexHandler = mainViewController.updateTableViewRows
-        
         mainViewModel.errorHandler = mainViewController.showError
+        
         return mainViewController
     }
     
@@ -80,10 +78,9 @@ struct AppDependency {
         
         detailViewController.bindPriceHandler = currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
         
-        
-        // assetsStatusViewModel.errorHandler
-        // detailViewModel.errorHandler
-        // graphViewModel.errorHandler
+        assetsStatusViewModel.errorHandler = detailViewController.showError
+        detailViewModel.errorHandler = detailViewController.showError
+        graphViewModel.errorHandler = detailViewController.showError
         
         return detailViewController
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MainViewController: UIViewController {
+final class MainViewController: BaseViewController {
     
     private var detailViewControllerFactory: (Ticker) -> UIViewController
     private var isUpdateLayout: Bool
@@ -58,7 +58,6 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         configureUI()
         configureTableView()
         fetchTickersHandler?()
@@ -151,10 +150,6 @@ final class MainViewController: UIViewController {
     
     private func updateVisibleRows() {
         diffableDatasource.reloadIndexPath(rows: mainTableView.indexPathsForVisibleRows)
-    }
-    
-    lazy var showError = { [weak self] (error: Error) -> Void in
-        self?.showErrorMessage(error)
     }
     
     private func moveDetailViewController(ticker: Ticker) {
