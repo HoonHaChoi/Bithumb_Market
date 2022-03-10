@@ -57,14 +57,13 @@ final class OrderbookViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = OrderbookNameSpace.navigationTitle
-        configureTableView()
         configureSumOfQuantitiesView()
-        fetchHandler?()
+        configureTableView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        orderbookTableView.scrollToCenter()
+        fetchHandler?()
    }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -76,17 +75,18 @@ final class OrderbookViewController: UIViewController {
         view.addSubview(orderbookTableView)
         NSLayoutConstraint.activate([
             orderbookTableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            orderbookTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            orderbookTableView.bottomAnchor.constraint(equalTo: sumOfQuantitiesView.topAnchor),
             orderbookTableView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             orderbookTableView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
         ])
         orderbookTableView.dataSource = dataSource
+        orderbookTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .middle, animated: false)
     }
     
     private func configureSumOfQuantitiesView() {
         view.addSubview(sumOfQuantitiesView)
         NSLayoutConstraint.activate([
-            sumOfQuantitiesView.heightAnchor.constraint(equalToConstant: 44),
+            sumOfQuantitiesView.heightAnchor.constraint(equalToConstant: 80),
             sumOfQuantitiesView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             sumOfQuantitiesView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             sumOfQuantitiesView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)

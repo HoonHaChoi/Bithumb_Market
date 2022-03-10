@@ -27,8 +27,8 @@ final class OrderbookDataSource: NSObject, UITableViewDataSource {
     
     override init() {
         items = .init(
-            asks: .init(),
-            bids: .init())
+            asks: Array(repeating: .init(quantity: "", price: ""), count: 30),
+            bids: Array(repeating: .init(quantity: "", price: ""), count: 30))
     }
     
     func updateCellData(by orderbook: OrderbookData) {

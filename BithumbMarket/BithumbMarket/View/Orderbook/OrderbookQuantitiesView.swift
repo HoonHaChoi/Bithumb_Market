@@ -29,6 +29,14 @@ class OrderbookQuantitiesView: UIView {
         return label
     }()
     
+    private let titleLabel: UILabel = {
+       let label = UILabel()
+        label.text = "호가 모아보기"
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.textColor = .textPrimary
+        return label
+    }()
+    
     private let stackView = UIStackView()
     
     override init(frame: CGRect) {
@@ -63,6 +71,7 @@ extension OrderbookQuantitiesView {
     
     private func setConstraintLayout() {
         stackView.addArrangedSubview(asksQuantitiesLabel)
+        stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(bidsQuantitiesLabel)
         addSubview(stackView)
         NSLayoutConstraint.activate([
