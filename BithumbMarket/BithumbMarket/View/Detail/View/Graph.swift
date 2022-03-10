@@ -147,6 +147,9 @@ extension Graph {
         layers.path = path.cgPath
         layers.lineJoin = .round
         self.layer.addSublayer(layers)
+
+        currentPriceBar(open: currentY[currentY.count - 1], close: currentY[currentY.count - 1])
+        currnetText(x: frame.width + 2, y: currentY[currentY.count - 1] - 8 , color: UIColor.mainColor.cgColor )
     }
     
     private func candleStickGraph(width: CGFloat, height: CGFloat, boundMinX: CGFloat, boundMaxX: CGFloat) {
@@ -176,6 +179,27 @@ extension Graph {
             : rectangle(top: close[i], bottom: open[i], color: UIColor.riseColor.cgColor, currentX: currentX)
         }
         currentPriceBar(open: open[open.count - 1], close: close[close.count - 1])
+        
+        close[close.count - 1] > open[open.count - 1]
+        ? currnetText(x: frame.width + 2, y: close[close.count - 1] - 8, color: UIColor.fallColor.cgColor )
+        : currnetText(x: frame.width + 2, y: close[close.count - 1] - 8, color: UIColor.riseColor.cgColor)
+    }
+    
+    private func currnetText(x: CGFloat, y: CGFloat, color: CGColor ) {
+        let textLayer = CATextLayer()
+        textLayer.frame = CGRect(x: x , y: y, width: 30, height: 16)
+        
+        let attributedString = NSAttributedString(
+            string: "현재",
+            attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: color]
+        )
+        textLayer.cornerRadius = 5
+        textLayer.string = attributedString
+        textLayer.alignmentMode = .center
+        textLayer.borderWidth = 1
+        textLayer.borderColor = color
+        textLayer.contentsScale = UIScreen.main.scale
+        self.layer.addSublayer(textLayer)
     }
  
     private func currentPriceBar(open: CGFloat, close: CGFloat) {

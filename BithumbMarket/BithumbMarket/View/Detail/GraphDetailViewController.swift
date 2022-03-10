@@ -81,7 +81,7 @@ extension GraphDetailViewController {
             graph.topAnchor.constraint(equalTo: scrollContentView.topAnchor),
             graph.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor),
             graph.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor),
-            graph.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor)
+            graph.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -35)
         ])
     }
     

@@ -231,8 +231,9 @@ extension DetailViewController {
         
         NSLayoutConstraint.activate([
             graphDetailButton.bottomAnchor.constraint(equalTo: transactionPricegraphView.bottomAnchor),
-            graphDetailButton.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 20),
-            graphDetailButton.widthAnchor.constraint(equalToConstant: 100),
+            graphDetailButton.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 10),
+            graphDetailButton.widthAnchor.constraint(equalToConstant: 50),
+            graphDetailButton.heightAnchor.constraint(equalToConstant: 50),
             
             currentMarketPriceView.topAnchor.constraint(equalTo: scrollContentView.topAnchor, constant: 20),
             currentMarketPriceView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 20),
@@ -241,7 +242,7 @@ extension DetailViewController {
             transactionPricegraphView.heightAnchor.constraint(equalToConstant: 350),
             transactionPricegraphView.topAnchor.constraint(equalTo: currentMarketPriceView.bottomAnchor, constant: 20),
             transactionPricegraphView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
-            transactionPricegraphView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
+            transactionPricegraphView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor, constant: -20),
             
             transactionPriceSelectTimeView.topAnchor.constraint(equalTo: transactionPricegraphView.bottomAnchor, constant: 20),
             transactionPriceSelectTimeView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
