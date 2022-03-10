@@ -43,24 +43,25 @@ final class OrderbookViewController: UIViewController {
         }
     }
     
-    private func scrollToCenter() {
-        if orderbookTableView.numberOfSections > .zero {
-            let indexPath = IndexPath(row: 0, section: 1)
-            orderbookTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
-        }
-    }
+//    private func scrollToCenter() {
+//        if orderbookTableView.numberOfSections > .zero {
+//            let indexPath = IndexPath(row: 0, section: 1)
+//            orderbookTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = OrderbookNameSpace.navigationTitle
         configureTableView()
+        fetchHandler?()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //scrollToCenter()
-        fetchHandler?()
+       
+        orderbookTableView.scrollToCenter()
    }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -79,4 +80,11 @@ final class OrderbookViewController: UIViewController {
         orderbookTableView.dataSource = dataSource
     }
 
+}
+
+extension UIScrollView {
+    func scrollToCenter() {
+        let centerOffset = CGPoint(x: 0, y: (contentSize.height - bounds.size.height) / 2.0)
+        setContentOffset(centerOffset, animated: false)
+    }
 }

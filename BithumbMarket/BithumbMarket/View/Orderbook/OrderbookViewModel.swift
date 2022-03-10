@@ -57,7 +57,6 @@ final class OrderbookViewModel {
     }
     
     private func updateOrderbook() {
-        print(self.socket)
         self.socket?.perform { [weak self] (result: Result<ReceiveOrderbook, HTTPError>) in
             switch result {
             case .success(let success):
