@@ -53,7 +53,7 @@ final class TransactionViewController: BaseViewController {
         disconnectHandler?()
     }
     
-    lazy var updateDataSource: (([TransactionData]) -> Void)? = { [weak self] transactionData in
+    lazy var updateDataSource = { [weak self] (transactionData: [TransactionData]) -> Void in
         self?.datasource.items = transactionData
     }
 

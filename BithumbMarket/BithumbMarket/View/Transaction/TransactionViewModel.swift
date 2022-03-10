@@ -9,11 +9,10 @@ import Foundation
 
 final class TransactionViewModel {
     
-    private let symbol: String
-    
     var transactionData: Observable<[TransactionData]>
+    private let symbol: String
     private let service: APIService
-    var socket: SocketService?
+    private var socket: SocketService?
     
     init(service: APIService, symbol: String) {
         self.transactionData = .init([])
