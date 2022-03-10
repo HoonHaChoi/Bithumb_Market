@@ -220,11 +220,9 @@ extension Graph {
     
     private func rectangle(top: CGFloat, bottom: CGFloat, color: CGColor, currentX: CGFloat) {
         let layers = CAShapeLayer()
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: currentX - (offsetX/2) - 3, y: top))
-        path.addLine(to: CGPoint(x: currentX - (offsetX/2) + offsetX - 5 , y: top))
-        path.addLine(to: CGPoint(x: currentX - (offsetX/2) + offsetX - 5, y: bottom))
-        path.addLine(to: CGPoint(x:  currentX - (offsetX/2) - 3, y: bottom))
+        let path = UIBezierPath(
+            roundedRect: CGRect(x: currentX - (offsetX/2) - 3, y: top, width: offsetX - 2, height: bottom - top),
+            cornerRadius: 2)
         layers.lineCap = .round
         layers.path = path.cgPath
         layers.fillColor = color
