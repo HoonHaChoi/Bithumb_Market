@@ -39,7 +39,7 @@ struct AppDependency {
         mainViewController.coinSortView.sortControlHandler = mainViewModel.executeFilterTickers
         mainViewController.disconnectHandler = mainViewModel.disconnect
         
-        mainViewController.testHandler = mainViewModel.updateFilterTickers
+        mainViewController.updateTickers = mainViewModel.updateFilterTickers
         mainViewModel.updateTickersHandler = mainViewController.updateTableView
         mainViewModel.changeIndexHandler = mainViewController.updateTableViewRows
         return mainViewController

@@ -24,7 +24,7 @@ final class MainViewController: UIViewController {
     
     var fetchTickersHandler: (() -> Void)?
     var disconnectHandler: (() -> Void)?
-    var testHandler: (() -> Void)?
+    var updateTickers: (() -> Void)?
     
     private let mainTableView: UITableView = {
         let tableView = UITableView()
@@ -63,29 +63,27 @@ final class MainViewController: UIViewController {
         configureTableView()
         fetchTickersHandler?()
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        isUpdateLayout = true
-        updateVisibleRows()
-        if !diffableDatasource.isEmptyItems() {
-            testHandler?()
-        }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        isUpdateLayout = false
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        isUpdateLayout = true
+        updateVisibleRows()
+        updateTickers?()
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        isUpdateLayout = false
     }
     
     private func configureUI() {
