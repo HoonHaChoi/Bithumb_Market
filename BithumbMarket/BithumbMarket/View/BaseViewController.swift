@@ -9,6 +9,8 @@ import UIKit
 
 class BaseViewController: UIViewController {
 
+    var disconnectHandler: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground

@@ -36,7 +36,6 @@ final class TransactionViewController: BaseViewController {
     }()
     
     var fetchTransactionHandler: (() -> Void)?
-    var disconnectHandler: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -37,7 +37,6 @@ final class OrderbookViewController: BaseViewController {
     }()
     
     var fetchHandler: (() -> Void)?
-    var disconnectHandler: (() -> Void)?
     
     lazy var updateDataSource: ((OrderbookData) -> Void)? = { [weak self] orderbook in
         self?.dataSource.items = orderbook

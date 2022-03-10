@@ -23,7 +23,6 @@ final class MainViewController: BaseViewController {
     }
     
     var fetchTickersHandler: (() -> Void)?
-    var disconnectHandler: (() -> Void)?
     var updateTickers: (() -> Void)?
     
     private let mainTableView: UITableView = {
