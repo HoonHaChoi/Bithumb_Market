@@ -238,8 +238,8 @@ extension DetailViewController {
             currentMarketPriceView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 20),
             currentMarketPriceView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -20),
             
-            transactionPricegraphView.heightAnchor.constraint(equalToConstant: 350),
-            transactionPricegraphView.topAnchor.constraint(equalTo: currentMarketPriceView.bottomAnchor, constant: 20),
+            transactionPricegraphView.heightAnchor.constraint(equalToConstant: 400),
+            transactionPricegraphView.topAnchor.constraint(equalTo: currentMarketPriceView.bottomAnchor, constant: 5),
             transactionPricegraphView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             transactionPricegraphView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
             
@@ -247,11 +247,11 @@ extension DetailViewController {
             transactionPriceSelectTimeView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             transactionPriceSelectTimeView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
             
-            transactionHistoryView.topAnchor.constraint(equalTo: transactionPriceSelectTimeView.bottomAnchor, constant: 20),
+            transactionHistoryView.topAnchor.constraint(equalTo: transactionPriceSelectTimeView.bottomAnchor, constant: 30),
             transactionHistoryView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             transactionHistoryView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
             
-            assetsStatusView.topAnchor.constraint(equalTo: transactionHistoryView.bottomAnchor, constant: 20),
+            assetsStatusView.topAnchor.constraint(equalTo: transactionHistoryView.bottomAnchor, constant: 30),
             assetsStatusView.leadingAnchor.constraint(equalTo: currentMarketPriceView.leadingAnchor),
             assetsStatusView.trailingAnchor.constraint(equalTo: currentMarketPriceView.trailingAnchor),
             assetsStatusView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -20),
