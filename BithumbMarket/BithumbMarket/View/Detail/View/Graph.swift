@@ -40,11 +40,15 @@ final class Graph: UIView {
 
     override func draw(_ rect: CGRect) {
         layer.sublayers?.removeAll()
+        offsetX = frame.width / CGFloat(closePrice.count + 1)
+        
         switch isLineGraph {
         case true:
-            lineGraph(width: frame.width, height: frame.height, values: closePrice)
+            lineGraph(width: frame.width, height: frame.height)
+            minMaxText(minList: closePrice, maxList: closePrice)
         case false:
             candleStickGraph(width: frame.width, height: frame.height, boundMinX: boundMinX, boundMaxX: boundMaxX)
+            minMaxText(minList: minPrice, maxList: maxPrice)
         }
         if let count = layer.sublayers?.count {
             layerCount = count
@@ -63,6 +67,12 @@ final class Graph: UIView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         remove()
+        switch isLineGraph {
+        case true:
+            minMaxText(minList: closePrice, maxList: closePrice)
+        case false:
+            minMaxText(minList: minPrice, maxList: maxPrice)
+        }
     }
     
 }
@@ -70,7 +80,7 @@ final class Graph: UIView {
 extension Graph {
     
     private func show(touches: Set<UITouch>) {
-        if let touch = touches.first { 
+        if let touch = touches.first {
             let position = touch.location(in: self)
             let x = position.x
             let index = checkIndex(index: Int(x / offsetX))
@@ -82,10 +92,52 @@ extension Graph {
     
     private func remove() {
         if let count = layer.sublayers?.count {
-            for _ in layerCount..<count {
-                layer.sublayers?.remove(at: layerCount)
+            for _ in layerCount - 2..<count {
+                layer.sublayers?.remove(at: layerCount - 2)
             }
         }
+    }
+    
+    private func minMaxText(minList: [Double], maxList: [Double]) {
+        let start = checkIndex(index: Int(boundMinX / offsetX))
+        let end = checkIndex(index: Int(boundMaxX / offsetX))
+        if start < 0 || end < 0 { return }
+        
+        guard let maxprice = maxList[start...end].max(),
+              let minprice = minList[start...end].min() else {return}
+        
+        let labelSpace: CGFloat = 55
+        let scale = CGFloat(Double(maxprice - minprice) / 0.8 / frame.height)
+        let max = maxList.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
+        let min = minList.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
+
+        guard let maxPriceIndex = maxList[start...end].firstIndex(of: maxprice),
+           let minPriceIndex = minList[start...end].firstIndex(of: minprice) else { return }
+        
+        let boundMinPriceX = offsetX * CGFloat(minPriceIndex)
+        let boundMaxPriceX = offsetX * CGFloat(maxPriceIndex)
+        let maxpriceString = convertString(price: maxprice)
+        let minpriceString = convertString(price: minprice)
+        
+        let minX = checkMinMaxX(x: boundMinPriceX + offsetX)
+        let maxX = checkMinMaxX(x: boundMaxPriceX + offsetX)
+ 
+        drawMinMaxText(x: minX, y: min[minPriceIndex] + 10, text: "최저 " + minpriceString, color: UIColor.fallColor.cgColor)
+        drawMinMaxText(x: maxX, y: max[maxPriceIndex] - 25, text: "최고 " + maxpriceString, color: UIColor.riseColor.cgColor)
+    }
+    
+    private func drawMinMaxText(x: CGFloat, y: CGFloat, text: String, color: CGColor) {
+        let textLayer = CATextLayer()
+        textLayer.frame = CGRect(x: x - 60 , y: y, width: 120, height: 10)
+        
+        let attributedString = NSAttributedString(
+            string: text,
+            attributes: [.font: UIFont.systemFont(ofSize: 10), .foregroundColor: color]
+        )
+        textLayer.string = attributedString
+        textLayer.alignmentMode = .center
+        textLayer.contentsScale = UIScreen.main.scale
+        self.layer.addSublayer(textLayer)
     }
     
     private func date(x: CGFloat, date: String) {
@@ -93,9 +145,14 @@ extension Graph {
     }
     
     private func price(x: CGFloat, price: Double) {
+        let text = convertString(price: price)
+        drawText(x: x, y: 20, text: text, fontSize: 16, height: 20)
+    }
+    
+    private func convertString(price: Double) -> String {
         let stringPrice = price < 1 ? String(format: "%.4f", price) : String(price).withComma()
         let text = stringPrice + "원"
-        drawText(x: x, y: 20, text: text, fontSize: 16, height: 20)
+        return text
     }
     
     private func drawText(x: CGFloat, y: CGFloat, text: String, fontSize: CGFloat, height: CGFloat) {
@@ -125,20 +182,26 @@ extension Graph {
         self.layer.addSublayer(layers)
     }
     
-    private func lineGraph(width: CGFloat, height: CGFloat, values: [Double]) {
-        offsetX = frame.width / CGFloat(values.count)
+    private func lineGraph(width: CGFloat, height: CGFloat) {
         let path = UIBezierPath()
         let layers = CAShapeLayer()
-        
-        guard let min = values.min(), let max = values.max() else { return }
-        let scale = CGFloat(Double(max - min) / 0.8)
-        let currentY = values.map{ max - $0 }
         var currentX: CGFloat = 0
         
-        path.move(to: CGPoint(x: 0, y: (frame.height * (CGFloat(currentY[0]) / scale)) + 55))
+        let start = checkIndex(index: Int(boundMinX / offsetX))
+        let end = checkIndex(index: Int(boundMaxX / offsetX))
+        if start < 0 || end < 0 { return }
+        
+        guard let maxprice = closePrice[start...end].max(),
+              let minprice = closePrice[start...end].min() else {return}
+        
+        let labelSpace: CGFloat = 55
+        let scale = CGFloat(Double(maxprice - minprice) / 0.8 / frame.height)
+        let currentY = closePrice.map{((CGFloat(maxprice - $0) / scale)) + labelSpace}
+        
+        path.move(to: CGPoint(x: 0, y: currentY[0]))
         currentY.forEach {
             currentX += offsetX
-            path.addLine(to: CGPoint(x: currentX, y: (frame.height * (CGFloat($0) / scale)) + 55))
+            path.addLine(to: CGPoint(x: currentX, y: $0))
         }
         layers.fillColor = nil
         layers.strokeColor = UIColor.mainColor.cgColor
@@ -147,28 +210,26 @@ extension Graph {
         layers.path = path.cgPath
         layers.lineJoin = .round
         self.layer.addSublayer(layers)
-
-        currentPriceBar(open: currentY[currentY.count - 1], close: currentY[currentY.count - 1])
+        
         currnetText(x: frame.width + 2, y: currentY[currentY.count - 1] - 8 , color: UIColor.mainColor.cgColor )
+        currentPriceBar(open: currentY[currentY.count - 1], close: currentY[currentY.count - 1])
     }
     
     private func candleStickGraph(width: CGFloat, height: CGFloat, boundMinX: CGFloat, boundMaxX: CGFloat) {
-        offsetX = frame.width / CGFloat(closePrice.count + 1)
         let start = checkIndex(index: Int(boundMinX / offsetX))
         let end = checkIndex(index: Int(boundMaxX / offsetX))
-        if start < 0 || end < 0 {
-            return
-        }
+        if start < 0 || end < 0 { return }
+        
         guard let maxprice = maxPrice[start...end].max(),
               let minprice = minPrice[start...end].min() else {return}
 
         let labelSpace: CGFloat = 55
         var currentX: CGFloat = boundMinX
-        let scale = CGFloat(Double((maxprice - minprice) / 2) / 0.4)
-        let close = closePrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
-        let open = openPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
-        let max = maxPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
-        let min = minPrice.map{ frame.height * (CGFloat(maxprice - $0) / scale) + labelSpace }
+        let scale = CGFloat(Double(maxprice - minprice) / 0.8 / frame.height)
+        let close = closePrice.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
+        let open = openPrice.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
+        let max = maxPrice.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
+        let min = minPrice.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
 
         for i in start...end{
             currentX += offsetX
@@ -178,11 +239,12 @@ extension Graph {
             ? rectangle(top: open[i] , bottom: close[i], color: UIColor.fallColor.cgColor, currentX: currentX)
             : rectangle(top: close[i], bottom: open[i], color: UIColor.riseColor.cgColor, currentX: currentX)
         }
-        currentPriceBar(open: open[open.count - 1], close: close[close.count - 1])
-        
+  
         close[close.count - 1] > open[open.count - 1]
         ? currnetText(x: frame.width + 2, y: close[close.count - 1] - 8, color: UIColor.fallColor.cgColor )
         : currnetText(x: frame.width + 2, y: close[close.count - 1] - 8, color: UIColor.riseColor.cgColor)
+        
+        currentPriceBar(open: open[open.count - 1], close: close[close.count - 1])
     }
     
     private func currnetText(x: CGFloat, y: CGFloat, color: CGColor ) {
@@ -205,8 +267,10 @@ extension Graph {
     private func currentPriceBar(open: CGFloat, close: CGFloat) {
         let layers = CAShapeLayer()
         let path = UIBezierPath()
-        let color: CGColor = close < open ? UIColor.riseColor.cgColor : UIColor.fallColor.cgColor
-      
+        var color: CGColor = close < open ? UIColor.riseColor.cgColor : UIColor.fallColor.cgColor
+        if open == close {
+            color = UIColor.mainColor.cgColor
+        }
         path.move(to: CGPoint(x: 0, y: close))
         path.addLine(to: CGPoint(x: frame.width, y: close))
         layers.fillColor = nil
@@ -242,10 +306,27 @@ extension Graph {
     
     private func checkX(x: CGFloat) -> CGFloat {
         switch x {
-        case ..<(boundMinX + 55):
-            return boundMinX + 55
         case (boundMaxX - 55)...:
             return boundMaxX - 55
+        case ..<(boundMinX + 55):
+            return boundMinX + 55
+        default:
+            return x
+        }
+    }
+    
+    private func checkMinMaxX(x: CGFloat) -> CGFloat {
+        switch x {
+        case (boundMaxX - 55)...:
+            if frame.width < UIScreen.main.bounds.width {
+                return boundMaxX - 30
+            }
+            return boundMaxX - 55
+        case ..<(boundMinX + 55):
+            if frame.width < UIScreen.main.bounds.width {
+                return boundMinX + 30
+            }
+            return boundMinX + 55
         default:
             return x
         }

@@ -26,6 +26,7 @@
 		7F844CF727D0661000C06084 /* AssetsStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CF627D0661000C06084 /* AssetsStatusViewModel.swift */; };
 		7F844CFF27D0A92000C06084 /* CurrentMarketPriceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CFE27D0A92000C06084 /* CurrentMarketPriceViewModel.swift */; };
 		7F844D0127D0A94100C06084 /* CurrentMarketPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844D0027D0A94000C06084 /* CurrentMarketPrice.swift */; };
+		7F8CC4AB27DA6E3800602A52 /* UIScrollview+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8CC4AA27DA6E3800602A52 /* UIScrollview+Extension.swift */; };
 		7FBD63DB27D5945C00C9801C /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63D927D5945C00C9801C /* Graph.swift */; };
 		7FBD63DD27D594B600C9801C /* CandleStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63DC27D594B600C9801C /* CandleStick.swift */; };
 		7FBD63E527D62A7E00C9801C /* MainDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63E427D62A7E00C9801C /* MainDiffableDataSource.swift */; };
@@ -117,6 +118,7 @@
 		7F844CF627D0661000C06084 /* AssetsStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsStatusViewModel.swift; sourceTree = "<group>"; };
 		7F844CFE27D0A92000C06084 /* CurrentMarketPriceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMarketPriceViewModel.swift; sourceTree = "<group>"; };
 		7F844D0027D0A94000C06084 /* CurrentMarketPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMarketPrice.swift; sourceTree = "<group>"; };
+		7F8CC4AA27DA6E3800602A52 /* UIScrollview+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollview+Extension.swift"; sourceTree = "<group>"; };
 		7FBD63D927D5945C00C9801C /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		7FBD63DC27D594B600C9801C /* CandleStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleStick.swift; sourceTree = "<group>"; };
 		7FBD63E427D62A7E00C9801C /* MainDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDiffableDataSource.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				7F2E004927CC9B1400752ABA /* NumberFormatter+Extension.swift */,
 				BF7D214127CE919C007F0DCE /* Double+Extension.swift */,
 				BF9A70B827D89D95002DDBEA /* UserDefaults+Extension.swift */,
+				7F8CC4AA27DA6E3800602A52 /* UIScrollview+Extension.swift */,
 				BF9A70F827DA64BA002DDBEA /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
@@ -484,6 +487,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F8CC4AB27DA6E3800602A52 /* UIScrollview+Extension.swift in Sources */,
 				7F34013927D88F2A00511464 /* GraphDetailViewController.swift in Sources */,
 				7F2A6BC827D7B7AC00486F36 /* AppDependency.swift in Sources */,
 				7FBD63EF27D62CF300C9801C /* DetailViewModel.swift in Sources */,
