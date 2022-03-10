@@ -98,6 +98,7 @@ struct AppDependency {
         transactionViewController.disconnectHandler = transactionViewModel.disconnect
         transactionViewModel.insertTableHandler = transactionViewController.insertRowTableView
         transactionViewModel.transactionData.bind = transactionViewController.updateDataSource
+        transactionViewModel.errorHandler = transactionViewController.showError
         return transactionViewController
     }
     

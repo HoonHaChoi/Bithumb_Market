@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TransactionViewController: UIViewController {
+final class TransactionViewController: BaseViewController {
     
     private let datasource: TransactionDataSource
     
@@ -41,15 +41,12 @@ final class TransactionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = TransactionNameSpace.navigationTitle
-        view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.barTintColor = .systemBackground
-        navigationController?.navigationBar.shadowImage = UIImage()
         setupView()
+        fetchTransactionHandler?()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchTransactionHandler?()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
