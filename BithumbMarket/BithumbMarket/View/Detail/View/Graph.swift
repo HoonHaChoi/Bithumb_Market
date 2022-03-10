@@ -125,20 +125,26 @@ extension Graph {
         self.layer.addSublayer(layers)
     }
     
-    private func lineGraph(width: CGFloat, height: CGFloat, values: [Double]) {
-        offsetX = frame.width / CGFloat(values.count)
+    private func lineGraph(width: CGFloat, height: CGFloat) {
         let path = UIBezierPath()
         let layers = CAShapeLayer()
-        
-        guard let min = values.min(), let max = values.max() else { return }
-        let scale = CGFloat(Double(max - min) / 0.8)
-        let currentY = values.map{ max - $0 }
         var currentX: CGFloat = 0
         
-        path.move(to: CGPoint(x: 0, y: (frame.height * (CGFloat(currentY[0]) / scale)) + 55))
+        let start = checkIndex(index: Int(boundMinX / offsetX))
+        let end = checkIndex(index: Int(boundMaxX / offsetX))
+        if start < 0 || end < 0 { return }
+        
+        guard let maxprice = closePrice[start...end].max(),
+              let minprice = closePrice[start...end].min() else {return}
+        
+        let labelSpace: CGFloat = 55
+        let scale = CGFloat(Double(maxprice - minprice) / 0.8 / frame.height)
+        let currentY = closePrice.map{((CGFloat(maxprice - $0) / scale)) + labelSpace}
+        
+        path.move(to: CGPoint(x: 0, y: currentY[0]))
         currentY.forEach {
             currentX += offsetX
-            path.addLine(to: CGPoint(x: currentX, y: (frame.height * (CGFloat($0) / scale)) + 55))
+            path.addLine(to: CGPoint(x: currentX, y: $0))
         }
         layers.fillColor = nil
         layers.strokeColor = UIColor.mainColor.cgColor
@@ -147,9 +153,9 @@ extension Graph {
         layers.path = path.cgPath
         layers.lineJoin = .round
         self.layer.addSublayer(layers)
-
-        currentPriceBar(open: currentY[currentY.count - 1], close: currentY[currentY.count - 1])
+        
         currnetText(x: frame.width + 2, y: currentY[currentY.count - 1] - 8 , color: UIColor.mainColor.cgColor )
+        currentPriceBar(open: currentY[currentY.count - 1], close: currentY[currentY.count - 1])
     }
     
     private func candleStickGraph(width: CGFloat, height: CGFloat, boundMinX: CGFloat, boundMaxX: CGFloat) {
