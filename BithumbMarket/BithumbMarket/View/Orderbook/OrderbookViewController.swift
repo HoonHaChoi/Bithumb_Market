@@ -30,11 +30,21 @@ final class OrderbookViewController: UIViewController {
         return tableView
     }()
     
+    private let sumOfQuantitiesView: OrderbookQuantitiesView = {
+        let view = OrderbookQuantitiesView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     var fetchHandler: (() -> Void)?
     var disconnectHandler: (() -> Void)?
     
     lazy var updateDataSource: ((OrderbookData) -> Void)? = { [weak self] orderbook in
         self?.dataSource.items = orderbook
+        DispatchQueue.main.async {
+            self?.sumOfQuantitiesView.updateUI(sumOfAsks: orderbook.sumOfAsks(),
+                                               sumOfBids: orderbook.sumOfBids())
+        }
     }
     
     lazy var updateTableView = { [weak self] in
@@ -43,24 +53,17 @@ final class OrderbookViewController: UIViewController {
         }
     }
     
-//    private func scrollToCenter() {
-//        if orderbookTableView.numberOfSections > .zero {
-//            let indexPath = IndexPath(row: 0, section: 1)
-//            orderbookTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
-//        }
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = OrderbookNameSpace.navigationTitle
         configureTableView()
+        configureSumOfQuantitiesView()
         fetchHandler?()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-       
         orderbookTableView.scrollToCenter()
    }
     
@@ -79,7 +82,16 @@ final class OrderbookViewController: UIViewController {
         ])
         orderbookTableView.dataSource = dataSource
     }
-
+    
+    private func configureSumOfQuantitiesView() {
+        view.addSubview(sumOfQuantitiesView)
+        NSLayoutConstraint.activate([
+            sumOfQuantitiesView.heightAnchor.constraint(equalToConstant: 44),
+            sumOfQuantitiesView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            sumOfQuantitiesView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            sumOfQuantitiesView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+        ])
+    }
 }
 
 extension UIScrollView {
