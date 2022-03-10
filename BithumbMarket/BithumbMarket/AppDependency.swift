@@ -91,7 +91,7 @@ struct AppDependency {
             symbol: ticker.paymentCurrency)
         let transactionViewController = TransactionViewController(datasource: .init())
         
-        //transactionViewModel.updateTableHandler = transactionViewController.updateTableView
+        transactionViewModel.updateTableHandler = transactionViewController.updateTableView
         transactionViewController.fetchTransactionHandler = transactionViewModel.fetchTransaction
         transactionViewController.disconnectHandler = transactionViewModel.disconnect
         transactionViewModel.insertTableHandler = transactionViewController.insertRowTableView
