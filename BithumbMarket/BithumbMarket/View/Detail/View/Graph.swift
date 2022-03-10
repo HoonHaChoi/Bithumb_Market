@@ -93,7 +93,7 @@ extension Graph {
     }
     
     private func price(x: CGFloat, price: Double) {
-        let stringPrice = String(price).withComma()
+        let stringPrice = price < 1 ? String(format: "%.4f", price) : String(price).withComma()
         let text = stringPrice + "원"
         drawText(x: x, y: 20, text: text, fontSize: 16, height: 20)
     }
@@ -217,7 +217,7 @@ extension Graph {
         layers.lineDashPattern = [3, 3]
         self.layer.addSublayer(layers)
     }
-
+    
     private func rectangle(top: CGFloat, bottom: CGFloat, color: CGColor, currentX: CGFloat) {
         let layers = CAShapeLayer()
         let path = UIBezierPath()
