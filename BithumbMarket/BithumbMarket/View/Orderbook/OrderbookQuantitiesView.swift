@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OrderbookQuantitiesView: UIView {
+final class OrderbookQuantitiesView: UIView {
 
     private let asksQuantitiesLabel: UILabel = {
         let label = UILabel()

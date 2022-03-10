@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class OrderbookViewController: UIViewController {
+final class OrderbookViewController: BaseViewController {
     
     private let dataSource: OrderbookDataSource
     
@@ -55,7 +55,6 @@ final class OrderbookViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         title = OrderbookNameSpace.navigationTitle
         configureTableView()
         configureSumOfQuantitiesView()

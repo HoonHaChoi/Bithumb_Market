@@ -110,6 +110,7 @@ struct AppDependency {
         orderbookViewController.fetchHandler = orderbookViewModel.fetchOrderbook
         orderbookViewModel.orderbook.bind = orderbookViewController.updateDataSource
         orderbookViewModel.updateHandler = orderbookViewController.updateTableView
+        orderbookViewModel.errorHandler = orderbookViewController.showError
         return orderbookViewController
     }
     

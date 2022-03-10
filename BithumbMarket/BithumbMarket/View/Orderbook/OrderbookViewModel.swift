@@ -9,10 +9,9 @@ import Foundation
 
 final class OrderbookViewModel {
 
-    var orderbook: Observable<OrderbookData>
     private let symbol: String
     private var service: APIService
-    
+    var orderbook: Observable<OrderbookData>
     var socket: SocketService?
     
     init(service: APIService, symbol: String) {
@@ -23,7 +22,7 @@ final class OrderbookViewModel {
         self.symbol = symbol
     }
     
-    var errorHandler: ((HTTPError) -> Void)?
+    var errorHandler: ((String) -> Void)?
     var updateHandler: (() -> Void)?
     
     func disconnect() {
@@ -41,7 +40,7 @@ final class OrderbookViewModel {
                     self?.updateOrderbook()
                 }
             case .failure(let error):
-                self?.errorHandler?(error)
+                self?.errorHandler?(error.description)
             }
         }
     }
@@ -71,7 +70,7 @@ final class OrderbookViewModel {
                 self.orderbook.value = .init(asks: asks, bids: bids)
                 self.updateHandler?()
             case .failure(let error):
-                self?.errorHandler?(error)
+                self?.errorHandler?(error.description)
             }
         }
     }
