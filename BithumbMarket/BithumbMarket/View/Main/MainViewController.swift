@@ -10,9 +10,11 @@ import UIKit
 final class MainViewController: UIViewController {
     
     private var detailViewControllerFactory: (Ticker) -> UIViewController
+    private var isUpdateLayout: Bool
     
     init(detailViewControllerFactory: @escaping (Ticker) -> UIViewController) {
         self.detailViewControllerFactory = detailViewControllerFactory
+        isUpdateLayout = true
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -65,14 +67,7 @@ final class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         isUpdateLayout = true
-        
-        mainTableView.indexPathsForVisibleRows?.forEach({ indexPath in
-            guard let ticker = self.diffableDatasource.itemIdentifier(for: indexPath) else {
-                return
-            }
-            diffableDatasource.reloadSnapshot(ticker: ticker)
-        })
-        
+        updateVisibleRows()
         if !diffableDatasource.isEmptyItems() {
             testHandler?()
         }
@@ -80,7 +75,6 @@ final class MainViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-//        disconnectHandler?()
         isUpdateLayout = false
     }
     
@@ -132,8 +126,6 @@ final class MainViewController: UIViewController {
         self?.diffableDatasource.updateItems(tickers: items)
     }
     
-    var isUpdateLayout = true
-    
     lazy var updateTableViewRows = { [weak self] (index: Int) in
         if self?.isUpdateLayout ?? false {
             guard let ticker = self?.diffableDatasource.itemIdentifier(for: IndexPath(row: index, section: 0)) else {
@@ -155,6 +147,10 @@ final class MainViewController: UIViewController {
                 self.mainTableView.backgroundView = .init()
             }
         }
+    }
+    
+    private func updateVisibleRows() {
+        diffableDatasource.reloadIndexPath(rows: mainTableView.indexPathsForVisibleRows)
     }
     
     private func moveDetailViewController(ticker: Ticker) {

@@ -39,6 +39,15 @@ final class MainDiffableDataSource: UITableViewDiffableDataSource<Section, Ticke
         }
     }
     
+    func reloadIndexPath(rows: [IndexPath]?) {
+        rows?.forEach({ indexPath in
+            guard let ticker = self.itemIdentifier(for: indexPath) else {
+                return
+            }
+            self.reloadSnapshot(ticker: ticker)
+        })
+    }
+    
     func isEmptyItems() -> Bool {
         items.isEmpty
     }
