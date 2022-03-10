@@ -59,13 +59,15 @@ final class OrderbookViewController: UIViewController {
         title = OrderbookNameSpace.navigationTitle
         configureSumOfQuantitiesView()
         configureTableView()
+        scrollToCenter { [weak self] in
+            self?.fetchHandler?()
+        }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        fetchHandler?()
-   }
-    
+    private func scrollToCenter(completion: @escaping () -> Void) {
+        orderbookTableView.scrollToCenter()
+        completion()
+    }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         disconnectHandler?()
@@ -80,7 +82,6 @@ final class OrderbookViewController: UIViewController {
             orderbookTableView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
         ])
         orderbookTableView.dataSource = dataSource
-        orderbookTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .middle, animated: false)
     }
     
     private func configureSumOfQuantitiesView() {
@@ -96,7 +97,7 @@ final class OrderbookViewController: UIViewController {
 
 extension UIScrollView {
     func scrollToCenter() {
-        let centerOffset = CGPoint(x: 0, y: (contentSize.height - bounds.size.height) / 2.0)
+        let centerOffset = CGPoint(x: 0, y: ((44 * 60) - UIScreen.main.bounds.height) / 1.9)
         setContentOffset(centerOffset, animated: false)
     }
 }
