@@ -12,8 +12,9 @@ final class OrderbookTableViewCell: UITableViewCell {
     private let priceLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 17, weight: .semibold)
+        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 15, weight: .bold)
         label.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: monoFont)
+        label.textColor = .textPrimary
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -22,7 +23,7 @@ final class OrderbookTableViewCell: UITableViewCell {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textAlignment = .right
-        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 15, weight: .regular)
+        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 12, weight: .heavy)
         label.font = UIFontMetrics(forTextStyle: .subheadline).scaledFont(for: monoFont)
         label.textColor = .fallColor
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +34,7 @@ final class OrderbookTableViewCell: UITableViewCell {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textAlignment = .left
-        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 15, weight: .regular)
+        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 12, weight: .heavy)
         label.font = UIFontMetrics(forTextStyle: .subheadline).scaledFont(for: monoFont)
         label.textColor = .riseColor
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -71,13 +72,15 @@ final class OrderbookTableViewCell: UITableViewCell {
         switch section {
         case 0:
             priceLabel.text = items.asks[index].price.withComma()
-            askQuantityLabel.text = items.asks[index].quantity.withComma().withDecimal(maximumDigit: 4)
+            priceLabel.backgroundColor = .orderBookSellBackground
+            askQuantityLabel.text = items.asks[index].quantity.withDecimal(maximumDigit: 4)
             UIView.animate(withDuration: 0.3) {
                 self.askQuantityBarView.setProgress(items.calculateRateOfAsks()[index], animated: true)
             }
         case 1:
             priceLabel.text = items.bids[index].price.withComma()
-            bidQuantityLabel.text = items.bids[index].quantity.withComma().withDecimal(maximumDigit: 4)
+            priceLabel.backgroundColor = .orderBookBuyBackground
+            bidQuantityLabel.text = items.bids[index].quantity.withDecimal(maximumDigit: 4)
             UIView.animate(withDuration: 0.3) {
                 self.bidQuantityBarView.setProgress(items.calculateRateOfBids()[index], animated: true)
             }
@@ -106,11 +109,11 @@ final class OrderbookTableViewCell: UITableViewCell {
         askQuantityBarView.heightAnchor.constraint(equalTo: priceLabel.heightAnchor),
         askQuantityBarView.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
         askQuantityBarView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-        askQuantityBarView.trailingAnchor.constraint(equalTo: priceLabel.leadingAnchor),
+        askQuantityBarView.trailingAnchor.constraint(equalTo: priceLabel.leadingAnchor, constant: -4),
 
         bidQuantityBarView.heightAnchor.constraint(equalTo: priceLabel.heightAnchor),
         bidQuantityBarView.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
-        bidQuantityBarView.leadingAnchor.constraint(equalTo: priceLabel.trailingAnchor),
+        bidQuantityBarView.leadingAnchor.constraint(equalTo: priceLabel.trailingAnchor, constant: 4),
         bidQuantityBarView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
         
         askQuantityLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),

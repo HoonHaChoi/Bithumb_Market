@@ -12,7 +12,7 @@ final class TransactionHeaderView: UIView {
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.distribution = .equalSpacing
+        view.distribution = .fillEqually
         return view
     }()
     
@@ -22,7 +22,8 @@ final class TransactionHeaderView: UIView {
         for text in titleText {
             let view = UILabel()
             view.textColor = .textPrimary
-            view.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
+            view.textAlignment = .center
+            view.font = .preferredFont(forTextStyle: .subheadline, compatibleWith: .current)
             view.text = text
             stackView.addArrangedSubview(view)
         }

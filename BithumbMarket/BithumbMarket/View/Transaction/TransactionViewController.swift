@@ -36,6 +36,7 @@ final class TransactionViewController: UIViewController {
     }()
     
     var fetchTransactionHandler: (() -> Void)?
+    var disconnectHandler: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,10 +45,13 @@ final class TransactionViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.shadowImage = UIImage()
         setupView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         fetchTransactionHandler?()
     }
     
-    var disconnectHandler: (() -> Void)?
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         disconnectHandler?()
@@ -80,11 +84,12 @@ extension TransactionViewController {
         }
         
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
-            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
+            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 34),
             
-            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10),
+            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),

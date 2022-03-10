@@ -5,7 +5,6 @@
 //  Created by jiinheo on 2022/02/24.
 //
 
-import Foundation
 import UIKit
 
 final class TransactionTableViewCell: UITableViewCell {
@@ -13,21 +12,25 @@ final class TransactionTableViewCell: UITableViewCell {
     private lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .textPrimary
-        label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
+        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 17, weight: .medium)
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: monoFont)
+        label.textAlignment = .center
         return label
     }()
     
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
-        label.textAlignment = .right
+        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 17, weight: .medium)
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: monoFont)
+        label.textAlignment = .center
         return label
     }()
     
     private lazy var quntityLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
-        label.textAlignment = .right
+        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 17, weight: .medium)
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: monoFont)
+        label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -70,19 +73,21 @@ extension TransactionTableViewCell {
         }
         
         NSLayoutConstraint.activate([
-            timeLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            
             priceLabel.topAnchor.constraint(equalTo: self.topAnchor),
             priceLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            priceLabel.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 10),
-            priceLabel.trailingAnchor.constraint(equalTo: quntityLabel.leadingAnchor, constant: -10),
+            priceLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            priceLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 3),
+            
+            timeLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            
+            priceLabel.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor),
+            priceLabel.trailingAnchor.constraint(equalTo: quntityLabel.leadingAnchor),
             
             quntityLabel.topAnchor.constraint(equalTo: self.topAnchor),
             quntityLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            quntityLabel.widthAnchor.constraint(equalToConstant: 100),
+            quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
     
