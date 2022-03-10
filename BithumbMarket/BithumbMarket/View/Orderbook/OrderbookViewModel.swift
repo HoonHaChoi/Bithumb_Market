@@ -16,8 +16,8 @@ final class OrderbookViewModel {
     
     init(service: APIService, symbol: String) {
         self.orderbook = .init(OrderbookData(
-            asks: Array(repeating: .init(quantity: "", price: ""), count: 30),
-            bids: Array(repeating: .init(quantity: "", price: ""), count: 30)))
+            asks: [],
+            bids: []))
         self.service = service
         self.symbol = symbol
     }

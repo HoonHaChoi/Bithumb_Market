@@ -27,8 +27,8 @@ final class OrderbookDataSource: NSObject, UITableViewDataSource {
     
     override init() {
         items = .init(
-            asks: .init(),
-            bids: .init())
+            asks: Array(repeating: .init(quantity: "", price: ""), count: 30),
+            bids: Array(repeating: .init(quantity: "", price: ""), count: 30))
     }
     
     func updateCellData(by orderbook: OrderbookData) {
@@ -54,6 +54,7 @@ final class OrderbookDataSource: NSObject, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: OrderbookNameSpace.cellReuseIdentifier, for: indexPath) as? OrderbookTableViewCell else {
             return UITableViewCell()
         }
+        cell.selectionStyle = .none
         cell.configure(items: items, section: indexPath.section, index: indexPath.row)
         return cell
     }

@@ -56,16 +56,17 @@ final class OrderbookViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = OrderbookNameSpace.navigationTitle
-        configureTableView()
         configureSumOfQuantitiesView()
-        fetchHandler?()
+        configureTableView()
+        scrollToCenter { [weak self] in
+            self?.fetchHandler?()
+        }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    private func scrollToCenter(completion: @escaping () -> Void) {
         orderbookTableView.scrollToCenter()
-   }
-    
+        completion()
+    }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         disconnectHandler?()
@@ -75,7 +76,7 @@ final class OrderbookViewController: BaseViewController {
         view.addSubview(orderbookTableView)
         NSLayoutConstraint.activate([
             orderbookTableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            orderbookTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            orderbookTableView.bottomAnchor.constraint(equalTo: sumOfQuantitiesView.topAnchor),
             orderbookTableView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             orderbookTableView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
         ])
@@ -85,7 +86,7 @@ final class OrderbookViewController: BaseViewController {
     private func configureSumOfQuantitiesView() {
         view.addSubview(sumOfQuantitiesView)
         NSLayoutConstraint.activate([
-            sumOfQuantitiesView.heightAnchor.constraint(equalToConstant: 44),
+            sumOfQuantitiesView.heightAnchor.constraint(equalToConstant: 80),
             sumOfQuantitiesView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             sumOfQuantitiesView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             sumOfQuantitiesView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
@@ -95,7 +96,7 @@ final class OrderbookViewController: BaseViewController {
 
 extension UIScrollView {
     func scrollToCenter() {
-        let centerOffset = CGPoint(x: 0, y: (contentSize.height - bounds.size.height) / 2.0)
+        let centerOffset = CGPoint(x: 0, y: ((44 * 60) - UIScreen.main.bounds.height) / 1.9)
         setContentOffset(centerOffset, animated: false)
     }
 }

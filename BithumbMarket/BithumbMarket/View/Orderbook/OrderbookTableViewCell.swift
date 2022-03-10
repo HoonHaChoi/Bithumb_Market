@@ -43,8 +43,9 @@ final class OrderbookTableViewCell: UITableViewCell {
 
     private let askQuantityBarView: UIProgressView = {
         let progreesBar = UIProgressView()
+        progreesBar.progressViewStyle = .bar
         progreesBar.semanticContentAttribute = .forceRightToLeft
-        progreesBar.progressTintColor = .orderBookSellBackground
+        progreesBar.progressTintColor = .fallColor.withAlphaComponent(0.2)
         progreesBar.trackTintColor = .clear
         progreesBar.translatesAutoresizingMaskIntoConstraints = false
         return progreesBar
@@ -52,7 +53,8 @@ final class OrderbookTableViewCell: UITableViewCell {
     
     private let bidQuantityBarView: UIProgressView = {
         let progreesBar = UIProgressView()
-        progreesBar.progressTintColor = .orderBookBuyBackground
+        progreesBar.progressViewStyle = .bar
+        progreesBar.progressTintColor = .riseColor.withAlphaComponent(0.2)
         progreesBar.trackTintColor = .clear
         progreesBar.translatesAutoresizingMaskIntoConstraints = false
         return progreesBar
@@ -72,14 +74,14 @@ final class OrderbookTableViewCell: UITableViewCell {
         switch section {
         case 0:
             priceLabel.text = items.asks[index].price.withComma()
-            priceLabel.backgroundColor = .orderBookSellBackground
+            priceLabel.backgroundColor = .fallColor.withAlphaComponent(0.2)
             askQuantityLabel.text = items.asks[index].quantity.withDecimal(maximumDigit: 4)
             UIView.animate(withDuration: 0.3) {
                 self.askQuantityBarView.setProgress(items.calculateRateOfAsks()[index], animated: true)
             }
         case 1:
             priceLabel.text = items.bids[index].price.withComma()
-            priceLabel.backgroundColor = .orderBookBuyBackground
+            priceLabel.backgroundColor = .riseColor.withAlphaComponent(0.2)
             bidQuantityLabel.text = items.bids[index].quantity.withDecimal(maximumDigit: 4)
             UIView.animate(withDuration: 0.3) {
                 self.bidQuantityBarView.setProgress(items.calculateRateOfBids()[index], animated: true)
