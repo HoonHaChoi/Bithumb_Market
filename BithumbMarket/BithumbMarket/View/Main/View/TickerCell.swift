@@ -9,10 +9,6 @@ import UIKit
 
 final class TickerCell: UITableViewCell {
     
-    static var reuseidentifier: String {
-        return String(describing: self)
-    }
-    
     private let symbolLabel = UILabel()
     private let paymentLabel = UILabel()
     private let currentPriceLabel = UILabel()
