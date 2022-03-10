@@ -13,9 +13,10 @@ class OrderbookQuantitiesView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.text = ""
-        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 15, weight: .black)
+        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 14, weight: .medium)
         label.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: monoFont)
         label.textColor = .fallColor
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -23,15 +24,17 @@ class OrderbookQuantitiesView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.text = ""
-        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 15, weight: .black)
+        let monoFont: UIFont = .monospacedDigitSystemFont(ofSize: 14, weight: .medium)
         label.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: monoFont)
         label.textColor = .riseColor
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     private let titleLabel: UILabel = {
        let label = UILabel()
         label.text = "호가 모아보기"
+        label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .textPrimary
         return label
@@ -63,7 +66,7 @@ extension OrderbookQuantitiesView {
     
     private func configureStackViewUI() {
         stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .fillEqually
         stackView.alignment = .fill
         stackView.spacing = 0
         stackView.translatesAutoresizingMaskIntoConstraints = false
