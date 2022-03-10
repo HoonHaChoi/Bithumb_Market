@@ -31,41 +31,24 @@ final class CurrentMarketPriceViewModel {
         socket = nil
     }
     
-    func fetchPrice() {
-        service.request(endpoint: .ticker(symbol: self.symbol)) { [weak self] (result: Result<CurrentPrice, HTTPError>) in
-            switch result {
-            case .success(let ticker):
-                guard let currentPrice = self?.convert(from: ticker.data) else { return }
-                self?.price.value = currentPrice
-                self?.sendMessage {
-                    self?.updatePrice()
-                }
-            case .failure(let error):
-                self?.errorHandler?(error)
-            }
-        }
-    }
-    
-    private func sendMessage(completion: @escaping () -> Void) {
-        self.socket = SocketService()
+    func sendMessage() {
+        socket = SocketService()
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
-            guard let symbol = self?.symbol else { return }
-            let message = Message(type: .ticker, symbols: .name(symbol), tickTypes: .twentyfourHour)
-            self?.socket?.sendMessage(message: message)
+            guard let self = self else { return }
+            let message = Message(type: .ticker, symbols: .name(self.symbol), tickTypes: .twentyfourHour)
+            self.socket?.sendMessage(message: message)
+            self.updatePrice()
         }
-        completion()
     }
     
     private func updatePrice() {
         self.socket?.perform { [weak self] (result: Result<ReceiveTicker, HTTPError>) in
             switch result {
             case .success(let ticker):
-                if ticker.content.symbol == self?.symbol {
-                    guard let currentPrice = self?.convert(from: ticker) else {
-                        return
-                    }
-                    self?.price.value = currentPrice
+                guard let currentPrice = self?.convert(from: ticker) else {
+                    return
                 }
+                self?.price.value = currentPrice
             case .failure(let error):
                 self?.errorHandler?(error)
             }

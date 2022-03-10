@@ -56,9 +56,8 @@ struct AppDependency {
                                                           symbol: ticker.paymentCurrency)
         let detailViewModel = DetailViewModel(storage: likeStorage)
         let graphViewModel = GraphViewModel(service: service, storage: graphStorage)
-        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
-        //detailViewContrller.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
-        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
+        
+        detailViewController.sendMessageHanlder = currentMarketPriceViewModel.sendMessage
         detailViewController.disconnectHandler = currentMarketPriceViewModel.disconnect
         
         detailViewController.fetchAssetsStatusHandler = assetsStatusViewModel.fetchAssetsStatus

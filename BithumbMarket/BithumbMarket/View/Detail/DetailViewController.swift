@@ -31,8 +31,7 @@ final class DetailViewController: BaseViewController {
     }
     
     var fetchAssetsStatusHandler: (() -> Void)?
-    var fetchCurrentMarketPrice: (() -> Void)?
-    var updateCurrentMarketPriceHandler: (() -> Void)?
+    var sendMessageHanlder: (() -> Void)?
     var likeHandler: ((String) -> Void)?
     var updateLikeHandler: ((String) -> Void)?
     var fetchGraphHandler: ((String, ChartIntervals) -> Void)?
@@ -106,7 +105,6 @@ final class DetailViewController: BaseViewController {
         configureUI()
         configureCurrentPrice()
         bind()
-//        _ = bindPriceHandler
     }
     
     func bind() {
@@ -115,16 +113,17 @@ final class DetailViewController: BaseViewController {
         transactionPriceSelectTimeView.changeIntervalHandler = selectIntervalAction
         transactionPriceSelectTimeView.changeGraphTypeHandler = changeGraphType
         fetchAssetsStatusHandler?()
+        sendMessageHanlder?()
         fetchGraphHandler?(ticker.symbol, .day)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchCurrentMarketPrice?()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        disconnectHandler?()
         navigationItem.backButtonTitle = ""
     }
     
