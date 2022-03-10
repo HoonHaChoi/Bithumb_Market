@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum CoreDataError: Error, CustomStringConvertible {
+enum CoreDataError: Error, LocalizedError {
     case failureFetch
     case failureSave
     case failureDelete
     case failiureFind
     
-    var description: String {
+    var errorDescription: String? {
         switch self {
         case .failureFetch:
             return "조회에 실패하였습니다."
