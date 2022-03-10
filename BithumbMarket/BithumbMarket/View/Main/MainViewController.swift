@@ -127,14 +127,15 @@ final class MainViewController: UIViewController {
     }
     
     lazy var updateTableViewRows = { [weak self] (index: Int) in
-        if self?.isUpdateLayout ?? false {
-            guard let ticker = self?.diffableDatasource.itemIdentifier(for: IndexPath(row: index, section: 0)) else {
+        guard let self = self else { return }
+        if self.isUpdateLayout {
+            guard let ticker = self.diffableDatasource.findTicker(index: index) else {
                 return
             }
-            self?.diffableDatasource.reloadSnapshot(ticker: ticker, completion: {
-                let cell = self?.mainTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TickerCell
+            self.diffableDatasource.reloadSnapshot(ticker: ticker) {
+                let cell = self.mainTableView.cellForRow(at: IndexPath(row: index, section: .zero)) as? TickerCell
                 cell?.updateAnimation(state: ticker.change)
-            })
+            }
         }
     }
     

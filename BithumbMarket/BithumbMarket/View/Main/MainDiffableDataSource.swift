@@ -48,6 +48,10 @@ final class MainDiffableDataSource: UITableViewDiffableDataSource<Section, Ticke
         })
     }
     
+    func findTicker(index: Int) -> Ticker? {
+        return self.itemIdentifier(for: IndexPath(row: index, section: 0))
+    }
+    
     func isEmptyItems() -> Bool {
         items.isEmpty
     }
