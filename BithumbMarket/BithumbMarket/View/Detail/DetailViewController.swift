@@ -91,12 +91,10 @@ final class DetailViewController: UIViewController {
     private let graphDetailButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("자세히보기", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 11)
-        button.setTitleColor(UIColor.textSecondary, for: .normal)
-        button.layer.cornerRadius = 5
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.textSecondary.cgColor
+        button.setBackgroundImage(UIImage(named: "scale"), for: .normal)
+//        button.layer.borderColor = UIColor.textSecondary.cgColor
+//        button.layer.borderWidth = 1
+//        button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(showGraph), for: .touchUpInside)
         return button
     }()
