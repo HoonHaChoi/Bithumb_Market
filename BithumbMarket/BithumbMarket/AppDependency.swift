@@ -42,6 +42,8 @@ struct AppDependency {
         mainViewController.updateTickers = mainViewModel.updateFilterTickers
         mainViewModel.updateTickersHandler = mainViewController.updateTableView
         mainViewModel.changeIndexHandler = mainViewController.updateTableViewRows
+        
+        mainViewModel.errorHandler = mainViewController.showError
         return mainViewController
     }
     

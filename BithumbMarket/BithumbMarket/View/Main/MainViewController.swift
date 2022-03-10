@@ -153,6 +153,10 @@ final class MainViewController: UIViewController {
         diffableDatasource.reloadIndexPath(rows: mainTableView.indexPathsForVisibleRows)
     }
     
+    lazy var showError = { [weak self] (message: String) -> Void in
+        self?.showErrorMessage(message)
+    }
+    
     private func moveDetailViewController(ticker: Ticker) {
         self.navigationController?.pushViewController(detailViewControllerFactory(ticker), animated: true)
     }
@@ -168,4 +172,15 @@ extension MainViewController: UITableViewDelegate {
         self.moveDetailViewController(ticker: ticker)
     }
     
+}
+
+extension UIViewController {
+    
+    func showErrorMessage(_ message: String) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
 }
