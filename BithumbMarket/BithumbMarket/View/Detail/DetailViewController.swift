@@ -108,6 +108,7 @@ final class DetailViewController: UIViewController {
         configureNavigationBar()
         configureScrollView()
         configureUI()
+        configureCurrentPrice()
         bind()
 //        _ = bindPriceHandler
     }
@@ -145,6 +146,15 @@ final class DetailViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: likeButton)
         likeHandler?(ticker.symbol)
+    }
+    
+    private func configureCurrentPrice() {
+        DispatchQueue.main.async { [weak self] in
+            guard let ticker = self?.ticker else {
+                return
+            }
+            self?.currentMarketPriceView.initialUI(ticker)
+        }
     }
     
     @objc private func likeBarButtonAction(_ sender: UIButton) {
@@ -225,7 +235,7 @@ final class DetailViewController: UIViewController {
 
 extension DetailViewController {
     
-    func configureUI() {
+    private func configureUI() {
         scrollContentView.addSubview(currentMarketPriceView)
         scrollContentView.addSubview(transactionPriceSelectTimeView)
         scrollContentView.addSubview(transactionPricegraphView)

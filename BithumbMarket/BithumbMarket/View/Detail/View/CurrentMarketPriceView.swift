@@ -39,11 +39,18 @@ final class CurrentMarketPriceView: UIView {
         orderbookButtonHandler?()
     }
 
+    func initialUI(_ ticker: Ticker) {
+        currentPriceLabel.text = ticker.market.closingPrice.withComma() + "원"
+        changePriceLabel.text = ticker.market.fluctate24H.withComma() + "원"
+        changeRateLabel.text = "(\(ticker.market.fluctateRate24H.withComma())%)"
+        changeRateLabel.textColor = ticker.market.computePriceChangeState().textColor
+        changePriceLabel.textColor = ticker.market.computePriceChangeState().textColor
+    }
+    
     func updateUI(_ currentPrice: CurrentMarketPrice) {
         currentPriceLabel.text = currentPrice.currentPrice.withComma() + "원"
         changePriceLabel.text = currentPrice.changePrice.withComma() + "원"
         changeRateLabel.text =  "(\(currentPrice.changeRate.withComma())%)"
-        currentPriceLabel.textColor = .typoColor
         changePriceLabel.textColor = currentPrice.setChangeState().textColor
         changeRateLabel.textColor = currentPrice.setChangeState().textColor
     }
@@ -70,9 +77,7 @@ extension CurrentMarketPriceView {
         orderBookButton.layer.cornerRadius = 10
         orderBookButton.addTarget(self, action: #selector(showOrderbook), for: .touchUpInside)
         
-        currentPriceLabel.textColor = .riseColor
-        changePriceLabel.textColor = .riseColor
-        changeRateLabel.textColor = .riseColor
+        currentPriceLabel.textColor = .typoColor
     }
     
     private func configureStackViewUI() {
