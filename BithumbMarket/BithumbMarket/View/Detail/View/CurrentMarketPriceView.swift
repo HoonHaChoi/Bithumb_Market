@@ -40,10 +40,10 @@ final class CurrentMarketPriceView: UIView {
     }
 
     func updateUI(_ currentPrice: CurrentMarketPrice) {
-        currentPriceLabel.text = currentPrice.currentPrice.withComma()
-        changePriceLabel.text = currentPrice.changePrice.withComma()
-        changeRateLabel.text = currentPrice.changeRate.withComma()  + "%"
-        currentPriceLabel.textColor = currentPrice.setChangeState().textColor
+        currentPriceLabel.text = currentPrice.currentPrice.withComma() + "원"
+        changePriceLabel.text = currentPrice.changePrice.withComma() + "원"
+        changeRateLabel.text =  "(\(currentPrice.changeRate.withComma())%)"
+        currentPriceLabel.textColor = .typoColor
         changePriceLabel.textColor = currentPrice.setChangeState().textColor
         changeRateLabel.textColor = currentPrice.setChangeState().textColor
     }
@@ -90,7 +90,7 @@ extension CurrentMarketPriceView {
         
         currentMarketPriceStackView.spacing = 0
         currnetPriceStackView.spacing = 5
-        changeStackView.spacing = 10
+        changeStackView.spacing = 5
         
         currentMarketPriceStackView.translatesAutoresizingMaskIntoConstraints = false
     }
