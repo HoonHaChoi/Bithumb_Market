@@ -40,9 +40,12 @@ final class Graph: UIView {
 
     override func draw(_ rect: CGRect) {
         layer.sublayers?.removeAll()
+        offsetX = frame.width / CGFloat(closePrice.count + 1)
+        
         switch isLineGraph {
         case true:
-            lineGraph(width: frame.width, height: frame.height, values: closePrice)
+            lineGraph(width: frame.width, height: frame.height)
+            minMaxText(minList: closePrice, maxList: closePrice)
         case false:
             candleStickGraph(width: frame.width, height: frame.height, boundMinX: boundMinX, boundMaxX: boundMaxX)
             minMaxText(minList: minPrice, maxList: maxPrice)
@@ -142,9 +145,14 @@ extension Graph {
     }
     
     private func price(x: CGFloat, price: Double) {
+        let text = convertString(price: price)
+        drawText(x: x, y: 20, text: text, fontSize: 16, height: 20)
+    }
+    
+    private func convertString(price: Double) -> String {
         let stringPrice = price < 1 ? String(format: "%.4f", price) : String(price).withComma()
         let text = stringPrice + "원"
-        drawText(x: x, y: 20, text: text, fontSize: 16, height: 20)
+        return text
     }
     
     private func drawText(x: CGFloat, y: CGFloat, text: String, fontSize: CGFloat, height: CGFloat) {
@@ -259,8 +267,10 @@ extension Graph {
     private func currentPriceBar(open: CGFloat, close: CGFloat) {
         let layers = CAShapeLayer()
         let path = UIBezierPath()
-        let color: CGColor = close < open ? UIColor.riseColor.cgColor : UIColor.fallColor.cgColor
-      
+        var color: CGColor = close < open ? UIColor.riseColor.cgColor : UIColor.fallColor.cgColor
+        if open == close {
+            color = UIColor.mainColor.cgColor
+        }
         path.move(to: CGPoint(x: 0, y: close))
         path.addLine(to: CGPoint(x: frame.width, y: close))
         layers.fillColor = nil
