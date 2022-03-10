@@ -147,7 +147,7 @@ final class DetailViewController: BaseViewController {
             guard let ticker = self?.ticker else {
                 return
             }
-            self?.currentMarketPriceView.initialUI(ticker)
+            self?.currentMarketPriceView.initialUI(ticker.market)
         }
     }
     
