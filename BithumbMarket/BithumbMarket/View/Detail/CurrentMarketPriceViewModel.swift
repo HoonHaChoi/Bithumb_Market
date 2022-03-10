@@ -50,7 +50,7 @@ final class CurrentMarketPriceViewModel {
         self.socket = SocketService()
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let symbol = self?.symbol else { return }
-            let message = Message(type: .ticker, symbols: .name(symbol), tickTypes: .mid)
+            let message = Message(type: .ticker, symbols: .name(symbol), tickTypes: .twentyfourHour)
             self?.socket?.sendMessage(message: message)
         }
         completion()
