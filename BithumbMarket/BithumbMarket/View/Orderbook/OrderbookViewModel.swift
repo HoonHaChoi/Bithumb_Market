@@ -11,10 +11,10 @@ final class OrderbookViewModel {
 
     private(set) var orderbook: Observable<OrderbookData>
     private let symbol: String
-    private let service: APIService
+    private let service: Serviceable
     private var socket: SocketService?
     
-    init(service: APIService, symbol: String) {
+    init(service: Serviceable, symbol: String) {
         self.orderbook = .init(OrderbookData(
             asks: [],
             bids: []))
