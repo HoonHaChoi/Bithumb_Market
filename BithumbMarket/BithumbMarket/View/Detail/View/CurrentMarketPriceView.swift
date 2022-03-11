@@ -39,17 +39,17 @@ final class CurrentMarketPriceView: UIView {
     }
 
     func initialUI(_ market: Market) {
-        currentPriceLabel.text = market.closingPrice.withComma() + "원"
-        changePriceLabel.text = market.fluctate24H.withComma() + "원"
-        changeRateLabel.text = "(\(market.fluctateRate24H.withComma())%)"
+        currentPriceLabel.text = market.closingPrice.withComma(max:4) + "원"
+        changePriceLabel.text = market.fluctate24H.withComma(max:4) + "원"
+        changeRateLabel.text = "(\(market.fluctateRate24H.withComma(max:4))%)"
         changeRateLabel.textColor = market.computePriceChangeState().textColor
         changePriceLabel.textColor = market.computePriceChangeState().textColor
     }
     
     func updateUI(_ currentPrice: CurrentMarketPrice) {
-        currentPriceLabel.text = currentPrice.currentPrice.withComma() + "원"
-        changePriceLabel.text = currentPrice.changePrice.withComma() + "원"
-        changeRateLabel.text =  "(\(currentPrice.changeRate.withComma())%)"
+        currentPriceLabel.text = currentPrice.currentPrice.withComma(max:4) + "원"
+        changePriceLabel.text = currentPrice.changePrice.withComma(max:4) + "원"
+        changeRateLabel.text =  "(\(currentPrice.changeRate.withComma(max:4))%)"
         changePriceLabel.textColor = currentPrice.setChange.textColor
         changeRateLabel.textColor = currentPrice.setChange.textColor
     }

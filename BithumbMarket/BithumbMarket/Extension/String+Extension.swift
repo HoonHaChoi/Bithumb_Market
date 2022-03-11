@@ -17,8 +17,8 @@ extension String {
         return Double(self) ?? 0
     }
     
-    func withComma() -> String {
-        return NumberFormatter().computeDecimal(str: self)
+    func withComma(min: Int = 0, max: Int = 0) -> String {
+        return NumberFormatter().computeDecimal(str: self, min: min, max: max)
     }
     
     func withDecimal(maximumDigit: Int) -> String {

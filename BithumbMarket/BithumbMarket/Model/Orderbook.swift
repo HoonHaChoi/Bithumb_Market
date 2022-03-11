@@ -15,13 +15,13 @@ struct OrderbookData: Decodable {
     var asks: [Order]
     var bids: [Order]
     
-    func sumOfAsks() -> Float {
-        asks.map { Float($0.quantity) ?? 0 }
+    func sumOfAsks() -> Double {
+        asks.map { Double($0.quantity) ?? 0 }
             .reduce(0) { $0 + $1 }
     }
     
-    func sumOfBids() -> Float {
-        bids.map { Float($0.quantity) ?? 0 }
+    func sumOfBids() -> Double {
+        bids.map { Double($0.quantity) ?? 0 }
             .reduce(0) { $0 + $1 }
     }
     

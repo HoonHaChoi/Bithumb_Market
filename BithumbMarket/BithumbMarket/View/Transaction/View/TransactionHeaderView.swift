@@ -54,7 +54,7 @@ extension TransactionHeaderView {
         
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             stackView.topAnchor.constraint(equalTo: self.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])

@@ -154,7 +154,7 @@ extension Graph {
     }
     
     private func convertString(price: Double) -> String {
-        let stringPrice = price < 1 ? String(format: "%.4f", price) : String(price).withComma()
+        let stringPrice = price < 1 ? String(format: "%.4f", price) : String(price).withComma(max: 4)
         let text = stringPrice + "원"
         return text
     }

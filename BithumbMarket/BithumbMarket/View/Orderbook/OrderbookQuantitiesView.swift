@@ -55,9 +55,9 @@ final class OrderbookQuantitiesView: UIView {
         setConstraintLayout()
     }
     
-    func updateUI(sumOfAsks: Float, sumOfBids: Float) {
-        asksQuantitiesLabel.text = String(sumOfAsks).withDecimal(maximumDigit: 4)
-        bidsQuantitiesLabel.text = String(sumOfBids).withDecimal(maximumDigit: 4)
+    func updateUI(sumOfAsks: Double, sumOfBids: Double) {
+        asksQuantitiesLabel.text = String(sumOfAsks).withComma(max: 4)
+        bidsQuantitiesLabel.text = String(sumOfBids).withComma(max: 4)
     }
 
 }

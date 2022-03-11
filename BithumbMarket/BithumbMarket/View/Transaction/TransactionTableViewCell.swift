@@ -55,8 +55,8 @@ final class TransactionTableViewCell: UITableViewCell {
     
     func configure(transaction: TransactionData) {
         timeLabel.text = transaction.transactionDate[11..<19]
-        priceLabel.text = transaction.price.withComma()
-        quntityLabel.text = transaction.unitsTraded.withDecimal(maximumDigit: 4)
+        priceLabel.text = transaction.price.withComma(max: 4)
+        quntityLabel.text = transaction.unitsTraded.withComma(min: 4, max: 4)
         check(type: transaction.type)
     }
     
@@ -85,7 +85,7 @@ extension TransactionTableViewCell {
             
             quntityLabel.topAnchor.constraint(equalTo: self.topAnchor),
             quntityLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)
         ])
     }
     
