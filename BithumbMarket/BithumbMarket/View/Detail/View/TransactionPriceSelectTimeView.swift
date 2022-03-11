@@ -55,7 +55,7 @@ final class TransactionPriceSelectTimeView: UIView {
         changeIntervalHandler?(chartIntervals[index])
     }
     
-    @objc private func graphChangeButtonTapped(_ sender: UIButton) {
+    @objc private func graphChangeButtonAction(_ sender: UIButton) {
         UserDefaults.standard.changeisLine()
         let isLine = UserDefaults.standard.isLine()
         changeGraphTypeHandler?(isLine)
@@ -85,7 +85,7 @@ extension TransactionPriceSelectTimeView {
         let imageName = UserDefaults.standard.isLine() ? GraphType.candlestick : GraphType.line
         graphChangeButton.translatesAutoresizingMaskIntoConstraints = false
         graphChangeButton.setImage(UIImage(named: imageName), for: .normal)
-        graphChangeButton.addTarget(self, action: #selector(graphChangeButtonTapped(_:)), for: .touchUpInside)
+        graphChangeButton.addTarget(self, action: #selector(graphChangeButtonAction(_:)), for: .touchUpInside)
         
         selectStackView.translatesAutoresizingMaskIntoConstraints = false
         selectStackView.alignment = .fill

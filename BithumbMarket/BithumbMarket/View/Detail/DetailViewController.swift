@@ -90,10 +90,7 @@ final class DetailViewController: BaseViewController {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(named: "scale"), for: .normal)
-//        button.layer.borderColor = UIColor.textSecondary.cgColor
-//        button.layer.borderWidth = 1
-//        button.layer.cornerRadius = 5
-        button.addTarget(self, action: #selector(showGraph), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showDetailGraphAction(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -126,7 +123,7 @@ final class DetailViewController: BaseViewController {
         navigationItem.backButtonTitle = ""
     }
     
-    func bind() {
+    private func bind() {
         currentMarketPriceView.orderbookButtonHandler = moveOrderbookViewController
         transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
         transactionPriceSelectTimeView.changeIntervalHandler = selectIntervalAction
@@ -155,7 +152,7 @@ final class DetailViewController: BaseViewController {
         updateLikeHandler?(ticker.symbol)
     }
     
-    @objc private func showGraph() {
+    @objc private func showDetailGraphAction(_ sender: UIButton) {
         passGraphHandler?()
     }
     
@@ -223,10 +220,6 @@ final class DetailViewController: BaseViewController {
     
     lazy var showGraphDetailViewController = { [weak self] (data: GraphData) -> Void in
         self?.moveGraphDetailViewController(data)
-    }
-    
-    deinit {
-        print(#function)
     }
 
 }

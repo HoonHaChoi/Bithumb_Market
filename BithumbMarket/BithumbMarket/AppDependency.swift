@@ -73,7 +73,7 @@ struct AppDependency {
         graphViewModel.loadingHandelr = detailViewController.showLoadingView
         
         detailViewController.passGraphHandler = graphViewModel.passGraphData
-        graphViewModel.passGraphHandler = detailViewController.showGraphDetailViewController
+        graphViewModel.passGraphDataHandler = detailViewController.showGraphDetailViewController
         
         currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
         
