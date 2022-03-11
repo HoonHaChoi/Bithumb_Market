@@ -132,11 +132,11 @@ extension Graph {
     
     private func drawMinMaxText(x: CGFloat, y: CGFloat, text: String, color: CGColor) {
         let textLayer = CATextLayer()
-        textLayer.frame = CGRect(x: x - 60 , y: y, width: 120, height: 10)
+        textLayer.frame = CGRect(x: x - 60 , y: y, width: 120, height: 12)
         
         let attributedString = NSAttributedString(
             string: text,
-            attributes: [.font: UIFont.systemFont(ofSize: 10), .foregroundColor: color]
+            attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: color]
         )
         textLayer.string = attributedString
         textLayer.alignmentMode = .center
@@ -326,12 +326,12 @@ extension Graph {
         switch x {
         case (boundMaxX - 55)...:
             if frame.width < UIScreen.main.bounds.width {
-                return boundMaxX - 30
+                return boundMaxX - 35
             }
             return boundMaxX - 55
         case ..<(boundMinX + 55):
             if frame.width < UIScreen.main.bounds.width {
-                return boundMinX + 30
+                return boundMinX + 35
             }
             return boundMinX + 55
         default:
