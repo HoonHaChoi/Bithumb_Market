@@ -95,7 +95,7 @@ extension TickerCell {
         changePriceLabel.font = .preferredFont(forTextStyle: .caption1)
         accTradeValueLabel.font = .preferredFont(forTextStyle: .callout)
 
-        paymentLabel.text = "KRW"
+        paymentLabel.text = MainViewNameSpace.payment
         paymentLabel.textColor = .textSecondary
         accTradeValueLabel.textColor = .typoColor
         

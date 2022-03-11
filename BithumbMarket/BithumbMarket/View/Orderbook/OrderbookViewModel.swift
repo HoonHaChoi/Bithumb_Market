@@ -9,7 +9,7 @@ import Foundation
 
 final class OrderbookViewModel {
 
-    var orderbook: Observable<OrderbookData>
+    private(set) var orderbook: Observable<OrderbookData>
     private let symbol: String
     private var service: APIService
     private var socket: SocketService?

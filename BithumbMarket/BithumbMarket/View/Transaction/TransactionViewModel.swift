@@ -9,7 +9,7 @@ import Foundation
 
 final class TransactionViewModel {
     
-    var transactionData: Observable<[TransactionData]>
+    private(set) var transactionData: Observable<[TransactionData]>
     private let symbol: String
     private let service: APIService
     private var socket: SocketService?

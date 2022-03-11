@@ -9,7 +9,7 @@ import Foundation
 
 final class CurrentMarketPriceViewModel {
     
-    var price : Observable<CurrentMarketPrice>
+    private(set) var price : Observable<CurrentMarketPrice>
     private var socket: SocketService?
     private var service: APIService
     private var symbol: String

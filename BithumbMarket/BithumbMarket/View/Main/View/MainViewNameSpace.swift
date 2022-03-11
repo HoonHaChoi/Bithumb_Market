@@ -12,6 +12,7 @@ enum MainViewNameSpace {
     static let emptyMessage = "등록된 관심 가상자산이 없습니다."
     static let segmentListTitle = "목록"
     static let segmentLikeTitle = "관심"
+    static let payment = "KRW"
 }
 
 enum MainHeaderViewNameSpace {

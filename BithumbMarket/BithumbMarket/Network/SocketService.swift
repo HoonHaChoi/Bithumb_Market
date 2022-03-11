@@ -16,7 +16,6 @@ final class SocketService {
         let urlRequest = URLRequest(url: APIEndpoint.socket.url!)
         self.webSocket = .init(request: urlRequest)
         self.webSocket.connect()
-        
     }
     
     func sendMessage(message: Message) {
