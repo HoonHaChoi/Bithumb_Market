@@ -22,8 +22,15 @@ struct DummyData {
               total: "1")
     ])
     
+    let orderbook: Orderbook = Orderbook(data: OrderbookData(asks: [Order(quantity: "1", price: "1")],
+                                                             bids: [Order(quantity: "1", price: "1")]))
+    
     func makeDummydata<T: Decodable>(type: T.Type) -> T {
-        return transaction as! T
+        if Transaction.self == T.self {
+            return transaction as! T
+        } else {
+            return orderbook as! T
+        }
     }
     
 }
