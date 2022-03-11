@@ -90,9 +90,6 @@ final class DetailViewController: BaseViewController {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(named: "scale"), for: .normal)
-//        button.layer.borderColor = UIColor.textSecondary.cgColor
-//        button.layer.borderWidth = 1
-//        button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(showGraph), for: .touchUpInside)
         return button
     }()
