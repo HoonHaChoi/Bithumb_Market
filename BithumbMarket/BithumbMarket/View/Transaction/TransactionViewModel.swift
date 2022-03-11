@@ -23,12 +23,7 @@ final class TransactionViewModel {
     var updateTableHandler: (() -> Void)?
     var insertTableHandler: (() -> Void)?
     var errorHandler: ((Error) -> Void)?
-    
-    func disconnect() {
-        socket?.disconnect()
-        socket = nil
-    }
-    
+        
     func fetchTransaction() {
         service.request(endpoint: .transactionHistory(symbol: symbol)) { [weak self] (result: Result<Transaction, HTTPError>)  in
             guard let self = self else { return }
@@ -68,6 +63,11 @@ final class TransactionViewModel {
                 self.errorHandler?(error)
             }
         }
+    }
+    
+    func disconnect() {
+        socket?.disconnect()
+        socket = nil
     }
     
 }

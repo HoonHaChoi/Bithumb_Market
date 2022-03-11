@@ -11,7 +11,7 @@ final class OrderbookViewModel {
 
     private(set) var orderbook: Observable<OrderbookData>
     private let symbol: String
-    private var service: APIService
+    private let service: APIService
     private var socket: SocketService?
     
     init(service: APIService, symbol: String) {
@@ -24,11 +24,6 @@ final class OrderbookViewModel {
     
     var errorHandler: ((Error) -> Void)?
     var updateHandler: (() -> Void)?
-    
-    func disconnect() {
-        socket?.disconnect()
-        socket = nil
-    }
     
     func fetchOrderbook() {
         service.request(endpoint: .orderBook(symbol: symbol)) { [weak self] (result: Result<Orderbook, HTTPError>) in
@@ -97,6 +92,11 @@ final class OrderbookViewModel {
         }
         order.sort{ Double($0.price) ?? 0 > Double($1.price) ?? 0 }
         return order
+    }
+    
+    func disconnect() {
+        socket?.disconnect()
+        socket = nil
     }
     
 }

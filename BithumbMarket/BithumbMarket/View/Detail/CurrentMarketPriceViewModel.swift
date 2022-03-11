@@ -10,9 +10,9 @@ import Foundation
 final class CurrentMarketPriceViewModel {
     
     private(set) var price : Observable<CurrentMarketPrice>
+    private let symbol: String
+    private let service: APIService
     private var socket: SocketService?
-    private var service: APIService
-    private var symbol: String
     
     var errorHandler: ((HTTPError) -> Void)?
     
