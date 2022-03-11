@@ -9,12 +9,6 @@ import Foundation
 
 extension NumberFormatter {
     
-    func computeDecimal(str: String) -> String {
-        self.numberStyle = .decimal
-        let number = self.number(from: str)
-        return self.string(from: number ?? 0) ?? ""
-    }
-    
     func computeDecimal(str: String, min: Int, max: Int) -> String {
         self.numberStyle = .decimal
         self.minimumFractionDigits = min
