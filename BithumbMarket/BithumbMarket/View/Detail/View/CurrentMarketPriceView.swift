@@ -34,7 +34,7 @@ final class CurrentMarketPriceView: UIView {
     
     var orderbookButtonHandler: (() -> Void)?
     
-    @objc func showOrderbook() {
+    @objc private func showOrderbook() {
         orderbookButtonHandler?()
     }
 

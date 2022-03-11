@@ -34,6 +34,4 @@ final class LoadingView: UIView {
         spinner.startAnimating()
     }
     
-    
-    
 }

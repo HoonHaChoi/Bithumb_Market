@@ -49,31 +49,31 @@ final class DetailViewController: BaseViewController {
         return view
     }()
     
-    let currentMarketPriceView: CurrentMarketPriceView = {
+    private let currentMarketPriceView: CurrentMarketPriceView = {
         let view = CurrentMarketPriceView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let transactionPriceSelectTimeView: TransactionPriceSelectTimeView = {
+    private let transactionPriceSelectTimeView: TransactionPriceSelectTimeView = {
         let view = TransactionPriceSelectTimeView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let transactionHistoryView: TransactionHistoryView = {
+    private let transactionHistoryView: TransactionHistoryView = {
         let view = TransactionHistoryView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let assetsStatusView: AssetsStatusView = {
+    private let assetsStatusView: AssetsStatusView = {
         let view = AssetsStatusView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let transactionPricegraphView: TransactionPriceGraphView = {
+    private let transactionPricegraphView: TransactionPriceGraphView = {
         let view = TransactionPriceGraphView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -90,7 +90,7 @@ final class DetailViewController: BaseViewController {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(named: "scale"), for: .normal)
-        button.addTarget(self, action: #selector(showGraph), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showDetailGraphAction(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -123,7 +123,7 @@ final class DetailViewController: BaseViewController {
         navigationItem.backButtonTitle = ""
     }
     
-    func bind() {
+    private func bind() {
         currentMarketPriceView.orderbookButtonHandler = moveOrderbookViewController
         transactionHistoryView.transactionHistoryButtonHandler = moveTransactionViewController
         transactionPriceSelectTimeView.changeIntervalHandler = selectIntervalAction
@@ -152,7 +152,7 @@ final class DetailViewController: BaseViewController {
         updateLikeHandler?(ticker.symbol)
     }
     
-    @objc private func showGraph() {
+    @objc private func showDetailGraphAction(_ sender: UIButton) {
         passGraphHandler?()
     }
     
@@ -220,10 +220,6 @@ final class DetailViewController: BaseViewController {
     
     lazy var showGraphDetailViewController = { [weak self] (data: GraphData) -> Void in
         self?.moveGraphDetailViewController(data)
-    }
-    
-    deinit {
-        print(#function)
     }
 
 }

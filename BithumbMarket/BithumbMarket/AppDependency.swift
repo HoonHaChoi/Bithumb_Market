@@ -11,7 +11,6 @@ struct AppDependency {
     
     let service = APIService()
     let likeStorage = LikeStorge()
-    let graphStorage = GraphStorage()
     
     func detailViewControllerFactory(ticker: Ticker) -> DetailViewController {
         return initialDetailViewController(ticker: ticker)
@@ -46,6 +45,7 @@ struct AppDependency {
     }
     
     private func initialDetailViewController(ticker: Ticker) -> DetailViewController {
+        let graphStorage = GraphStorage()
         let detailViewController = DetailViewController(ticker: ticker,
                                                         transactionViewControllerFactory: transactionViewControllerFactory,
                                                         orderbookViewControllerFactory: orderbookViewControllerFactory,
@@ -57,6 +57,7 @@ struct AppDependency {
         let detailViewModel = DetailViewModel(storage: likeStorage)
         let graphViewModel = GraphViewModel(service: service, storage: graphStorage)
         
+        currentMarketPriceViewModel.price.bind = detailViewController.updatePriceView
         detailViewController.sendMessageHanlder = currentMarketPriceViewModel.sendMessage
         detailViewController.disconnectHandler = currentMarketPriceViewModel.disconnect
         
@@ -73,10 +74,8 @@ struct AppDependency {
         graphViewModel.loadingHandelr = detailViewController.showLoadingView
         
         detailViewController.passGraphHandler = graphViewModel.passGraphData
-        graphViewModel.passGraphHandler = detailViewController.showGraphDetailViewController
-        
-        currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
-        
+        graphViewModel.passGraphDataHandler = detailViewController.showGraphDetailViewController
+
         assetsStatusViewModel.errorHandler = detailViewController.showError
         detailViewModel.errorHandler = detailViewController.showError
         graphViewModel.errorHandler = detailViewController.showError
@@ -89,7 +88,6 @@ struct AppDependency {
             service: service,
             symbol: ticker.paymentCurrency)
         let transactionViewController = TransactionViewController(datasource: .init())
-        
         transactionViewModel.updateTableHandler = transactionViewController.updateTableView
         transactionViewController.fetchTransactionHandler = transactionViewModel.fetchTransaction
         transactionViewController.disconnectHandler = transactionViewModel.disconnect

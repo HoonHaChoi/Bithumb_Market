@@ -26,7 +26,7 @@ final class GraphViewModel {
     var errorHandler: ((Error) -> Void)?
     var loadingHandelr: ((Bool) -> Void)?
     var updateGraphHandler: ((GraphData) -> Void)?
-    var passGraphHandler: ((GraphData) -> Void)?
+    var passGraphDataHandler: ((GraphData) -> Void)?
     
     func fetchGraph(symbol: String, interval: ChartIntervals) {
         if let graphData = hasGraphData(symbol: symbol, interval: interval) {
@@ -109,6 +109,6 @@ final class GraphViewModel {
     }
     
     func passGraphData() {
-        passGraphHandler?(graphData)
+        passGraphDataHandler?(graphData)
     }
 }
