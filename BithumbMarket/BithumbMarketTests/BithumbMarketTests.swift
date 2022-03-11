@@ -23,7 +23,7 @@ class TransactionViewModelTests: XCTestCase {
         transactionViewModel = nil
     }
 
-    func test_체결내역_성공적으로_가져오기() throws {
+    func test_체결내역_요청성공() throws {
         transactionViewModel.fetchTransaction()
         
         let expectedTransactionDataType = transactionViewModel.transactionData.value[0].type
