@@ -9,11 +9,10 @@ import Foundation
 
 final class TransactionViewModel {
     
+    private(set) var transactionData: Observable<[TransactionData]>
     private let symbol: String
-    
-    var transactionData: Observable<[TransactionData]>
     private let service: APIService
-    var socket: SocketService?
+    private var socket: SocketService?
     
     init(service: APIService, symbol: String) {
         self.transactionData = .init([])
@@ -24,12 +23,7 @@ final class TransactionViewModel {
     var updateTableHandler: (() -> Void)?
     var insertTableHandler: (() -> Void)?
     var errorHandler: ((Error) -> Void)?
-    
-    func disconnect() {
-        socket?.disconnect()
-        socket = nil
-    }
-    
+        
     func fetchTransaction() {
         service.request(endpoint: .transactionHistory(symbol: symbol)) { [weak self] (result: Result<Transaction, HTTPError>)  in
             guard let self = self else { return }
@@ -69,6 +63,11 @@ final class TransactionViewModel {
                 self.errorHandler?(error)
             }
         }
+    }
+    
+    func disconnect() {
+        socket?.disconnect()
+        socket = nil
     }
     
 }

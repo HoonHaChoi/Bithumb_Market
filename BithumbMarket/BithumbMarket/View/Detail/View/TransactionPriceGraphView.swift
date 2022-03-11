@@ -23,11 +23,12 @@ final class TransactionPriceGraphView: UIView {
     
     func updateGraph(_ graph: GraphData) {
         DispatchQueue.main.async {
-            self.graph.closePrice = graph.closePriceList[graph.startPoint..<graph.count].map { Double($0) }
-            self.graph.openPrice = graph.openPriceList[graph.startPoint..<graph.count].map { Double($0) }
-            self.graph.maxPrice = graph.maxPriceList[graph.startPoint..<graph.count].map { Double($0) }
-            self.graph.minPrice = graph.minPriceList[graph.startPoint..<graph.count].map { Double($0) }
-            self.graph.date = graph.dateList[graph.startPoint..<graph.count].map { String($0) }
+            let graphData = graph.previewGraphData
+            self.graph.closePrice = graphData.closePriceList
+            self.graph.openPrice = graphData.openPriceList
+            self.graph.maxPrice = graphData.maxPriceList
+            self.graph.minPrice = graphData.minPriceList
+            self.graph.date = graphData.dateList
             self.graph.boundMinX = 0
             self.graph.boundMaxX = self.frame.width
             self.graph.layer.setNeedsDisplay()
@@ -42,11 +43,6 @@ final class TransactionPriceGraphView: UIView {
 extension TransactionPriceGraphView {
     
     private func setupView() {
-        if let viewWithTag = self.viewWithTag(1) {
-            viewWithTag.removeFromSuperview()
-        }
-        graph.tag = 1
-        
         addSubview(graph)
         graph.translatesAutoresizingMaskIntoConstraints = false
         

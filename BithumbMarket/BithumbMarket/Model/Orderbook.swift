@@ -16,14 +16,12 @@ struct OrderbookData: Decodable {
     var bids: [Order]
     
     func sumOfAsks() -> Float {
-        asks
-            .map { Float($0.quantity) ?? 0 }
+        asks.map { Float($0.quantity) ?? 0 }
             .reduce(0) { $0 + $1 }
     }
     
     func sumOfBids() -> Float {
-        bids
-            .map { Float($0.quantity) ?? 0 }
+        bids.map { Float($0.quantity) ?? 0 }
             .reduce(0) { $0 + $1 }
     }
     
@@ -40,10 +38,8 @@ extension OrderbookData {
     
     func calculateRateOfQuintity(orders: [Order]) -> [Float] {
         var rate = [Float]()
-        let quantities = orders
-            .map { Float($0.quantity) ?? 0 }
-        var sum = quantities
-            .reduce(0) { $0 + $1 }
+        let quantities = orders.map { Float($0.quantity) ?? 0 }
+        var sum = quantities.reduce(0) { $0 + $1 }
         if sum == 0 {
             sum = 1
         }

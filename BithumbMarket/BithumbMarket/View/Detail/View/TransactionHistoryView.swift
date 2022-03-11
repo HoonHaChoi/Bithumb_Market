@@ -29,8 +29,7 @@ final class TransactionHistoryView: UIView {
     
     var transactionHistoryButtonHandler: (() -> Void)?
     
-    @objc
-    private func showTransactionView() {
+    @objc private func showTransactionView() {
         transactionHistoryButtonHandler?()
     }
     

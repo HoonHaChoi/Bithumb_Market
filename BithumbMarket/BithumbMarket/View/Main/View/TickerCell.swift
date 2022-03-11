@@ -9,10 +9,6 @@ import UIKit
 
 final class TickerCell: UITableViewCell {
     
-    static var reuseidentifier: String {
-        return String(describing: self)
-    }
-    
     private let symbolLabel = UILabel()
     private let paymentLabel = UILabel()
     private let currentPriceLabel = UILabel()
@@ -99,7 +95,7 @@ extension TickerCell {
         changePriceLabel.font = .preferredFont(forTextStyle: .caption1)
         accTradeValueLabel.font = .preferredFont(forTextStyle: .callout)
 
-        paymentLabel.text = "KRW"
+        paymentLabel.text = MainViewNameSpace.payment
         paymentLabel.textColor = .textSecondary
         accTradeValueLabel.textColor = .typoColor
         

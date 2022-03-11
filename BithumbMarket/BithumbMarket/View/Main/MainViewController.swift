@@ -23,7 +23,6 @@ final class MainViewController: BaseViewController {
     }
     
     var fetchTickersHandler: (() -> Void)?
-    var disconnectHandler: (() -> Void)?
     var updateTickers: (() -> Void)?
     
     private let mainTableView: UITableView = {
@@ -36,7 +35,8 @@ final class MainViewController: BaseViewController {
     }()
     
     lazy var diffableDatasource = MainDiffableDataSource(tableView: mainTableView) { tableView, indexPath, ticker in
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TickerCell.reuseidentifier, for: indexPath) as? TickerCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainViewNameSpace.cellReuseIdentifier,
+                                                       for: indexPath) as? TickerCell else {
             return .init()
         }
         cell.selectionStyle = .none
@@ -110,7 +110,8 @@ final class MainViewController: BaseViewController {
     }
     
     private func configureTableView() {
-        mainTableView.register(TickerCell.self, forCellReuseIdentifier: TickerCell.reuseidentifier)
+        mainTableView.register(TickerCell.self,
+                               forCellReuseIdentifier: MainViewNameSpace.cellReuseIdentifier)
         mainTableView.dataSource = diffableDatasource
         mainTableView.delegate = self
     }

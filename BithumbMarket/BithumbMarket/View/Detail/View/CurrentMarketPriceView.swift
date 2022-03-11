@@ -34,25 +34,24 @@ final class CurrentMarketPriceView: UIView {
     
     var orderbookButtonHandler: (() -> Void)?
     
-    @objc
-    func showOrderbook() {
+    @objc func showOrderbook() {
         orderbookButtonHandler?()
     }
 
-    func initialUI(_ ticker: Ticker) {
-        currentPriceLabel.text = ticker.market.closingPrice.withComma() + "원"
-        changePriceLabel.text = ticker.market.fluctate24H.withComma() + "원"
-        changeRateLabel.text = "(\(ticker.market.fluctateRate24H.withComma())%)"
-        changeRateLabel.textColor = ticker.market.computePriceChangeState().textColor
-        changePriceLabel.textColor = ticker.market.computePriceChangeState().textColor
+    func initialUI(_ market: Market) {
+        currentPriceLabel.text = market.closingPrice.withComma() + "원"
+        changePriceLabel.text = market.fluctate24H.withComma() + "원"
+        changeRateLabel.text = "(\(market.fluctateRate24H.withComma())%)"
+        changeRateLabel.textColor = market.computePriceChangeState().textColor
+        changePriceLabel.textColor = market.computePriceChangeState().textColor
     }
     
     func updateUI(_ currentPrice: CurrentMarketPrice) {
         currentPriceLabel.text = currentPrice.currentPrice.withComma() + "원"
         changePriceLabel.text = currentPrice.changePrice.withComma() + "원"
         changeRateLabel.text =  "(\(currentPrice.changeRate.withComma())%)"
-        changePriceLabel.textColor = currentPrice.setChangeState().textColor
-        changeRateLabel.textColor = currentPrice.setChangeState().textColor
+        changePriceLabel.textColor = currentPrice.setChange.textColor
+        changeRateLabel.textColor = currentPrice.setChange.textColor
     }
     
 }

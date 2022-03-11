@@ -9,7 +9,7 @@ import Foundation
 
 final class MainViewModel {
     
-    var tickers: Observable<[Ticker]>
+    private(set) var tickers: Observable<[Ticker]>
     private let service: APIService
     private let storage: LikeStorge
     private var socket: SocketService?

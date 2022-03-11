@@ -32,7 +32,7 @@ struct AppDependency {
     func initialMainViewController() -> MainViewController {
         let mainViewController = MainViewController(detailViewControllerFactory: detailViewControllerFactory)
         let mainViewModel = MainViewModel(service: service, storage: likeStorage)
-        mainViewModel.tickers.bind  = mainViewController.updateDiffableDataSource
+        mainViewModel.tickers.bind = mainViewController.updateDiffableDataSource
         mainViewController.fetchTickersHandler = mainViewModel.fetchTickers
         mainViewController.coinSortView.sortControlHandler = mainViewModel.executeFilterTickers
         mainViewController.disconnectHandler = mainViewModel.disconnect
@@ -56,9 +56,8 @@ struct AppDependency {
                                                           symbol: ticker.paymentCurrency)
         let detailViewModel = DetailViewModel(storage: likeStorage)
         let graphViewModel = GraphViewModel(service: service, storage: graphStorage)
-        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
-        //detailViewContrller.updateCurrentMarketPriceHandler = currentMarketPriceViewModel.updatePrice
-        detailViewController.fetchCurrentMarketPrice = currentMarketPriceViewModel.fetchPrice
+        
+        detailViewController.sendMessageHanlder = currentMarketPriceViewModel.sendMessage
         detailViewController.disconnectHandler = currentMarketPriceViewModel.disconnect
         
         detailViewController.fetchAssetsStatusHandler = assetsStatusViewModel.fetchAssetsStatus
@@ -76,7 +75,7 @@ struct AppDependency {
         detailViewController.passGraphHandler = graphViewModel.passGraphData
         graphViewModel.passGraphHandler = detailViewController.showGraphDetailViewController
         
-        detailViewController.bindPriceHandler = currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
+        currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
         
         assetsStatusViewModel.errorHandler = detailViewController.showError
         detailViewModel.errorHandler = detailViewController.showError

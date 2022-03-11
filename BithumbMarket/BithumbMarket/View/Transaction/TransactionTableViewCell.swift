@@ -35,6 +35,16 @@ final class TransactionTableViewCell: UITableViewCell {
         return label
     }()
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
     private func check(type: String) {
         if type == TransactionNameSpace.ask[0] || type == TransactionNameSpace.ask[1] {
             [priceLabel, quntityLabel].forEach{$0.textColor = .fallColor}
@@ -47,18 +57,7 @@ final class TransactionTableViewCell: UITableViewCell {
         timeLabel.text = transaction.transactionDate[11..<19]
         priceLabel.text = transaction.price.withComma()
         quntityLabel.text = transaction.unitsTraded.withDecimal(maximumDigit: 4)
-        
         check(type: transaction.type)
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupView()
     }
     
 }
@@ -66,7 +65,6 @@ final class TransactionTableViewCell: UITableViewCell {
 extension TransactionTableViewCell {
     
     func setupView() {
-        
         [timeLabel, priceLabel, quntityLabel].forEach{
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false

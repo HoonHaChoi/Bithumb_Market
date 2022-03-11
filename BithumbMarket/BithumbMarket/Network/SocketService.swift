@@ -26,7 +26,7 @@ final class SocketService {
     }
     
     func disconnect() {
-        webSocket.disconnect()
+        webSocket.forceDisconnect()
     }
     
     func reciveText(completion: @escaping (String) -> Void) {
@@ -71,4 +71,5 @@ final class SocketService {
         }
         return .success(decoding)
     }
+    
 }
