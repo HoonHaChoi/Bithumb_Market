@@ -53,10 +53,8 @@ final class GraphDetailViewController: UIViewController {
         setupView()
         updateGraph()
         
-        // TODO: scrollTOEnd() * 2 문제 해결
-        scrollView.scrollToEnd(x: width)
-        scrollView.scrollToEnd(x: width)
         scrollView.delegate = self
+        scrollView.scrollToEnd(x: width)
     }
     
     override func viewDidAppear(_ animated: Bool) {

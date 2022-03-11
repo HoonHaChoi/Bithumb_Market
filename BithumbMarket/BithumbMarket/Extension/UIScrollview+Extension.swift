@@ -10,11 +10,9 @@ import UIKit
 extension UIScrollView {
 
     func scrollToEnd(x: CGFloat) {
+        self.layoutIfNeeded()
         let offset = CGPoint(x: x - UIScreen.main.bounds.width, y: 0)
-        DispatchQueue.main.async {
             self.setContentOffset(offset, animated: false)
-            self.layoutIfNeeded()
-        }
     }
     
     func scrollToCenter(y: CGFloat) {
