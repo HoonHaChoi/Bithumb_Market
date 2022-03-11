@@ -11,7 +11,8 @@ final class GraphDetailViewController: UIViewController {
     
     private lazy var graph = Graph()
     private let graphData: GraphData
-    private lazy var width: CGFloat = CGFloat(graphData.closePriceList.count * 12)
+    private lazy var initailWidth: CGFloat = CGFloat(graphData.closePriceList.count * 12)
+    private lazy var width: CGFloat = initailWidth < UIScreen.main.bounds.width ? UIScreen.main.bounds.width : initailWidth
     
     init(graphData: GraphData) {
         self.graphData = graphData

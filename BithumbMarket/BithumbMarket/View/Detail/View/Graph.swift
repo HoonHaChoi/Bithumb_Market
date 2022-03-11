@@ -8,16 +8,13 @@
 import UIKit
 
 final class Graph: UIView {
-    
-    var offsetX = CGFloat()
 
     var date = [String]()
     var openPrice = [Double]()
     var closePrice = [Double]()
     var maxPrice = [Double]()
     var minPrice = [Double]()
-    private var layerCount = 0
-    
+
     var boundMinX = CGFloat()
     var boundMaxX = CGFloat() {
         didSet {
@@ -30,6 +27,9 @@ final class Graph: UIView {
           }
       }
     
+    private var offsetX = CGFloat()
+    private var layerCount = 0
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -41,7 +41,6 @@ final class Graph: UIView {
     override func draw(_ rect: CGRect) {
         layer.sublayers?.removeAll()
         offsetX = frame.width / CGFloat(closePrice.count + 1)
-        
         switch isLineGraph {
         case true:
             lineGraph(width: frame.width, height: frame.height)
@@ -108,8 +107,13 @@ extension Graph {
         
         let labelSpace: CGFloat = 55
         let scale = CGFloat(Double(maxprice - minprice) / 0.8 / frame.height)
-        let max = maxList.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
-        let min = minList.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
+        var max = maxList.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
+        var min = minList.map{(CGFloat(maxprice - $0) / scale) + labelSpace }
+        
+        if maxprice == minprice {
+            max = [frame.height / 2]
+            min = [frame.height / 2]
+        }
 
         guard let maxPriceIndex = maxList[start...end].firstIndex(of: maxprice),
            let minPriceIndex = minList[start...end].firstIndex(of: minprice) else { return }
@@ -196,7 +200,10 @@ extension Graph {
         
         let labelSpace: CGFloat = 55
         let scale = CGFloat(Double(maxprice - minprice) / 0.8 / frame.height)
-        let currentY = closePrice.map{((CGFloat(maxprice - $0) / scale)) + labelSpace}
+        var currentY = closePrice.map{((CGFloat(maxprice - $0) / scale)) + labelSpace}
+        if maxprice == minprice {
+            currentY = [frame.height / 2]
+        }
         
         path.move(to: CGPoint(x: 0, y: currentY[0]))
         currentY.forEach {
