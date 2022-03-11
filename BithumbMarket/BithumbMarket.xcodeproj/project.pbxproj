@@ -57,6 +57,34 @@
 		BF86B5F327C60653005A2170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F227C60653005A2170 /* APIService.swift */; };
 		BF86B5F527C606D8005A2170 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F427C606D8005A2170 /* EndPoint.swift */; };
 		BF86B5F727C60B65005A2170 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F627C60B65005A2170 /* HTTPError.swift */; };
+		BF904B6127DBB561001C651F /* BithumbMarketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF904B6027DBB561001C651F /* BithumbMarketTests.swift */; };
+		BF904B6827DBB57C001C651F /* MockAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF904B6727DBB57C001C651F /* MockAPIService.swift */; };
+		BF904B6927DBB5F8001C651F /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F227C60653005A2170 /* APIService.swift */; };
+		BF904B6A27DBB5F8001C651F /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005A27CC9F3300752ABA /* SocketService.swift */; };
+		BF904B6B27DBB5F8001C651F /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F627C60B65005A2170 /* HTTPError.swift */; };
+		BF904B6C27DBB5F8001C651F /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5F427C606D8005A2170 /* EndPoint.swift */; };
+		BF904B6D27DBB5F8001C651F /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005B27CC9F3300752ABA /* APIEndpoint.swift */; };
+		BF904B6E27DBB623001C651F /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
+		BF904B6F27DBB623001C651F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004227CC9AE000752ABA /* Message.swift */; };
+		BF904B7027DBB623001C651F /* ReceiveTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CE127CFB63800C06084 /* ReceiveTransaction.swift */; };
+		BF904B7227DBB623001C651F /* GraphData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE911727D7447900CC4FF5 /* GraphData.swift */; };
+		BF904B7327DBB623001C651F /* Orderbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004327CC9AE000752ABA /* Orderbook.swift */; };
+		BF904B7427DBB623001C651F /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004027CC9AE000752ABA /* Market.swift */; };
+		BF904B7527DBB623001C651F /* ReceiveTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB9563827CCBD37001627C6 /* ReceiveTicker.swift */; };
+		BF904B7627DBB623001C651F /* AssetsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CF427D065A500C06084 /* AssetsStatus.swift */; };
+		BF904B7727DBB623001C651F /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86B5EF27C604B0005A2170 /* Ticker.swift */; };
+		BF904B7827DBB623001C651F /* CandleStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63DC27D594B600C9801C /* CandleStick.swift */; };
+		BF904B7927DBB623001C651F /* CurrentMarketPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844D0027D0A94000C06084 /* CurrentMarketPrice.swift */; };
+		BF904B7A27DBB623001C651F /* ReceiveOrderbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CDE27CFB5F300C06084 /* ReceiveOrderbook.swift */; };
+		BF904B7B27DBB643001C651F /* GraphDataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE910827D71BE500CC4FF5 /* GraphDataEntity.swift */; };
+		BF904B7C27DBB649001C651F /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004D27CC9B4B00752ABA /* Observable.swift */; };
+		BF904B7D27DBB649001C651F /* ChangeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5573C227CD43C30065B054 /* ChangeState.swift */; };
+		BF904B7E27DBB649001C651F /* AssetsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5AFC1D27D1A943002BECC3 /* AssetsState.swift */; };
+		BF904B7F27DBB649001C651F /* ChartIntervals.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE910F27D7310900CC4FF5 /* ChartIntervals.swift */; };
+		BF904B8027DBB666001C651F /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004827CC9B1400752ABA /* UIColor+Extension.swift */; };
+		BF904B8127DBB666001C651F /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B927C8BB5600C50FA3 /* String+Extension.swift */; };
+		BF904B8227DBB66A001C651F /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214127CE919C007F0DCE /* Double+Extension.swift */; };
+		BF904B8327DBB675001C651F /* NumberFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004927CC9B1400752ABA /* NumberFormatter+Extension.swift */; };
 		BF9A70B927D89D95002DDBEA /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A70B827D89D95002DDBEA /* UserDefaults+Extension.swift */; };
 		BF9A70BB27D9EB98002DDBEA /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A70BA27D9EB98002DDBEA /* NavigationController.swift */; };
 		BF9A70F727DA519D002DDBEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A70F627DA519D002DDBEA /* BaseViewController.swift */; };
@@ -89,6 +117,16 @@
 		E8AC90BA27C8BB5600C50FA3 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B927C8BB5600C50FA3 /* String+Extension.swift */; };
 		E8AC90BC27C8D12100C50FA3 /* TransactionNameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90BB27C8D12100C50FA3 /* TransactionNameSpace.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BF904B6227DBB561001C651F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF0430BD27C5C1D500A77A38 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF0430C427C5C1D500A77A38;
+			remoteInfo = BithumbMarket;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7F2A6BC727D7B7AB00486F36 /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
@@ -151,6 +189,9 @@
 		BF86B5F227C60653005A2170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		BF86B5F427C606D8005A2170 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		BF86B5F627C60B65005A2170 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
+		BF904B5E27DBB561001C651F /* BithumbMarketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BithumbMarketTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF904B6027DBB561001C651F /* BithumbMarketTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbMarketTests.swift; sourceTree = "<group>"; };
+		BF904B6727DBB57C001C651F /* MockAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIService.swift; sourceTree = "<group>"; };
 		BF9A70B827D89D95002DDBEA /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		BF9A70BA27D9EB98002DDBEA /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		BF9A70F627DA519D002DDBEA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +222,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFB9562C27CCADDC001627C6 /* Starscream in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF904B5B27DBB561001C651F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				BF0430C727C5C1D500A77A38 /* BithumbMarket */,
+				BF904B5F27DBB561001C651F /* BithumbMarketTests */,
 				BF0430C627C5C1D500A77A38 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -290,6 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				BF0430C527C5C1D500A77A38 /* BithumbMarket.app */,
+				BF904B5E27DBB561001C651F /* BithumbMarketTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -373,6 +423,15 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		BF904B5F27DBB561001C651F /* BithumbMarketTests */ = {
+			isa = PBXGroup;
+			children = (
+				BF904B6727DBB57C001C651F /* MockAPIService.swift */,
+				BF904B6027DBB561001C651F /* BithumbMarketTests.swift */,
+			);
+			path = BithumbMarketTests;
+			sourceTree = "<group>";
+		};
 		BFDE910C27D71D6D00CC4FF5 /* GraphStorage */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,6 +493,24 @@
 			productReference = BF0430C527C5C1D500A77A38 /* BithumbMarket.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BF904B5D27DBB561001C651F /* BithumbMarketTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF904B6427DBB561001C651F /* Build configuration list for PBXNativeTarget "BithumbMarketTests" */;
+			buildPhases = (
+				BF904B5A27DBB561001C651F /* Sources */,
+				BF904B5B27DBB561001C651F /* Frameworks */,
+				BF904B5C27DBB561001C651F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF904B6327DBB561001C651F /* PBXTargetDependency */,
+			);
+			name = BithumbMarketTests;
+			productName = BithumbMarketTests;
+			productReference = BF904B5E27DBB561001C651F /* BithumbMarketTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -446,6 +523,10 @@
 				TargetAttributes = {
 					BF0430C427C5C1D500A77A38 = {
 						CreatedOnToolsVersion = 13.1;
+					};
+					BF904B5D27DBB561001C651F = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = BF0430C427C5C1D500A77A38;
 					};
 				};
 			};
@@ -466,6 +547,7 @@
 			projectRoot = "";
 			targets = (
 				BF0430C427C5C1D500A77A38 /* BithumbMarket */,
+				BF904B5D27DBB561001C651F /* BithumbMarketTests */,
 			);
 		};
 /* End PBXProject section */
@@ -477,6 +559,13 @@
 			files = (
 				BF0430D527C5C1D700A77A38 /* LaunchScreen.storyboard in Resources */,
 				BF0430D227C5C1D700A77A38 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF904B5C27DBB561001C651F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,7 +657,50 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BF904B5A27DBB561001C651F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF904B7827DBB623001C651F /* CandleStick.swift in Sources */,
+				BF904B7B27DBB643001C651F /* GraphDataEntity.swift in Sources */,
+				BF904B7027DBB623001C651F /* ReceiveTransaction.swift in Sources */,
+				BF904B6D27DBB5F8001C651F /* APIEndpoint.swift in Sources */,
+				BF904B7E27DBB649001C651F /* AssetsState.swift in Sources */,
+				BF904B6C27DBB5F8001C651F /* EndPoint.swift in Sources */,
+				BF904B8127DBB666001C651F /* String+Extension.swift in Sources */,
+				BF904B8327DBB675001C651F /* NumberFormatter+Extension.swift in Sources */,
+				BF904B7627DBB623001C651F /* AssetsStatus.swift in Sources */,
+				BF904B6E27DBB623001C651F /* Transaction.swift in Sources */,
+				BF904B6F27DBB623001C651F /* Message.swift in Sources */,
+				BF904B8027DBB666001C651F /* UIColor+Extension.swift in Sources */,
+				BF904B7327DBB623001C651F /* Orderbook.swift in Sources */,
+				BF904B7527DBB623001C651F /* ReceiveTicker.swift in Sources */,
+				BF904B7C27DBB649001C651F /* Observable.swift in Sources */,
+				BF904B7927DBB623001C651F /* CurrentMarketPrice.swift in Sources */,
+				BF904B6A27DBB5F8001C651F /* SocketService.swift in Sources */,
+				BF904B6827DBB57C001C651F /* MockAPIService.swift in Sources */,
+				BF904B7427DBB623001C651F /* Market.swift in Sources */,
+				BF904B6927DBB5F8001C651F /* APIService.swift in Sources */,
+				BF904B7F27DBB649001C651F /* ChartIntervals.swift in Sources */,
+				BF904B8227DBB66A001C651F /* Double+Extension.swift in Sources */,
+				BF904B7A27DBB623001C651F /* ReceiveOrderbook.swift in Sources */,
+				BF904B7727DBB623001C651F /* Ticker.swift in Sources */,
+				BF904B6B27DBB5F8001C651F /* HTTPError.swift in Sources */,
+				BF904B7D27DBB649001C651F /* ChangeState.swift in Sources */,
+				BF904B7227DBB623001C651F /* GraphData.swift in Sources */,
+				BF904B6127DBB561001C651F /* BithumbMarketTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BF904B6327DBB561001C651F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF0430C427C5C1D500A77A38 /* BithumbMarket */;
+			targetProxy = BF904B6227DBB561001C651F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BF0430D327C5C1D700A77A38 /* LaunchScreen.storyboard */ = {
@@ -752,6 +884,54 @@
 			};
 			name = Release;
 		};
+		BF904B6527DBB561001C651F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 27BW92Z482;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HoonhaChoi.BithumbMarketTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BithumbMarket.app/BithumbMarket";
+			};
+			name = Debug;
+		};
+		BF904B6627DBB561001C651F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 27BW92Z482;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HoonhaChoi.BithumbMarketTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BithumbMarket.app/BithumbMarket";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -769,6 +949,15 @@
 			buildConfigurations = (
 				BF0430DA27C5C1D700A77A38 /* Debug */,
 				BF0430DB27C5C1D700A77A38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF904B6427DBB561001C651F /* Build configuration list for PBXNativeTarget "BithumbMarketTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF904B6527DBB561001C651F /* Debug */,
+				BF904B6627DBB561001C651F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
