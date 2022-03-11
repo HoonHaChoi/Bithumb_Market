@@ -21,6 +21,10 @@ extension String {
         return NumberFormatter().computeDecimal(str: self)
     }
     
+    func withComma(min: Int = 0, max: Int = 0) -> String {
+        return NumberFormatter().computeDecimal(str: self, min: min, max: max)
+    }
+    
     func withDecimal(maximumDigit: Int) -> String {
         let numberString = NumberFormatter().computeDecimal(str: self, maximumDigit: maximumDigit)
         return String(format: "%.\(maximumDigit)f", numberString)

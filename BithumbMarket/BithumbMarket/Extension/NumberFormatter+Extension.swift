@@ -15,6 +15,14 @@ extension NumberFormatter {
         return self.string(from: number ?? 0) ?? ""
     }
     
+    func computeDecimal(str: String, min: Int, max: Int) -> String {
+        self.numberStyle = .decimal
+        self.minimumFractionDigits = min
+        self.maximumFractionDigits = max
+        let number = self.number(from: str)
+        return self.string(from: number ?? 0) ?? ""
+    }
+    
     func computeDecimal(str: String, maximumDigit: Int) -> Double {
         self.numberStyle = .decimal
         self.maximumFractionDigits = maximumDigit
