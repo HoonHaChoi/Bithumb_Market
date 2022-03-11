@@ -49,31 +49,31 @@ final class DetailViewController: BaseViewController {
         return view
     }()
     
-    let currentMarketPriceView: CurrentMarketPriceView = {
+    private let currentMarketPriceView: CurrentMarketPriceView = {
         let view = CurrentMarketPriceView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let transactionPriceSelectTimeView: TransactionPriceSelectTimeView = {
+    private let transactionPriceSelectTimeView: TransactionPriceSelectTimeView = {
         let view = TransactionPriceSelectTimeView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let transactionHistoryView: TransactionHistoryView = {
+    private let transactionHistoryView: TransactionHistoryView = {
         let view = TransactionHistoryView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let assetsStatusView: AssetsStatusView = {
+    private let assetsStatusView: AssetsStatusView = {
         let view = AssetsStatusView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let transactionPricegraphView: TransactionPriceGraphView = {
+    private let transactionPricegraphView: TransactionPriceGraphView = {
         let view = TransactionPriceGraphView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
