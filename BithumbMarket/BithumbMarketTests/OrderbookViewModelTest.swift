@@ -43,19 +43,16 @@ class OrderbookViewModelTest: XCTestCase {
 
     func test_호가_요청실패() throws {
         service = MockAPIService(isSuccess: false)
-        service.request(endpoint: .orderBook(symbol: "")) { (result: Result<Orderbook, HTTPError>) -> Void in
-            switch result {
-            case .success(_):
-                XCTFail()
-            case .failure(let failure):
-                XCTAssertEqual(failure.errorDescription, "연결에 실패 하였습니다.")
-            }
-        }
-        
         orderbookViewModel = OrderbookViewModel(service: service, symbol: "")
+        
+        let error: (Error) -> Void = { error in
+            XCTAssertEqual(error.localizedDescription, "연결에 실패 하였습니다.")
+        }
+        orderbookViewModel.errorHandler = error
         orderbookViewModel.fetchOrderbook()
         
         XCTAssertTrue(orderbookViewModel.orderbook.value.bids.isEmpty)
         XCTAssertTrue(orderbookViewModel.orderbook.value.asks.isEmpty)
     }
+    
 }

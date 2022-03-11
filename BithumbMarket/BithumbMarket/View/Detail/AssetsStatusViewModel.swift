@@ -10,9 +10,9 @@ import Foundation
 final class AssetsStatusViewModel {
     
     private let symbol: String
-    private let service: APIService
+    private let service: Serviceable
     
-    init(service: APIService, symbol: String) {
+    init(service: Serviceable, symbol: String) {
         self.service = service
         self.symbol = symbol
     }

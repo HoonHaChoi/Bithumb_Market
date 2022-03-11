@@ -40,18 +40,15 @@ class TransactionViewModelTests: XCTestCase {
     
     func test_채결내역_요청실패() throws {
         service = MockAPIService(isSuccess: false)
-        service.request(endpoint: .transactionHistory(symbol: "")) { (result: Result<Transaction, HTTPError>) -> Void in
-            switch result {
-            case .success(_):
-                XCTFail()
-            case .failure(let failure):
-                XCTAssertEqual(failure.errorDescription, "연결에 실패 하였습니다.")
-            }
+        transactionViewModel = TransactionViewModel(service: service, symbol: "")
+
+        let error: (Error) -> Void = { error in
+            XCTAssertEqual(error.localizedDescription, "연결에 실패 하였습니다.")
         }
         
-        transactionViewModel = TransactionViewModel(service: service, symbol: "")
+        transactionViewModel.errorHandler = error
         transactionViewModel.fetchTransaction()
-        
+        transactionViewModel.
         XCTAssertTrue(transactionViewModel.transactionData.value.isEmpty)
     }
     
