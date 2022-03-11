@@ -85,7 +85,7 @@ extension TransactionTableViewCell {
             
             quntityLabel.topAnchor.constraint(equalTo: self.topAnchor),
             quntityLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)
         ])
     }
     
