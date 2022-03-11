@@ -16,5 +16,10 @@ extension UIScrollView {
             self.layoutIfNeeded()
         }
     }
-
+    
+    func scrollToCenter(y: CGFloat) {
+        let centerOffset = CGPoint(x: 0, y: y)
+        setContentOffset(centerOffset, animated: false)
+    }
+    
 }
