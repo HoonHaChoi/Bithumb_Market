@@ -78,14 +78,14 @@ extension TransactionTableViewCell {
             
             timeLabel.topAnchor.constraint(equalTo: self.topAnchor),
             timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             
             priceLabel.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor),
             priceLabel.trailingAnchor.constraint(equalTo: quntityLabel.leadingAnchor),
             
             quntityLabel.topAnchor.constraint(equalTo: self.topAnchor),
             quntityLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)
+            quntityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
         ])
     }
     
