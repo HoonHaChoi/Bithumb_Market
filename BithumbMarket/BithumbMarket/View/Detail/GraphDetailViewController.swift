@@ -35,19 +35,6 @@ final class GraphDetailViewController: UIViewController {
         return view
     }()
         
-    func updateGraph() {
-        DispatchQueue.main.async {
-            self.graph.closePrice = self.graphData.closePriceList
-            self.graph.openPrice = self.graphData.openPriceList
-            self.graph.maxPrice = self.graphData.maxPriceList
-            self.graph.minPrice = self.graphData.minPriceList
-            self.graph.boundMaxX = self.scrollView.bounds.maxX
-            self.graph.boundMinX = self.scrollView.bounds.minX
-            self.graph.date = self.graphData.dateList
-            self.graph.layer.setNeedsDisplay()
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -62,9 +49,18 @@ final class GraphDetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-
-    deinit {
-        print(#function)
+    
+    func updateGraph() {
+        DispatchQueue.main.async {
+            self.graph.closePrice = self.graphData.closePriceList
+            self.graph.openPrice = self.graphData.openPriceList
+            self.graph.maxPrice = self.graphData.maxPriceList
+            self.graph.minPrice = self.graphData.minPriceList
+            self.graph.boundMaxX = self.scrollView.bounds.maxX
+            self.graph.boundMinX = self.scrollView.bounds.minX
+            self.graph.date = self.graphData.dateList
+            self.graph.layer.setNeedsDisplay()
+        }
     }
     
 }

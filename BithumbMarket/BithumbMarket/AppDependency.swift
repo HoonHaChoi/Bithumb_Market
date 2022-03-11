@@ -57,6 +57,7 @@ struct AppDependency {
         let detailViewModel = DetailViewModel(storage: likeStorage)
         let graphViewModel = GraphViewModel(service: service, storage: graphStorage)
         
+        currentMarketPriceViewModel.price.bind = detailViewController.updatePriceView
         detailViewController.sendMessageHanlder = currentMarketPriceViewModel.sendMessage
         detailViewController.disconnectHandler = currentMarketPriceViewModel.disconnect
         
@@ -74,9 +75,7 @@ struct AppDependency {
         
         detailViewController.passGraphHandler = graphViewModel.passGraphData
         graphViewModel.passGraphDataHandler = detailViewController.showGraphDetailViewController
-        
-        currentMarketPriceViewModel.price.subscribe(bind: detailViewController.updatePriceView)
-        
+
         assetsStatusViewModel.errorHandler = detailViewController.showError
         detailViewModel.errorHandler = detailViewController.showError
         graphViewModel.errorHandler = detailViewController.showError
@@ -89,7 +88,6 @@ struct AppDependency {
             service: service,
             symbol: ticker.paymentCurrency)
         let transactionViewController = TransactionViewController(datasource: .init())
-        
         transactionViewModel.updateTableHandler = transactionViewController.updateTableView
         transactionViewController.fetchTransactionHandler = transactionViewModel.fetchTransaction
         transactionViewController.disconnectHandler = transactionViewModel.disconnect
