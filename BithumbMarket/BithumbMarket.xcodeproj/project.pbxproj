@@ -90,6 +90,8 @@
 		BF904B8827DBC7E9001C651F /* OrderbookViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF904B8727DBC7E9001C651F /* OrderbookViewModelTest.swift */; };
 		BF904B8927DBC831001C651F /* OrderbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005927CC9B4B00752ABA /* OrderbookViewModel.swift */; };
 		BF904B8A27DBC842001C651F /* OrderbookNameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E005627CC9B4B00752ABA /* OrderbookNameSpace.swift */; };
+		BF904B8B27DBDC5F001C651F /* AssetsStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CF627D0661000C06084 /* AssetsStatusViewModel.swift */; };
+		BF904B8D27DBDC80001C651F /* AssetsStatusViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF904B8C27DBDC80001C651F /* AssetsStatusViewModelTest.swift */; };
 		BF9A70B927D89D95002DDBEA /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A70B827D89D95002DDBEA /* UserDefaults+Extension.swift */; };
 		BF9A70BB27D9EB98002DDBEA /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A70BA27D9EB98002DDBEA /* NavigationController.swift */; };
 		BF9A70F727DA519D002DDBEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A70F627DA519D002DDBEA /* BaseViewController.swift */; };
@@ -199,6 +201,7 @@
 		BF904B6727DBB57C001C651F /* MockAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIService.swift; sourceTree = "<group>"; };
 		BF904B8427DBB783001C651F /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		BF904B8727DBC7E9001C651F /* OrderbookViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderbookViewModelTest.swift; sourceTree = "<group>"; };
+		BF904B8C27DBDC80001C651F /* AssetsStatusViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsStatusViewModelTest.swift; sourceTree = "<group>"; };
 		BF9A70B827D89D95002DDBEA /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		BF9A70BA27D9EB98002DDBEA /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		BF9A70F627DA519D002DDBEA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -437,6 +440,7 @@
 				BF904B6727DBB57C001C651F /* MockAPIService.swift */,
 				BF904B6027DBB561001C651F /* TransactionViewModelTests.swift */,
 				BF904B8727DBC7E9001C651F /* OrderbookViewModelTest.swift */,
+				BF904B8C27DBDC80001C651F /* AssetsStatusViewModelTest.swift */,
 			);
 			path = BithumbMarketTests;
 			sourceTree = "<group>";
@@ -687,6 +691,7 @@
 				BF904B7327DBB623001C651F /* Orderbook.swift in Sources */,
 				BF904B7527DBB623001C651F /* ReceiveTicker.swift in Sources */,
 				BF904B7C27DBB649001C651F /* Observable.swift in Sources */,
+				BF904B8B27DBDC5F001C651F /* AssetsStatusViewModel.swift in Sources */,
 				BF904B7927DBB623001C651F /* CurrentMarketPrice.swift in Sources */,
 				BF904B6A27DBB5F8001C651F /* SocketService.swift in Sources */,
 				BF904B6827DBB57C001C651F /* MockAPIService.swift in Sources */,
@@ -695,6 +700,7 @@
 				BF904B7F27DBB649001C651F /* ChartIntervals.swift in Sources */,
 				BF904B8227DBB66A001C651F /* Double+Extension.swift in Sources */,
 				BF904B7A27DBB623001C651F /* ReceiveOrderbook.swift in Sources */,
+				BF904B8D27DBDC80001C651F /* AssetsStatusViewModelTest.swift in Sources */,
 				BF904B7727DBB623001C651F /* Ticker.swift in Sources */,
 				BF904B6B27DBB5F8001C651F /* HTTPError.swift in Sources */,
 				BF904B7D27DBB649001C651F /* ChangeState.swift in Sources */,
