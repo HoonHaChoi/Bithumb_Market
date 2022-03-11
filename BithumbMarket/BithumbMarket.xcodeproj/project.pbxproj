@@ -85,6 +85,8 @@
 		BF904B8127DBB666001C651F /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B927C8BB5600C50FA3 /* String+Extension.swift */; };
 		BF904B8227DBB66A001C651F /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D214127CE919C007F0DCE /* Double+Extension.swift */; };
 		BF904B8327DBB675001C651F /* NumberFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E004927CC9B1400752ABA /* NumberFormatter+Extension.swift */; };
+		BF904B8527DBB783001C651F /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF904B8427DBB783001C651F /* DummyData.swift */; };
+		BF904B8627DBBAA0001C651F /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B427C8745100C50FA3 /* TransactionViewModel.swift */; };
 		BF9A70B927D89D95002DDBEA /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A70B827D89D95002DDBEA /* UserDefaults+Extension.swift */; };
 		BF9A70BB27D9EB98002DDBEA /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A70BA27D9EB98002DDBEA /* NavigationController.swift */; };
 		BF9A70F727DA519D002DDBEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A70F627DA519D002DDBEA /* BaseViewController.swift */; };
@@ -192,6 +194,7 @@
 		BF904B5E27DBB561001C651F /* BithumbMarketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BithumbMarketTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF904B6027DBB561001C651F /* BithumbMarketTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbMarketTests.swift; sourceTree = "<group>"; };
 		BF904B6727DBB57C001C651F /* MockAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIService.swift; sourceTree = "<group>"; };
+		BF904B8427DBB783001C651F /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		BF9A70B827D89D95002DDBEA /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		BF9A70BA27D9EB98002DDBEA /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		BF9A70F627DA519D002DDBEA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -427,6 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				BF904B6727DBB57C001C651F /* MockAPIService.swift */,
+				BF904B8427DBB783001C651F /* DummyData.swift */,
 				BF904B6027DBB561001C651F /* BithumbMarketTests.swift */,
 			);
 			path = BithumbMarketTests;
@@ -689,6 +693,8 @@
 				BF904B7D27DBB649001C651F /* ChangeState.swift in Sources */,
 				BF904B7227DBB623001C651F /* GraphData.swift in Sources */,
 				BF904B6127DBB561001C651F /* BithumbMarketTests.swift in Sources */,
+				BF904B8527DBB783001C651F /* DummyData.swift in Sources */,
+				BF904B8627DBBAA0001C651F /* TransactionViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

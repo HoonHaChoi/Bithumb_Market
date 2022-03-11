@@ -11,10 +11,10 @@ final class TransactionViewModel {
     
     private(set) var transactionData: Observable<[TransactionData]>
     private let symbol: String
-    private let service: APIService
+    private let service: Serviceable
     private var socket: SocketService?
     
-    init(service: APIService, symbol: String) {
+    init(service: Serviceable, symbol: String) {
         self.transactionData = .init([])
         self.service = service
         self.symbol = symbol
