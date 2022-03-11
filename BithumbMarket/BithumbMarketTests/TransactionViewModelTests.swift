@@ -48,7 +48,7 @@ class TransactionViewModelTests: XCTestCase {
         
         transactionViewModel.errorHandler = error
         transactionViewModel.fetchTransaction()
-        transactionViewModel.
+        
         XCTAssertTrue(transactionViewModel.transactionData.value.isEmpty)
     }
     
