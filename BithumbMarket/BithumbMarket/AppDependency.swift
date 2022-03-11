@@ -11,7 +11,6 @@ struct AppDependency {
     
     let service = APIService()
     let likeStorage = LikeStorge()
-    let graphStorage = GraphStorage()
     
     func detailViewControllerFactory(ticker: Ticker) -> DetailViewController {
         return initialDetailViewController(ticker: ticker)
@@ -46,6 +45,7 @@ struct AppDependency {
     }
     
     private func initialDetailViewController(ticker: Ticker) -> DetailViewController {
+        let graphStorage = GraphStorage()
         let detailViewController = DetailViewController(ticker: ticker,
                                                         transactionViewControllerFactory: transactionViewControllerFactory,
                                                         orderbookViewControllerFactory: orderbookViewControllerFactory,
