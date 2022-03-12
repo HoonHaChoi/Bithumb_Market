@@ -17,11 +17,11 @@ class AssetsStatusViewModelTest: XCTestCase {
         let service = MockAssetsStatusAPIService(isSuccess: true, index: 0)
         let viewmodel = AssetsStatusViewModel(service: service, symbol: "")
         
-        let status: ((AssetsState) -> Void)? = {
+        let resultStatus: ((AssetsState) -> Void)? = {
             XCTAssertEqual($0, .impossible)
         }
         
-        viewmodel.assetsStateHandler = status
+        viewmodel.assetsStateHandler = resultStatus
         viewmodel.fetchAssetsStatus()
     }
     
@@ -29,11 +29,11 @@ class AssetsStatusViewModelTest: XCTestCase {
         let service = MockAssetsStatusAPIService(isSuccess: true, index: 1)
         let viewmodel = AssetsStatusViewModel(service: service, symbol: "")
         
-        let status: ((AssetsState) -> Void)? = {
+        let resultStatus: ((AssetsState) -> Void)? = {
             XCTAssertEqual($0, .possibleWithdrawal)
         }
         
-        viewmodel.assetsStateHandler = status
+        viewmodel.assetsStateHandler = resultStatus
         viewmodel.fetchAssetsStatus()
     }
 
@@ -41,23 +41,35 @@ class AssetsStatusViewModelTest: XCTestCase {
         let service = MockAssetsStatusAPIService(isSuccess: true, index: 2)
         let viewmodel = AssetsStatusViewModel(service: service, symbol: "")
         
-        let status: ((AssetsState) -> Void)? = {
+        let resultStatus: ((AssetsState) -> Void)? = {
             XCTAssertEqual($0, .possibleDeposit)
         }
         
-        viewmodel.assetsStateHandler = status
+        viewmodel.assetsStateHandler = resultStatus
         viewmodel.fetchAssetsStatus()
     }
     
-    func test_입출금가능() throws {
+    func test_입출금_가능() throws {
         let service = MockAssetsStatusAPIService(isSuccess: true, index: 3)
         let viewmodel = AssetsStatusViewModel(service: service, symbol: "")
         
-        let status: ((AssetsState) -> Void)? = {
+        let resultStatus: ((AssetsState) -> Void)? = {
             XCTAssertEqual($0, .possibleAll)
         }
         
-        viewmodel.assetsStateHandler = status
+        viewmodel.assetsStateHandler = resultStatus
+        viewmodel.fetchAssetsStatus()
+    }
+    
+    func test_요청실패() throws {
+        let service = MockAssetsStatusAPIService(isSuccess: false, index: 0)
+        let viewmodel = AssetsStatusViewModel(service: service, symbol: "")
+        
+        let resultError: (HTTPError) -> Void = { error in
+            XCTAssertEqual(error.errorDescription, "연결에 실패 하였습니다.")
+        }
+    
+        viewmodel.errorHandler = resultError
         viewmodel.fetchAssetsStatus()
     }
     
