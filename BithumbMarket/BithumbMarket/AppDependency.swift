@@ -100,6 +100,7 @@ struct AppDependency {
     
     private func initialOrderbookViewController(ticker: Ticker) -> OrderbookViewController {
         let orderbookViewModel = OrderbookViewModel(service: service,
+                                                    socket: SocketService(),
                                                     symbol: ticker.paymentCurrency)
         let orderbookViewController = OrderbookViewController(dataSource: .init())
         orderbookViewController.disconnectHandler = orderbookViewModel.disconnect

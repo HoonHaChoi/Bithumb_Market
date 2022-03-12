@@ -12,13 +12,14 @@ final class OrderbookViewModel {
     private(set) var orderbook: Observable<OrderbookData>
     private let symbol: String
     private let service: Serviceable
-    private var socket: SocketService?
+    private let socket: SocketServiceable
     
-    init(service: Serviceable, symbol: String) {
+    init(service: Serviceable, socket: SocketServiceable, symbol: String) {
         self.orderbook = .init(OrderbookData(
             asks: [],
             bids: []))
         self.service = service
+        self.socket = socket
         self.symbol = symbol
     }
     
@@ -41,17 +42,16 @@ final class OrderbookViewModel {
     }
     
     private func sendMessage(completion: @escaping () -> Void) {
-        self.socket = SocketService()
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let symbol = self?.symbol else { return }
             let message = Message(type: .orderbookdepth, symbols: .name(symbol))
-            self?.socket?.sendMessage(message: message)
+            self?.socket.sendMessage(message: message)
         }
         completion()
     }
     
     private func updateOrderbook() {
-        self.socket?.perform { [weak self] (result: Result<ReceiveOrderbook, HTTPError>) in
+        socket.perform { [weak self] (result: Result<ReceiveOrderbook, HTTPError>) in
             switch result {
             case .success(let success):
                 guard let self = self else { return }
@@ -95,8 +95,7 @@ final class OrderbookViewModel {
     }
     
     func disconnect() {
-        socket?.disconnect()
-        socket = nil
+        socket.disconnect()
     }
     
 }
