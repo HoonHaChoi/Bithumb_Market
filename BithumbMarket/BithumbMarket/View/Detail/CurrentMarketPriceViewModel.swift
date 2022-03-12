@@ -23,6 +23,7 @@ final class CurrentMarketPriceViewModel {
     func createSocket(_ socket: SocketServiceable) {
         self.socket = socket
         sendMessage()
+        updatePrice()
     }
     
     private func sendMessage() {
@@ -30,7 +31,6 @@ final class CurrentMarketPriceViewModel {
             guard let self = self else { return }
             let message = Message(type: .ticker, symbols: .name(self.symbol), tickTypes: .twentyfourHour)
             self.socket?.sendMessage(message: message)
-            self.updatePrice()
         }
     }
     

@@ -32,22 +32,20 @@ final class TransactionViewModel {
             case .success(let transaction):
                 self.transactionData.value = transaction.data
                 self.updateTableHandler?()
-                self.sendMessage {
-                    self.updateTransaction()
-                }
+                self.sendMessage()
+                self.updateTransaction()
             case.failure(let error):
                 self.errorHandler?(error)
             }
         }
     }
     
-    private func sendMessage(completion: @escaping () -> Void) {
+    private func sendMessage() {
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self = self else { return }
             let message = Message(type: .transaction, symbols: .name(self.symbol))
             self.socket.sendMessage(message: message)
         }
-        completion()
     }
     
     private func updateTransaction() {

@@ -32,22 +32,20 @@ final class OrderbookViewModel {
             case .success(let success):
                 self?.orderbook.value = success.data
                 self?.updateHandler?()
-                self?.sendMessage {
-                    self?.updateOrderbook()
-                }
+                self?.sendMessage()
+                self?.updateOrderbook()
             case .failure(let error):
                 self?.errorHandler?(error)
             }
         }
     }
     
-    private func sendMessage(completion: @escaping () -> Void) {
+    private func sendMessage() {
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let symbol = self?.symbol else { return }
             let message = Message(type: .orderbookdepth, symbols: .name(symbol))
             self?.socket.sendMessage(message: message)
         }
-        completion()
     }
     
     private func updateOrderbook() {
