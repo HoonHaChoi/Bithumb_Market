@@ -24,14 +24,15 @@ struct DummyData {
     
     let orderbook: Orderbook = Orderbook(data: OrderbookData(asks: [Order(quantity: "1", price: "1")],
                                                              bids: [Order(quantity: "11111", price: "11111")]))
-        
-    let receiveTransaction = ReceiveTransaction(type: "", content: TransactionContent(list: [TransactionList(buySellGb: "1",
-                                                                                                             contPrice: "1",
-                                                                                                             contQty: "100",
-                                                                                                             contAmt: "100.0",
-                                                                                                             contDtm: "2022-01-29",
-                                                                                                             updn: "dn",
-                                                                                                             symbol: "Fake_KRW")]))
+    
+    let receiveTransaction = ReceiveTransaction(type: "",
+                                                content: TransactionContent(list: [TransactionList(buySellGb: "1",
+                                                                                                   contPrice: "1",
+                                                                                                   contQty: "100",
+                                                                                                   contAmt: "100.0",
+                                                                                                   contDtm: "2022-01-29",
+                                                                                                   updn: "dn",
+                                                                                                   symbol: "Fake_KRW")]))
     let receiveTicker = ReceiveTicker(type: "", content: Content(openPrice: "1000",
                                                                  closePrice: "1500",
                                                                  symbol: "Fake_KRW",
