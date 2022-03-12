@@ -9,7 +9,7 @@ import Foundation
 
 struct MockLikeStorage: LikeStorgeType {
     
-    var isSuccess: Bool
+    var isSuccess: Bool = true 
     var likes: [String] = ["ASD", "ZXC"]
 
     func fetch() -> Result<[String], CoreDataError> {

@@ -71,10 +71,8 @@ struct DummyData {
     func makeDummydata<T: Decodable>(type: T.Type) -> T {
         if Transaction.self == T.self {
             return transaction as! T
-        } else if Orderbook.self == T.self {
-            return orderbook as! T
         } else {
-            return tickers as! T
+            return orderbook as! T
         }
     }
     
