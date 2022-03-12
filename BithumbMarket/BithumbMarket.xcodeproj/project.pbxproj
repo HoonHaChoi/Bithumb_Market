@@ -119,6 +119,7 @@
 		BFDE911827D7447900CC4FF5 /* GraphData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE911727D7447900CC4FF5 /* GraphData.swift */; };
 		BFDE916827D79EA600CC4FF5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE916727D79EA600CC4FF5 /* LoadingView.swift */; };
 		BFFCA5EB27DC5C8800BDE401 /* MockSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFCA5EA27DC5C8800BDE401 /* MockSocketService.swift */; };
+		BFFCA5ED27DC7AA500BDE401 /* MockOrderbookSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFCA5EC27DC7AA500BDE401 /* MockOrderbookSocketService.swift */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
@@ -222,6 +223,7 @@
 		BFDE911727D7447900CC4FF5 /* GraphData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphData.swift; sourceTree = "<group>"; };
 		BFDE916727D79EA600CC4FF5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		BFFCA5EA27DC5C8800BDE401 /* MockSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSocketService.swift; sourceTree = "<group>"; };
+		BFFCA5EC27DC7AA500BDE401 /* MockOrderbookSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOrderbookSocketService.swift; sourceTree = "<group>"; };
 		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E8AC90B027C8700500C50FA3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				BF904B6727DBB57C001C651F /* MockAPIService.swift */,
 				BFFCA5EA27DC5C8800BDE401 /* MockSocketService.swift */,
 				BF904B8E27DBE0D0001C651F /* MockAssetsStatusAPIService.swift */,
+				BFFCA5EC27DC7AA500BDE401 /* MockOrderbookSocketService.swift */,
 				BF904B6027DBB561001C651F /* TransactionViewModelTests.swift */,
 				BF904B8727DBC7E9001C651F /* OrderbookViewModelTest.swift */,
 				BF904B8C27DBDC80001C651F /* AssetsStatusViewModelTest.swift */,
@@ -704,6 +707,7 @@
 				BF904B6827DBB57C001C651F /* MockAPIService.swift in Sources */,
 				BF904B7427DBB623001C651F /* Market.swift in Sources */,
 				BF904B6927DBB5F8001C651F /* APIService.swift in Sources */,
+				BFFCA5ED27DC7AA500BDE401 /* MockOrderbookSocketService.swift in Sources */,
 				BF904B7F27DBB649001C651F /* ChartIntervals.swift in Sources */,
 				BF904B8227DBB66A001C651F /* Double+Extension.swift in Sources */,
 				BF904B7A27DBB623001C651F /* ReceiveOrderbook.swift in Sources */,

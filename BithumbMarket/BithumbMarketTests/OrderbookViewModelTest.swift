@@ -21,28 +21,69 @@ class OrderbookViewModelTest: XCTestCase {
 
     override func tearDownWithError() throws {
         service = nil
+        socket = nil
         orderbookViewModel = nil
     }
 
-    func test_호가_요청성공() throws {
+    func test_네트워크정상_새로운매도_호가데이터_추가() throws {
+        let receiveOrderbook = ReceiveOrderbook(content: ReceiveOrderList(list: [ReceiveOrder(orderType: "ask",
+                                                                                                     price: "10000",
+                                                                                                     quantity: "10",
+                                                                                                     total: "0")]))
+        socket = MockOrderbookSocketService(receiveOrderbook: receiveOrderbook)
+        orderbookViewModel = OrderbookViewModel(service: service, socket: socket, symbol: "")
+        
+        orderbookViewModel.fetchOrderbook()
+        
+        let resultAskFirstPrice = orderbookViewModel.orderbook.value.asks[1].price
+        let resultAskFirstQuantity = orderbookViewModel.orderbook.value.asks[1].quantity
+        let resultAskSecondPrice = orderbookViewModel.orderbook.value.asks[0].price
+        let resultAskSecondQuantity = orderbookViewModel.orderbook.value.asks[0].quantity
+        
+        let expectationAskFirstPrice = "1"
+        let expectationAskFirstQuantity = "1"
+        let expectationAskSecondPrice = "10000"
+        let expectationAskSecondQuantity = "10"
+    
+        XCTAssertEqual(resultAskFirstPrice, expectationAskFirstPrice)
+        XCTAssertEqual(resultAskFirstQuantity, expectationAskFirstQuantity)
+        XCTAssertEqual(resultAskSecondPrice, expectationAskSecondPrice)
+        XCTAssertEqual(resultAskSecondQuantity, expectationAskSecondQuantity)
+    }
+    
+    func test_네트워크정상_같은가격_매도_호가데이터_quantity_0인경우() throws {
+        let receiveOrderbook = ReceiveOrderbook(content: ReceiveOrderList(list: [ReceiveOrder(orderType: "ask",
+                                                                                                     price: "1",
+                                                                                                     quantity: "0",
+                                                                                                     total: "0")]))
+        socket = MockOrderbookSocketService(receiveOrderbook: receiveOrderbook)
+        orderbookViewModel = OrderbookViewModel(service: service, socket: socket, symbol: "")
+        
+        orderbookViewModel.fetchOrderbook()
+        
+        XCTAssertTrue(orderbookViewModel.orderbook.value.asks.isEmpty)
+    }
+    
+    func test_네트워크정상_같은가격_매도_호가데이터_quantity_다른경우() throws {
+        let receiveOrderbook = ReceiveOrderbook(content: ReceiveOrderList(list: [ReceiveOrder(orderType: "ask",
+                                                                                                     price: "1",
+                                                                                                     quantity: "50",
+                                                                                                     total: "0")]))
+        socket = MockOrderbookSocketService(receiveOrderbook: receiveOrderbook)
+        orderbookViewModel = OrderbookViewModel(service: service, socket: socket, symbol: "")
+        
         orderbookViewModel.fetchOrderbook()
         
         let resultAskPrice = orderbookViewModel.orderbook.value.asks[0].price
         let resultAskQuantity = orderbookViewModel.orderbook.value.asks[0].quantity
-        let resultBidsPrice = orderbookViewModel.orderbook.value.bids[0].price
-        let resultBidsQuantity = orderbookViewModel.orderbook.value.bids[0].quantity
         
         let expectationAskPrice = "1"
-        let expectationAskQuantity = "1"
-        let expectationBidsPrice = "11111"
-        let expectationBidsQuantity = "11111"
+        let expectationAskQuantity = "50"
         
-        print(orderbookViewModel.orderbook.value)
         XCTAssertEqual(resultAskPrice, expectationAskPrice)
         XCTAssertEqual(resultAskQuantity, expectationAskQuantity)
-        XCTAssertEqual(resultBidsPrice, expectationBidsPrice)
-        XCTAssertEqual(resultBidsQuantity, expectationBidsQuantity)
     }
+    
 
     func test_API네트워크_요청실패() throws {
         service = MockAPIService(isSuccess: false)
