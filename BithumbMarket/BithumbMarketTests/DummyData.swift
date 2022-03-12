@@ -45,11 +45,36 @@ struct DummyData {
                                                                  chgAmt: "500",
                                                                  volumePower: "50.00"))
     
+    let tickers = [Ticker(symbol: "Fake_KRW", market: Market(openingPrice: "10",
+                                                            closingPrice: "12",
+                                                            minPrice: "10",
+                                                            maxPrice: "15",
+                                                            unitsTraded: "",
+                                                            accTradeValue: "",
+                                                            prevClosingPrice: "",
+                                                            unitsTraded24H: "",
+                                                            accTradeValue24H: "",
+                                                            fluctate24H: "10",
+                                                            fluctateRate24H: "10")),
+                  .init(symbol: "Faker_KRW", market: Market(openingPrice: "20",
+                                                            closingPrice: "25",
+                                                            minPrice: "15",
+                                                            maxPrice: "30",
+                                                            unitsTraded: "",
+                                                            accTradeValue: "",
+                                                            prevClosingPrice: "",
+                                                            unitsTraded24H: "",
+                                                            accTradeValue24H: "",
+                                                            fluctate24H: "5",
+                                                            fluctateRate24H: "5"))]
+                  
     func makeDummydata<T: Decodable>(type: T.Type) -> T {
         if Transaction.self == T.self {
             return transaction as! T
-        } else {
+        } else if Orderbook.self == T.self {
             return orderbook as! T
+        } else {
+            return tickers as! T
         }
     }
     
