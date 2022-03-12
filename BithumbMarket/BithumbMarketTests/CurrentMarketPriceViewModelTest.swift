@@ -19,9 +19,13 @@ class CurrentMarketPriceViewModelTest: XCTestCase {
         currentMarketPriceViewModel = nil
     }
 
-    func test_네트워크정상_소켓데이터_값으로_변경() throws {
+    func test_네트워크정상_소켓데이터_응답시_가격변경() throws {
         let socket = MockSocketService(isSuccess: true)
         currentMarketPriceViewModel.createSocket(socket)
+        
+        XCTAssertTrue(self.currentMarketPriceViewModel.price.value.currentPrice.isEmpty)
+        XCTAssertTrue(self.currentMarketPriceViewModel.price.value.changePrice.isEmpty)
+        XCTAssertTrue(self.currentMarketPriceViewModel.price.value.changeRate.isEmpty)
         
         let expectation = XCTestExpectation(description: "sendMessage")
         DispatchQueue.global().asyncAfter(deadline: .now() + 1.1) {
@@ -42,18 +46,17 @@ class CurrentMarketPriceViewModelTest: XCTestCase {
         let socket = MockSocketService(isSuccess: false)
         currentMarketPriceViewModel.createSocket(socket)
         
+        var resultError: Error?
+        let executeError: (Error) -> Void = { error in
+            resultError = error
+        }
+        currentMarketPriceViewModel.errorHandler = executeError
+        
         let expectation = XCTestExpectation(description: "sendMessage")
         DispatchQueue.global().asyncAfter(deadline: .now() + 1.1) {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 3)
-        
-        var resultError: Error?
-        let executeError: (Error) -> Void = { error in
-            resultError = error
-        }
-        
-        currentMarketPriceViewModel.errorHandler = executeError
         
         XCTAssertEqual(resultError?.localizedDescription, "연결에 실패 하였습니다.")
     }

@@ -74,7 +74,7 @@ class TransactionViewModelTests: XCTestCase {
         XCTAssertTrue(transactionViewModel.transactionData.value.isEmpty)
     }
     
-    func test_Socket네트워크_요청실패() throws {
+    func test_API네트워크정상_Socket네트워크_요청실패() throws {
         service = MockAPIService(isSuccess: true)
         socketService = MockSocketService(isSuccess: false)
         transactionViewModel = TransactionViewModel(service: service, socket: socketService , symbol: "")

@@ -102,7 +102,7 @@ class OrderbookViewModelTest: XCTestCase {
         XCTAssertTrue(orderbookViewModel.orderbook.value.bids.isEmpty)
     }
     
-    func test_Socket네트워크_요청실패() throws {
+    func test_API네트워크정상_Socket네트워크_요청실패() throws {
         socket = MockSocketService(isSuccess: false)
         orderbookViewModel = OrderbookViewModel(service: service, socket: socket, symbol: "")
         
