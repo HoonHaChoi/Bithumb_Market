@@ -7,7 +7,14 @@
 
 import CoreData
 
-final class LikeStorge {
+protocol LikeStorgeType {
+    func fetch() -> Result<[Like], CoreDataError>
+    @discardableResult func save(symbol: String) -> Result<Bool, CoreDataError>
+    @discardableResult func delete(symbol: String) -> Result<Bool, CoreDataError>
+    @discardableResult func find(symbol: String) -> Bool
+}
+
+final class LikeStorge: LikeStorgeType {
     
     private let storageKey = "LikeSymbol"
     

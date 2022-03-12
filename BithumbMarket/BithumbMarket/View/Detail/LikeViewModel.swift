@@ -9,9 +9,9 @@ import Foundation
 
 final class LikeViewModel {
     
-    private let storage: LikeStorge
+    private let storage: LikeStorgeType
     
-    init(storage: LikeStorge) {
+    init(storage: LikeStorgeType) {
         self.storage = storage
     }
     
