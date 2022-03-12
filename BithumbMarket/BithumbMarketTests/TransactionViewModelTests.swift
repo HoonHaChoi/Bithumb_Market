@@ -57,19 +57,38 @@ class TransactionViewModelTests: XCTestCase {
         
     }
     
-    func test_채결내역_요청실패() throws {
+    func test_API네트워크_요청실패() throws {
         service = MockAPIService(isSuccess: false)
-        socketService = MockSocketService()
+        socketService = MockSocketService(isSuccess: true)
         transactionViewModel = TransactionViewModel(service: service, socket: socketService , symbol: "")
 
-        let error: (Error) -> Void = { error in
-            XCTAssertEqual(error.localizedDescription, "연결에 실패 하였습니다.")
+        var resultError: Error?
+        let executeError: (Error) -> Void = { error in
+            resultError = error
         }
         
-        transactionViewModel.errorHandler = error
+        transactionViewModel.errorHandler = executeError
         transactionViewModel.fetchTransaction()
         
+        XCTAssertEqual(resultError?.localizedDescription, "연결에 실패 하였습니다.")
         XCTAssertTrue(transactionViewModel.transactionData.value.isEmpty)
     }
     
+    func test_Socket네트워크_요청실패() throws {
+        service = MockAPIService(isSuccess: true)
+        socketService = MockSocketService(isSuccess: false)
+        transactionViewModel = TransactionViewModel(service: service, socket: socketService , symbol: "")
+
+        var resultError: Error?
+        let executeError: (Error) -> Void = { error in
+            resultError = error
+        }
+        
+        transactionViewModel.errorHandler = executeError
+        transactionViewModel.fetchTransaction()
+        
+        XCTAssertEqual(resultError?.localizedDescription, "연결에 실패 하였습니다.")
+        XCTAssertFalse(transactionViewModel.transactionData.value.isEmpty)
+    }
+
 }
