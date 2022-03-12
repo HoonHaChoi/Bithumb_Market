@@ -53,7 +53,7 @@ struct AppDependency {
         let currentMarketPriceViewModel = CurrentMarketPriceViewModel(symbol: ticker.paymentCurrency)
         let assetsStatusViewModel = AssetsStatusViewModel(service: service,
                                                           symbol: ticker.paymentCurrency)
-        let detailViewModel = DetailViewModel(storage: likeStorage)
+        let detailViewModel = LikeViewModel(storage: likeStorage)
         let graphViewModel = GraphViewModel(service: service, storage: graphStorage)
         
         currentMarketPriceViewModel.price.bind = detailViewController.updatePriceView

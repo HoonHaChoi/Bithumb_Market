@@ -34,7 +34,7 @@
 		7FBD63E927D62AED00C9801C /* TableEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63E727D62AED00C9801C /* TableEmptyView.swift */; };
 		7FBD63EB27D62B3300C9801C /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63EA27D62B3300C9801C /* TickerCell.swift */; };
 		7FBD63ED27D62C9100C9801C /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63EC27D62C8B00C9801C /* GraphViewModel.swift */; };
-		7FBD63EF27D62CF300C9801C /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63EE27D62CF200C9801C /* DetailViewModel.swift */; };
+		7FBD63EF27D62CF300C9801C /* LikeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63EE27D62CF200C9801C /* LikeViewModel.swift */; };
 		7FBD63FA27D62DD300C9801C /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F327D62D9E00C9801C /* CoreDataError.swift */; };
 		7FBD63FB27D62DD700C9801C /* LikeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F427D62D9E00C9801C /* LikeStorage.swift */; };
 		7FBD63FC27D62DDB00C9801C /* Like+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F827D62D9E00C9801C /* Like+CoreDataClass.swift */; };
@@ -176,7 +176,7 @@
 		7FBD63E727D62AED00C9801C /* TableEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableEmptyView.swift; sourceTree = "<group>"; };
 		7FBD63EA27D62B3300C9801C /* TickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerCell.swift; sourceTree = "<group>"; };
 		7FBD63EC27D62C8B00C9801C /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
-		7FBD63EE27D62CF200C9801C /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		7FBD63EE27D62CF200C9801C /* LikeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewModel.swift; sourceTree = "<group>"; };
 		7FBD63F327D62D9E00C9801C /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		7FBD63F427D62D9E00C9801C /* LikeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeStorage.swift; sourceTree = "<group>"; };
 		7FBD63F727D62D9E00C9801C /* LikeEntity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LikeEntity.xcdatamodel; sourceTree = "<group>"; };
@@ -391,7 +391,7 @@
 				7F844CFE27D0A92000C06084 /* CurrentMarketPriceViewModel.swift */,
 				7F844CF627D0661000C06084 /* AssetsStatusViewModel.swift */,
 				7FBD63EC27D62C8B00C9801C /* GraphViewModel.swift */,
-				7FBD63EE27D62CF200C9801C /* DetailViewModel.swift */,
+				7FBD63EE27D62CF200C9801C /* LikeViewModel.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -605,7 +605,7 @@
 				7F8CC4AB27DA6E3800602A52 /* UIScrollview+Extension.swift in Sources */,
 				7F34013927D88F2A00511464 /* GraphDetailViewController.swift in Sources */,
 				7F2A6BC827D7B7AC00486F36 /* AppDependency.swift in Sources */,
-				7FBD63EF27D62CF300C9801C /* DetailViewModel.swift in Sources */,
+				7FBD63EF27D62CF300C9801C /* LikeViewModel.swift in Sources */,
 				7FBD63EB27D62B3300C9801C /* TickerCell.swift in Sources */,
 				BFDE910727D6FB8900CC4FF5 /* GraphStorage.xcdatamodeld in Sources */,
 				7FBD63E827D62AED00C9801C /* MainViewNameSpace.swift in Sources */,

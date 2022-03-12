@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DetailViewModel {
+final class LikeViewModel {
     
     private let storage: LikeStorge
     
