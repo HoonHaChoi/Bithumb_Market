@@ -86,6 +86,7 @@ struct AppDependency {
     private func initialTransactionViewController(ticker: Ticker) -> TransactionViewController {
         let transactionViewModel = TransactionViewModel(
             service: service,
+            socket: SocketService(),
             symbol: ticker.paymentCurrency)
         let transactionViewController = TransactionViewController(datasource: .init())
         transactionViewModel.updateTableHandler = transactionViewController.updateTableView

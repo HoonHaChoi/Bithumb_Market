@@ -8,7 +8,13 @@
 import Foundation
 import Starscream
 
-final class SocketService {
+protocol SocketServiceable {
+    func sendMessage(message: Message)
+    func perform<T: Decodable>(completion: @escaping (Result<T, HTTPError>) -> Void)
+    func disconnect()
+}
+
+final class SocketService: SocketServiceable {
     
     private var webSocket: WebSocket
     
@@ -29,7 +35,7 @@ final class SocketService {
         webSocket.forceDisconnect()
     }
     
-    func reciveText(completion: @escaping (String) -> Void) {
+    private func reciveText(completion: @escaping (String) -> Void) {
         webSocket.onEvent = { [weak self] result in
             switch result {
             case .text(let string):
