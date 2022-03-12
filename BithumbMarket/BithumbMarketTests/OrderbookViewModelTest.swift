@@ -11,10 +11,12 @@ class OrderbookViewModelTest: XCTestCase {
     
     var orderbookViewModel: OrderbookViewModel!
     var service: Serviceable!
+    var socket: SocketServiceable!
     
     override func setUpWithError() throws {
         service = MockAPIService()
-        orderbookViewModel = OrderbookViewModel(service: service, symbol: "")
+        socket = MockSocketService()
+        orderbookViewModel = OrderbookViewModel(service: service, socket: socket, symbol: "")
     }
 
     override func tearDownWithError() throws {
@@ -35,24 +37,45 @@ class OrderbookViewModelTest: XCTestCase {
         let expectationBidsPrice = "11111"
         let expectationBidsQuantity = "11111"
         
+        print(orderbookViewModel.orderbook.value)
         XCTAssertEqual(resultAskPrice, expectationAskPrice)
         XCTAssertEqual(resultAskQuantity, expectationAskQuantity)
         XCTAssertEqual(resultBidsPrice, expectationBidsPrice)
         XCTAssertEqual(resultBidsQuantity, expectationBidsQuantity)
     }
 
-    func test_호가_요청실패() throws {
+    func test_API네트워크_요청실패() throws {
         service = MockAPIService(isSuccess: false)
-        orderbookViewModel = OrderbookViewModel(service: service, symbol: "")
+        orderbookViewModel = OrderbookViewModel(service: service, socket: socket, symbol: "")
         
-        let error: (Error) -> Void = { error in
-            XCTAssertEqual(error.localizedDescription, "연결에 실패 하였습니다.")
+        var resultError: Error?
+        let executeError: (Error) -> Void = { error in
+            resultError = error
         }
-        orderbookViewModel.errorHandler = error
+        
+        orderbookViewModel.errorHandler = executeError
         orderbookViewModel.fetchOrderbook()
         
-        XCTAssertTrue(orderbookViewModel.orderbook.value.bids.isEmpty)
+        XCTAssertEqual(resultError?.localizedDescription, "연결에 실패 하였습니다.")
         XCTAssertTrue(orderbookViewModel.orderbook.value.asks.isEmpty)
+        XCTAssertTrue(orderbookViewModel.orderbook.value.bids.isEmpty)
+    }
+    
+    func test_Socket네트워크_요청실패() throws {
+        socket = MockSocketService(isSuccess: false)
+        orderbookViewModel = OrderbookViewModel(service: service, socket: socket, symbol: "")
+        
+        var resultError: Error?
+        let executeError: (Error) -> Void = { error in
+            resultError = error
+        }
+        
+        orderbookViewModel.errorHandler = executeError
+        orderbookViewModel.fetchOrderbook()
+        
+        XCTAssertEqual(resultError?.localizedDescription, "연결에 실패 하였습니다.")
+        XCTAssertFalse(orderbookViewModel.orderbook.value.asks.isEmpty)
+        XCTAssertEqual(orderbookViewModel.orderbook.value.asks[0].price, "1")
     }
     
 }
