@@ -50,8 +50,7 @@ struct AppDependency {
                                                         transactionViewControllerFactory: transactionViewControllerFactory,
                                                         orderbookViewControllerFactory: orderbookViewControllerFactory,
         graphDetailViewControllerFactory: graphDetailViewControllerFactory(graphData:))
-        let currentMarketPriceViewModel = CurrentMarketPriceViewModel(service: service,
-                                                                      symbol: ticker.paymentCurrency)
+        let currentMarketPriceViewModel = CurrentMarketPriceViewModel(symbol: ticker.paymentCurrency)
         let assetsStatusViewModel = AssetsStatusViewModel(service: service,
                                                           symbol: ticker.paymentCurrency)
         let detailViewModel = DetailViewModel(storage: likeStorage)

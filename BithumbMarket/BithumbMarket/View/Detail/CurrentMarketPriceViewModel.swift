@@ -11,13 +11,11 @@ final class CurrentMarketPriceViewModel {
     
     private(set) var price : Observable<CurrentMarketPrice>
     private let symbol: String
-    private let service: APIService
-    private var socket: SocketService?
+    private var socket: SocketServiceable?
     
     var errorHandler: ((HTTPError) -> Void)?
     
-    init(service: APIService, symbol: String) {
-        self.service = service
+    init(symbol: String) {
         self.symbol = symbol
         self.price = .init(CurrentMarketPrice.empty)
     }
