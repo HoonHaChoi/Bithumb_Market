@@ -78,7 +78,7 @@ final class MainViewModel {
     
     private func update(index: Int, to ticker: ReceiveTicker) {
         tickers.value[index].updatePrice(to: ticker)
-        
+
         if isFilter {
             if symbols.contains(tickers.value[index].symbol) {
                 guard let filterIndex = findSymbolIndex(of: tickers.value[index].symbol) else {
@@ -102,7 +102,8 @@ final class MainViewModel {
     
     func updateFilterTickers() {
         if isFilter {
-            updateTickersHandler?(filterTickers())
+            let tickers = filterTickers()
+            updateTickersHandler?(tickers)
         } else {
             updateTickersHandler?(tickers.value)
         }

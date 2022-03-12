@@ -41,7 +41,7 @@ class LikeViewModelTest: XCTestCase {
         }
         
         likeViewModel.hasLikeHandler = executeHasLike
-        likeViewModel.hasLike(symbol: "Fake")
+        likeViewModel.hasLike(symbol: "Joke")
         
         XCTAssertEqual(resultHasLike, false)
     }
@@ -64,7 +64,7 @@ class LikeViewModelTest: XCTestCase {
         }
         
         likeViewModel.updateCompleteHandler = executeComplete
-        likeViewModel.updateLike(symbol: "Fake")
+        likeViewModel.updateLike(symbol: "Joke")
         XCTAssertEqual(resultComplete, true)
     }
     
@@ -78,7 +78,7 @@ class LikeViewModelTest: XCTestCase {
         }
         
         likeViewModel.errorHandler = executeError
-        likeViewModel.updateLike(symbol: "Fake")
+        likeViewModel.updateLike(symbol: "Joke")
         XCTAssertEqual(resultError?.localizedDescription, "저장에 실패하였습니다.")
     }
     

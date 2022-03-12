@@ -45,7 +45,7 @@ struct DummyData {
                                                                  chgAmt: "500",
                                                                  volumePower: "50.00"))
     
-    let tickers = [Ticker(symbol: "Fake_KRW", market: Market(openingPrice: "10",
+    let tickers = [Ticker(symbol: "Fake", market: Market(openingPrice: "10",
                                                             closingPrice: "12",
                                                             minPrice: "10",
                                                             maxPrice: "15",

@@ -125,12 +125,12 @@
 		BFFCA5F227DCA28400BDE401 /* MockLikeStorge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFCA5F127DCA28400BDE401 /* MockLikeStorge.swift */; };
 		BFFCA5F327DCA29300BDE401 /* LikeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F427D62D9E00C9801C /* LikeStorage.swift */; };
 		BFFCA5F427DCA29C00BDE401 /* LikeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63EE27D62CF200C9801C /* LikeViewModel.swift */; };
-		BFFCA5F627DCA30600BDE401 /* Like+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F927D62D9E00C9801C /* Like+CoreDataProperties.swift */; };
-		BFFCA5F727DCA30600BDE401 /* Like+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F827D62D9E00C9801C /* Like+CoreDataClass.swift */; };
 		BFFCA5F827DCA39F00BDE401 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F327D62D9E00C9801C /* CoreDataError.swift */; };
 		BFFCA5FA27DCA7A800BDE401 /* LikeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFCA5F927DCA7A800BDE401 /* LikeViewModelTest.swift */; };
 		BFFCA60727DCEF6500BDE401 /* MainViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFCA60627DCEF6500BDE401 /* MainViewModelTest.swift */; };
 		BFFCA60827DCF0AB00BDE401 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB9562827CCAD49001627C6 /* MainViewModel.swift */; };
+		BFFCA60927DCFBEB00BDE401 /* Like+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F927D62D9E00C9801C /* Like+CoreDataProperties.swift */; };
+		BFFCA60A27DCFBEB00BDE401 /* Like+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F827D62D9E00C9801C /* Like+CoreDataClass.swift */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
@@ -723,10 +723,11 @@
 				BF904B8027DBB666001C651F /* UIColor+Extension.swift in Sources */,
 				BF904B8827DBC7E9001C651F /* OrderbookViewModelTest.swift in Sources */,
 				BFFCA60727DCEF6500BDE401 /* MainViewModelTest.swift in Sources */,
-				BFFCA5F627DCA30600BDE401 /* Like+CoreDataProperties.swift in Sources */,
 				BFFCA5F427DCA29C00BDE401 /* LikeViewModel.swift in Sources */,
+				BFFCA60A27DCFBEB00BDE401 /* Like+CoreDataClass.swift in Sources */,
 				BF904B7327DBB623001C651F /* Orderbook.swift in Sources */,
 				BF904B7527DBB623001C651F /* ReceiveTicker.swift in Sources */,
+				BFFCA60927DCFBEB00BDE401 /* Like+CoreDataProperties.swift in Sources */,
 				BF904B7C27DBB649001C651F /* Observable.swift in Sources */,
 				BFFCA5F227DCA28400BDE401 /* MockLikeStorge.swift in Sources */,
 				BFFCA5FA27DCA7A800BDE401 /* LikeViewModelTest.swift in Sources */,
@@ -745,7 +746,6 @@
 				BF904B6B27DBB5F8001C651F /* HTTPError.swift in Sources */,
 				BF904B7D27DBB649001C651F /* ChangeState.swift in Sources */,
 				BF904B8F27DBE0D0001C651F /* MockAssetsStatusAPIService.swift in Sources */,
-				BFFCA5F727DCA30600BDE401 /* Like+CoreDataClass.swift in Sources */,
 				BF904B7227DBB623001C651F /* GraphData.swift in Sources */,
 				BF904B6127DBB561001C651F /* TransactionViewModelTests.swift in Sources */,
 				BF904B8527DBB783001C651F /* DummyData.swift in Sources */,
