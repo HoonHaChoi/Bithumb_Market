@@ -9,7 +9,6 @@ import Foundation
 
 protocol Serviceable {
     func request<T: Decodable>(endpoint: APIEndpoint, completion: @escaping (Result<T, HTTPError>) -> Void)
-    func requestTickers(endpoint: APIEndpoint, completion: @escaping (Result<[Ticker], HTTPError>) -> Void)
 }
 
 struct APIService: Serviceable {

@@ -9,7 +9,6 @@ import Foundation
 
 struct MockAssetsStatusAPIService: Serviceable {
     
-//    let dummyData = DummyData()
     var isSuccess = true
     var assetsState: AssetsStatus
     
@@ -21,7 +20,4 @@ struct MockAssetsStatusAPIService: Serviceable {
         }
     }
     
-    func requestTickers(endpoint: APIEndpoint, completion: @escaping (Result<[Ticker], HTTPError>) -> Void) {
-        return
-    }
 }

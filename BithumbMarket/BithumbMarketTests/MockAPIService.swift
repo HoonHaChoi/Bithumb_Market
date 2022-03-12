@@ -20,7 +20,4 @@ struct MockAPIService: Serviceable {
         }
     }
     
-    func requestTickers(endpoint: APIEndpoint, completion: @escaping (Result<[Ticker], HTTPError>) -> Void) {
-        return
-    }
 }
