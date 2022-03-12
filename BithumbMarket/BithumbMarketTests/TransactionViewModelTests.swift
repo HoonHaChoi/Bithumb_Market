@@ -25,7 +25,7 @@ class TransactionViewModelTests: XCTestCase {
         transactionViewModel = nil
     }
 
-    func test_체결내역_요청성공() throws {
+    func test_네트워크정상_체결내역_요청성공() throws {
         transactionViewModel.fetchTransaction()
         
         let resultTransactionDataType = transactionViewModel.transactionData.value[0].type
@@ -39,6 +39,22 @@ class TransactionViewModelTests: XCTestCase {
         XCTAssertEqual(resultTransactionDataType, expectationTransactionType)
         XCTAssertEqual(resultTransactionDataPrice, expectationTransactionPrice)
         XCTAssertEqual(resultTransactionDataTotal, expectationTransactionTotal)
+        
+        let resultSocketTransactionDataType = transactionViewModel.transactionData.value[2].type
+        let resultSocketTransactionDataPrice = transactionViewModel.transactionData.value[2].price
+        let resultSocketTransactionDataTotal = transactionViewModel.transactionData.value[2].total
+        let resultSocketTransactionDataCount = transactionViewModel.transactionData.value.count
+        
+        let expectationSocketTransactionType = "1"
+        let expectationSocketTransactionPrice = "1"
+        let expectationSocketTransactionTotal = "100.0"
+        let expectationSocketTransactionCount = 3
+        
+        XCTAssertEqual(resultSocketTransactionDataType, expectationSocketTransactionType)
+        XCTAssertEqual(resultSocketTransactionDataPrice, expectationSocketTransactionPrice)
+        XCTAssertEqual(resultSocketTransactionDataTotal, expectationSocketTransactionTotal)
+        XCTAssertEqual(resultSocketTransactionDataCount, expectationSocketTransactionCount)
+        
     }
     
     func test_채결내역_요청실패() throws {

@@ -10,7 +10,7 @@ import Foundation
 struct MockSocketService: SocketServiceable {
     
     let dummyData = DummyData()
-    let isSuccess = false
+    let isSuccess = true
     
     func sendMessage(message: Message) {
         return

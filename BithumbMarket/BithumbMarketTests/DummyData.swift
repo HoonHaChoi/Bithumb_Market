@@ -35,7 +35,7 @@ struct DummyData {
     
     
     func makeSocketDummydata<T: Decodable>(type: T.Type) -> T {
-        return ReceiveTransaction.init(type: "", content: .init(list: [.init(buySellGb: "Fake_KRW",
+        return ReceiveTransaction.init(type: "", content: .init(list: [.init(buySellGb: "1",
                                                                             contPrice: "1",
                                                                             contQty: "100",
                                                                             contAmt: "100.0",
