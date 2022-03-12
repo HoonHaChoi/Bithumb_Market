@@ -34,14 +34,11 @@ struct MockLikeStorage: LikeStorgeType {
         } else {
             return .failure(.failureDelete)
         }
+        
     }
 
     func find(symbol: String) -> Bool {
-        if isSuccess {
-            return true
-        } else {
-            return false
-        }
+        return likes.contains(symbol)
     }
 
 }

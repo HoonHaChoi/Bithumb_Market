@@ -27,7 +27,7 @@ final class LikeViewModel {
         if storage.find(symbol: symbol) {
             deleteLike(symbol: symbol)
         } else {
-            saveLike(symbol: symbol.description)
+            saveLike(symbol: symbol)
         }
     }
     

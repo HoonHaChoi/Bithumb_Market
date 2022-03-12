@@ -22,8 +22,28 @@ class LikeViewModelTest: XCTestCase {
         likeViewModel = nil
     }
 
-    func testExample() throws {
+    func test_같은_이름의_심볼이_존재하는경우() throws {
+        var resultHasLike: Bool?
+        let executeHasLike: ((Bool) -> Void)? = { state in
+            resultHasLike = state
+        }
         
+        likeViewModel.hasLikeHandler = executeHasLike
+        likeViewModel.hasLike(symbol: "ASD")
+        
+        XCTAssertEqual(resultHasLike, true) // 옵셔널이기에 XCTAssertTrue 불가
+    }
+    
+    func test_같은_이름의_심볼이_존재하지_않은경우() throws {
+        var resultHasLike: Bool?
+        let executeHasLike: ((Bool) -> Void)? = { state in
+            resultHasLike = state
+        }
+        
+        likeViewModel.hasLikeHandler = executeHasLike
+        likeViewModel.hasLike(symbol: "Fake")
+        
+        XCTAssertEqual(resultHasLike, false)
     }
 
 }
