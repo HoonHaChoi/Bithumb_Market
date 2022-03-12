@@ -33,4 +33,15 @@ struct DummyData {
         }
     }
     
+    
+    func makeSocketDummydata<T: Decodable>(type: T.Type) -> T {
+        return ReceiveTransaction.init(type: "", content: .init(list: [.init(buySellGb: "Fake_KRW",
+                                                                            contPrice: "1",
+                                                                            contQty: "100",
+                                                                            contAmt: "100.0",
+                                                                            contDtm: "2022-01-29",
+                                                                            updn: "dn",
+                                                                            symbol: "Fake_KRW")])) as! T
+    }
+    
 }

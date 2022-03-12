@@ -11,14 +11,17 @@ class TransactionViewModelTests: XCTestCase {
     
     var transactionViewModel: TransactionViewModel!
     var service: Serviceable!
+    var socketService: SocketServiceable!
     
     override func setUpWithError() throws {
         service = MockAPIService()
-        transactionViewModel = TransactionViewModel(service: service, symbol: "")
+        socketService = MockSocketService()
+        transactionViewModel = TransactionViewModel(service: service, socket: socketService , symbol: "")
     }
 
     override func tearDownWithError() throws {
         service = nil
+        socketService = nil
         transactionViewModel = nil
     }
 
@@ -40,7 +43,8 @@ class TransactionViewModelTests: XCTestCase {
     
     func test_채결내역_요청실패() throws {
         service = MockAPIService(isSuccess: false)
-        transactionViewModel = TransactionViewModel(service: service, symbol: "")
+        socketService = MockSocketService()
+        transactionViewModel = TransactionViewModel(service: service, socket: socketService , symbol: "")
 
         let error: (Error) -> Void = { error in
             XCTAssertEqual(error.localizedDescription, "연결에 실패 하였습니다.")

@@ -118,6 +118,7 @@
 		BFDE911427D742F500CC4FF5 /* GraphEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE911227D742F500CC4FF5 /* GraphEntity+CoreDataProperties.swift */; };
 		BFDE911827D7447900CC4FF5 /* GraphData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE911727D7447900CC4FF5 /* GraphData.swift */; };
 		BFDE916827D79EA600CC4FF5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE916727D79EA600CC4FF5 /* LoadingView.swift */; };
+		BFFCA5EB27DC5C8800BDE401 /* MockSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFCA5EA27DC5C8800BDE401 /* MockSocketService.swift */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
@@ -220,6 +221,7 @@
 		BFDE911227D742F500CC4FF5 /* GraphEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BFDE911727D7447900CC4FF5 /* GraphData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphData.swift; sourceTree = "<group>"; };
 		BFDE916727D79EA600CC4FF5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		BFFCA5EA27DC5C8800BDE401 /* MockSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSocketService.swift; sourceTree = "<group>"; };
 		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E8AC90B027C8700500C50FA3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 			children = (
 				BF904B8427DBB783001C651F /* DummyData.swift */,
 				BF904B6727DBB57C001C651F /* MockAPIService.swift */,
+				BFFCA5EA27DC5C8800BDE401 /* MockSocketService.swift */,
 				BF904B8E27DBE0D0001C651F /* MockAssetsStatusAPIService.swift */,
 				BF904B6027DBB561001C651F /* TransactionViewModelTests.swift */,
 				BF904B8727DBC7E9001C651F /* OrderbookViewModelTest.swift */,
@@ -687,6 +690,7 @@
 				BF904B8127DBB666001C651F /* String+Extension.swift in Sources */,
 				BF904B8327DBB675001C651F /* NumberFormatter+Extension.swift in Sources */,
 				BF904B7627DBB623001C651F /* AssetsStatus.swift in Sources */,
+				BFFCA5EB27DC5C8800BDE401 /* MockSocketService.swift in Sources */,
 				BF904B6E27DBB623001C651F /* Transaction.swift in Sources */,
 				BF904B6F27DBB623001C651F /* Message.swift in Sources */,
 				BF904B8027DBB666001C651F /* UIColor+Extension.swift in Sources */,
