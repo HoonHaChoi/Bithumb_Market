@@ -25,17 +25,17 @@ class TransactionViewModelTests: XCTestCase {
     func test_체결내역_요청성공() throws {
         transactionViewModel.fetchTransaction()
         
-        let expectedTransactionDataType = transactionViewModel.transactionData.value[0].type
-        let expectedTransactionDataPrice = transactionViewModel.transactionData.value[0].price
-        let expectedTransactionDataTotal = transactionViewModel.transactionData.value[1].total
+        let resultTransactionDataType = transactionViewModel.transactionData.value[0].type
+        let resultTransactionDataPrice = transactionViewModel.transactionData.value[0].price
+        let resultTransactionDataTotal = transactionViewModel.transactionData.value[1].total
         
-        let expectTransactionType = "ask"
-        let expectTransactionPrice = "1"
-        let expectTransactionTotal = "1"
+        let expectationTransactionType = "ask"
+        let expectationTransactionPrice = "1"
+        let expectationTransactionTotal = "1"
         
-        XCTAssertEqual(expectedTransactionDataType, expectTransactionType)
-        XCTAssertEqual(expectedTransactionDataPrice, expectTransactionPrice)
-        XCTAssertEqual(expectedTransactionDataTotal, expectTransactionTotal)
+        XCTAssertEqual(resultTransactionDataType, expectationTransactionType)
+        XCTAssertEqual(resultTransactionDataPrice, expectationTransactionPrice)
+        XCTAssertEqual(resultTransactionDataTotal, expectationTransactionTotal)
     }
     
     func test_채결내역_요청실패() throws {

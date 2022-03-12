@@ -25,20 +25,20 @@ class OrderbookViewModelTest: XCTestCase {
     func test_호가_요청성공() throws {
         orderbookViewModel.fetchOrderbook()
         
-        let expectedOrderBookAskPrice = orderbookViewModel.orderbook.value.asks[0].price
-        let expectedOrderBookAskQuantity = orderbookViewModel.orderbook.value.asks[0].quantity
-        let expectedOrderBookBidsPrice = orderbookViewModel.orderbook.value.bids[0].price
-        let expectedOrderBookBidsQuantity = orderbookViewModel.orderbook.value.bids[0].quantity
+        let resultAskPrice = orderbookViewModel.orderbook.value.asks[0].price
+        let resultAskQuantity = orderbookViewModel.orderbook.value.asks[0].quantity
+        let resultBidsPrice = orderbookViewModel.orderbook.value.bids[0].price
+        let resultBidsQuantity = orderbookViewModel.orderbook.value.bids[0].quantity
         
-        let expectOrderBookAskPrice = "1"
-        let expectOrderBookAskQuantity = "1"
-        let expectOrderBookBidsPrice = "11111"
-        let expectOrderBookBidsQuantity = "11111"
+        let expectationAskPrice = "1"
+        let expectationAskQuantity = "1"
+        let expectationBidsPrice = "11111"
+        let expectationBidsQuantity = "11111"
         
-        XCTAssertEqual(expectedOrderBookAskPrice, expectOrderBookAskPrice)
-        XCTAssertEqual(expectedOrderBookAskQuantity, expectOrderBookAskQuantity)
-        XCTAssertEqual(expectedOrderBookBidsPrice, expectOrderBookBidsPrice)
-        XCTAssertEqual(expectedOrderBookBidsQuantity, expectOrderBookBidsQuantity)
+        XCTAssertEqual(resultAskPrice, expectationAskPrice)
+        XCTAssertEqual(resultAskQuantity, expectationAskQuantity)
+        XCTAssertEqual(resultBidsPrice, expectationBidsPrice)
+        XCTAssertEqual(resultBidsQuantity, expectationBidsQuantity)
     }
 
     func test_호가_요청실패() throws {

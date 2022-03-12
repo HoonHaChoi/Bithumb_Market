@@ -18,11 +18,11 @@ struct AssetsStatusData: Decodable {
     func setState() -> AssetsState {
         switch true {
         case depositStatus == 1 && withdrawalStatus == 0:
-            return .possibleWithdrawal
+            return .possibleDeposit
         case depositStatus == 1 && withdrawalStatus == 1:
             return .possibleAll
         case depositStatus == 0 && withdrawalStatus == 1:
-            return .possibleDeposit
+            return .possibleWithdrawal
         default:
             return .impossible
         }

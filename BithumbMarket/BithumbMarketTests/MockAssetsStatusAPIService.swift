@@ -9,13 +9,13 @@ import Foundation
 
 struct MockAssetsStatusAPIService: Serviceable {
     
-    let dummyData = DummyData()
+//    let dummyData = DummyData()
     var isSuccess = true
-    var index = 0
+    var assetsState: AssetsStatus
     
     func request<T: Decodable>(endpoint: APIEndpoint, completion: @escaping (Result<T, HTTPError>) -> Void) {
         if isSuccess {
-            completion(.success(dummyData.makeDummyAssetStatus(index: index)))
+            completion(.success(assetsState as! T))
         } else {
             completion(.failure(.statusCode(404)))
         }

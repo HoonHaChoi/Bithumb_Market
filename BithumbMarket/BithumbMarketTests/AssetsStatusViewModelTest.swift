@@ -8,69 +8,86 @@
 import XCTest
 
 class AssetsStatusViewModelTest: XCTestCase {
-    
-    override func setUpWithError() throws {}
 
-    override func tearDownWithError() throws {}
+    func test_네트워크정상_입출금_불가() throws {
+        let service = MockAssetsStatusAPIService(isSuccess: true, assetsState: .init(data: AssetsStatusData(depositStatus: 0,
+                                                                                                            withdrawalStatus: 0)))
+        let viewmodel = AssetsStatusViewModel(service: service, symbol: "")
+        
+        var resultStatus: AssetsState?
+        let executeAssetState: ((AssetsState) -> Void)? = { state in
+            resultStatus = state
+        }
+        
+        viewmodel.assetsStateHandler = executeAssetState
+        viewmodel.fetchAssetsStatus()
+        
+        XCTAssertEqual(resultStatus, .impossible)
+    }
+    
+    func test_네트워크정상_입금불가_출금가능() throws {
+        let service = MockAssetsStatusAPIService(isSuccess: true, assetsState: .init(data: AssetsStatusData(depositStatus: 1,
+                                                                                                            withdrawalStatus: 0)))
+        let viewmodel = AssetsStatusViewModel(service: service, symbol: "")
+        
+        var resultStatus: AssetsState?
+        let executeAssetState: ((AssetsState) -> Void)? = { state in
+            resultStatus = state
+        }
+        
+        viewmodel.assetsStateHandler = executeAssetState
+        viewmodel.fetchAssetsStatus()
+        
+        XCTAssertEqual(resultStatus, .possibleDeposit)
+    }
 
-    func test_입출금_불가() throws {
-        let service = MockAssetsStatusAPIService(isSuccess: true, index: 0)
+    func test_네트워크정상_입금가능_출금불가() throws {
+        let service = MockAssetsStatusAPIService(isSuccess: true, assetsState: .init(data: AssetsStatusData(depositStatus: 0,
+                                                                                                            withdrawalStatus: 1)))
         let viewmodel = AssetsStatusViewModel(service: service, symbol: "")
         
-        let resultStatus: ((AssetsState) -> Void)? = {
-            XCTAssertEqual($0, .impossible)
+        var resultStatus: AssetsState?
+        let executeAssetState: ((AssetsState) -> Void)? = { state in
+            resultStatus = state
         }
         
-        viewmodel.assetsStateHandler = resultStatus
+        viewmodel.assetsStateHandler = executeAssetState
         viewmodel.fetchAssetsStatus()
+        
+        XCTAssertEqual(resultStatus, .possibleWithdrawal)
     }
     
-    func test_입금불가_출금가능() throws {
-        let service = MockAssetsStatusAPIService(isSuccess: true, index: 1)
+    func test_네트워크정상_입출금_가능() throws {
+        let service = MockAssetsStatusAPIService(isSuccess: true, assetsState: .init(data: AssetsStatusData(depositStatus: 1,
+                                                                                                            withdrawalStatus: 1)))
         let viewmodel = AssetsStatusViewModel(service: service, symbol: "")
         
-        let resultStatus: ((AssetsState) -> Void)? = {
-            XCTAssertEqual($0, .possibleWithdrawal)
+        var resultStatus: AssetsState?
+        let executeAssetState: ((AssetsState) -> Void)? = { state in
+            resultStatus = state
         }
         
-        viewmodel.assetsStateHandler = resultStatus
+        viewmodel.assetsStateHandler = executeAssetState
         viewmodel.fetchAssetsStatus()
+        
+        XCTAssertEqual(resultStatus, .possibleAll)
     }
+    
+    func test_네트워크연결실패_요청실패() throws {
+        let service = MockAssetsStatusAPIService(isSuccess: false, assetsState: .init(data: AssetsStatusData(depositStatus: 1,
+                                                                                                            withdrawalStatus: 1)))
 
-    func test_입금가능_출금불가() throws {
-        let service = MockAssetsStatusAPIService(isSuccess: true, index: 2)
         let viewmodel = AssetsStatusViewModel(service: service, symbol: "")
         
-        let resultStatus: ((AssetsState) -> Void)? = {
-            XCTAssertEqual($0, .possibleDeposit)
-        }
-        
-        viewmodel.assetsStateHandler = resultStatus
-        viewmodel.fetchAssetsStatus()
-    }
-    
-    func test_입출금_가능() throws {
-        let service = MockAssetsStatusAPIService(isSuccess: true, index: 3)
-        let viewmodel = AssetsStatusViewModel(service: service, symbol: "")
-        
-        let resultStatus: ((AssetsState) -> Void)? = {
-            XCTAssertEqual($0, .possibleAll)
-        }
-        
-        viewmodel.assetsStateHandler = resultStatus
-        viewmodel.fetchAssetsStatus()
-    }
-    
-    func test_요청실패() throws {
-        let service = MockAssetsStatusAPIService(isSuccess: false, index: 0)
-        let viewmodel = AssetsStatusViewModel(service: service, symbol: "")
-        
-        let resultError: (HTTPError) -> Void = { error in
-            XCTAssertEqual(error.errorDescription, "연결에 실패 하였습니다.")
+        var resultError: HTTPError?
+        let executeError: (HTTPError) -> Void = { error in
+            resultError = error
         }
     
-        viewmodel.errorHandler = resultError
+        viewmodel.errorHandler = executeError
         viewmodel.fetchAssetsStatus()
+        
+        XCTAssertEqual(resultError?.localizedDescription, "연결에 실패 하였습니다.")
     }
     
 }
