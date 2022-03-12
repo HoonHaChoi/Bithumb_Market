@@ -114,7 +114,7 @@ final class MainViewModel {
     private func fetctLikeSymbols() -> [String] {
         switch storage.fetch() {
         case .success(let likes):
-            return likes.compactMap { $0.symbol }
+            return likes
         case .failure(let error):
             errorHandler?(error)
         }

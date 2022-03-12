@@ -8,10 +8,10 @@
 import CoreData
 
 protocol LikeStorgeType {
-    func fetch() -> Result<[Like], CoreDataError>
-    @discardableResult func save(symbol: String) -> Result<Bool, CoreDataError>
-    @discardableResult func delete(symbol: String) -> Result<Bool, CoreDataError>
-    @discardableResult func find(symbol: String) -> Bool
+    func fetch() -> Result<[String], CoreDataError>
+    func save(symbol: String) -> Result<Bool, CoreDataError>
+    func delete(symbol: String) -> Result<Bool, CoreDataError>
+    func find(symbol: String) -> Bool
 }
 
 final class LikeStorge: LikeStorgeType {
@@ -32,11 +32,11 @@ final class LikeStorge: LikeStorgeType {
         return persistentContainer.viewContext
     }
     
-    func fetch() -> Result<[Like], CoreDataError> {
+    func fetch() -> Result<[String], CoreDataError> {
         guard let likes = try? context.fetch(Like.fetchRequest()) else {
             return .failure(.failureFetch)
         }
-        return .success(likes)
+        return .success(likes.compactMap { $0.symbol })
     }
     
     @discardableResult

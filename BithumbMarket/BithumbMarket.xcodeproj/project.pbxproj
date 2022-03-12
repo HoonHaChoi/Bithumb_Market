@@ -122,6 +122,13 @@
 		BFFCA5ED27DC7AA500BDE401 /* MockOrderbookSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFCA5EC27DC7AA500BDE401 /* MockOrderbookSocketService.swift */; };
 		BFFCA5EF27DC84B600BDE401 /* CurrentMarketPriceViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFCA5EE27DC84B600BDE401 /* CurrentMarketPriceViewModelTest.swift */; };
 		BFFCA5F027DC863B00BDE401 /* CurrentMarketPriceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CFE27D0A92000C06084 /* CurrentMarketPriceViewModel.swift */; };
+		BFFCA5F227DCA28400BDE401 /* MockLikeStorge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFCA5F127DCA28400BDE401 /* MockLikeStorge.swift */; };
+		BFFCA5F327DCA29300BDE401 /* LikeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F427D62D9E00C9801C /* LikeStorage.swift */; };
+		BFFCA5F427DCA29C00BDE401 /* LikeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63EE27D62CF200C9801C /* LikeViewModel.swift */; };
+		BFFCA5F627DCA30600BDE401 /* Like+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F927D62D9E00C9801C /* Like+CoreDataProperties.swift */; };
+		BFFCA5F727DCA30600BDE401 /* Like+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F827D62D9E00C9801C /* Like+CoreDataClass.swift */; };
+		BFFCA5F827DCA39F00BDE401 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD63F327D62D9E00C9801C /* CoreDataError.swift */; };
+		BFFCA5FA27DCA7A800BDE401 /* LikeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFCA5F927DCA7A800BDE401 /* LikeViewModelTest.swift */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
@@ -227,6 +234,8 @@
 		BFFCA5EA27DC5C8800BDE401 /* MockSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSocketService.swift; sourceTree = "<group>"; };
 		BFFCA5EC27DC7AA500BDE401 /* MockOrderbookSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOrderbookSocketService.swift; sourceTree = "<group>"; };
 		BFFCA5EE27DC84B600BDE401 /* CurrentMarketPriceViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMarketPriceViewModelTest.swift; sourceTree = "<group>"; };
+		BFFCA5F127DCA28400BDE401 /* MockLikeStorge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLikeStorge.swift; sourceTree = "<group>"; };
+		BFFCA5F927DCA7A800BDE401 /* LikeViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewModelTest.swift; sourceTree = "<group>"; };
 		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E8AC90B027C8700500C50FA3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -450,10 +459,12 @@
 				BFFCA5EA27DC5C8800BDE401 /* MockSocketService.swift */,
 				BF904B8E27DBE0D0001C651F /* MockAssetsStatusAPIService.swift */,
 				BFFCA5EC27DC7AA500BDE401 /* MockOrderbookSocketService.swift */,
+				BFFCA5F127DCA28400BDE401 /* MockLikeStorge.swift */,
 				BF904B6027DBB561001C651F /* TransactionViewModelTests.swift */,
 				BF904B8727DBC7E9001C651F /* OrderbookViewModelTest.swift */,
 				BF904B8C27DBDC80001C651F /* AssetsStatusViewModelTest.swift */,
 				BFFCA5EE27DC84B600BDE401 /* CurrentMarketPriceViewModelTest.swift */,
+				BFFCA5F927DCA7A800BDE401 /* LikeViewModelTest.swift */,
 			);
 			path = BithumbMarketTests;
 			sourceTree = "<group>";
@@ -688,6 +699,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF904B7827DBB623001C651F /* CandleStick.swift in Sources */,
+				BFFCA5F827DCA39F00BDE401 /* CoreDataError.swift in Sources */,
 				BF904B7B27DBB643001C651F /* GraphDataEntity.swift in Sources */,
 				BF904B7027DBB623001C651F /* ReceiveTransaction.swift in Sources */,
 				BF904B6D27DBB5F8001C651F /* APIEndpoint.swift in Sources */,
@@ -695,6 +707,7 @@
 				BF904B6C27DBB5F8001C651F /* EndPoint.swift in Sources */,
 				BF904B8927DBC831001C651F /* OrderbookViewModel.swift in Sources */,
 				BF904B8127DBB666001C651F /* String+Extension.swift in Sources */,
+				BFFCA5F327DCA29300BDE401 /* LikeStorage.swift in Sources */,
 				BF904B8327DBB675001C651F /* NumberFormatter+Extension.swift in Sources */,
 				BF904B7627DBB623001C651F /* AssetsStatus.swift in Sources */,
 				BFFCA5EB27DC5C8800BDE401 /* MockSocketService.swift in Sources */,
@@ -704,9 +717,13 @@
 				BFFCA5F027DC863B00BDE401 /* CurrentMarketPriceViewModel.swift in Sources */,
 				BF904B8027DBB666001C651F /* UIColor+Extension.swift in Sources */,
 				BF904B8827DBC7E9001C651F /* OrderbookViewModelTest.swift in Sources */,
+				BFFCA5F627DCA30600BDE401 /* Like+CoreDataProperties.swift in Sources */,
+				BFFCA5F427DCA29C00BDE401 /* LikeViewModel.swift in Sources */,
 				BF904B7327DBB623001C651F /* Orderbook.swift in Sources */,
 				BF904B7527DBB623001C651F /* ReceiveTicker.swift in Sources */,
 				BF904B7C27DBB649001C651F /* Observable.swift in Sources */,
+				BFFCA5F227DCA28400BDE401 /* MockLikeStorge.swift in Sources */,
+				BFFCA5FA27DCA7A800BDE401 /* LikeViewModelTest.swift in Sources */,
 				BF904B8B27DBDC5F001C651F /* AssetsStatusViewModel.swift in Sources */,
 				BF904B7927DBB623001C651F /* CurrentMarketPrice.swift in Sources */,
 				BF904B6A27DBB5F8001C651F /* SocketService.swift in Sources */,
@@ -722,6 +739,7 @@
 				BF904B6B27DBB5F8001C651F /* HTTPError.swift in Sources */,
 				BF904B7D27DBB649001C651F /* ChangeState.swift in Sources */,
 				BF904B8F27DBE0D0001C651F /* MockAssetsStatusAPIService.swift in Sources */,
+				BFFCA5F727DCA30600BDE401 /* Like+CoreDataClass.swift in Sources */,
 				BF904B7227DBB623001C651F /* GraphData.swift in Sources */,
 				BF904B6127DBB561001C651F /* TransactionViewModelTests.swift in Sources */,
 				BF904B8527DBB783001C651F /* DummyData.swift in Sources */,
