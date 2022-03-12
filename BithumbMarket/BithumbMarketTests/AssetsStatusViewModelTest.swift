@@ -90,4 +90,20 @@ class AssetsStatusViewModelTest: XCTestCase {
         XCTAssertEqual(resultError?.localizedDescription, "연결에 실패 하였습니다.")
     }
     
+    func test_네트워크정상_비정상데이터_AssetsStatusData() throws {
+        let service = MockAssetsStatusAPIService(isSuccess: true, assetsState: .init(data: AssetsStatusData(depositStatus: 123123,
+                                                                                                            withdrawalStatus: 523123)))
+        let viewmodel = AssetsStatusViewModel(service: service, symbol: "")
+        
+        var resultStatus: AssetsState?
+        let executeAssetState: ((AssetsState) -> Void)? = { state in
+            resultStatus = state
+        }
+        
+        viewmodel.assetsStateHandler = executeAssetState
+        viewmodel.fetchAssetsStatus()
+        
+        XCTAssertEqual(resultStatus, .impossible)
+    }
+    
 }
