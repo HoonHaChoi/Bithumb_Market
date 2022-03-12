@@ -11,7 +11,11 @@ protocol Serviceable {
     func request<T: Decodable>(endpoint: APIEndpoint, completion: @escaping (Result<T, HTTPError>) -> Void)
 }
 
-struct APIService: Serviceable {
+protocol TickerServiceable {
+    func requestTickers(endpoint: APIEndpoint, completion: @escaping (Result<[Ticker], HTTPError>) -> Void)
+}
+
+struct APIService: Serviceable, TickerServiceable {
     
     private let session: URLSession
     

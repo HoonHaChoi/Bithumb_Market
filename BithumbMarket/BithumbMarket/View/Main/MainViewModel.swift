@@ -10,18 +10,18 @@ import Foundation
 final class MainViewModel {
     
     private(set) var tickers: Observable<[Ticker]>
-    private let service: APIService
-    private let storage: LikeStorge
-    private var socket: SocketService?
+    private let service: TickerServiceable
+    private let storage: LikeStorgeType
+    private var socket: SocketServiceable
     private var symbols: [String]
     private var isFilter: Bool
     
-    init(service: APIService, storage: LikeStorge) {
+    init(service: TickerServiceable, storage: LikeStorgeType, socket: SocketServiceable) {
         self.tickers = .init([])
         self.isFilter = false
         self.service = service
         self.storage = storage
-        self.socket = .init()
+        self.socket = socket
         self.symbols = []
     }
     
@@ -50,18 +50,17 @@ final class MainViewModel {
             guard let self = self else { return }
             let symbols = self.tickers.value.map { $0.paymentCurrency }
             let message = Message(type: .ticker, symbols: .names(symbols), tickTypes: .twentyfourHour)
-            self.socket?.sendMessage(message: message)
+            self.socket.sendMessage(message: message)
         }
         completion()
     }
     
     func disconnect() {
-        socket?.disconnect()
-        socket = nil
+        socket.disconnect()
     }
     
     private func updateTickers() {
-        self.socket?.perform { [weak self] (respone: Result<ReceiveTicker, HTTPError>) in
+        self.socket.perform { [weak self] (respone: Result<ReceiveTicker, HTTPError>) in
             guard let self = self else { return }
             switch respone {
             case .success(let ticker):
