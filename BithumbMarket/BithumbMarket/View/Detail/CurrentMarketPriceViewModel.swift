@@ -20,8 +20,12 @@ final class CurrentMarketPriceViewModel {
         self.price = .init(CurrentMarketPrice.empty)
     }
     
-    func sendMessage() {
-        socket = SocketService()
+    func createSocket(_ socket: SocketServiceable) {
+        self.socket = socket
+        sendMessage()
+    }
+    
+    private func sendMessage() {
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self = self else { return }
             let message = Message(type: .ticker, symbols: .name(self.symbol), tickTypes: .twentyfourHour)

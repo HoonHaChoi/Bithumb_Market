@@ -57,7 +57,7 @@ struct AppDependency {
         let graphViewModel = GraphViewModel(service: service, storage: graphStorage)
         
         currentMarketPriceViewModel.price.bind = detailViewController.updatePriceView
-        detailViewController.sendMessageHanlder = currentMarketPriceViewModel.sendMessage
+        detailViewController.createSocketHandler = currentMarketPriceViewModel.createSocket(_:)
         detailViewController.disconnectHandler = currentMarketPriceViewModel.disconnect
         
         detailViewController.fetchAssetsStatusHandler = assetsStatusViewModel.fetchAssetsStatus

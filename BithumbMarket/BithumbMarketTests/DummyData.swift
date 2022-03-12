@@ -24,12 +24,7 @@ struct DummyData {
     
     let orderbook: Orderbook = Orderbook(data: OrderbookData(asks: [Order(quantity: "1", price: "1")],
                                                              bids: [Order(quantity: "11111", price: "11111")]))
-    
-    let receiveOrderbook = ReceiveOrderbook(content: ReceiveOrderList(list: [ReceiveOrder(orderType: "ask",
-                                                                                                 price: "10000",
-                                                                                                 quantity: "10",
-                                                                                                 total: "0")]))
-    
+        
     let receiveTransaction = ReceiveTransaction(type: "", content: TransactionContent(list: [TransactionList(buySellGb: "1",
                                                                                                              contPrice: "1",
                                                                                                              contQty: "100",
@@ -37,6 +32,17 @@ struct DummyData {
                                                                                                              contDtm: "2022-01-29",
                                                                                                              updn: "dn",
                                                                                                              symbol: "Fake_KRW")]))
+    let receiveTicker = ReceiveTicker(type: "", content: Content(openPrice: "1000",
+                                                                 closePrice: "1500",
+                                                                 symbol: "Fake_KRW",
+                                                                 value: "123.01",
+                                                                 volume: "1234.01",
+                                                                 sellVolume: "10",
+                                                                 buyVolume: "15",
+                                                                 prevClosePrice: "1300",
+                                                                 chgRate: "50",
+                                                                 chgAmt: "500",
+                                                                 volumePower: "50.00"))
     
     func makeDummydata<T: Decodable>(type: T.Type) -> T {
         if Transaction.self == T.self {
@@ -50,7 +56,7 @@ struct DummyData {
         if ReceiveTransaction.self == T.self {
             return receiveTransaction as! T
         } else {
-            return receiveOrderbook as! T
+            return receiveTicker as! T
         }
     }
     

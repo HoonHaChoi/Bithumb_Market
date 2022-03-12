@@ -32,7 +32,7 @@ final class DetailViewController: BaseViewController {
     
     var likeHandler: ((String) -> Void)?
     var updateLikeHandler: ((String) -> Void)?
-    var sendMessageHanlder: (() -> Void)?
+    var createSocketHandler: ((SocketServiceable) -> Void)?
     var fetchAssetsStatusHandler: (() -> Void)?
     var fetchGraphHandler: ((String, ChartIntervals) -> Void)?
     var passGraphHandler: (() -> Void)?
@@ -114,13 +114,17 @@ final class DetailViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        sendMessageHanlder?()
+        createSocketHandler?(SocketService())
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        disconnectHandler?()
         navigationItem.backButtonTitle = ""
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disconnectHandler?()
     }
     
     private func bind() {

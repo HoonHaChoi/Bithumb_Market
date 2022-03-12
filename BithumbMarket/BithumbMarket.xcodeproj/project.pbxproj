@@ -120,6 +120,8 @@
 		BFDE916827D79EA600CC4FF5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE916727D79EA600CC4FF5 /* LoadingView.swift */; };
 		BFFCA5EB27DC5C8800BDE401 /* MockSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFCA5EA27DC5C8800BDE401 /* MockSocketService.swift */; };
 		BFFCA5ED27DC7AA500BDE401 /* MockOrderbookSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFCA5EC27DC7AA500BDE401 /* MockOrderbookSocketService.swift */; };
+		BFFCA5EF27DC84B600BDE401 /* CurrentMarketPriceViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFCA5EE27DC84B600BDE401 /* CurrentMarketPriceViewModelTest.swift */; };
+		BFFCA5F027DC863B00BDE401 /* CurrentMarketPriceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F844CFE27D0A92000C06084 /* CurrentMarketPriceViewModel.swift */; };
 		E8AC90AB27C71E5B00C50FA3 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */; };
 		E8AC90AD27C72B7500C50FA3 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */; };
 		E8AC90B127C8700500C50FA3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AC90B027C8700500C50FA3 /* Transaction.swift */; };
@@ -224,6 +226,7 @@
 		BFDE916727D79EA600CC4FF5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		BFFCA5EA27DC5C8800BDE401 /* MockSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSocketService.swift; sourceTree = "<group>"; };
 		BFFCA5EC27DC7AA500BDE401 /* MockOrderbookSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOrderbookSocketService.swift; sourceTree = "<group>"; };
+		BFFCA5EE27DC84B600BDE401 /* CurrentMarketPriceViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMarketPriceViewModelTest.swift; sourceTree = "<group>"; };
 		E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E8AC90B027C8700500C50FA3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -450,6 +453,7 @@
 				BF904B6027DBB561001C651F /* TransactionViewModelTests.swift */,
 				BF904B8727DBC7E9001C651F /* OrderbookViewModelTest.swift */,
 				BF904B8C27DBDC80001C651F /* AssetsStatusViewModelTest.swift */,
+				BFFCA5EE27DC84B600BDE401 /* CurrentMarketPriceViewModelTest.swift */,
 			);
 			path = BithumbMarketTests;
 			sourceTree = "<group>";
@@ -694,8 +698,10 @@
 				BF904B8327DBB675001C651F /* NumberFormatter+Extension.swift in Sources */,
 				BF904B7627DBB623001C651F /* AssetsStatus.swift in Sources */,
 				BFFCA5EB27DC5C8800BDE401 /* MockSocketService.swift in Sources */,
+				BFFCA5EF27DC84B600BDE401 /* CurrentMarketPriceViewModelTest.swift in Sources */,
 				BF904B6E27DBB623001C651F /* Transaction.swift in Sources */,
 				BF904B6F27DBB623001C651F /* Message.swift in Sources */,
+				BFFCA5F027DC863B00BDE401 /* CurrentMarketPriceViewModel.swift in Sources */,
 				BF904B8027DBB666001C651F /* UIColor+Extension.swift in Sources */,
 				BF904B8827DBC7E9001C651F /* OrderbookViewModelTest.swift in Sources */,
 				BF904B7327DBB623001C651F /* Orderbook.swift in Sources */,
