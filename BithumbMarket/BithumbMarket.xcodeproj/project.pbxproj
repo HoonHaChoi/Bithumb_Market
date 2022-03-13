@@ -270,10 +270,11 @@
 		7F2E004E27CC9B4B00752ABA /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				7FBD63E427D62A7E00C9801C /* MainDiffableDataSource.swift */,
-				7F2E005027CC9B4B00752ABA /* MainViewController.swift */,
-				BFB9562827CCAD49001627C6 /* MainViewModel.swift */,
 				7F2E005127CC9B4B00752ABA /* View */,
+				7F2E005027CC9B4B00752ABA /* MainViewController.swift */,
+				7FBD63E427D62A7E00C9801C /* MainDiffableDataSource.swift */,
+				BFB9562827CCAD49001627C6 /* MainViewModel.swift */,
+				7FBD63E627D62AED00C9801C /* MainViewNameSpace.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -282,7 +283,6 @@
 			isa = PBXGroup;
 			children = (
 				7FBD63EA27D62B3300C9801C /* TickerCell.swift */,
-				7FBD63E627D62AED00C9801C /* MainViewNameSpace.swift */,
 				7FBD63E727D62AED00C9801C /* TableEmptyView.swift */,
 				7F2E005227CC9B4B00752ABA /* CoinSortControlView.swift */,
 				7F2E005327CC9B4B00752ABA /* CoinSortSegmentControl.swift */,
@@ -294,11 +294,10 @@
 		7F2E005427CC9B4B00752ABA /* Orderbook */ = {
 			isa = PBXGroup;
 			children = (
-				7FD10B7727D99D780019600B /* OrderbookQuantitiesView.swift */,
+				7F6D82AA27DDBD0000CB749B /* View */,
 				7F2E005527CC9B4B00752ABA /* OrderbookViewController.swift */,
-				7F2E005727CC9B4B00752ABA /* OrderbookTableViewCell.swift */,
-				7F2E005927CC9B4B00752ABA /* OrderbookViewModel.swift */,
 				7F844CDB27CFB58C00C06084 /* OrderbookDataSource.swift */,
+				7F2E005927CC9B4B00752ABA /* OrderbookViewModel.swift */,
 				7F2E005627CC9B4B00752ABA /* OrderbookNameSpace.swift */,
 			);
 			path = Orderbook;
@@ -317,10 +316,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7F6D82AA27DDBD0000CB749B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7FD10B7727D99D780019600B /* OrderbookQuantitiesView.swift */,
+				7F2E005727CC9B4B00752ABA /* OrderbookTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		7F844CE727CFB7D900C06084 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				7F844CE827CFB7D900C06084 /* TransactionHeaderView.swift */,
+				E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -369,12 +378,12 @@
 		BF0430C727C5C1D500A77A38 /* BithumbMarket */ = {
 			isa = PBXGroup;
 			children = (
-				7F2A6BC727D7B7AB00486F36 /* AppDependency.swift */,
 				BF0430C827C5C1D500A77A38 /* AppDelegate.swift */,
 				BF0430CA27C5C1D500A77A38 /* SceneDelegate.swift */,
+				7F2A6BC727D7B7AB00486F36 /* AppDependency.swift */,
 				7F2E005E27CCA15400752ABA /* View */,
-				BF86B5F127C60638005A2170 /* Network */,
 				BF86B5EE27C602D4005A2170 /* Model */,
+				BF86B5F127C60638005A2170 /* Network */,
 				7FBD63F227D62D9E00C9801C /* Storage */,
 				E8AC90B627C8BB2300C50FA3 /* Extension */,
 				7F2E004C27CC9B4B00752ABA /* Util */,
@@ -488,7 +497,6 @@
 			children = (
 				7F844CE727CFB7D900C06084 /* View */,
 				E8AC90AA27C71E5B00C50FA3 /* TransactionViewController.swift */,
-				E8AC90AC27C72B7500C50FA3 /* TransactionTableViewCell.swift */,
 				7F844CE427CFB76400C06084 /* TransactionDataSource.swift */,
 				E8AC90B427C8745100C50FA3 /* TransactionViewModel.swift */,
 				E8AC90BB27C8D12100C50FA3 /* TransactionNameSpace.swift */,
