@@ -11,9 +11,8 @@ final class GraphDetailViewController: UIViewController {
     
     private lazy var graph = Graph()
     private let graphData: GraphData
-    private lazy var initailWidth: CGFloat = CGFloat(graphData.closePriceList.count * 12)
-    private lazy var width: CGFloat = initailWidth < UIScreen.main.bounds.width ? UIScreen.main.bounds.width : initailWidth
-    
+    private lazy var width: CGFloat = CGFloat(graphData.closePriceList.count * 12)
+
     init(graphData: GraphData) {
         self.graphData = graphData
         super.init(nibName: nil, bundle: nil)
@@ -38,15 +37,26 @@ final class GraphDetailViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        width = checkWidth()
         setupView()
         updateGraph()
-        
         scrollView.delegate = self
         scrollView.scrollToEnd(x: width)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    private func checkWidth() -> CGFloat{
+        switch width {
+        case ..<UIScreen.main.bounds.width:
+            return UIScreen.main.bounds.width
+        case 39000...:
+            return 39000
+        default:
+            return width
+        }
     }
     
     func updateGraph() {
